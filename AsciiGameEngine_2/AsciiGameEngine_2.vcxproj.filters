@@ -1,84 +1,84 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    <Filter Include="Source">
+      <UniqueIdentifier>{f58c4c1e-fea8-4881-abfb-1069e66de25b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Core">
+    <Filter Include="Source\Core">
       <UniqueIdentifier>{dfad1ee4-e951-42b4-ab62-c2832b8f4fe6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Core\Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    <Filter Include="Source\Core\Draw">
+      <UniqueIdentifier>{0db79ec6-9e1e-4ee3-aee2-fbbfa42015af}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Core\Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    <Filter Include="Source\Core\Display">
+      <UniqueIdentifier>{351e2e61-e430-459e-a409-4c83df547c43}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Test">
+    <Filter Include="Source\Core\Engine">
+      <UniqueIdentifier>{a49eac70-ad21-49f0-974e-2e1b4c5b06f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Core\Math">
+      <UniqueIdentifier>{63edcb6d-6e77-47c0-b256-99942d27e128}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Core\Object">
+      <UniqueIdentifier>{9750a842-6f2c-4da7-93ff-9fecdcbf9a0a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Test">
       <UniqueIdentifier>{75d4aee7-ba7e-445d-aa24-cbc645f606dd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Main.cpp">
-      <Filter>Core\Source Files</Filter>
+    <ClCompile Include="Source\Core\Display\Console.cpp">
+      <Filter>Source\Core\Display</Filter>
     </ClCompile>
-    <ClCompile Include="Console.cpp">
-      <Filter>Core\Source Files</Filter>
+    <ClCompile Include="Source\Core\Draw\Renderer.cpp">
+      <Filter>Source\Core\Draw</Filter>
     </ClCompile>
-    <ClCompile Include="Renderer.cpp">
-      <Filter>Core\Source Files</Filter>
+    <ClCompile Include="Source\Core\Engine\GameCore.cpp">
+      <Filter>Source\Core\Engine</Filter>
     </ClCompile>
-    <ClCompile Include="Object.cpp">
-      <Filter>Core\Source Files</Filter>
+    <ClCompile Include="Source\Core\Engine\MainEngine.cpp">
+      <Filter>Source\Core\Engine</Filter>
     </ClCompile>
-    <ClCompile Include="MainEngine.cpp">
-      <Filter>Core\Source Files</Filter>
+    <ClCompile Include="Source\Core\Object\Object.cpp">
+      <Filter>Source\Core\Object</Filter>
     </ClCompile>
-    <ClCompile Include="GameCore.cpp">
-      <Filter>Core\Source Files</Filter>
+    <ClCompile Include="Source\Test\TestGame.cpp">
+      <Filter>Source\Test</Filter>
     </ClCompile>
-    <ClCompile Include="TestGame.cpp">
-      <Filter>Test</Filter>
+    <ClCompile Include="Source\Test\TestObject.cpp">
+      <Filter>Source\Test</Filter>
     </ClCompile>
-    <ClCompile Include="TestObject.cpp">
-      <Filter>Test</Filter>
+    <ClCompile Include="Source\Main.cpp">
+      <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Console.hpp">
-      <Filter>Core\Header Files</Filter>
+    <ClInclude Include="Source\Core\Display\Console.hpp">
+      <Filter>Source\Core\Display</Filter>
     </ClInclude>
-    <ClInclude Include="resource.h">
-      <Filter>Core\Header Files</Filter>
+    <ClInclude Include="Source\Core\Display\ConsoleDefines.hpp">
+      <Filter>Source\Core\Display</Filter>
     </ClInclude>
-    <ClInclude Include="Renderer.hpp">
-      <Filter>Core\Header Files</Filter>
+    <ClInclude Include="Source\Core\Draw\Renderer.hpp">
+      <Filter>Source\Core\Draw</Filter>
     </ClInclude>
-    <ClInclude Include="DrawProgram.hpp">
-      <Filter>Core\Header Files</Filter>
+    <ClInclude Include="Source\Core\Engine\GameCore.hpp">
+      <Filter>Source\Core\Engine</Filter>
     </ClInclude>
-    <ClInclude Include="Object.hpp">
-      <Filter>Core\Header Files</Filter>
+    <ClInclude Include="Source\Core\Engine\MainEngine.hpp">
+      <Filter>Source\Core\Engine</Filter>
     </ClInclude>
-    <ClInclude Include="Vector2f.hpp">
-      <Filter>Core\Header Files</Filter>
+    <ClInclude Include="Source\Core\Math\Vector2f.hpp">
+      <Filter>Source\Core\Math</Filter>
     </ClInclude>
-    <ClInclude Include="MainEngine.hpp">
-      <Filter>Core\Header Files</Filter>
+    <ClInclude Include="Source\Core\Object\Object.hpp">
+      <Filter>Source\Core\Object</Filter>
     </ClInclude>
-    <ClInclude Include="GameCore.hpp">
-      <Filter>Core\Header Files</Filter>
+    <ClInclude Include="Source\Test\TestGame.hpp">
+      <Filter>Source\Test</Filter>
     </ClInclude>
-    <ClInclude Include="TestGame.hpp">
-      <Filter>Test</Filter>
-    </ClInclude>
-    <ClInclude Include="TestObject.hpp">
-      <Filter>Test</Filter>
-    </ClInclude>
-    <ClInclude Include="ConsoleDefines.hpp">
-      <Filter>Core\Header Files</Filter>
+    <ClInclude Include="Source\Test\TestObject.hpp">
+      <Filter>Source\Test</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

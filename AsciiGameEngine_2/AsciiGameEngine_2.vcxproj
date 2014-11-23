@@ -38,13 +38,19 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <SourcePath>$(VC_SourcePath)</SourcePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <SourcePath>$(VC_SourcePath)</SourcePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NOMINMAX;UNICODE;STRICT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)\AsciiGameEngine_2\Source</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -58,6 +64,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NOMINMAX;UNICODE;STRICT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)\AsciiGameEngine_2\Source</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -66,27 +73,25 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Console.cpp" />
-    <ClCompile Include="GameCore.cpp" />
-    <ClCompile Include="Main.cpp" />
-    <ClCompile Include="MainEngine.cpp" />
-    <ClCompile Include="Object.cpp" />
-    <ClCompile Include="Renderer.cpp" />
-    <ClCompile Include="TestGame.cpp" />
-    <ClCompile Include="TestObject.cpp" />
+    <ClCompile Include="Source\Core\Display\Console.cpp" />
+    <ClCompile Include="Source\Core\Draw\Renderer.cpp" />
+    <ClCompile Include="Source\Core\Engine\GameCore.cpp" />
+    <ClCompile Include="Source\Core\Engine\MainEngine.cpp" />
+    <ClCompile Include="Source\Core\Object\Object.cpp" />
+    <ClCompile Include="Source\Main.cpp" />
+    <ClCompile Include="Source\Test\TestGame.cpp" />
+    <ClCompile Include="Source\Test\TestObject.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Console.hpp" />
-    <ClInclude Include="ConsoleDefines.hpp" />
-    <ClInclude Include="DrawProgram.hpp" />
-    <ClInclude Include="GameCore.hpp" />
-    <ClInclude Include="MainEngine.hpp" />
-    <ClInclude Include="Object.hpp" />
-    <ClInclude Include="Renderer.hpp" />
-    <ClInclude Include="resource.h" />
-    <ClInclude Include="TestGame.hpp" />
-    <ClInclude Include="TestObject.hpp" />
-    <ClInclude Include="Vector2f.hpp" />
+    <ClInclude Include="Source\Core\Display\Console.hpp" />
+    <ClInclude Include="Source\Core\Display\ConsoleDefines.hpp" />
+    <ClInclude Include="Source\Core\Draw\Renderer.hpp" />
+    <ClInclude Include="Source\Core\Engine\GameCore.hpp" />
+    <ClInclude Include="Source\Core\Engine\MainEngine.hpp" />
+    <ClInclude Include="Source\Core\Math\Vector2f.hpp" />
+    <ClInclude Include="Source\Core\Object\Object.hpp" />
+    <ClInclude Include="Source\Test\TestGame.hpp" />
+    <ClInclude Include="Source\Test\TestObject.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

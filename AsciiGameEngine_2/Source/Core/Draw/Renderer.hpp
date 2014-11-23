@@ -3,7 +3,7 @@
 #define Z_BUFFER       0x0001
 #define CONSOLE_BUFFER 0x0002
 
-#include "Console.hpp"
+#include "Core\Display\Console.hpp"
 
 class Object;
 

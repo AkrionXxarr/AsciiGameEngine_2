@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Object.hpp"
+#include "Core\Object\Object.hpp"
 
 class TestObject : public Object
 {

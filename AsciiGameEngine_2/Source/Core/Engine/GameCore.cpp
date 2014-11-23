@@ -1,6 +1,6 @@
 #include "GameCore.hpp"
-#include "Renderer.hpp"
-#include "Object.hpp"
+#include "Core\Draw\Renderer.hpp"
+#include "Core\Object\Object.hpp"
 
 GameCore::GameCore()
 {

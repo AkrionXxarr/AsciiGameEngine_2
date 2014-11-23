@@ -2,9 +2,9 @@
 
 #include <vector>
 
-#include "ConsoleDefines.hpp"
-#include "Vector2f.hpp"
-#include "Renderer.hpp"
+#include "Core\Display\ConsoleDefines.hpp"
+#include "Core\Math\Vector2f.hpp"
+#include "Core\Draw\Renderer.hpp"
 
 class Object
 {

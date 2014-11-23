@@ -1,4 +1,4 @@
-#include "ConsoleDefines.hpp"
+#include "Core\Display\ConsoleDefines.hpp"
 #include "TestGame.hpp"
 #include "TestObject.hpp"
 

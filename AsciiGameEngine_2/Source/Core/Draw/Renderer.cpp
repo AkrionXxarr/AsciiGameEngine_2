@@ -1,8 +1,8 @@
 #include <limits>
 
 #include "Renderer.hpp"
-#include "Console.hpp"
-#include "Object.hpp"
+#include "Core\Display\Console.hpp"
+#include "Core\Object\Object.hpp"
 
 Renderer::Renderer()
 {

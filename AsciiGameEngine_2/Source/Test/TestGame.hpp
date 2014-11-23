@@ -1,6 +1,6 @@
 #pragma once
 
-#include "GameCore.hpp"
+#include "Core\Engine\GameCore.hpp"
 
 class TestGame : public GameCore
 {
