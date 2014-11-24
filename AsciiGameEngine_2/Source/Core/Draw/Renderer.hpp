@@ -15,7 +15,8 @@ public:
     ~Renderer();
 
     void Draw(Object* root);
-    void DrawPixel(int x, int y, int z, char c, unsigned short color);
+    void DrawPixel(int x, int y, int z, CHAR_INFO& ci);
+    void DrawBuffer(int x, int y, int z, int bufWidth, int bufHeight, CHAR_INFO* buffer);
 
     void ClearBuffers();
 

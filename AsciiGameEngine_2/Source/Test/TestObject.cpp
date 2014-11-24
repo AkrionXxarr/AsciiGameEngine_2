@@ -14,11 +14,5 @@ void TestObject::Update(float deltaTime)
 void TestObject::Draw(Renderer* renderer)
 {
     Vector2f v = position.AsInt();
-    for (int x = v.x; x < 15 + v.x; x++)
-    {
-        for (int y = v.y; y < 15 + v.y; y++)
-        {
-            renderer->DrawPixel(x, y, depth, '#', color);
-        }
-    }
+    renderer->DrawBuffer(v.x, v.y, depth, 15, 10, buffer);
 }

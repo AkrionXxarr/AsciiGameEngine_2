@@ -22,18 +22,33 @@ void Renderer::Draw(Object* root)
     hConsole->Display();
 }
 
-void Renderer::DrawPixel(int x, int y, int z, char c, unsigned short color)
+void Renderer::DrawPixel(int x, int y, int z, CHAR_INFO& ci)
 {
     if ((x < 0) || (x >= (width - 1))) { return; }
     if ((y < 0) || (y >= (height - 1))) { return; }
     if (zBuffer[(y * width) + x] < z) { return; }
 
-    CHAR_INFO ci;
-    ci.Attributes = color;
-    ci.Char.UnicodeChar = c;
+    int index = (y * width) + x;
 
-    zBuffer[(y * width) + x] = z;
-    hConsole->GetConsoleBuffer()[(y * width) + x] = ci;
+    zBuffer[index] = z;
+    hConsole->GetConsoleBuffer()[index] = ci;
+}
+
+void Renderer::DrawBuffer(int x, int y, int z, int bufWidth, int bufHeight, CHAR_INFO* buffer)
+{
+    // Object isn't even on the screen, skip the draw completely
+    if ((x >= width) && (y >= height)) { return; }
+    if (((x + bufWidth) < 0) && ((y + bufHeight) < 0)) { return; }
+
+    CHAR_INFO* consoleBuffer = hConsole->GetConsoleBuffer();
+
+    for (int row = 0; row < bufHeight; row++)
+    {
+        for (int col = 0; col < bufWidth; col++)
+        {
+            DrawPixel(col + x, row + y, z, buffer[(row * bufWidth) + col]);
+        }
+    }
 }
 
 void Renderer::ClearBuffers()
