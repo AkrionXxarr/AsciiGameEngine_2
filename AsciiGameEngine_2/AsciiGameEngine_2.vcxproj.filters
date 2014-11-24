@@ -7,9 +7,6 @@
     <Filter Include="Source\Core">
       <UniqueIdentifier>{dfad1ee4-e951-42b4-ab62-c2832b8f4fe6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Core\Draw">
-      <UniqueIdentifier>{0db79ec6-9e1e-4ee3-aee2-fbbfa42015af}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source\Core\Display">
       <UniqueIdentifier>{351e2e61-e430-459e-a409-4c83df547c43}</UniqueIdentifier>
     </Filter>
@@ -30,9 +27,6 @@
     <ClCompile Include="Source\Core\Display\Console.cpp">
       <Filter>Source\Core\Display</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Core\Draw\Renderer.cpp">
-      <Filter>Source\Core\Draw</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Core\Engine\GameCore.cpp">
       <Filter>Source\Core\Engine</Filter>
     </ClCompile>
@@ -51,6 +45,9 @@
     <ClCompile Include="Source\Test\TestComponent.cpp">
       <Filter>Source\Test</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Core\Engine\Renderer.cpp">
+      <Filter>Source\Core\Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Core\Display\Console.hpp">
@@ -58,9 +55,6 @@
     </ClInclude>
     <ClInclude Include="Source\Core\Display\ConsoleDefines.hpp">
       <Filter>Source\Core\Display</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Core\Draw\Renderer.hpp">
-      <Filter>Source\Core\Draw</Filter>
     </ClInclude>
     <ClInclude Include="Source\Core\Engine\GameCore.hpp">
       <Filter>Source\Core\Engine</Filter>
@@ -82,6 +76,9 @@
     </ClInclude>
     <ClInclude Include="Source\Test\TestComponent.hpp">
       <Filter>Source\Test</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Core\Engine\Renderer.hpp">
+      <Filter>Source\Core\Engine</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

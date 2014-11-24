@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Core\Display\Console.hpp"
-#include "Core\Draw\Renderer.hpp"
+#include "Core\Engine\Renderer.hpp"
 
 class GameCore;
 

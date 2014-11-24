@@ -5,7 +5,7 @@
 
 #include "Core\Display\ConsoleDefines.hpp"
 #include "Core\Math\Vector2f.hpp"
-#include "Core\Draw\Renderer.hpp"
+#include "Core\Engine\Renderer.hpp"
 
 class Component;
 

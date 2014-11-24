@@ -74,9 +74,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source\Core\Display\Console.cpp" />
-    <ClCompile Include="Source\Core\Draw\Renderer.cpp" />
     <ClCompile Include="Source\Core\Engine\GameCore.cpp" />
     <ClCompile Include="Source\Core\Engine\MainEngine.cpp" />
+    <ClCompile Include="Source\Core\Engine\Renderer.cpp" />
     <ClCompile Include="Source\Core\Object\Object.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\Test\TestComponent.cpp" />
@@ -85,9 +85,9 @@
   <ItemGroup>
     <ClInclude Include="Source\Core\Display\Console.hpp" />
     <ClInclude Include="Source\Core\Display\ConsoleDefines.hpp" />
-    <ClInclude Include="Source\Core\Draw\Renderer.hpp" />
     <ClInclude Include="Source\Core\Engine\GameCore.hpp" />
     <ClInclude Include="Source\Core\Engine\MainEngine.hpp" />
+    <ClInclude Include="Source\Core\Engine\Renderer.hpp" />
     <ClInclude Include="Source\Core\Math\Vector2f.hpp" />
     <ClInclude Include="Source\Core\Object\Component.hpp" />
     <ClInclude Include="Source\Core\Object\Object.hpp" />

@@ -1,6 +1,6 @@
 #include "TestComponent.hpp"
 #include "Core\Object\Object.hpp"
-#include "Core\Draw\Renderer.hpp"
+#include "Core\Engine\Renderer.hpp"
 #include "Core\Math\Vector2f.hpp"
 
 #include <math.h>
