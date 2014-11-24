@@ -79,8 +79,8 @@
     <ClCompile Include="Source\Core\Engine\MainEngine.cpp" />
     <ClCompile Include="Source\Core\Object\Object.cpp" />
     <ClCompile Include="Source\Main.cpp" />
+    <ClCompile Include="Source\Test\TestComponent.cpp" />
     <ClCompile Include="Source\Test\TestGame.cpp" />
-    <ClCompile Include="Source\Test\TestObject.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Core\Display\Console.hpp" />
@@ -89,9 +89,10 @@
     <ClInclude Include="Source\Core\Engine\GameCore.hpp" />
     <ClInclude Include="Source\Core\Engine\MainEngine.hpp" />
     <ClInclude Include="Source\Core\Math\Vector2f.hpp" />
+    <ClInclude Include="Source\Core\Object\Component.hpp" />
     <ClInclude Include="Source\Core\Object\Object.hpp" />
+    <ClInclude Include="Source\Test\TestComponent.hpp" />
     <ClInclude Include="Source\Test\TestGame.hpp" />
-    <ClInclude Include="Source\Test\TestObject.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

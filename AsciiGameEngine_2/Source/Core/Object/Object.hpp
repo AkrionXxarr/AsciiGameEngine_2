@@ -7,6 +7,8 @@
 #include "Core\Math\Vector2f.hpp"
 #include "Core\Draw\Renderer.hpp"
 
+class Component;
+
 class Object
 {
 public:
@@ -18,19 +20,21 @@ public:
     void AddChild(Object* child);
     void RemoveChild(Object* child);
 
-    void UpdateChildren(float deltaTime);
-    void DrawChildren(Renderer* renderer);
+    void AddComponent(Component* component);
+    void RemoveComponent(Component* component);
 
-protected:
-    virtual void Update(float deltaTime) { }
-    virtual void Draw(Renderer* renderer) { }
+    void Update(float deltaTime);
+    void UpdateAll(float deltaTime);
+
+    void Draw(Renderer* renderer);
+    void DrawAll(Renderer* renderer);
 
 public:
     int depth;
     Vector2f position;
-    Vector2f scale;
-    Vector2f yBasis, xBasis;
+    Object* parent;
 
-protected:
+private:
     std::vector<Object*> children;
+    std::vector<Component*> components;
 };

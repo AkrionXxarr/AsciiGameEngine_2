@@ -18,7 +18,7 @@ Renderer::~Renderer()
 void Renderer::Draw(Object* root)
 {
     ClearBuffers();
-    root->DrawChildren(this);
+    root->DrawAll(this);
     hConsole->Display();
 }
 

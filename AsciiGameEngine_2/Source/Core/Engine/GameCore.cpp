@@ -18,7 +18,7 @@ GameCore::~GameCore()
 
 void GameCore::Update(float deltaTime)
 {
-    root->UpdateChildren(deltaTime);
+    root->UpdateAll(deltaTime);
 }
 
 void GameCore::Draw(Renderer* renderer)

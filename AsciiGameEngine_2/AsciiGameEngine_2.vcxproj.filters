@@ -45,11 +45,11 @@
     <ClCompile Include="Source\Test\TestGame.cpp">
       <Filter>Source\Test</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Test\TestObject.cpp">
-      <Filter>Source\Test</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Main.cpp">
       <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Test\TestComponent.cpp">
+      <Filter>Source\Test</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -77,7 +77,10 @@
     <ClInclude Include="Source\Test\TestGame.hpp">
       <Filter>Source\Test</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Test\TestObject.hpp">
+    <ClInclude Include="Source\Core\Object\Component.hpp">
+      <Filter>Source\Core\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Test\TestComponent.hpp">
       <Filter>Source\Test</Filter>
     </ClInclude>
   </ItemGroup>

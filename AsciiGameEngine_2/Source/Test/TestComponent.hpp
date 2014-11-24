@@ -1,12 +1,14 @@
 #pragma once
 
-#include "Core\Object\Object.hpp"
+#include <Windows.h>
 
-class TestObject : public Object
+#include "Core\Object\Component.hpp"
+
+class TestComponent : public Component
 {
 public:
-    TestObject(int depth, unsigned short color, float xFactor, float yFactor)
-    { 
+    TestComponent(int depth, unsigned short color, float xFactor, float yFactor)
+    {
         this->depth = depth;
         this->color = color;
         this->xFactor = xFactor;
@@ -24,21 +26,21 @@ public:
                 else
                     buffer[index].Char.UnicodeChar = '.';
 
-                buffer[index].Attributes = color;       
+                buffer[index].Attributes = color;
             }
         }
     }
-    virtual ~TestObject() 
-    { 
-        if (buffer != nullptr)
-            delete[] buffer;
+    virtual ~TestComponent()
+    {
     }
 
+    void Destroy();
     void Update(float deltaTime);
     void Draw(Renderer* renderer);
 
 private:
     CHAR_INFO* buffer;
+    int depth;
     unsigned short color;
     float xFactor, yFactor;
 };
