@@ -73,26 +73,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Source\Core\Display\Console.cpp" />
-    <ClCompile Include="Source\Core\Engine\GameCore.cpp" />
-    <ClCompile Include="Source\Core\Engine\MainEngine.cpp" />
-    <ClCompile Include="Source\Core\Engine\Renderer.cpp" />
-    <ClCompile Include="Source\Core\Object\Object.cpp" />
+    <ClCompile Include="Source\Display Device\Windows Console\Console.cpp" />
     <ClCompile Include="Source\Main.cpp" />
-    <ClCompile Include="Source\Test\TestComponent.cpp" />
-    <ClCompile Include="Source\Test\TestGame.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\Core\Display\Console.hpp" />
-    <ClInclude Include="Source\Core\Display\ConsoleDefines.hpp" />
-    <ClInclude Include="Source\Core\Engine\GameCore.hpp" />
-    <ClInclude Include="Source\Core\Engine\MainEngine.hpp" />
-    <ClInclude Include="Source\Core\Engine\Renderer.hpp" />
-    <ClInclude Include="Source\Core\Math\Vector2f.hpp" />
-    <ClInclude Include="Source\Core\Object\Component.hpp" />
-    <ClInclude Include="Source\Core\Object\Object.hpp" />
-    <ClInclude Include="Source\Test\TestComponent.hpp" />
-    <ClInclude Include="Source\Test\TestGame.hpp" />
+    <ClInclude Include="Source\Display Device\Interface\IDisplayDevice.hpp" />
+    <ClInclude Include="Source\Display Device\Windows Console\Console.hpp" />
+    <ClInclude Include="Source\Display Device\Windows Console\ConsoleDefines.hpp" />
+    <ClInclude Include="Source\Display Device\Windows Console\Interface\IWindowsConsole.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
