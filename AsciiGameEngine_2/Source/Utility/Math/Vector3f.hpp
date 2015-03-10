@@ -29,13 +29,13 @@ public:
     float Length();
     Vector3f Normalized();
 
-    float Dot(const Vector3f& v);
-    Vector3f Cross(const Vector3f& v);
+    float Dot(Vector3f& v);
+    Vector3f Cross(Vector3f& v);
 
-    Vector3f Rotate(const Vector3f& axis, float angle);
-    Vector3f Rotate(const Quaternion& rotation);
+    Vector3f Rotate(Vector3f& axis, float angle);
+    Vector3f Rotate(Quaternion& rotation);
 
-    Vector3f Lerp(const Vector3f dest, float factor);
+    Vector3f Lerp(Vector3f& dest, float factor);
 
     /* Getters */
     float GetMax() { return fmax(x, fmax(y, z)); }
@@ -52,21 +52,28 @@ public:
     Vector2f YZ(); // (-,a,b)
     Vector2f ZY(); // (-,b,a)
 
+    Vector3f XYZ(); // (a,b,c)
+    Vector3f XZY(); // (a,c,b)
+    Vector3f YXZ(); // (b,a,c)
+    Vector3f YZX(); // (b,c,a)
+    Vector3f ZXY(); // (c,a,b)
+    Vector3f ZYX(); // (c,b,a)
+
 public:
     /* Operators */
     void operator= (const Vector3f& v) { x = v.x; y = v.y; z = v.z; }
 
-    bool operator== (const Vector3f& v) { return (x == v.x) && (y == v.y) && (z == v.z); }
-    Vector3f operator- () { return Vector3f(-x, -y, -z); }
+    bool operator== (const Vector3f& v) const { return (x == v.x) && (y == v.y) && (z == v.z); }
+    Vector3f operator- () const { return Vector3f(-x, -y, -z); }
 
-    Vector3f operator- (const Vector3f& v) { return Vector3f(x - v.x, y - v.y, z - v.z); }
-    Vector3f operator+ (const Vector3f& v) { return Vector3f(x + v.x, y + v.y, z + v.z); }
+    Vector3f operator- (const Vector3f& v) const { return Vector3f(x - v.x, y - v.y, z - v.z); }
+    Vector3f operator+ (const Vector3f& v) const { return Vector3f(x + v.x, y + v.y, z + v.z); }
 
-    Vector3f operator* (const Vector3f& v) { return Vector3f(x * v.x, y * v.y, z * v.z); }
-    Vector3f operator/ (const Vector3f& v) { return Vector3f(x / v.x, y / v.y, z / v.z); }
+    Vector3f operator* (const Vector3f& v) const { return Vector3f(x * v.x, y * v.y, z * v.z); }
+    Vector3f operator/ (const Vector3f& v) const { return Vector3f(x / v.x, y / v.y, z / v.z); }
 
-    Vector3f operator* (float f) { return Vector3f(x * f, y * f, z * f); }
-    Vector3f operator/ (float f) { return Vector3f(x / f, y / f, z / f); }
+    Vector3f operator* (float f) const { return Vector3f(x * f, y * f, z * f); }
+    Vector3f operator/ (float f) const { return Vector3f(x / f, y / f, z / f); }
 
 public:
     /* Variables */

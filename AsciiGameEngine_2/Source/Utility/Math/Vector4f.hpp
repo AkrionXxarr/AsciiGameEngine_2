@@ -28,9 +28,9 @@ public:
 
     /* Vector operations */
     float Length();
-    float Normalized();
+    Vector4f Normalized();
 
-    Vector4f Lerp(const Vector4f& dest, float factor);
+    Vector4f Lerp(Vector4f& dest, float factor);
 
     /* Getters */
     float GetMax() { return fmax(x, fmax(y, fmax(z, w))); }
@@ -88,16 +88,16 @@ public:
 public:
     /* Operators */
     bool operator== (const Vector4f& v) { return (x == v.x) && (y == v.y) && (z == v.z) && (w == v.w); }
-    Vector4f operator- () { return Vector4f(-x, -y, -z, -w); }
+    Vector4f operator- () const { return Vector4f(-x, -y, -z, -w); }
 
-    Vector4f operator- (const Vector4f& v) { return Vector4f(x - v.x, y - v.y, z - v.z, w - v.w); }
-    Vector4f operator+ (const Vector4f& v) { return Vector4f(x + v.x, y + v.y, z + v.z, w + v.w); }
+    Vector4f operator- (const Vector4f& v) const { return Vector4f(x - v.x, y - v.y, z - v.z, w - v.w); }
+    Vector4f operator+ (const Vector4f& v) const { return Vector4f(x + v.x, y + v.y, z + v.z, w + v.w); }
 
-    Vector4f operator* (const Vector4f& v) { return Vector4f(x * v.x, y * v.y, z * v.z, w * v.w); }
-    Vector4f operator/ (const Vector4f& v) { return Vector4f(x / v.x, y / v.y, z / v.z, w / v.w); }
+    Vector4f operator* (const Vector4f& v) const { return Vector4f(x * v.x, y * v.y, z * v.z, w * v.w); }
+    Vector4f operator/ (const Vector4f& v) const { return Vector4f(x / v.x, y / v.y, z / v.z, w / v.w); }
 
-    Vector4f operator* (float f) { return Vector4f(x * f, y * f, z * f, w * f); }
-    Vector4f operator/ (float f) { return Vector4f(x / f, y / f, z / f, w / f); }
+    Vector4f operator* (float f) const { return Vector4f(x * f, y * f, z * f, w * f); }
+    Vector4f operator/ (float f) const { return Vector4f(x / f, y / f, z / f, w / f); }
 
 public:
     /* Variables */

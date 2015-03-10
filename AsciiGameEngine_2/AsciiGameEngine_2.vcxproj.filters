@@ -27,6 +27,15 @@
     <ClCompile Include="Source\Display Device\Windows Console\Console.cpp">
       <Filter>Source\Display Device\Windows Console</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Utility\Math\Vector2f.cpp">
+      <Filter>Source\Utility\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Utility\Math\Vector3f.cpp">
+      <Filter>Source\Utility\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Utility\Math\Vector4f.cpp">
+      <Filter>Source\Utility\Math</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Display Device\Windows Console\ConsoleDefines.hpp">

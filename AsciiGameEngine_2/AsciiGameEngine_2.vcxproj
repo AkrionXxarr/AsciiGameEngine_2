@@ -75,6 +75,9 @@
   <ItemGroup>
     <ClCompile Include="Source\Display Device\Windows Console\Console.cpp" />
     <ClCompile Include="Source\Main.cpp" />
+    <ClCompile Include="Source\Utility\Math\Vector2f.cpp" />
+    <ClCompile Include="Source\Utility\Math\Vector3f.cpp" />
+    <ClCompile Include="Source\Utility\Math\Vector4f.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Display Device\Windows Console\Console.hpp" />
