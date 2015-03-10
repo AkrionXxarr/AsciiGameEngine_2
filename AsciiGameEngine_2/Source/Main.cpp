@@ -1,12 +1,19 @@
-#include <iostream>
+/*
+* Copyright(c) 2015, Stephen Bloomquist
+* All rights reserved.
+*/
 
-#include "Display Device\Windows Console\Console.hpp"
-#include "Display Device\Windows Console\ConsoleDefines.hpp"
+#include "Utility\Math\Vector2f.hpp"
 
 int main(int argc, const char* argv[])
 {
+}
+
+/*
+int main(int argc, const char* argv[])
+{
     Console console;
-    std::shared_ptr<ConsoleBuffer> consoleBuffer(new ConsoleBuffer(70, 30));
+    std::shared_ptr<ConsoleBuffer> consoleBuffer(new ConsoleBuffer(60, 60));
 
     console.CreateDevice(consoleBuffer, 25, FONT_8x8);
     console.ClearBuffer();
@@ -42,7 +49,7 @@ int main(int argc, const char* argv[])
 
     system("pause");
 
-    consoleBuffer->drawRect = { 5, 5, 64, 24 };
+    consoleBuffer->drawRect = { 5, 5, X - 6, Y - 6};
     consoleBuffer->useDrawRect = true;
 
     console.Display();
@@ -51,3 +58,4 @@ int main(int argc, const char* argv[])
 
     return 0;
 }
+*/

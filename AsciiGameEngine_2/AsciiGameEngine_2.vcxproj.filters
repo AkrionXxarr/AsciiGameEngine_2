@@ -10,11 +10,14 @@
     <Filter Include="Source\Display Device\Windows Console">
       <UniqueIdentifier>{cf107c27-556b-4a2d-9698-2911cb7d35db}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Display Device\Interface">
-      <UniqueIdentifier>{8cd6ae1d-e0b0-43fc-9f74-f7204069f3b0}</UniqueIdentifier>
+    <Filter Include="Source\Utility">
+      <UniqueIdentifier>{c1e9f23d-0f84-4e68-b295-ca71dc001fee}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Display Device\Windows Console\Interface">
-      <UniqueIdentifier>{9c8330f6-cb85-41f8-a8a5-ac593dc55ddd}</UniqueIdentifier>
+    <Filter Include="Source\Utility\Time">
+      <UniqueIdentifier>{b59b7bc1-37f6-4a47-a124-d02e179bfae6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Utility\Math">
+      <UniqueIdentifier>{24f4ee0e-ab7e-42d0-bd92-90f27bc7c7f2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -32,11 +35,17 @@
     <ClInclude Include="Source\Display Device\Windows Console\Console.hpp">
       <Filter>Source\Display Device\Windows Console</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Display Device\Interface\IDisplayDevice.hpp">
-      <Filter>Source\Display Device\Interface</Filter>
+    <ClInclude Include="Source\Utility\Time\WindowsTime.hpp">
+      <Filter>Source\Utility\Time</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Display Device\Windows Console\Interface\IWindowsConsole.hpp">
-      <Filter>Source\Display Device\Windows Console\Interface</Filter>
+    <ClInclude Include="Source\Utility\Math\Vector2f.hpp">
+      <Filter>Source\Utility\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Utility\Math\Vector3f.hpp">
+      <Filter>Source\Utility\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Utility\Math\Vector4f.hpp">
+      <Filter>Source\Utility\Math</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

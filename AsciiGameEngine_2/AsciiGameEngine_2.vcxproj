@@ -77,10 +77,12 @@
     <ClCompile Include="Source\Main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\Display Device\Interface\IDisplayDevice.hpp" />
     <ClInclude Include="Source\Display Device\Windows Console\Console.hpp" />
     <ClInclude Include="Source\Display Device\Windows Console\ConsoleDefines.hpp" />
-    <ClInclude Include="Source\Display Device\Windows Console\Interface\IWindowsConsole.hpp" />
+    <ClInclude Include="Source\Utility\Math\Vector2f.hpp" />
+    <ClInclude Include="Source\Utility\Math\Vector3f.hpp" />
+    <ClInclude Include="Source\Utility\Math\Vector4f.hpp" />
+    <ClInclude Include="Source\Utility\Time\WindowsTime.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

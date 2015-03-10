@@ -1,3 +1,8 @@
+/*
+* Copyright(c) 2015, Stephen Bloomquist
+* All rights reserved.
+*/
+
 #include <assert.h>
 
 #include "Console.hpp"
@@ -23,7 +28,7 @@ void Console::Display()
         // Draw only a subrectangle of the buffer
         WriteConsoleOutputA(
             outputHandle, 
-            consoleBuffer->GetBuffer(), 
+            consoleBuffer->buffer, 
             consoleBuffer->GetSizeAsCoord(), 
             { 0, 0 }, 
             &consoleBuffer->drawRect
@@ -34,26 +39,11 @@ void Console::Display()
         // Draw the entire buffer
         WriteConsoleOutputA(
             outputHandle, 
-            consoleBuffer->GetBuffer(), 
+            consoleBuffer->buffer, 
             consoleBuffer->GetSizeAsCoord(), 
             { 0, 0 }, 
             &screenRect
             );
-    }
-}
-
-void Console::ClearBuffer(unsigned short attributes, char c)
-{
-    CHAR_INFO ci = { c, attributes };
-    ClearBuffer(ci);
-}
-
-void Console::ClearBuffer(CHAR_INFO& ci)
-{
-    unsigned int size = consoleBuffer->GetSize();
-    for (unsigned int i = 0; i < size; i++)
-    {
-        consoleBuffer->Put(i, ci);
     }
 }
 
@@ -74,6 +64,21 @@ bool Console::CreateDevice(std::shared_ptr<ConsoleBuffer> cb, unsigned short cur
     SetCursorSize(cursorSize);
 
     return true;
+}
+
+void Console::ClearBuffer(unsigned short attributes, char c)
+{
+    CHAR_INFO ci = { c, attributes };
+    ClearBuffer(ci);
+}
+
+void Console::ClearBuffer(CHAR_INFO& ci)
+{
+    unsigned int size = consoleBuffer->GetSize();
+    for (unsigned int i = 0; i < size; i++)
+    {
+        consoleBuffer->Put(i, ci);
+    }
 }
 
 void Console::SetCursorSize(unsigned short size)

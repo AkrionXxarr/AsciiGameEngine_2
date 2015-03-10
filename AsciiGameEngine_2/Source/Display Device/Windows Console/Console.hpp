@@ -1,3 +1,8 @@
+/*
+* Copyright(c) 2015, Stephen Bloomquist
+* All rights reserved.
+*/
+
 #pragma once
 
 #include <Windows.h>
@@ -20,9 +25,20 @@ enum CONSOLE_FONT_TYPE
     NOT_SET
 };
 
+///////////////////////////////////////////////////////////////////////////////////////////////////
+// The buffer that the Console class will render from. It has the capacity to instruct
+// the console class to push the whole buffer or only a portion of the buffer.
+//
+// This class will be accessed through a shared pointer.
+//
+// Console has friend access as the raw buffer is needed for the WriteConsoleOutput function.
+//
 class ConsoleBuffer
 {
+    friend class Console;
+
 public:
+    /* Construct / Destruct */
     ConsoleBuffer(unsigned int width, unsigned int height) : width(width), height(height)
     {
         buffer = new CHAR_INFO[width * height];
@@ -35,6 +51,7 @@ public:
             delete[] buffer;
     }
 
+    /* Buffer write */
     void Put(unsigned int i, CHAR_INFO& ci)
     {
         buffer[i] = ci;
@@ -44,43 +61,55 @@ public:
         buffer[(y * width) + x] = ci;
     }
 
-    const CHAR_INFO* GetBuffer() const { return buffer; }
-
+    /* Getters */
     unsigned int GetSize() { return size; }
     COORD GetSizeAsCoord() { return { width, height }; }
 
+private:
+    ConsoleBuffer(const ConsoleBuffer& other);
+    void operator= (const ConsoleBuffer& other);
+
 public:
+    /* Variables */
     bool useDrawRect = false;
     SMALL_RECT drawRect;
 
 private:
+    /* Variables */
     CHAR_INFO* buffer = nullptr;
     unsigned int width, height;
     unsigned int size;
 };
 
-/*
-*
-*/
-// Raster fonts only
+///////////////////////////////////////////////////////////////////////////////////////////
+// Handles Windows Console relevant data and operations.
+//
+// Expected usage will have the render context share a pointer with the console buffer
+// and for Display() to be called to push the buffer to the console window.
+//
 class Console
 {
 public:
+    /* Construct & Destruct */
     Console();
     ~Console();
 
+    /* Main functions */
     void Display(); // Push the console buffer to the console window
-
-    void ClearBuffer() { ClearBuffer(0, ' '); }
-    void ClearBuffer(unsigned short attributes, char c);
-    void ClearBuffer(CHAR_INFO& ci);
-
 
     bool CreateDevice(
         std::shared_ptr<ConsoleBuffer> cb,
         unsigned short cursorSize = 25,
         CONSOLE_FONT_TYPE fontType = FONT_8x12);
 
+    std::shared_ptr<ConsoleBuffer> GetBuffer() { return consoleBuffer; }
+
+    /* Utility functions */
+    void ClearBuffer() { ClearBuffer(0, ' '); }
+    void ClearBuffer(unsigned short attributes, char c);
+    void ClearBuffer(CHAR_INFO& ci);
+
+    /* Getters & Setters */
     COORD GetCursorPosition() { return cursorPos; }
 
     void SetCursorSize(unsigned short size = 0);
@@ -88,10 +117,16 @@ public:
     void SetCursorPosition(COORD pos);
 
 private:
+    /* Helper functions */
     void InitFont();
     void InitSize();
 
+    // Display device should not be copied
+    Console(const Console& other);
+    void operator= (const Console& other);
+
 private:
+    /* Variables */
     std::shared_ptr<ConsoleBuffer> consoleBuffer;
     HANDLE outputHandle = nullptr;
     HANDLE inputHandle = nullptr;
@@ -99,9 +134,4 @@ private:
     SMALL_RECT screenRect;
     CONSOLE_CURSOR_INFO cci;
     CONSOLE_FONT_TYPE fontType = NOT_SET;
-
-private:
-    // Display device should not be copied
-    Console(const Console& other);
-    void operator= (const Console& other);
 };
