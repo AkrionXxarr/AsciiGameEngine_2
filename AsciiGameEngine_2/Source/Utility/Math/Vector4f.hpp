@@ -102,4 +102,6 @@ public:
 public:
     /* Variables */
     float x, y, z, w;
+
+    const static Vector4f zero;
 };

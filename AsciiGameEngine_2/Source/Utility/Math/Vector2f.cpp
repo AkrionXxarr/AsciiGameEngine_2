@@ -61,3 +61,8 @@ Vector2f Vector2f::Lerp(Vector2f& dest, float factor)
 // Swizzlers
 //
 Vector2f Vector2f::YX() { return Vector2f(y, x); }
+
+////////////////////////
+// Static variables
+//
+const Vector2f Vector2f::zero(0, 0);

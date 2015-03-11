@@ -59,4 +59,6 @@ public:
 public:
     /* Variables */
     float x, y;
+
+    static const Vector2f zero;
 };

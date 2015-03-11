@@ -103,3 +103,22 @@ Matrix4f Matrix4f::operator* (const Matrix4f& other) const
 
     return res;
 }
+
+
+/////////////////////////
+// Static variables
+//
+
+const Matrix4f Matrix4f::identity(
+    1, 0, 0, 0,
+    0, 1, 0, 0,
+    0, 0, 1, 0,
+    0, 0, 0, 1
+    );
+
+const Matrix4f Matrix4f::zero(
+    0, 0, 0, 0,
+    0, 0, 0, 0,
+    0, 0, 0, 0,
+    0, 0, 0, 0
+    );

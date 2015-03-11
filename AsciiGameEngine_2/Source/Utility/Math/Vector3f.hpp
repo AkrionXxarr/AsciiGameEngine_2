@@ -78,4 +78,6 @@ public:
 public:
     /* Variables */
     float x, y, z;
+
+    const static Vector3f zero;
 };

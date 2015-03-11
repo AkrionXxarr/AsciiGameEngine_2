@@ -86,3 +86,10 @@ Vector3f Vector3f::YXZ() { return Vector3f(y, x, z); }
 Vector3f Vector3f::YZX() { return Vector3f(y, z, x); }
 Vector3f Vector3f::ZXY() { return Vector3f(z, x, y); }
 Vector3f Vector3f::ZYX() { return Vector3f(z, y, x); }
+
+
+//////////////////////////
+// Static variables
+//
+
+const Vector3f Vector3f::zero(0, 0, 0);

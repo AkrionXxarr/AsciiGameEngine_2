@@ -94,3 +94,9 @@ Vector3f Vector4f::ZYW() { return Vector3f(z, y, w); }
 Vector3f Vector4f::ZWY() { return Vector3f(z, w, y); }
 Vector3f Vector4f::WYZ() { return Vector3f(w, y, z); }
 Vector3f Vector4f::WZY() { return Vector3f(w, z, y); }
+
+/////////////////////////
+// Static variables
+//
+
+const Vector4f Vector4f::zero(0, 0, 0, 0);
