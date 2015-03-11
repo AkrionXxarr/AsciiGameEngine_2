@@ -75,6 +75,7 @@
   <ItemGroup>
     <ClCompile Include="Source\Display Device\Windows Console\Console.cpp" />
     <ClCompile Include="Source\Main.cpp" />
+    <ClCompile Include="Source\Utility\Math\Matrix4f.cpp" />
     <ClCompile Include="Source\Utility\Math\Vector2f.cpp" />
     <ClCompile Include="Source\Utility\Math\Vector3f.cpp" />
     <ClCompile Include="Source\Utility\Math\Vector4f.cpp" />
@@ -82,6 +83,7 @@
   <ItemGroup>
     <ClInclude Include="Source\Display Device\Windows Console\Console.hpp" />
     <ClInclude Include="Source\Display Device\Windows Console\ConsoleDefines.hpp" />
+    <ClInclude Include="Source\Utility\Math\Matrix4f.hpp" />
     <ClInclude Include="Source\Utility\Math\Vector2f.hpp" />
     <ClInclude Include="Source\Utility\Math\Vector3f.hpp" />
     <ClInclude Include="Source\Utility\Math\Vector4f.hpp" />

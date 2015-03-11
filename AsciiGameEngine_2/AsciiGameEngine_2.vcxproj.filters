@@ -36,6 +36,9 @@
     <ClCompile Include="Source\Utility\Math\Vector4f.cpp">
       <Filter>Source\Utility\Math</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Utility\Math\Matrix4f.cpp">
+      <Filter>Source\Utility\Math</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Display Device\Windows Console\ConsoleDefines.hpp">
@@ -54,6 +57,9 @@
       <Filter>Source\Utility\Math</Filter>
     </ClInclude>
     <ClInclude Include="Source\Utility\Math\Vector4f.hpp">
+      <Filter>Source\Utility\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Utility\Math\Matrix4f.hpp">
       <Filter>Source\Utility\Math</Filter>
     </ClInclude>
   </ItemGroup>
