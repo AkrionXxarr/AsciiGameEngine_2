@@ -1,7 +1,12 @@
+/*
+* Copyright(c) 2015, Stephen Bloomquist
+* All rights reserved.
+*/
+
 #include "Utility\Math\Vector2f.hpp"
 
 /////////////////////////////
-// Construct & Destruct
+// Constructors
 //
 Vector2f::Vector2f()
 {

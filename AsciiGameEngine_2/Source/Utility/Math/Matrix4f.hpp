@@ -5,6 +5,8 @@
 
 #pragma once
 
+#define _USE_MATH_DEFINES
+#include <math.h>
 #include <vector>
 
 class Vector3f;
@@ -41,8 +43,8 @@ public:
     /* Operators */
     void operator= (const Matrix4f& other);
 
-    Vector3f operator*(const Vector3f& v) const;
-    Vector4f operator*(const Vector4f& v) const;
+    Vector3f operator* (const Vector3f& v) const;
+    Vector4f operator* (const Vector4f& v) const;
 
     Matrix4f operator* (const Matrix4f& other) const;
 

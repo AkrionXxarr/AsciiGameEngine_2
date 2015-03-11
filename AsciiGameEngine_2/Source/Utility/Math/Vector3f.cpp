@@ -1,8 +1,13 @@
+/*
+* Copyright(c) 2015, Stephen Bloomquist
+* All rights reserved.
+*/
+
 #include "Utility\Math\Vector2f.hpp"
 #include "Utility\Math\Vector3f.hpp"
 
 /////////////////////////////
-// Construct & Destruct
+// Constructors
 //
 Vector3f::Vector3f()
 {
