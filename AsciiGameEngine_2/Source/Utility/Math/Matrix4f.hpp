@@ -27,7 +27,7 @@ public:
         float wx, float wy, float wz, float ww);
     Matrix4f(const Matrix4f& m);
 
-    ~Matrix4f();
+    ~Matrix4f() { }
 
     /* Matrix operations */
 
