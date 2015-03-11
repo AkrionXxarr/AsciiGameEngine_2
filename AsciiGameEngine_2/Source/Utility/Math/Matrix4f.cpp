@@ -33,17 +33,21 @@ Matrix4f::Matrix4f(
     m[3][0] = wx; m[3][1] = wy; m[3][2] = wz; m[3][3] = ww;
 }
 
-Matrix4f::Matrix4f(const Matrix4f& m)
+Matrix4f::Matrix4f(const Matrix4f& other)
 {
+    for (int row = 0; row < 4; row++)
+    {
+        for (int col = 0; col < 4; col++)
+        {
+            m[row][col] = other.m[row][col];
+        }
+    }
 }
 
 
 ////////////////////////////
 // Accessors
 //
-float& Matrix4f::M(int row, int col)
-{
-}
 
 void Matrix4f::Set(
     float xx, float xy, float xz, float xw,

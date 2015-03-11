@@ -5,6 +5,7 @@
 
 #include "Utility\Math\Vector2f.hpp"
 #include "Utility\Math\Vector3f.hpp"
+#include "Utility\Math\Quaternion.hpp"
 
 /////////////////////////////
 // Constructors
@@ -59,12 +60,15 @@ Vector3f Vector3f::Cross(Vector3f& v)
 
 Vector3f Vector3f::Rotate(Vector3f& axis, float angle)
 {
-    return Vector3f(0, 0, 0);
+    return Rotate(Quaternion(axis, angle));
 }
 
 Vector3f Vector3f::Rotate(Quaternion& rotation)
 {
-    return Vector3f(0, 0, 0);
+    Quaternion conjugate = rotation.Conjugate();
+    Quaternion w = rotation * (*this) * conjugate;
+
+    return Vector3f(w.x, w.y, w.z);
 }
 
 Vector3f Vector3f::Lerp(Vector3f& dest, float factor)

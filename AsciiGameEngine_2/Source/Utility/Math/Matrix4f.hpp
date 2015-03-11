@@ -32,7 +32,6 @@ public:
     /* Matrix operations */
 
     /* Accessors */
-    float& M(int row, int col);
     void Set(
         float xx, float xy, float xz, float xw,
         float yx, float yy, float yz, float yw,

@@ -37,9 +37,48 @@ Quaternion::Quaternion(Vector3f& axis, float angle)
     w = cosHalfAngle;
 }
 
+// From Ken Shoemake's "Quaternion Calculus and Fast Animation" article
 Quaternion::Quaternion(Matrix4f& rot)
 {
+    float trace = rot.m[0][0] + rot.m[1][1] + rot.m[2][2];
 
+    if (trace > 0)
+    {
+        float s = 0.5f / sqrt(trace + 1.0f);
+        w = 0.25f / s;
+        x = (rot.m[1][2] - rot.m[2][1]) * s;
+        y = (rot.m[2][0] - rot.m[0][2]) * s;
+        z = (rot.m[0][1] - rot.m[1][0]) * s;
+    }
+    else
+    {
+        if ((rot.m[0][0] > rot.m[1][1]) && (rot.m[0][0] > rot.m[2][2]))
+        {
+            float s = 2.0f * sqrt(1.0f + rot.m[0][0] - rot.m[1][1] - rot.m[2][2]);
+            w = (rot.m[1][2] - rot.m[2][1]) / s;
+            x = 0.25f * s;
+            y = (rot.m[1][0] + rot.m[0][1]) / s;
+            z = (rot.m[2][0] + rot.m[0][2]) / s;
+        }
+        else if (rot.m[1][1] > rot.m[2][2])
+        {
+            float s = 2.0f * sqrt(1.0f + rot.m[1][1] - rot.m[0][0] - rot.m[2][2]);
+            w = (rot.m[2][0] - rot.m[0][2]) / s;
+            x = (rot.m[1][0] + rot.m[0][1]) / s;
+            y = 0.25f * s;
+            z = (rot.m[2][1] + rot.m[1][2]) / s;
+        }
+        else
+        {
+            float s = 2.0f * sqrt(1.0f + rot.m[2][2] - rot.m[0][0] - rot.m[1][1]);
+            w = (rot.m[0][1] - rot.m[1][0]) / s;
+            x = (rot.m[2][0] + rot.m[0][2]) / s;
+            y = (rot.m[1][2] + rot.m[2][1]) / s;
+            z = 0.25f * s;
+        }
+    }
+
+    *this = Normalized();
 }
 
 Quaternion::Quaternion(const Quaternion& other)
