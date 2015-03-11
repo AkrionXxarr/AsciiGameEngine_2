@@ -8,7 +8,7 @@
 #include "Matrix4f.hpp"
 
 ////////////////////////////////
-// Construct & Destruct
+// Constructors
 //
 Matrix4f::Matrix4f() : m(4, std::vector<float>(4))
 {

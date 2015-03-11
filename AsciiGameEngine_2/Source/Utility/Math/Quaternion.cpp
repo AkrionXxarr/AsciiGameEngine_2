@@ -85,3 +85,52 @@ Quaternion::Quaternion(const Quaternion& other)
 {
     x = other.x; y = other.y; z = other.z; w = other.w;
 }
+
+
+/////////////////////////////////
+// Quaternion operations
+//
+float Quaternion::Length()
+{
+    return sqrt(x * x + y * y + z * z + w * w);
+}
+
+Quaternion Quaternion::Normalized()
+{
+    float l = Length();
+    return Quaternion(x / l, y / l, z / l, w / l);
+}
+
+Quaternion Quaternion::Conjugate()
+{
+    return Quaternion(-x, -y, -z, w);
+}
+
+float Quaternion::Dot(Quaternion& q)
+{
+    return (x * q.x) + (y * q.y) + (z * q.z) + (w * q.w);
+}
+
+///////////////////
+// Operators
+//
+
+Quaternion Quaternion::operator* (const Quaternion& q) const
+{
+    float i = x * q.w + w * q.x + y * q.z - z * q.y;
+    float j = y * q.w + w * q.y + z * q.x - x * q.z;
+    float k = z * q.w + w * q.z + x * q.y - y * q.x;
+    float h = w * q.w - x * q.x - y * q.y - z * q.z;
+
+    return Quaternion(i, j, k, h);
+}
+
+Quaternion Quaternion::operator* (const Vector3f& v) const
+{
+    float i = w * v.x + y * v.z + z * v.y;
+    float j = w * v.y + z * v.x - x * v.z;
+    float k = w * v.z + x * v.y - y * v.x;
+    float h = -x * v.x - y * v.y - z * v.z;
+
+    return Quaternion(i, j, k, h);
+}
