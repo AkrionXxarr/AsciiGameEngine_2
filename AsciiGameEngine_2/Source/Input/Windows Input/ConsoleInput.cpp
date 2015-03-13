@@ -8,8 +8,6 @@
 
 ConsoleInput::ConsoleInput(POINT mouseFreezePos)
 {
-    RECT desktop;
-
     mouseDelta = new Vector2f();
     this->mouseFreezePos = mouseFreezePos;
     SetCursorPos(mouseFreezePos.x, mouseFreezePos.y);
