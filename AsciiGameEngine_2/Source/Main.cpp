@@ -13,7 +13,7 @@
 
 #define WIDTH 160
 #define HEIGHT 90
-#define SENSITIVITY 150
+#define SENSITIVITY 8
 
 int main()
 {
@@ -30,13 +30,13 @@ int main()
     console.CreateDevice(buffer, 0, FONT_8x8);
     console.ClearBuffer();
 
-    buffer->useDrawRect = true;
+    //buffer->useDrawRect = true;
 
     for (;;)
     {
         input.Tick();
         v = input.GetMouseDelta();
-        charPos = charPos + (v * SENSITIVITY);
+        charPos = charPos + (v / SENSITIVITY);
 
         if (charPos.x < 0) charPos.x = 0;
         else if (charPos.x >= WIDTH) charPos.x = WIDTH - 1;
@@ -44,7 +44,7 @@ int main()
         else if (charPos.y >= HEIGHT) charPos.y = HEIGHT - 1;
 
         buffer->Put(unsigned int(charPos.x), unsigned int(charPos.y), ci);
-        buffer->drawRect = { charPos.x, charPos.y, charPos.x, charPos.y };
+        //buffer->drawRect = { charPos.x, charPos.y, charPos.x, charPos.y };
 
         console.Display();
         console.ClearBuffer();

@@ -20,7 +20,6 @@ public:
     Vector2f GetMouseDelta();
 
 private:
-    unsigned int screenWidth, screenHeight;
     POINT lastMousePos, mouseFreezePos;
     Vector2f* mouseDelta;
 };

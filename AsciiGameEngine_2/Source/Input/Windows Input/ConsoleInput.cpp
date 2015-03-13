@@ -10,15 +10,9 @@ ConsoleInput::ConsoleInput(POINT mouseFreezePos)
 {
     RECT desktop;
 
-    // Primary monitor resolution size only
-    GetWindowRect(GetDesktopWindow(), &desktop);
-
     mouseDelta = new Vector2f();
     this->mouseFreezePos = mouseFreezePos;
     SetCursorPos(mouseFreezePos.x, mouseFreezePos.y);
-
-    screenWidth = desktop.right;
-    screenHeight = desktop.bottom;
 }
 
 ConsoleInput::~ConsoleInput()
@@ -33,8 +27,8 @@ void ConsoleInput::Tick()
     
     GetCursorPos(&curMousePos);
 
-    mouseDelta->x = float(curMousePos.x - mouseFreezePos.x) / screenWidth;
-    mouseDelta->y = float(curMousePos.y - mouseFreezePos.y) / screenHeight;
+    mouseDelta->x = float(curMousePos.x - mouseFreezePos.x);
+    mouseDelta->y = float(curMousePos.y - mouseFreezePos.y);
 
     SetCursorPos(mouseFreezePos.x, mouseFreezePos.y);
 }
