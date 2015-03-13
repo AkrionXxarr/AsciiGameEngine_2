@@ -5,5 +5,5 @@ Ultimately, the idea with this project will be that alternating from a console-b
 <br>
 This project will involve much more pre-planning than most of my projects, hopefully for greater results.<br>
 <br>
-Video as of commit 4a517ea608ae06fd09961ce17d790c41ba7bf695:
+Video as of commit 4a517ea608ae06fd09961ce17d790c41ba7bf695:<br>
 1) https://www.youtube.com/watch?v=KNb9d_IMoXs
