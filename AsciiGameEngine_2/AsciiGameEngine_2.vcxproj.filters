@@ -25,6 +25,12 @@
     <Filter Include="Source\Scene Graph\Interface">
       <UniqueIdentifier>{86dd6cf4-4874-4f19-a38c-baec47fffcfa}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Input">
+      <UniqueIdentifier>{ad1622cf-4719-43fb-8645-0909567f6676}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Input\Windows Input">
+      <UniqueIdentifier>{417c4f79-773c-4e92-876e-0a52d3caca5d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Main.cpp">
@@ -47,6 +53,9 @@
     </ClCompile>
     <ClCompile Include="Source\Utility\Math\Quaternion.cpp">
       <Filter>Source\Utility\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Input\Windows Input\ConsoleInput.cpp">
+      <Filter>Source\Input\Windows Input</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -76,6 +85,9 @@
     </ClInclude>
     <ClInclude Include="Source\Scene Graph\Interface\ISceneGraph.hpp">
       <Filter>Source\Scene Graph\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Input\Windows Input\ConsoleInput.hpp">
+      <Filter>Source\Input\Windows Input</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

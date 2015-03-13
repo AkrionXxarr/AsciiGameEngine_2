@@ -30,7 +30,7 @@ void Console::Display()
             outputHandle, 
             consoleBuffer->buffer, 
             consoleBuffer->GetSizeAsCoord(), 
-            { 0, 0 }, 
+            { consoleBuffer->drawRect.Left, consoleBuffer->drawRect.Top }, 
             &consoleBuffer->drawRect
             );
     }
