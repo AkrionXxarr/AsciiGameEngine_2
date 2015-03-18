@@ -109,6 +109,8 @@ public:
     void ClearBuffer(unsigned short attributes, char c);
     void ClearBuffer(CHAR_INFO& ci);
 
+    bool HasFocus();
+
     /* Getters & Setters */
     COORD GetCursorPosition() { return cursorPos; }
 
@@ -128,6 +130,7 @@ private:
 private:
     /* Variables */
     std::shared_ptr<ConsoleBuffer> consoleBuffer;
+    HWND consoleWindow;
     HANDLE outputHandle = nullptr;
     HANDLE inputHandle = nullptr;
     COORD cursorPos;

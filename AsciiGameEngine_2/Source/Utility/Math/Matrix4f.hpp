@@ -12,45 +12,49 @@
 class Vector3f;
 class Vector4f;
 
-//////////////////////
-// 4 by 4 float-based matrix
-//
-class Matrix4f
+namespace Math
 {
-public:
-    /* Construct & Destruct */
-    Matrix4f();
-    Matrix4f(
-        float xx, float xy, float xz, float xw,
-        float yx, float yy, float yz, float yw,
-        float zx, float zy, float zz, float zw,
-        float wx, float wy, float wz, float ww);
-    Matrix4f(const Matrix4f& m);
+    //////////////////////
+    // 4 by 4 float-based matrix
+    //
 
-    ~Matrix4f() { }
+    class Matrix4f
+    {
+    public:
+        /* Construct & Destruct */
+        Matrix4f();
+        Matrix4f(
+            float xx, float xy, float xz, float xw,
+            float yx, float yy, float yz, float yw,
+            float zx, float zy, float zz, float zw,
+            float wx, float wy, float wz, float ww);
+        Matrix4f(const Matrix4f& m);
 
-    /* Matrix operations */
+        ~Matrix4f() { }
 
-    /* Accessors */
-    void Set(
-        float xx, float xy, float xz, float xw,
-        float yx, float yy, float yz, float yw,
-        float zx, float zy, float zz, float zw,
-        float wx, float wy, float wz, float ww);
+        /* Matrix operations */
 
-public:
-    /* Operators */
-    void operator= (const Matrix4f& other);
+        /* Accessors */
+        void Set(
+            float xx, float xy, float xz, float xw,
+            float yx, float yy, float yz, float yw,
+            float zx, float zy, float zz, float zw,
+            float wx, float wy, float wz, float ww);
 
-    Vector3f operator* (const Vector3f& v) const;
-    Vector4f operator* (const Vector4f& v) const;
+    public:
+        /* Operators */
+        void operator= (const Matrix4f& other);
 
-    Matrix4f operator* (const Matrix4f& other) const;
+        Vector3f operator* (const Vector3f& v) const;
+        Vector4f operator* (const Vector4f& v) const;
 
-public:
-    /* Variables */
-    std::vector<std::vector<float>> m;
+        Matrix4f operator* (const Matrix4f& other) const;
 
-    const static Matrix4f identity;
-    const static Matrix4f zero;
-};
+    public:
+        /* Variables */
+        std::vector<std::vector<float>> m;
+
+        const static Matrix4f identity;
+        const static Matrix4f zero;
+    };
+}; // Namespace Math

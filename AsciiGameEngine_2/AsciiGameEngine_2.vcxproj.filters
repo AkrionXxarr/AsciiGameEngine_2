@@ -31,6 +31,12 @@
     <Filter Include="Source\Input\Windows Input">
       <UniqueIdentifier>{417c4f79-773c-4e92-876e-0a52d3caca5d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\System">
+      <UniqueIdentifier>{5aa44549-24c4-4a24-9297-3460b8780284}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\System\Win32">
+      <UniqueIdentifier>{a06ea735-667a-45c7-9ef8-61181900f27a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Main.cpp">
@@ -88,6 +94,9 @@
     </ClInclude>
     <ClInclude Include="Source\Input\Windows Input\ConsoleInput.hpp">
       <Filter>Source\Input\Windows Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\System\Win32\Window.hpp">
+      <Filter>Source\System\Win32</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

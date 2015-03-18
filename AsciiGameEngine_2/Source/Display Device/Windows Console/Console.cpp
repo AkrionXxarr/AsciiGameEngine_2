@@ -7,11 +7,17 @@
 
 #include "Console.hpp"
 
+////////////////////////////////
+// Construct & Destruct
+//
+
 // Initialize basic console-related variables
 Console::Console()
 {
     outputHandle = GetStdHandle(STD_OUTPUT_HANDLE);
+    consoleWindow = GetConsoleWindow();
     assert(outputHandle != INVALID_HANDLE_VALUE);
+    assert(consoleWindow != INVALID_HANDLE_VALUE);
 }
 
 Console::~Console()
@@ -19,6 +25,11 @@ Console::~Console()
     inputHandle = nullptr;
     outputHandle = nullptr;
 }
+
+
+///////////////////////////
+// Main functions
+//
 
 // Push the console buffer to the console, nothing more
 void Console::Display()
@@ -66,6 +77,11 @@ bool Console::CreateDevice(std::shared_ptr<ConsoleBuffer> cb, unsigned short cur
     return true;
 }
 
+
+/////////////////////////////
+// Utility functions
+//
+
 void Console::ClearBuffer(unsigned short attributes, char c)
 {
     CHAR_INFO ci = { c, attributes };
@@ -80,6 +96,16 @@ void Console::ClearBuffer(CHAR_INFO& ci)
         consoleBuffer->Put(i, ci);
     }
 }
+
+bool Console::HasFocus()
+{
+    return consoleWindow == GetActiveWindow();
+}
+
+
+///////////////////////////
+// Setters
+//
 
 void Console::SetCursorSize(unsigned short size)
 {
@@ -103,6 +129,11 @@ void Console::SetCursorPosition(COORD pos)
     cursorPos = pos;
     SetConsoleCursorPosition(outputHandle, pos);
 }
+
+
+/////////////////////////////
+// Helper functions
+//
 
 void Console::InitFont()
 {

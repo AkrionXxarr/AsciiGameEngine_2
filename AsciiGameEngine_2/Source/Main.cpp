@@ -13,15 +13,15 @@
 
 #define WIDTH 160
 #define HEIGHT 90
-#define SENSITIVITY 8
+#define SENSITIVITY 7.9
 
 int main()
 {
     std::shared_ptr<ConsoleBuffer> buffer = std::make_shared<ConsoleBuffer>(WIDTH, HEIGHT);
     Console console;
     ConsoleInput input({ 250, 250 });
-    Vector2f v;
-    Vector2f charPos;
+    Math::Vector2f v;
+    Math::Vector2f charPos;
     CHAR_INFO ci;
 
     ci.Attributes = FOREGROUND_INTENSITY | FOREGROUND_GREEN;
@@ -30,23 +30,26 @@ int main()
     console.CreateDevice(buffer, 0, FONT_8x8);
     console.ClearBuffer();
 
-    //buffer->useDrawRect = true;
+    buffer->useDrawRect = true;
 
     for (;;)
     {
-        input.Tick();
-        v = input.GetMouseDelta();
-        charPos = charPos + (v / SENSITIVITY);
+        if (console.HasFocus())
+        {
+            input.Tick();
+            v = input.GetMouseDelta();
+            charPos = charPos + (v / SENSITIVITY);
 
-        if (charPos.x < 0) charPos.x = 0;
-        else if (charPos.x >= WIDTH) charPos.x = WIDTH - 1;
-        if (charPos.y < 0) charPos.y = 0;
-        else if (charPos.y >= HEIGHT) charPos.y = HEIGHT - 1;
+            if (charPos.x < 0) charPos.x = 0;
+            else if (charPos.x >= WIDTH) charPos.x = WIDTH - 1;
+            if (charPos.y < 0) charPos.y = 0;
+            else if (charPos.y >= HEIGHT) charPos.y = HEIGHT - 1;
 
-        buffer->Put(unsigned int(charPos.x), unsigned int(charPos.y), ci);
-        //buffer->drawRect = { charPos.x, charPos.y, charPos.x, charPos.y };
+            buffer->Put(unsigned int(charPos.x), unsigned int(charPos.y), ci);
+            buffer->drawRect = { charPos.x, charPos.y, charPos.x, charPos.y };
 
-        console.Display();
-        console.ClearBuffer();
+            console.Display();
+            console.ClearBuffer();
+        }
     }
 }

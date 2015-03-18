@@ -87,6 +87,7 @@
     <ClInclude Include="Source\Display Device\Windows Console\ConsoleDefines.hpp" />
     <ClInclude Include="Source\Input\Windows Input\ConsoleInput.hpp" />
     <ClInclude Include="Source\Scene Graph\Interface\ISceneGraph.hpp" />
+    <ClInclude Include="Source\System\Win32\Window.hpp" />
     <ClInclude Include="Source\Utility\Math\Matrix4f.hpp" />
     <ClInclude Include="Source\Utility\Math\Quaternion.hpp" />
     <ClInclude Include="Source\Utility\Math\Vector2f.hpp" />

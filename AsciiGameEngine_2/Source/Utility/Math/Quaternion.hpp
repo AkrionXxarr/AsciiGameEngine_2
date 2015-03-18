@@ -12,43 +12,50 @@ class Vector3f;
 class Vector4f;
 class Matrix4f;
 
-class Quaternion
+namespace Math
 {
-public:
-    /* Construct & Destruct */
-    Quaternion();
-    Quaternion(float x, float y, float z, float w);
-    Quaternion(Vector4f& v);
-    Quaternion(Vector3f& axis, float angle);
-    Quaternion(Matrix4f& rot);
-    Quaternion(const Quaternion& other);
+    ///////////////////////////////
+    // Float-based Quaternion
+    //
 
-    ~Quaternion() { }
+    class Quaternion
+    {
+    public:
+        /* Construct & Destruct */
+        Quaternion();
+        Quaternion(float x, float y, float z, float w);
+        Quaternion(Vector4f& v);
+        Quaternion(Vector3f& axis, float angle);
+        Quaternion(Matrix4f& rot);
+        Quaternion(const Quaternion& other);
 
-    /* Quaternion operations */
-    float Length();
-    Quaternion Normalized();
-    Quaternion Conjugate();
+        ~Quaternion() { }
 
-    float Dot(Quaternion& q);
+        /* Quaternion operations */
+        float Length();
+        Quaternion Normalized();
+        Quaternion Conjugate();
 
-    Quaternion NLerp(Quaternion& dest, float lerpFactor, bool shortest);
+        float Dot(Quaternion& q);
 
-    Matrix4f ToRotationMatrix();
+        Quaternion NLerp(Quaternion& dest, float lerpFactor, bool shortest);
 
-public:
-    /* Operators */
-    bool operator== (Quaternion& q) { return (x == q.x) && (y == q.y) && (z == q.z) && (w == q.w); }
+        Matrix4f ToRotationMatrix();
 
-    Quaternion operator- (const Quaternion& q) const { return Quaternion(x - q.x, y - q.y, z - q.z, w - q.w); }
-    Quaternion operator+ (const Quaternion& q) const { return Quaternion(x + q.x, y + q.y, z + q.z, w + q.w); }
+    public:
+        /* Operators */
+        bool operator== (Quaternion& q) { return (x == q.x) && (y == q.y) && (z == q.z) && (w == q.w); }
 
-    Quaternion operator* (float f) const { return Quaternion(x * f, y * f, z * f, w * f); }
-    Quaternion operator/ (float f) const { return Quaternion(x / f, y / f, z / f, w / f); }
+        Quaternion operator- (const Quaternion& q) const { return Quaternion(x - q.x, y - q.y, z - q.z, w - q.w); }
+        Quaternion operator+ (const Quaternion& q) const { return Quaternion(x + q.x, y + q.y, z + q.z, w + q.w); }
 
-    Quaternion operator* (const Quaternion& q) const;
-    Quaternion operator* (const Vector3f& v) const;
+        Quaternion operator* (float f) const { return Quaternion(x * f, y * f, z * f, w * f); }
+        Quaternion operator/ (float f) const { return Quaternion(x / f, y / f, z / f, w / f); }
 
-public:
-    float x, y, z, w;
-};
+        Quaternion operator* (const Quaternion& q) const;
+        Quaternion operator* (const Vector3f& v) const;
+
+    public:
+        float x, y, z, w;
+    };
+}; // Namespace Math
