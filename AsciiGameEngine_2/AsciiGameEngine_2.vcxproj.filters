@@ -98,5 +98,8 @@
     <ClInclude Include="Source\System\Win32\Window.hpp">
       <Filter>Source\System\Win32</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Input\Windows Input\ConsoleInputDefines.hpp">
+      <Filter>Source\Input\Windows Input</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

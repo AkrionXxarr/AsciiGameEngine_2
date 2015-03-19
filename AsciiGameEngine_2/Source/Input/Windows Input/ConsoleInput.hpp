@@ -8,10 +8,16 @@
 #include <Windows.h>
 #include <deque>
 
-namespace Math
+#include "Input\Windows Input\ConsoleInputDefines.hpp"
+
+struct MouseData
 {
-    class Vector2f;
-}
+    bool moved;
+    bool leftButtonPressed;
+    bool rightButtonPressed;
+    bool doubleClick;
+    COORD pos;
+};
 
 //////////////////////////////////////////////////////////////////////////////
 // This class is intended to allow for mouse and keyboard input that
@@ -27,18 +33,15 @@ public:
     /* ConsoleInput operations */
     void Tick();
 
-    /* Peek & Get */
-    KEY_EVENT_RECORD PeekKeyEvent();
-    KEY_EVENT_RECORD GetKeyEvent();
-    unsigned int GetKeyEventCount();
+    bool IsKeyUp(KEYBOARD key);
+    bool IsKeyDown(KEYBOARD key);
 
-    MOUSE_EVENT_RECORD PeekMouseEvent();
-    MOUSE_EVENT_RECORD GetMouseEvent();
-    unsigned int GetMouseEventCount();
+    bool MouseMoved();
+    bool LeftClick();
+    bool RightClick();
+    bool DoubleClick();
 
-    POINT PeekMouseScreenPos();
-    POINT GetMouseScreenPos();
-    unsigned int GetMouseScreenPosCount();
+    COORD GetMousePosition();
 
 private:
     /* Utility */
@@ -55,7 +58,8 @@ private:
     DWORD oldMode;
     INPUT_RECORD* inputRecords;
 
-    std::deque<POINT> mouseScreenPos;
-    std::deque<KEY_EVENT_RECORD> keyboardEvents;
-    std::deque<MOUSE_EVENT_RECORD> mouseEvents;
+    bool* pressedKeys;
+    std::deque<KEYBOARD> releasedKeys;
+
+    MouseData mouseData;
 };
