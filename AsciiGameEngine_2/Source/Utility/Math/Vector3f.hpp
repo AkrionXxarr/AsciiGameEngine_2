@@ -8,11 +8,11 @@
 #define _USE_MATH_DEFINES
 #include <math.h>
 
-class Vector2f;
-class Quaternion;
-
 namespace Math
 {
+    class Vector2f;
+    class Quaternion;
+
     //////////////////////////////////////////
     // 3 Dimensional float-based vector
     //

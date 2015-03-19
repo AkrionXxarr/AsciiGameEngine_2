@@ -6,8 +6,12 @@
 #pragma once
 
 #include <Windows.h>
+#include <deque>
 
-class Vector2f;
+namespace Math
+{
+    class Vector2f;
+}
 
 //////////////////////////////////////////////////////////////////////////////
 // This class is intended to allow for mouse and keyboard input that
@@ -16,15 +20,42 @@ class Vector2f;
 class ConsoleInput
 {
 public:
-    ConsoleInput(POINT mouseFreezePos);
+    /* Construct & Destruct*/
+    ConsoleInput(unsigned int bufferLimit);
     ~ConsoleInput();
 
-    // Handles all the input updates
+    /* ConsoleInput operations */
     void Tick();
 
-    Vector2f GetMouseDelta();
+    /* Peek & Get */
+    KEY_EVENT_RECORD PeekKeyEvent();
+    KEY_EVENT_RECORD GetKeyEvent();
+    unsigned int GetKeyEventCount();
+
+    MOUSE_EVENT_RECORD PeekMouseEvent();
+    MOUSE_EVENT_RECORD GetMouseEvent();
+    unsigned int GetMouseEventCount();
+
+    POINT PeekMouseScreenPos();
+    POINT GetMouseScreenPos();
+    unsigned int GetMouseScreenPosCount();
 
 private:
-    POINT lastMousePos, mouseFreezePos;
-    Vector2f* mouseDelta;
+    /* Utility */
+    void KeyEvent(KEY_EVENT_RECORD keyEvent);
+    void MouseEvent(MOUSE_EVENT_RECORD mouseEvent);
+    void UpdateMouseDesktopPos();
+
+private:
+    unsigned int bufferLimit;
+
+    HWND consoleWindow;
+    HANDLE inputHandle;
+
+    DWORD oldMode;
+    INPUT_RECORD* inputRecords;
+
+    std::deque<POINT> mouseScreenPos;
+    std::deque<KEY_EVENT_RECORD> keyboardEvents;
+    std::deque<MOUSE_EVENT_RECORD> mouseEvents;
 };

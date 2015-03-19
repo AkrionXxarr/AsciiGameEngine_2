@@ -7,7 +7,6 @@
 #include "Utility\Math\Vector3f.hpp"
 #include "Utility\Math\Vector4f.hpp"
 
-
 namespace Math
 {
     ///////////////////////////////

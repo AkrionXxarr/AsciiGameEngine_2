@@ -9,11 +9,11 @@
 #include <math.h>
 #include <vector>
 
-class Vector3f;
-class Vector4f;
-
 namespace Math
 {
+    class Vector3f;
+    class Vector4f;
+
     //////////////////////
     // 4 by 4 float-based matrix
     //

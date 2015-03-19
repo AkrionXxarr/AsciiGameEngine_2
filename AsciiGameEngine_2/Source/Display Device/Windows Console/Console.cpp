@@ -16,6 +16,7 @@ Console::Console()
 {
     outputHandle = GetStdHandle(STD_OUTPUT_HANDLE);
     consoleWindow = GetConsoleWindow();
+
     assert(outputHandle != INVALID_HANDLE_VALUE);
     assert(consoleWindow != INVALID_HANDLE_VALUE);
 }

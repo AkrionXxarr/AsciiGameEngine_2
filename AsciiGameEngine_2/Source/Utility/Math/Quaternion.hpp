@@ -8,12 +8,12 @@
 #define _USE_MATH_DEFINES
 #include <math.h>
 
-class Vector3f;
-class Vector4f;
-class Matrix4f;
-
 namespace Math
 {
+    class Vector3f;
+    class Vector4f;
+    class Matrix4f;
+
     ///////////////////////////////
     // Float-based Quaternion
     //
