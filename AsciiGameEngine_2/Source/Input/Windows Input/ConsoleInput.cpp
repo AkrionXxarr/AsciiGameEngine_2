@@ -308,13 +308,17 @@ void ConsoleInput::MouseEvent(MOUSE_EVENT_RECORD mouseEvent)
         mouseAction = MOUSE_ACTION::CLICK_DOUBLE;
         break;
     case MOUSE_HWHEELED:
-        if (HIWORD(mouseButtonFlags) > 0)
+        // HIWORD returns an unsigned short but a signed short
+        // is used to indicate direction.
+        if (short(HIWORD(mouseButtonFlags)) > 0)
             mouseAction = MOUSE_ACTION::MOUSE_WHEEL_RIGHT;
         else
             mouseAction = MOUSE_ACTION::MOUSE_WHEEL_LEFT;
         break;
     case MOUSE_WHEELED:
-        if (HIWORD(mouseButtonFlags) > 0)
+        // HIWORD returns an unsigned short but a signed short
+        // is used to indicate direction.
+        if (short(HIWORD(mouseButtonFlags)) > 0)
             mouseAction = MOUSE_ACTION::MOUSE_WHEEL_FORWARD;
         else
             mouseAction = MOUSE_ACTION::MOUSE_WHEEL_BACKWARD;

@@ -93,9 +93,6 @@ int main()
         if (input.GetMouseAction(MOUSE_ACTION::MOUSE_WHEEL_BACKWARD))
             ci.Char.UnicodeChar = 'B';
 
-        if (input.GetMouseAction(MOUSE_ACTION::MOVED))
-            charPos = Math::Vector2f(input.GetMousePosition().X, input.GetMousePosition().Y);
-
         if (input.GetMouseDown(MOUSE_BUTTON::CLICK_LEFT))
         {
             if (input.GetMouseAction(MOUSE_ACTION::CLICK_DOUBLE))
@@ -108,6 +105,22 @@ int main()
         {
             ci.Char.UnicodeChar = '#';
         }
+
+        if (input.GetMouseAction(MOUSE_ACTION::MOVED))
+            charPos = Math::Vector2f(input.GetMousePosition().X, input.GetMousePosition().Y);
+
+        if (input.GetKeyDown(KEYBOARD::F1)) ci.Char.UnicodeChar = '1';
+        else if (input.GetKeyDown(KEYBOARD::F2)) ci.Char.UnicodeChar = '2';
+        else if (input.GetKeyDown(KEYBOARD::F3)) ci.Char.UnicodeChar = '3';
+        else if (input.GetKeyDown(KEYBOARD::F4)) ci.Char.UnicodeChar = '4';
+        else if (input.GetKeyDown(KEYBOARD::F5)) ci.Char.UnicodeChar = '5';
+        else if (input.GetKeyDown(KEYBOARD::F6)) ci.Char.UnicodeChar = '6';
+        else if (input.GetKeyDown(KEYBOARD::F7)) ci.Char.UnicodeChar = '7';
+        else if (input.GetKeyDown(KEYBOARD::F8)) ci.Char.UnicodeChar = '8';
+        else if (input.GetKeyDown(KEYBOARD::F9)) ci.Char.UnicodeChar = '9';
+        else if (input.GetKeyDown(KEYBOARD::F10)) ci.Char.UnicodeChar = 'A';
+        else if (input.GetKeyDown(KEYBOARD::F11)) ci.Char.UnicodeChar = 'B';
+        else if (input.GetKeyDown(KEYBOARD::F12)) ci.Char.UnicodeChar = 'C';
 
         for (int i = 0; i < 3; i++)
         {
