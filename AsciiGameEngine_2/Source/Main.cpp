@@ -43,7 +43,7 @@ int main()
         console.ClearBuffer();
         input.Tick();
         
-        if (input.IsKeyDown(KEYBOARD::ARROW_RIGHT))
+        if (input.GetKeyDown(KEYBOARD::ARROW_RIGHT))
         {
             ci.Char.UnicodeChar = 0x1A;
             ci2.Char.UnicodeChar = 0x1A;
@@ -51,7 +51,7 @@ int main()
             if ((charPos2.x + 1) < buffer->GetSizeAsCoord().X)
                 charPos2.x++;
         }
-        if (input.IsKeyDown(KEYBOARD::ARROW_LEFT))
+        if (input.GetKeyDown(KEYBOARD::ARROW_LEFT))
         {
             ci.Char.UnicodeChar = 0x1B;
             ci2.Char.UnicodeChar = 0x1B;
@@ -59,7 +59,7 @@ int main()
             if ((charPos2.x - 1) >= 0)
                 charPos2.x--;
         }
-        if (input.IsKeyDown(KEYBOARD::ARROW_UP))
+        if (input.GetKeyDown(KEYBOARD::ARROW_UP))
         {
             ci.Char.UnicodeChar = 0x1E;
             ci2.Char.UnicodeChar = 0x1E;
@@ -67,7 +67,7 @@ int main()
             if ((charPos2.y - 1) >= 0)
                 charPos2.y--;
         }
-        if (input.IsKeyDown(KEYBOARD::ARROW_DOWN))
+        if (input.GetKeyDown(KEYBOARD::ARROW_DOWN))
         {
             ci.Char.UnicodeChar = 0x1F;
             ci2.Char.UnicodeChar = 0x1F;
@@ -76,21 +76,38 @@ int main()
                 charPos2.y++;
         }
 
-        if (input.IsKeyUp(KEYBOARD::NUM_1))
+        if (input.GetKeyDown(KEYBOARD::SHIFT))
         {
-            ci.Char.UnicodeChar = '1';
+            if (input.GetKeyUp(KEYBOARD::NUM_1))
+            {
+                ci.Char.UnicodeChar = '!';
+            }
         }
 
+        if (input.GetMouseAction(MOUSE_ACTION::MOUSE_WHEEL_LEFT))
+            ci.Char.UnicodeChar = 'L';
+        if (input.GetMouseAction(MOUSE_ACTION::MOUSE_WHEEL_RIGHT))
+            ci.Char.UnicodeChar = 'R';
+        if (input.GetMouseAction(MOUSE_ACTION::MOUSE_WHEEL_FORWARD))
+            ci.Char.UnicodeChar = 'F';
+        if (input.GetMouseAction(MOUSE_ACTION::MOUSE_WHEEL_BACKWARD))
+            ci.Char.UnicodeChar = 'B';
 
-        if (input.MouseMoved())
+        if (input.GetMouseAction(MOUSE_ACTION::MOVED))
             charPos = Math::Vector2f(input.GetMousePosition().X, input.GetMousePosition().Y);
 
-        if (input.LeftClick())
-            ci.Char.UnicodeChar = '-';
-        else if (input.RightClick())
+        if (input.GetMouseDown(MOUSE_BUTTON::CLICK_LEFT))
+        {
+            if (input.GetMouseAction(MOUSE_ACTION::CLICK_DOUBLE))
+                ci.Char.UnicodeChar = 'D';
+            else
+                ci.Char.UnicodeChar = '-';
+
+        }
+        else if (input.GetMouseUp(MOUSE_BUTTON::CLICK_RIGHT))
+        {
             ci.Char.UnicodeChar = '#';
-        else if (input.DoubleClick())
-            ci.Char.UnicodeChar = 'D';
+        }
 
         for (int i = 0; i < 3; i++)
         {

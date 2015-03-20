@@ -33,13 +33,12 @@ public:
     /* ConsoleInput operations */
     void Tick();
 
-    bool IsKeyUp(KEYBOARD key);
-    bool IsKeyDown(KEYBOARD key);
+    bool GetKeyUp(KEYBOARD key);
+    bool GetKeyDown(KEYBOARD key);
 
-    bool MouseMoved();
-    bool LeftClick();
-    bool RightClick();
-    bool DoubleClick();
+    bool GetMouseDown(MOUSE_BUTTON button);
+    bool GetMouseUp(MOUSE_BUTTON button);
+    bool GetMouseAction(MOUSE_ACTION action);
 
     COORD GetMousePosition();
 
@@ -61,5 +60,9 @@ private:
     bool* pressedKeys;
     std::deque<KEYBOARD> releasedKeys;
 
-    MouseData mouseData;
+    bool* mouseActions;
+    bool* pressedMouseButtons;
+    std::deque<MOUSE_BUTTON> releasedMouseButtons;
+
+    COORD mousePosition;
 };

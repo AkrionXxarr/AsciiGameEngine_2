@@ -5,10 +5,38 @@
 
 #pragma once
 
+enum MOUSE_ACTION
+{
+    UNHANDLED_ACTION,
+    NO_ACTION,
+
+    CLICK,
+    CLICK_DOUBLE,
+    MOUSE_WHEEL_LEFT,
+    MOUSE_WHEEL_RIGHT,
+    MOUSE_WHEEL_FORWARD,
+    MOUSE_WHEEL_BACKWARD,
+    MOVED,
+
+    END_OF_MOUSE_ACTION
+};
+
+enum MOUSE_BUTTON
+{
+    UNHANDLED_BUTTON,
+    NO_BUTTON,
+
+    CLICK_LEFT,
+    CLICK_MIDDLE,
+    CLICK_RIGHT,
+
+    END_OF_MOUSE_BUTTON
+};
+
 enum KEYBOARD
 {
-    UNHANDLED_KEY = -1,
-    NO_KEY = 0,
+    UNHANDLED_KEY,
+    NO_KEY,
 
     /* Letter keys */
     A, // a A
@@ -137,5 +165,5 @@ enum KEYBOARD
     SYSTEM_LEFT,
     SYSTEM_RIGHT,
     
-    END_OF_ENUM
+    END_OF_KEYBOARD
 };

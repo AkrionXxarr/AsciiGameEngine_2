@@ -18,17 +18,24 @@ ConsoleInput::ConsoleInput(unsigned int bufferLimit)
     this->bufferLimit = bufferLimit;
     inputRecords = new INPUT_RECORD[32];
 
-    pressedKeys = new bool[KEYBOARD::END_OF_ENUM];
+    pressedKeys = new bool[KEYBOARD::END_OF_KEYBOARD];
+    mouseActions = new bool[MOUSE_ACTION::END_OF_MOUSE_ACTION];
+    pressedMouseButtons = new bool[MOUSE_BUTTON::END_OF_MOUSE_BUTTON];
 
-    for (int i = 0; i < KEYBOARD::END_OF_ENUM; i++)
+    for (int i = 0; i < KEYBOARD::END_OF_KEYBOARD; i++)
     {
         pressedKeys[i] = false;
     }
+    for (int i = 0; i < MOUSE_ACTION::END_OF_MOUSE_ACTION; i++)
+    {
+        mouseActions[i] = false;
+    }
+    for (int i = 0; i < MOUSE_BUTTON::END_OF_MOUSE_BUTTON; i++)
+    {
+        pressedMouseButtons[i] = false;
+    }
 
-    mouseData.moved = false;
-    mouseData.leftButtonPressed = false;
-    mouseData.rightButtonPressed = false;
-    mouseData.pos = { 0, 0 };
+    mousePosition = { 0, 0 };
 
     inputHandle = GetStdHandle(STD_INPUT_HANDLE);
     consoleWindow = GetConsoleWindow();
@@ -37,7 +44,7 @@ ConsoleInput::ConsoleInput(unsigned int bufferLimit)
     assert(consoleWindow != INVALID_HANDLE_VALUE);
 
     GetConsoleMode(inputHandle, &oldMode);
-    SetConsoleMode(inputHandle, ENABLE_WINDOW_INPUT | ENABLE_MOUSE_INPUT);
+    SetConsoleMode(inputHandle, ENABLE_WINDOW_INPUT | ENABLE_MOUSE_INPUT | ENABLE_EXTENDED_FLAGS);
 }
 
 ConsoleInput::~ConsoleInput()
@@ -60,11 +67,10 @@ void ConsoleInput::Tick()
     DWORD inputCount;
 
     releasedKeys.clear();
+    releasedMouseButtons.clear();
 
-    mouseData.moved = false;
-    mouseData.leftButtonPressed = false;
-    mouseData.rightButtonPressed = false;
-    mouseData.doubleClick = false;
+    for (int i = 0; i < END_OF_MOUSE_ACTION; i++)
+        mouseActions[i] = false;
 
     PeekConsoleInput(inputHandle, inputRecords, 32, &inputCount);
 
@@ -89,11 +95,11 @@ void ConsoleInput::Tick()
     GetCursorPos(&point);
 }
 
-bool ConsoleInput::IsKeyUp(KEYBOARD key)
+bool ConsoleInput::GetKeyUp(KEYBOARD key)
 {
     bool keyMatched = false;
 
-    for (int i = 0; i < releasedKeys.size(); i++)
+    for (unsigned int i = 0; i < releasedKeys.size(); i++)
     {
         if (releasedKeys[i] == key)
         {
@@ -105,34 +111,40 @@ bool ConsoleInput::IsKeyUp(KEYBOARD key)
     return keyMatched;
 }
 
-bool ConsoleInput::IsKeyDown(KEYBOARD key)
+bool ConsoleInput::GetKeyDown(KEYBOARD key)
 {
     return pressedKeys[key];
 }
 
-bool ConsoleInput::MouseMoved()
+bool ConsoleInput::GetMouseDown(MOUSE_BUTTON button)
 {
-    return mouseData.moved;
+    return pressedMouseButtons[button];
 }
 
-bool ConsoleInput::LeftClick()
+bool ConsoleInput::GetMouseUp(MOUSE_BUTTON button)
 {
-    return mouseData.leftButtonPressed;
+    bool buttonMatched = false;
+
+    for (unsigned int i = 0; i < releasedMouseButtons.size(); i++)
+    {
+        if (releasedMouseButtons[i] == button)
+        {
+            buttonMatched = true;
+            break;
+        }
+    }
+
+    return buttonMatched;
 }
 
-bool ConsoleInput::RightClick()
+bool ConsoleInput::GetMouseAction(MOUSE_ACTION action)
 {
-    return mouseData.rightButtonPressed;
-}
-
-bool ConsoleInput::DoubleClick()
-{
-    return mouseData.doubleClick;
+    return mouseActions[action];
 }
 
 COORD ConsoleInput::GetMousePosition()
 {
-    return mouseData.pos;
+    return mousePosition;
 }
 
 
@@ -148,34 +160,6 @@ void ConsoleInput::KeyEvent(KEY_EVENT_RECORD keyEvent)
     }
 
     KEYBOARD key = KEYBOARD::NO_KEY;
-    KEYBOARD controlKey = KEYBOARD::NO_KEY;
-
-    if ((keyEvent.dwControlKeyState & SHIFT_PRESSED) != 0)
-        controlKey = KEYBOARD::SHIFT;
-
-    /*
-    switch (keyEvent.dwControlKeyState)
-    {
-    case LEFT_ALT_PRESSED:
-        controlKey = KEYBOARD::ALT_LEFT;
-        break;
-    case RIGHT_ALT_PRESSED:
-        controlKey = KEYBOARD::ALT_RIGHT;
-        break;
-    case LEFT_CTRL_PRESSED:
-        controlKey = KEYBOARD::CONTROL_LEFT;
-        break;
-    case RIGHT_CTRL_PRESSED:
-        controlKey = KEYBOARD::CONTROL_RIGHT;
-        break;
-    case SHIFT_PRESSED:
-        controlKey = KEYBOARD::SHIFT;
-        break;
-    default:
-        controlKey = KEYBOARD::NO_KEY;
-        break;
-    }
-    */
 
     switch (keyEvent.wVirtualKeyCode)
     {
@@ -308,31 +292,73 @@ void ConsoleInput::KeyEvent(KEY_EVENT_RECORD keyEvent)
 
 void ConsoleInput::MouseEvent(MOUSE_EVENT_RECORD mouseEvent)
 {
+    MOUSE_ACTION mouseAction = MOUSE_ACTION::NO_ACTION; 
+    MOUSE_BUTTON mouseButton = MOUSE_BUTTON::NO_BUTTON;
+    DWORD mouseButtonFlags = mouseEvent.dwButtonState;
+
     switch (mouseEvent.dwEventFlags)
     {
+        /* Button pressed or released */
     case 0:
-        switch (mouseEvent.dwButtonState)
-        {
-        case FROM_LEFT_1ST_BUTTON_PRESSED:
-            mouseData.leftButtonPressed = true;
-            break;
-        case RIGHTMOST_BUTTON_PRESSED:
-            mouseData.rightButtonPressed = true;
-            break;
-        }
+        mouseAction = MOUSE_ACTION::CLICK;
         break;
+
+        /* Actions */
     case DOUBLE_CLICK:
-        mouseData.doubleClick = true;
+        mouseAction = MOUSE_ACTION::CLICK_DOUBLE;
         break;
     case MOUSE_HWHEELED:
+        if (HIWORD(mouseButtonFlags) > 0)
+            mouseAction = MOUSE_ACTION::MOUSE_WHEEL_RIGHT;
+        else
+            mouseAction = MOUSE_ACTION::MOUSE_WHEEL_LEFT;
         break;
     case MOUSE_WHEELED:
+        if (HIWORD(mouseButtonFlags) > 0)
+            mouseAction = MOUSE_ACTION::MOUSE_WHEEL_FORWARD;
+        else
+            mouseAction = MOUSE_ACTION::MOUSE_WHEEL_BACKWARD;
         break;
     case MOUSE_MOVED:
-        mouseData.pos = mouseEvent.dwMousePosition;
-        mouseData.moved = true;
+        mousePosition = mouseEvent.dwMousePosition;
+        mouseAction = MOUSE_ACTION::MOVED;
+        break;
+    default:
+        mouseAction = MOUSE_ACTION::UNHANDLED_ACTION;
         break;
     }
+
+    if (mouseAction == MOUSE_ACTION::CLICK || mouseAction == MOUSE_ACTION::CLICK_DOUBLE)
+    {
+        bool leftClick = (mouseButtonFlags & FROM_LEFT_1ST_BUTTON_PRESSED) != 0;
+        bool rightClick = (mouseButtonFlags & RIGHTMOST_BUTTON_PRESSED) != 0;
+
+        if (leftClick)
+        {
+            // Button was or still is pressed
+            pressedMouseButtons[MOUSE_BUTTON::CLICK_LEFT] = true;
+        }
+        else if (!leftClick && pressedMouseButtons[MOUSE_BUTTON::CLICK_LEFT])
+        {
+            // Button was pressed, but is not any longer
+            pressedMouseButtons[MOUSE_BUTTON::CLICK_LEFT] = false;
+            releasedMouseButtons.push_front(MOUSE_BUTTON::CLICK_LEFT);
+        }
+
+        if (rightClick)
+        {
+            // Button was or still is pressed
+            pressedMouseButtons[MOUSE_BUTTON::CLICK_RIGHT] = true;
+        }
+        else if (!leftClick && pressedMouseButtons[MOUSE_BUTTON::CLICK_RIGHT])
+        {
+            // Button was pressed, but is not any longer
+            pressedMouseButtons[MOUSE_BUTTON::CLICK_RIGHT] = false;
+            releasedMouseButtons.push_front(MOUSE_BUTTON::CLICK_RIGHT);
+        }
+    }
+
+    mouseActions[mouseAction] = true;
 }
 
 void ConsoleInput::UpdateMouseDesktopPos()
