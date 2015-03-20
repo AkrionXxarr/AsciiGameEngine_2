@@ -7,11 +7,13 @@
 #include "Utility\Math\Vector3f.hpp"
 #include "Utility\Math\Quaternion.hpp"
 
+
 namespace Math
 {
     /////////////////////////////
     // Constructors
     //
+
     Vector3f::Vector3f()
     {
         x = 0; y = 0; z = 0;
@@ -32,9 +34,11 @@ namespace Math
         x = v.x; y = v.y; z = v.z;
     }
 
+
     ////////////////////////////
     // Vector operations
     //
+
     float Vector3f::Length()
     {
         return sqrt(x * x + y * y + z * z);
@@ -82,6 +86,7 @@ namespace Math
     ////////////////////////////
     // Swizzlers
     //
+
     Vector2f Vector3f::XY() { return Vector2f(x, y); }
     Vector2f Vector3f::YX() { return Vector2f(y, x); }
 

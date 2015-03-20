@@ -5,11 +5,13 @@
 
 #include "Utility\Math\Vector2f.hpp"
 
+
 namespace Math
 {
     /////////////////////////////
     // Constructors
     //
+
     Vector2f::Vector2f()
     {
         x = 0; y = 0;
@@ -29,6 +31,7 @@ namespace Math
     ////////////////////////////
     // Vector operations
     //
+
     float Vector2f::Length()
     {
         return sqrt(x * x + y * y);
@@ -64,13 +67,17 @@ namespace Math
         return (((dest - *this) * factor) + *this);
     }
 
+
     ///////////////////
     // Swizzlers
     //
+
     Vector2f Vector2f::YX() { return Vector2f(y, x); }
+
 
     ////////////////////////
     // Static variables
     //
+
     const Vector2f Vector2f::zero(0, 0);
 }; // Namespace Math

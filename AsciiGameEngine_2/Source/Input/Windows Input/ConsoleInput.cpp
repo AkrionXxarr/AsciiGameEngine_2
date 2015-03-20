@@ -9,15 +9,17 @@
 #include "Utility\Math\Vector2f.hpp"
 using namespace Math;
 
+
 /////////////////////////////
 // Construct & Destruct
 //
 
-ConsoleInput::ConsoleInput(unsigned int bufferLimit)
+ConsoleInput::ConsoleInput(unsigned int inputBufferSize)
 {
-    this->bufferLimit = bufferLimit;
-    inputRecords = new INPUT_RECORD[32];
+    this->inputBufferSize = inputBufferSize;
+    inputRecords = new INPUT_RECORD[inputBufferSize];
 
+    // Set and clear input buffers
     pressedKeys = new bool[KEYBOARD::END_OF_KEYBOARD];
     mouseActions = new bool[MOUSE_ACTION::END_OF_MOUSE_ACTION];
     pressedMouseButtons = new bool[MOUSE_BUTTON::END_OF_MOUSE_BUTTON];
@@ -34,16 +36,17 @@ ConsoleInput::ConsoleInput(unsigned int bufferLimit)
     {
         pressedMouseButtons[i] = false;
     }
+    // --
 
     mousePosition = { 0, 0 };
 
     inputHandle = GetStdHandle(STD_INPUT_HANDLE);
-    consoleWindow = GetConsoleWindow();
+    consoleWindow = GetConsoleWindow(); // May be useful in the future
 
     assert(inputHandle != INVALID_HANDLE_VALUE);
     assert(consoleWindow != INVALID_HANDLE_VALUE);
 
-    GetConsoleMode(inputHandle, &oldMode);
+    GetConsoleMode(inputHandle, &oldMode); // Save the mode so that it may be restored
     SetConsoleMode(inputHandle, ENABLE_WINDOW_INPUT | ENABLE_MOUSE_INPUT | ENABLE_EXTENDED_FLAGS);
 }
 
@@ -55,7 +58,10 @@ ConsoleInput::~ConsoleInput()
         delete[] inputRecords;
     if (pressedKeys)
         delete[] pressedKeys;
+    if (pressedMouseButtons)
+        delete[] pressedMouseButtons;
 }
+
 
 /////////////////////////////////
 // ConsoleInput operations
@@ -72,7 +78,7 @@ void ConsoleInput::Tick()
     for (int i = 0; i < END_OF_MOUSE_ACTION; i++)
         mouseActions[i] = false;
 
-    PeekConsoleInput(inputHandle, inputRecords, 32, &inputCount);
+    PeekConsoleInput(inputHandle, inputRecords, inputBufferSize, &inputCount);
 
     for (unsigned int i = 0; i < inputCount; i++)
     {
@@ -94,6 +100,11 @@ void ConsoleInput::Tick()
 
     GetCursorPos(&point);
 }
+
+
+///////////////////
+// Getters
+//
 
 bool ConsoleInput::GetKeyUp(KEYBOARD key)
 {
@@ -151,14 +162,9 @@ COORD ConsoleInput::GetMousePosition()
 //////////////////
 // Utility
 //
+
 void ConsoleInput::KeyEvent(KEY_EVENT_RECORD keyEvent)
 {
-    if (keyEvent.wVirtualKeyCode == 0x32)
-    {
-        int x = 3;
-        x = 0;
-    }
-
     KEYBOARD key = KEYBOARD::NO_KEY;
 
     switch (keyEvent.wVirtualKeyCode)
@@ -286,6 +292,8 @@ void ConsoleInput::KeyEvent(KEY_EVENT_RECORD keyEvent)
 
     pressedKeys[key] = (keyEvent.bKeyDown != 0);
 
+    // Assumption that in order to have a key up event, there must have
+    // been a key down event, so add the key to the queue of released keys.
     if (!keyEvent.bKeyDown)
         releasedKeys.push_front(key);
 }
@@ -334,8 +342,11 @@ void ConsoleInput::MouseEvent(MOUSE_EVENT_RECORD mouseEvent)
 
     if (mouseAction == MOUSE_ACTION::CLICK || mouseAction == MOUSE_ACTION::CLICK_DOUBLE)
     {
+        // Extract the bit flags
         bool leftClick = (mouseButtonFlags & FROM_LEFT_1ST_BUTTON_PRESSED) != 0;
         bool rightClick = (mouseButtonFlags & RIGHTMOST_BUTTON_PRESSED) != 0;
+        bool middleClick = (mouseButtonFlags & FROM_LEFT_2ND_BUTTON_PRESSED) != 0;
+
 
         if (leftClick)
         {
@@ -347,6 +358,18 @@ void ConsoleInput::MouseEvent(MOUSE_EVENT_RECORD mouseEvent)
             // Button was pressed, but is not any longer
             pressedMouseButtons[MOUSE_BUTTON::CLICK_LEFT] = false;
             releasedMouseButtons.push_front(MOUSE_BUTTON::CLICK_LEFT);
+        }
+
+        if (middleClick)
+        {
+            // Button was or still is pressed
+            pressedMouseButtons[MOUSE_BUTTON::CLICK_MIDDLE] = true;
+        }
+        else if (!middleClick && pressedMouseButtons[MOUSE_BUTTON::CLICK_MIDDLE])
+        {
+            // Button was pressed, but is not any longer
+            pressedMouseButtons[MOUSE_BUTTON::CLICK_MIDDLE] = false;
+            releasedMouseButtons.push_front(MOUSE_BUTTON::CLICK_MIDDLE);
         }
 
         if (rightClick)
@@ -363,8 +386,4 @@ void ConsoleInput::MouseEvent(MOUSE_EVENT_RECORD mouseEvent)
     }
 
     mouseActions[mouseAction] = true;
-}
-
-void ConsoleInput::UpdateMouseDesktopPos()
-{
 }

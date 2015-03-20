@@ -7,6 +7,7 @@
 
 #include "Console.hpp"
 
+
 ////////////////////////////////
 // Construct & Destruct
 //

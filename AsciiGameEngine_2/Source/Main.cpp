@@ -22,7 +22,7 @@ int main()
     ConsoleInput input(10); // Keep past 10 events
     Console console;
 
-    console.CreateDevice(buffer, 0, FONT_10x18);
+    console.CreateDevice(buffer, 1, FONT_10x18);
     console.ClearBuffer();
 
     CHAR_INFO ci;
@@ -105,6 +105,9 @@ int main()
         {
             ci.Char.UnicodeChar = '#';
         }
+        
+        if (input.GetMouseDown(MOUSE_BUTTON::CLICK_MIDDLE))
+            ci.Char.UnicodeChar = 'M';
 
         if (input.GetMouseAction(MOUSE_ACTION::MOVED))
             charPos = Math::Vector2f(input.GetMousePosition().X, input.GetMousePosition().Y);

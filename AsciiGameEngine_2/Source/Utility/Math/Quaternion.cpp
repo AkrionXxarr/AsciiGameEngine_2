@@ -8,11 +8,13 @@
 #include "Utility\Math\Matrix4f.hpp"
 #include "Utility\Math\Quaternion.hpp"
 
+
 namespace Math
 {
     ///////////////////////////////
     // Constructors
     //
+
     Quaternion::Quaternion()
     {
         x = 0; y = 0; z = 0; w = 0;
@@ -92,6 +94,7 @@ namespace Math
     /////////////////////////////////
     // Quaternion operations
     //
+
     float Quaternion::Length()
     {
         return sqrt(x * x + y * y + z * z + w * w);
@@ -112,6 +115,7 @@ namespace Math
     {
         return (x * q.x) + (y * q.y) + (z * q.z) + (w * q.w);
     }
+
 
     ///////////////////
     // Operators

@@ -7,11 +7,13 @@
 #include "Utility\Math\Vector3f.hpp"
 #include "Utility\Math\Vector4f.hpp"
 
+
 namespace Math
 {
     ///////////////////////////////
     // Constructors
     //
+
     Vector4f::Vector4f()
     {
         x = 0; y = 0; z = 0; w = 0;
@@ -32,9 +34,11 @@ namespace Math
         x = v.x; y = v.y; z = v.z; w = v.w;
     }
 
+
     ////////////////////////////
     // Variable operations
     //
+
     float Vector4f::Length()
     {
         return sqrt(x * x + y * y + z * z + w * w);
@@ -51,9 +55,11 @@ namespace Math
         return (((dest - *this) * factor) + *this);
     }
 
+
     ////////////////////////////
     // Swizzlers
     //
+
     Vector2f Vector4f::XY() { return Vector2f(x, y); }
     Vector2f Vector4f::YX() { return Vector2f(y, x); }
 
@@ -100,6 +106,7 @@ namespace Math
     Vector3f Vector4f::ZWY() { return Vector3f(z, w, y); }
     Vector3f Vector4f::WYZ() { return Vector3f(w, y, z); }
     Vector3f Vector4f::WZY() { return Vector3f(w, z, y); }
+
 
     /////////////////////////
     // Static variables

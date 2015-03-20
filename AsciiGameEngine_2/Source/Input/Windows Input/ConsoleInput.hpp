@@ -10,29 +10,26 @@
 
 #include "Input\Windows Input\ConsoleInputDefines.hpp"
 
-struct MouseData
-{
-    bool moved;
-    bool leftButtonPressed;
-    bool rightButtonPressed;
-    bool doubleClick;
-    COORD pos;
-};
-
 //////////////////////////////////////////////////////////////////////////////
 // This class is intended to allow for mouse and keyboard input that
 // doesn't require the console to be used with Win32 functionality.
+//
+// A buffer of booleans is used to keep track of key/button presses
+// which can be indexed by the appropriate enum code.
+//
+// Dequeues are used for Key/Button Up events.
 //
 class ConsoleInput
 {
 public:
     /* Construct & Destruct*/
-    ConsoleInput(unsigned int bufferLimit);
+    ConsoleInput(unsigned int inputBufferSize);
     ~ConsoleInput();
 
     /* ConsoleInput operations */
     void Tick();
 
+    /* Getters */
     bool GetKeyUp(KEYBOARD key);
     bool GetKeyDown(KEYBOARD key);
 
@@ -46,15 +43,15 @@ private:
     /* Utility */
     void KeyEvent(KEY_EVENT_RECORD keyEvent);
     void MouseEvent(MOUSE_EVENT_RECORD mouseEvent);
-    void UpdateMouseDesktopPos();
 
 private:
-    unsigned int bufferLimit;
-
+    /* Variables */
     HWND consoleWindow;
     HANDLE inputHandle;
 
-    DWORD oldMode;
+    DWORD oldMode; // Input settings before being changed
+
+    unsigned int inputBufferSize; // Maximum records to process
     INPUT_RECORD* inputRecords;
 
     bool* pressedKeys;

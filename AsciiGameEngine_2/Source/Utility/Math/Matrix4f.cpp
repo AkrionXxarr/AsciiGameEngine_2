@@ -7,11 +7,13 @@
 #include "Utility\Math\Vector4f.hpp"
 #include "Matrix4f.hpp"
 
+
 namespace Math
 {
     ////////////////////////////////
     // Constructors
     //
+
     Matrix4f::Matrix4f() : m(4, std::vector<float>(4))
     {
         for (int row = 0; row < 4; row++)
@@ -63,9 +65,11 @@ namespace Math
         m[3][0] = wx; m[3][1] = wy; m[3][2] = wz; m[3][3] = ww;
     }
 
+
     ////////////////////////
     // Operators
     //
+
     void Matrix4f::operator= (const Matrix4f& other)
     {
         for (int row = 0; row < 4; row++)
