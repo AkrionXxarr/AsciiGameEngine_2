@@ -4,6 +4,7 @@ An attempt to design, from scratch, a 2010 project with current experiences and 
 Ultimately, the idea with this project will be that alternating from a console-based design to something more modern, such as DirectX or OpenGL, wouldn't require everything to be redone anew.<br>
 <br>
 This project will involve much more pre-planning than most of my projects, hopefully for greater results.<br>
+<br>
 Video as of commit d29c04805d36cfb04ca83cdd11663b9973e7d168:<br>
 4) https://www.youtube.com/watch?v=-EYOauxpLwY<br>
 
