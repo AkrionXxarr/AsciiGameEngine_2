@@ -24,25 +24,41 @@ class ConsoleInput
 public:
     /* Construct & Destruct*/
     ConsoleInput(unsigned int inputBufferSize);
-    ~ConsoleInput();
+    virtual ~ConsoleInput();
 
     /* ConsoleInput operations */
-    void Tick();
+    virtual void Tick();
 
     /* Getters */
+    // Keyboard
     bool GetKeyUp(KEYBOARD key);
     bool GetKeyDown(KEYBOARD key);
 
+    // Mouse
     bool GetMouseDown(MOUSE_BUTTON button);
     bool GetMouseUp(MOUSE_BUTTON button);
     bool GetMouseAction(MOUSE_ACTION action);
 
     COORD GetMousePosition();
+    bool GetMouseDesktopPosition(POINT& pos);
 
 private:
     /* Utility */
     void KeyEvent(KEY_EVENT_RECORD keyEvent);
     void MouseEvent(MOUSE_EVENT_RECORD mouseEvent);
+
+protected:
+    /* Variables */
+    // Keyboard
+    bool* pressedKeys;
+    std::deque<KEYBOARD> releasedKeys;
+
+    // Mouse
+    bool* mouseActions;
+    bool* pressedMouseButtons;
+    std::deque<MOUSE_BUTTON> releasedMouseButtons;
+
+    COORD mousePosition;
 
 private:
     /* Variables */
@@ -53,13 +69,4 @@ private:
 
     unsigned int inputBufferSize; // Maximum records to process
     INPUT_RECORD* inputRecords;
-
-    bool* pressedKeys;
-    std::deque<KEYBOARD> releasedKeys;
-
-    bool* mouseActions;
-    bool* pressedMouseButtons;
-    std::deque<MOUSE_BUTTON> releasedMouseButtons;
-
-    COORD mousePosition;
 };

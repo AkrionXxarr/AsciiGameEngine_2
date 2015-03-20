@@ -63,6 +63,9 @@
     <ClCompile Include="Source\Input\Windows Input\ConsoleInput.cpp">
       <Filter>Source\Input\Windows Input</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Input\Windows Input\ConsoleInputExt.cpp">
+      <Filter>Source\Input\Windows Input</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Display Device\Windows Console\ConsoleDefines.hpp">
@@ -99,6 +102,9 @@
       <Filter>Source\System\Win32</Filter>
     </ClInclude>
     <ClInclude Include="Source\Input\Windows Input\ConsoleInputDefines.hpp">
+      <Filter>Source\Input\Windows Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Input\Windows Input\ConsoleInputExt.hpp">
       <Filter>Source\Input\Windows Input</Filter>
     </ClInclude>
   </ItemGroup>

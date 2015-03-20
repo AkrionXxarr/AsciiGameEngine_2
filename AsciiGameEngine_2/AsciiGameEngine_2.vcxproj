@@ -75,6 +75,7 @@
   <ItemGroup>
     <ClCompile Include="Source\Display Device\Windows Console\Console.cpp" />
     <ClCompile Include="Source\Input\Windows Input\ConsoleInput.cpp" />
+    <ClCompile Include="Source\Input\Windows Input\ConsoleInputExt.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\Utility\Math\Matrix4f.cpp" />
     <ClCompile Include="Source\Utility\Math\Quaternion.cpp" />
@@ -87,6 +88,7 @@
     <ClInclude Include="Source\Display Device\Windows Console\ConsoleDefines.hpp" />
     <ClInclude Include="Source\Input\Windows Input\ConsoleInput.hpp" />
     <ClInclude Include="Source\Input\Windows Input\ConsoleInputDefines.hpp" />
+    <ClInclude Include="Source\Input\Windows Input\ConsoleInputExt.hpp" />
     <ClInclude Include="Source\Scene Graph\Interface\ISceneGraph.hpp" />
     <ClInclude Include="Source\System\Win32\Window.hpp" />
     <ClInclude Include="Source\Utility\Math\Matrix4f.hpp" />

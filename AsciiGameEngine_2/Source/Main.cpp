@@ -7,7 +7,7 @@
 #include <stdio.h>
 #include <iostream>
 
-#include "Input\Windows Input\ConsoleInput.hpp"
+#include "Input\Windows Input\ConsoleInputExt.hpp"
 #include "Utility\Math\Vector2f.hpp"
 #include "Display Device\Windows Console\Console.hpp"
 #include "Display Device\Windows Console\ConsoleDefines.hpp"
@@ -19,7 +19,7 @@
 int main()
 {
     std::shared_ptr<ConsoleBuffer> buffer = std::make_shared<ConsoleBuffer>(WIDTH, HEIGHT);
-    ConsoleInput input(10); // Keep past 10 events
+    ConsoleInputExt input(10); // Keep past 10 events
     Console console;
 
     console.CreateDevice(buffer, 1, FONT_10x18);
@@ -43,6 +43,9 @@ int main()
         console.ClearBuffer();
         input.Tick();
         
+        ci.Char.UnicodeChar = '.';
+        ci2.Char.UnicodeChar = '.';
+
         if (input.GetKeyDown(KEYBOARD::ARROW_RIGHT))
         {
             ci.Char.UnicodeChar = 0x1A;
@@ -76,54 +79,13 @@ int main()
                 charPos2.y++;
         }
 
-        if (input.GetKeyDown(KEYBOARD::SHIFT))
+        if (input.GetAnyKeyDown())
         {
-            if (input.GetKeyUp(KEYBOARD::NUM_1))
-            {
-                ci.Char.UnicodeChar = '!';
-            }
+            ci2.Char.UnicodeChar = input.GetCharacter();
         }
-
-        if (input.GetMouseAction(MOUSE_ACTION::MOUSE_WHEEL_LEFT))
-            ci.Char.UnicodeChar = 'L';
-        if (input.GetMouseAction(MOUSE_ACTION::MOUSE_WHEEL_RIGHT))
-            ci.Char.UnicodeChar = 'R';
-        if (input.GetMouseAction(MOUSE_ACTION::MOUSE_WHEEL_FORWARD))
-            ci.Char.UnicodeChar = 'F';
-        if (input.GetMouseAction(MOUSE_ACTION::MOUSE_WHEEL_BACKWARD))
-            ci.Char.UnicodeChar = 'B';
-
-        if (input.GetMouseDown(MOUSE_BUTTON::CLICK_LEFT))
-        {
-            if (input.GetMouseAction(MOUSE_ACTION::CLICK_DOUBLE))
-                ci.Char.UnicodeChar = 'D';
-            else
-                ci.Char.UnicodeChar = '-';
-
-        }
-        else if (input.GetMouseUp(MOUSE_BUTTON::CLICK_RIGHT))
-        {
-            ci.Char.UnicodeChar = '#';
-        }
-        
-        if (input.GetMouseDown(MOUSE_BUTTON::CLICK_MIDDLE))
-            ci.Char.UnicodeChar = 'M';
 
         if (input.GetMouseAction(MOUSE_ACTION::MOVED))
             charPos = Math::Vector2f(input.GetMousePosition().X, input.GetMousePosition().Y);
-
-        if (input.GetKeyDown(KEYBOARD::F1)) ci.Char.UnicodeChar = '1';
-        else if (input.GetKeyDown(KEYBOARD::F2)) ci.Char.UnicodeChar = '2';
-        else if (input.GetKeyDown(KEYBOARD::F3)) ci.Char.UnicodeChar = '3';
-        else if (input.GetKeyDown(KEYBOARD::F4)) ci.Char.UnicodeChar = '4';
-        else if (input.GetKeyDown(KEYBOARD::F5)) ci.Char.UnicodeChar = '5';
-        else if (input.GetKeyDown(KEYBOARD::F6)) ci.Char.UnicodeChar = '6';
-        else if (input.GetKeyDown(KEYBOARD::F7)) ci.Char.UnicodeChar = '7';
-        else if (input.GetKeyDown(KEYBOARD::F8)) ci.Char.UnicodeChar = '8';
-        else if (input.GetKeyDown(KEYBOARD::F9)) ci.Char.UnicodeChar = '9';
-        else if (input.GetKeyDown(KEYBOARD::F10)) ci.Char.UnicodeChar = 'A';
-        else if (input.GetKeyDown(KEYBOARD::F11)) ci.Char.UnicodeChar = 'B';
-        else if (input.GetKeyDown(KEYBOARD::F12)) ci.Char.UnicodeChar = 'C';
 
         for (int i = 0; i < 3; i++)
         {

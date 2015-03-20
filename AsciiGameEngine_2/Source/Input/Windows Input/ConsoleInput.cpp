@@ -106,6 +106,7 @@ void ConsoleInput::Tick()
 // Getters
 //
 
+/* Keyboard */
 bool ConsoleInput::GetKeyUp(KEYBOARD key)
 {
     bool keyMatched = false;
@@ -126,7 +127,10 @@ bool ConsoleInput::GetKeyDown(KEYBOARD key)
 {
     return pressedKeys[key];
 }
+/* ---------------------------------------------------------------- */
 
+
+/* Mouse */
 bool ConsoleInput::GetMouseDown(MOUSE_BUTTON button)
 {
     return pressedMouseButtons[button];
@@ -157,6 +161,19 @@ COORD ConsoleInput::GetMousePosition()
 {
     return mousePosition;
 }
+
+bool ConsoleInput::GetMouseDesktopPosition(POINT& pos)
+{
+    bool hasFocus = (consoleWindow == GetActiveWindow());
+    POINT t = { 0, 0 };
+
+    if (hasFocus)
+        GetCursorPos(&t);
+
+    pos = t;
+    return hasFocus;
+}
+/* ---------------------------------------------------------------- */
 
 
 //////////////////
@@ -292,8 +309,6 @@ void ConsoleInput::KeyEvent(KEY_EVENT_RECORD keyEvent)
 
     pressedKeys[key] = (keyEvent.bKeyDown != 0);
 
-    // Assumption that in order to have a key up event, there must have
-    // been a key down event, so add the key to the queue of released keys.
     if (!keyEvent.bKeyDown)
         releasedKeys.push_front(key);
 }

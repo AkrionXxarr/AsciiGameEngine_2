@@ -84,7 +84,7 @@ enum KEYBOARD
     ARROW_UP,
     ARROW_DOWN,
 
-    /* Numpad Keys */
+    /* Numpad keys */
     NUMPAD_0,
     NUMPAD_1,
     NUMPAD_2,
@@ -102,7 +102,7 @@ enum KEYBOARD
     NUMPAD_DIVIDE,
     NUMPAD_DECIMAL,
 
-    /* Other Keys */
+    /* Other keys */
     BACKSPACE,
     TAB,
     INSERT,
