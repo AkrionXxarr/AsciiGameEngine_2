@@ -1,3 +1,2 @@
 * Proper error handling
 * Better way of managing console window HWND
-* Have WindowsTime just always use floating points
