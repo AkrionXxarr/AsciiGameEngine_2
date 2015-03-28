@@ -9,6 +9,10 @@
 #include <assert.h>
 #include <memory>
 
+#include "Utility\Logging\Log.hpp"
+
+#define DISPLAY_DEVICE_LOG "DisplayDeviceLog.txt"
+
 // Raster fonts only
 enum CONSOLE_FONT_TYPE
 {
@@ -115,14 +119,14 @@ public:
     COORD GetCursorPosition() { return cursorPos; }
     HWND GetHandle() { return consoleWindow; }
 
-    void SetCursorSize(unsigned short size = 0);
-    void SetCursorPosition(short x, short y) { SetCursorPosition({ x, y }); }
-    void SetCursorPosition(COORD pos);
+    bool SetCursorSize(unsigned short size = 0);
+    bool SetCursorPosition(short x, short y) { return SetCursorPosition({ x, y }); }
+    bool SetCursorPosition(COORD pos);
 
 private:
     /* Helper functions */
-    void InitFont();
-    void InitSize();
+    bool InitFont();
+    bool InitSize();
 
     // Display device should not be copied
     Console(const Console& other);

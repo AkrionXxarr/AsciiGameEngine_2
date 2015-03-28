@@ -3,6 +3,7 @@
 * All rights reserved.
 */
 
+#include <sstream>
 #include "Input\Windows Input\ConsoleInputExt.hpp"
 
 CursorLock::CursorLock()
@@ -54,7 +55,7 @@ unsigned int __stdcall CursorLock::Run(void* params)
     return 0;
 }
 
-void CursorLock::Start(POINT c)
+bool CursorLock::Start(POINT c)
 {
     EnterCriticalSection(&runCritical);
     if (!running)
@@ -62,20 +63,42 @@ void CursorLock::Start(POINT c)
         center = c;
         running = true;
         handle = HANDLE(_beginthreadex(0, 0, &CursorLock::Run, (void*)this, 0, 0));
+
+        if (handle == 0)
+        {
+            std::stringstream sstream;
+            int errNum = errno;
+            int dosErrNum = _doserrno;
+
+            sstream << "Thread creation failed. (errno: ";
+            sstream << errNum << ") (_doserrno: " << dosErrNum;
+
+            LogError(sstream.str(), INPUT_LOG);
+        }
     }
     LeaveCriticalSection(&runCritical);
+
+    return true;
 }
 
-void CursorLock::Stop()
+bool CursorLock::Stop()
 {
     EnterCriticalSection(&runCritical);
     if (running)
     {
         running = false;
-        CloseHandle(handle);
+
+        if (!CloseHandle(handle))
+        {
+            LogWindowsError(INPUT_LOG);
+            return false;
+        }
+
         handle = INVALID_HANDLE_VALUE;
     }
     LeaveCriticalSection(&runCritical);
+
+    return true;
 }
 
 POINT CursorLock::GetDelta()

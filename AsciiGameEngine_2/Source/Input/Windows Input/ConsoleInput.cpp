@@ -9,13 +9,14 @@
 #include "Utility\Math\Vector2f.hpp"
 using namespace Math;
 
-
 /////////////////////////////
 // Construct & Destruct
 //
 
 ConsoleInput::ConsoleInput(unsigned int inputBufferSize, HWND consoleWindow)
 {
+    ClearLogFile(INPUT_LOG);
+
     this->inputBufferSize = inputBufferSize;
     this->consoleWindow = consoleWindow;
     inputRecords = new INPUT_RECORD[inputBufferSize];
@@ -42,16 +43,23 @@ ConsoleInput::ConsoleInput(unsigned int inputBufferSize, HWND consoleWindow)
     mousePosition = { 0, 0 };
 
     inputHandle = GetStdHandle(STD_INPUT_HANDLE);
+    if (inputHandle == INVALID_HANDLE_VALUE)
+        LogWindowsError(INPUT_LOG);
 
     assert(inputHandle != INVALID_HANDLE_VALUE);
 
-    GetConsoleMode(inputHandle, &oldMode); // Save the mode so that it may be restored
-    SetConsoleMode(inputHandle, ENABLE_WINDOW_INPUT | ENABLE_MOUSE_INPUT | ENABLE_EXTENDED_FLAGS);
+    // Save the mode so that it may be restored
+    if (!GetConsoleMode(inputHandle, &oldMode))
+        LogWindowsError(INPUT_LOG);
+
+    if (!SetConsoleMode(inputHandle, ENABLE_WINDOW_INPUT | ENABLE_MOUSE_INPUT | ENABLE_EXTENDED_FLAGS))
+        LogWindowsError(INPUT_LOG);
 }
 
 ConsoleInput::~ConsoleInput()
 {
-    SetConsoleMode(inputHandle, oldMode);
+    if (!SetConsoleMode(inputHandle, oldMode))
+        LogWindowsError(INPUT_LOG);
 
     if (inputRecords)
         delete[] inputRecords;
@@ -82,7 +90,8 @@ void ConsoleInput::Tick()
         for (int i = 0; i < END_OF_MOUSE_ACTION; i++)
             mouseActions[i] = false;
 
-        PeekConsoleInput(inputHandle, inputRecords, inputBufferSize, &inputCount);
+        if (!PeekConsoleInput(inputHandle, inputRecords, inputBufferSize, &inputCount))
+            LogWindowsError(INPUT_LOG);
 
         for (unsigned int i = 0; i < inputCount; i++)
         {
@@ -105,7 +114,8 @@ void ConsoleInput::Tick()
         ClearInputEvents();
     }
 
-    FlushConsoleInputBuffer(inputHandle);
+    if (!FlushConsoleInputBuffer(inputHandle))
+        LogWindowsError(INPUT_LOG);
 }
 
 

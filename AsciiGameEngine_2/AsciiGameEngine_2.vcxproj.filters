@@ -40,6 +40,15 @@
     <Filter Include="Docs">
       <UniqueIdentifier>{a0e5aad0-ee6f-4d27-9845-0700c39f8796}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Utility\Logging">
+      <UniqueIdentifier>{5c398526-70b9-44db-97f4-2e273db7059b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Utility\Error Handling">
+      <UniqueIdentifier>{bb881d47-0974-430e-a75c-86d825198ccc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Utility\Error Handling\Windows">
+      <UniqueIdentifier>{4aaf95f3-bf1d-410c-955f-bfb0abfa678a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Main.cpp">
@@ -71,6 +80,12 @@
     </ClCompile>
     <ClCompile Include="Source\Input\Windows Input\CursorLock.cpp">
       <Filter>Source\Input\Windows Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Utility\Logging\Log.cpp">
+      <Filter>Source\Utility\Logging</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Utility\Error Handling\Windows\ErrorHandler.cpp">
+      <Filter>Source\Utility\Error Handling\Windows</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -115,6 +130,12 @@
     </ClInclude>
     <ClInclude Include="Source\Utility\Time\ITime.hpp">
       <Filter>Source\Utility\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Utility\Logging\Log.hpp">
+      <Filter>Source\Utility\Logging</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Utility\Error Handling\Windows\ErrorHandler.hpp">
+      <Filter>Source\Utility\Error Handling\Windows</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

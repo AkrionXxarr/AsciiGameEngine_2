@@ -31,7 +31,12 @@ void ConsoleInputExt::Tick()
         if (lockCursor && cursorIsLocked)
         {
             // Given the unique case of this unlock, the unlock is handled manually.
-            cursorLock.Stop();
+            if (!cursorLock.Stop())
+            {
+                LogError("cursorLock.Stop() failed.", INPUT_LOG);
+                return;
+            }
+
             cursorIsLocked = false;
             lockCursor = true;
         }
@@ -41,12 +46,13 @@ void ConsoleInputExt::Tick()
         // Cursor should be locked, and isn't locked, so lock it
         if (lockCursor && !cursorIsLocked)
         {
-            LockCursor(true);
+            if (!LockCursor(true))
+                return;
         }
     }
 }
 
-void ConsoleInputExt::LockCursor(bool lock)
+bool ConsoleInputExt::LockCursor(bool lock)
 {
     lockCursor = lock;
 
@@ -54,19 +60,35 @@ void ConsoleInputExt::LockCursor(bool lock)
     {
         RECT r;
         POINT p;
-        GetWindowRect(consoleWindow, &r);
+        if (!GetWindowRect(consoleWindow, &r))
+        {
+            LogWindowsError(INPUT_LOG);
+            return false;
+        }
 
         p.x = r.left + (r.right - r.left) / 2;
         p.y = r.top + (r.bottom - r.top) / 2;
 
-        cursorLock.Start(p);
+        if (!cursorLock.Start(p))
+        {
+            LogError("cursorLock.Start() failed.", INPUT_LOG);
+            return false;
+        }
+
         cursorIsLocked = true;
     }
     else
     {
-        cursorLock.Stop();
+        if (!cursorLock.Stop())
+        {
+            LogError("cursorLock.Stop() failed.", INPUT_LOG);
+            return false;
+        }
+
         cursorIsLocked = false;
     }
+
+    return true;
 }
 
 char ConsoleInputExt::GetCharacter()

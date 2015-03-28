@@ -1,2 +1,2 @@
-* Proper error handling
-* Better way of managing console window HWND
+Console HWND
+* HWND must be obtained after device initialization

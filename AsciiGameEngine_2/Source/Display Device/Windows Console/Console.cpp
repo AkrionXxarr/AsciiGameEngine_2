@@ -7,7 +7,6 @@
 
 #include "Console.hpp"
 
-
 ////////////////////////////////
 // Construct & Destruct
 //
@@ -15,7 +14,13 @@
 // Initialize basic console-related variables
 Console::Console()
 {
+    ClearLogFile(DISPLAY_DEVICE_LOG);
+
     outputHandle = GetStdHandle(STD_OUTPUT_HANDLE);
+
+    if (outputHandle == INVALID_HANDLE_VALUE)
+        LogWindowsError(DISPLAY_DEVICE_LOG);
+
     assert(outputHandle != INVALID_HANDLE_VALUE);
 }
 
@@ -68,13 +73,30 @@ bool Console::CreateDevice(std::shared_ptr<ConsoleBuffer> cb, unsigned short cur
     consoleBuffer = cb;
     this->fontType = fontType;
 
-    InitFont();
-    InitSize();
+    if (!InitFont())
+    {
+        LogError("InitFont() failed.", DISPLAY_DEVICE_LOG);
+        return false;
+    }
 
-    SetCursorSize(cursorSize);
+    if (!InitSize())
+    {
+        LogError("InitSize() failed.", DISPLAY_DEVICE_LOG);
+        return false;
+    }
+
+    if (!SetCursorSize(cursorSize))
+    {
+        LogError("SetCursorSize() failed.", DISPLAY_DEVICE_LOG);
+        return false;
+    }
 
     consoleWindow = GetConsoleWindow();
-    assert(consoleWindow != INVALID_HANDLE_VALUE);
+    if (consoleWindow == INVALID_HANDLE_VALUE)
+    {
+        LogWindowsError(DISPLAY_DEVICE_LOG);
+        return false;
+    }
 
     return true;
 }
@@ -109,7 +131,7 @@ bool Console::HasFocus()
 // Setters
 //
 
-void Console::SetCursorSize(unsigned short size)
+bool Console::SetCursorSize(unsigned short size)
 {
     switch (size)
     {
@@ -123,13 +145,26 @@ void Console::SetCursorSize(unsigned short size)
         cci.dwSize = size;
     }
 
-    SetConsoleCursorInfo(outputHandle, &cci);
+    if (!SetConsoleCursorInfo(outputHandle, &cci))
+    {
+        LogWindowsError(DISPLAY_DEVICE_LOG);
+        return false;
+    }
+
+    return true;
 }
 
-void Console::SetCursorPosition(COORD pos)
+bool Console::SetCursorPosition(COORD pos)
 {
     cursorPos = pos;
-    SetConsoleCursorPosition(outputHandle, pos);
+
+    if (!SetConsoleCursorPosition(outputHandle, pos))
+    {
+        LogWindowsError(DISPLAY_DEVICE_LOG);
+        return false;
+    }
+
+    return true;
 }
 
 
@@ -137,7 +172,7 @@ void Console::SetCursorPosition(COORD pos)
 // Helper functions
 //
 
-void Console::InitFont()
+bool Console::InitFont()
 {
     CONSOLE_FONT_INFOEX cfi;
     cfi.cbSize = sizeof(CONSOLE_FONT_INFOEX);
@@ -147,7 +182,12 @@ void Console::InitFont()
 #define dwFontSize(type, x, y) if (fontType == type) { cfi.dwFontSize = { x, y }; }
     // ---
 
-    GetCurrentConsoleFontEx(outputHandle, NULL, &cfi);
+    if (!GetCurrentConsoleFontEx(outputHandle, NULL, &cfi))
+    {
+        LogWindowsError(DISPLAY_DEVICE_LOG);
+        return false;
+    }
+
     cfi.FontWeight = 400;
     cfi.nFont = fontType;
 
@@ -162,10 +202,16 @@ void Console::InitFont()
     dwFontSize(FONT_12x16, 12, 16);
     dwFontSize(FONT_10x18, 10, 18);
 
-    SetCurrentConsoleFontEx(outputHandle, NULL, &cfi);
+    if (!SetCurrentConsoleFontEx(outputHandle, NULL, &cfi))
+    {
+        LogWindowsError(DISPLAY_DEVICE_LOG);
+        return false;
+    }
+
+    return true;
 }
 
-void Console::InitSize()
+bool Console::InitSize()
 {
     SMALL_RECT temp = { 0, 0, 0, 0 };
     screenRect.Top = 0;
@@ -176,8 +222,23 @@ void Console::InitSize()
     // We need to shrink the window before changing the buffer size
     // or else SetConsoleScreenBufferSize may fail due to the buffer
     // being smaller than the window.
-    SetConsoleWindowInfo(outputHandle, TRUE, &temp);
+    if (!SetConsoleWindowInfo(outputHandle, TRUE, &temp))
+    {
+        LogWindowsError(DISPLAY_DEVICE_LOG);
+        return false;
+    }
 
-    SetConsoleScreenBufferSize(outputHandle, consoleBuffer->GetSizeAsCoord());
-    SetConsoleWindowInfo(outputHandle, TRUE, &screenRect);
+    if (!SetConsoleScreenBufferSize(outputHandle, consoleBuffer->GetSizeAsCoord()))
+    {
+        LogWindowsError(DISPLAY_DEVICE_LOG);
+        return false;
+    }
+
+    if (!SetConsoleWindowInfo(outputHandle, TRUE, &screenRect))
+    {
+        LogWindowsError(DISPLAY_DEVICE_LOG);
+        return false;
+    }
+
+    return true;
 }

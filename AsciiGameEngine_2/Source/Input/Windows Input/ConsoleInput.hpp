@@ -9,6 +9,9 @@
 #include <deque>
 
 #include "Input\Windows Input\ConsoleInputDefines.hpp"
+#include "Utility\Logging\Log.hpp"
+
+#define INPUT_LOG "InputLog.txt"
 
 //////////////////////////////////////////////////////////////////////////////
 // This class is intended to allow for mouse and keyboard input that

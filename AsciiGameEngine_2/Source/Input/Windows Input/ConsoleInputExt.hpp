@@ -19,8 +19,8 @@ private:
 
     static unsigned int __stdcall Run(void* params);
 
-    void Start(POINT center);
-    void Stop();
+    bool Start(POINT center);
+    bool Stop();
 
     POINT GetDelta();
 
@@ -46,7 +46,7 @@ public:
     /* ConsoleInputExt operations */
     virtual void Tick();
     
-    void LockCursor(bool lock);
+    bool LockCursor(bool lock);
 
     /* Getters */
     char GetCharacter();
