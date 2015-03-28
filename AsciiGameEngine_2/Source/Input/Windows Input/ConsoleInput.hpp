@@ -23,10 +23,10 @@ class ConsoleInput
 {
 public:
     /* Construct & Destruct*/
-    ConsoleInput(unsigned int inputBufferSize);
+    ConsoleInput(unsigned int inputBufferSize, HWND consoleWindow);
     virtual ~ConsoleInput();
 
-    /* ConsoleInput operations */
+    /* ConsoleInpu operations */
     virtual void Tick();
 
     /* Getters */
@@ -40,7 +40,7 @@ public:
     bool GetMouseAction(MOUSE_ACTION action);
 
     COORD GetMousePosition();
-    bool GetMouseDesktopPosition(POINT& pos);
+    void GetMouseDesktopPosition(POINT& pos);
 
 private:
     /* Utility */
@@ -60,11 +60,12 @@ protected:
 
     COORD mousePosition;
 
+    /* Other */
+    HANDLE inputHandle;
+    HWND consoleWindow;
+
 private:
     /* Variables */
-    HWND consoleWindow;
-    HANDLE inputHandle;
-
     DWORD oldMode; // Input settings before being changed
 
     unsigned int inputBufferSize; // Maximum records to process

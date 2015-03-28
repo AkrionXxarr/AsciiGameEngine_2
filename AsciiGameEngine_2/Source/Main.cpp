@@ -12,6 +12,8 @@
 #include "Display Device\Windows Console\Console.hpp"
 #include "Display Device\Windows Console\ConsoleDefines.hpp"
 
+#include "Utility\Time\WindowsTime.hpp"
+
 #define WIDTH 80
 #define HEIGHT 30
 #define SENSITIVITY 7.9
@@ -19,14 +21,23 @@
 int main()
 {
     std::shared_ptr<ConsoleBuffer> buffer = std::make_shared<ConsoleBuffer>(WIDTH, HEIGHT);
-    ConsoleInputExt input(10); // Keep past 10 events
+    
     Console console;
+    WindowsTime time;
 
     console.CreateDevice(buffer, 1, FONT_10x18);
     console.ClearBuffer();
 
+    ConsoleInputExt input(10, console.GetHandle()); // Keep past 10 events
+
     CHAR_INFO ci;
     CHAR_INFO ci2;
+
+    CHAR_INFO lineChar;
+
+    POINT p = { 0, 0 };
+    Math::Vector2f a;
+    Math::Vector2f b;
 
     ci.Attributes = f_fullGreen;
     ci.Char.UnicodeChar = '.';
@@ -34,14 +45,24 @@ int main()
     ci2.Attributes = f_fullRed;
     ci2.Char.UnicodeChar = '.';
 
-    Math::Vector2f charPos;
+    lineChar.Attributes = f_white;
+    lineChar.Char.UnicodeChar = '@';
+
+    Math::Vector2f charPos = Math::Vector2f(20, 20);
     Math::Vector2f charPos2;
+
+    bool lockCursor = false;
+
+    time.Tick();
 
     for (;;)
     {
-        Sleep(10);
+        Sleep(1000);
+        time.Tick();
         console.ClearBuffer();
         input.Tick();
+
+        float deltaTime = float(time.deltaTime) / 1000.0f;
         
         ci.Char.UnicodeChar = '.';
         ci2.Char.UnicodeChar = '.';
@@ -52,7 +73,7 @@ int main()
             ci2.Char.UnicodeChar = 0x1A;
 
             if ((charPos2.x + 1) < buffer->GetSizeAsCoord().X)
-                charPos2.x++;
+                charPos2.x += (20 * deltaTime);
         }
         if (input.GetKeyDown(KEYBOARD::ARROW_LEFT))
         {
@@ -60,7 +81,7 @@ int main()
             ci2.Char.UnicodeChar = 0x1B;
 
             if ((charPos2.x - 1) >= 0)
-                charPos2.x--;
+                charPos2.x -= (20 * deltaTime);
         }
         if (input.GetKeyDown(KEYBOARD::ARROW_UP))
         {
@@ -68,7 +89,7 @@ int main()
             ci2.Char.UnicodeChar = 0x1E;
 
             if ((charPos2.y - 1) >= 0)
-                charPos2.y--;
+                charPos2.y -= (20 * deltaTime);
         }
         if (input.GetKeyDown(KEYBOARD::ARROW_DOWN))
         {
@@ -76,17 +97,63 @@ int main()
             ci2.Char.UnicodeChar = 0x1F;
 
             if ((charPos2.y + 1) < buffer->GetSizeAsCoord().Y)
-                charPos2.y++;
+                charPos2.y += (20 * deltaTime);
         }
 
         if (input.GetAnyKeyDown())
         {
             ci2.Char.UnicodeChar = input.GetCharacter();
+            if (ci2.Char.UnicodeChar == 0)
+                ci2.Char.UnicodeChar = '.';
         }
 
-        if (input.GetMouseAction(MOUSE_ACTION::MOVED))
-            charPos = Math::Vector2f(input.GetMousePosition().X, input.GetMousePosition().Y);
+        if (input.GetMouseUp(MOUSE_BUTTON::CLICK_LEFT))
+        {
+            input.LockCursor(true);
+            lockCursor = true;
+        }
+        else if (input.GetMouseUp(MOUSE_BUTTON::CLICK_RIGHT))
+        {
+            input.LockCursor(false);
+            lockCursor = false;
+        }
 
+        //if (input.GetMouseAction(MOUSE_ACTION::MOVED))
+        //charPos = Math::Vector2f(input.GetMousePosition().X, input.GetMousePosition().Y);
+
+        if (lockCursor)
+        {
+            if (input.GetMouseAction(MOUSE_ACTION::MOVED))
+            {
+                p = input.GetDelta();
+                a = Math::Vector2f(buffer->GetSizeAsCoord().X / 2.0f, buffer->GetSizeAsCoord().Y / 2.0f);
+                b = Math::Vector2f(a.x + p.x, a.y + p.y);
+
+                charPos.x += p.x / 10.0f;
+                charPos.y += p.y / 10.0f;
+
+                if (charPos.x < 0) charPos.x = 0;
+                else if (charPos.x > buffer->GetSizeAsCoord().X - 1) charPos.x = buffer->GetSizeAsCoord().X - 1;
+                if (charPos.y < 0) charPos.y = 0;
+                else if (charPos.y > buffer->GetSizeAsCoord().Y - 1) charPos.y = buffer->GetSizeAsCoord().Y - 1;
+
+                int length = (b - a).Length();
+
+                for (int i = 0; i <= length; i++)
+                {
+                    Math::Vector2f t = a.Lerp(b, float(i) / float(length));
+                    int x = int(t.x);
+                    int y = int(t.y);
+
+                    if (x > 0 && y > 0 && x < buffer->GetSizeAsCoord().X - 1 && y < buffer->GetSizeAsCoord().Y - 1)
+                    {
+                        buffer->Put(x, y, lineChar);
+                    }
+                }
+            }
+        }
+
+        
         for (int i = 0; i < 3; i++)
         {
             for (int j = 0; j < 3; j++)

@@ -9,7 +9,7 @@
 ///////////////////////////////
 // Construct & Destruct
 //
-ConsoleInputExt::ConsoleInputExt(unsigned int inputBufferSize) : ConsoleInput(inputBufferSize)
+ConsoleInputExt::ConsoleInputExt(unsigned int inputBufferSize, HWND consoleWindow) : ConsoleInput(inputBufferSize, consoleWindow)
 {
     capsLock = false;
     scrollLock = false;
@@ -24,6 +24,25 @@ ConsoleInputExt::~ConsoleInputExt()
 void ConsoleInputExt::Tick()
 {
     ConsoleInput::Tick();
+}
+
+void ConsoleInputExt::LockCursor(bool lock)
+{
+    if (lock)
+    {
+        RECT r;
+        POINT p;
+        GetWindowRect(consoleWindow, &r);
+
+        p.x = r.left + (r.right - r.left) / 2;
+        p.y = r.top + (r.bottom - r.top) / 2;
+
+        cursorLock.Start(p);
+    }
+    else
+    {
+        cursorLock.Stop();
+    }
 }
 
 char ConsoleInputExt::GetCharacter()
@@ -221,4 +240,9 @@ bool ConsoleInputExt::GetAnyMouseDown()
     }
 
     return mouseIsDown;
+}
+
+POINT ConsoleInputExt::GetDelta()
+{
+    return cursorLock.GetDelta();
 }

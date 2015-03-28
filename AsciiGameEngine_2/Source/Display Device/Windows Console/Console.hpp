@@ -113,6 +113,7 @@ public:
 
     /* Getters & Setters */
     COORD GetCursorPosition() { return cursorPos; }
+    HWND GetHandle() { return consoleWindow; }
 
     void SetCursorSize(unsigned short size = 0);
     void SetCursorPosition(short x, short y) { SetCursorPosition({ x, y }); }

@@ -14,9 +14,10 @@ using namespace Math;
 // Construct & Destruct
 //
 
-ConsoleInput::ConsoleInput(unsigned int inputBufferSize)
+ConsoleInput::ConsoleInput(unsigned int inputBufferSize, HWND consoleWindow)
 {
     this->inputBufferSize = inputBufferSize;
+    this->consoleWindow = consoleWindow;
     inputRecords = new INPUT_RECORD[inputBufferSize];
 
     // Set and clear input buffers
@@ -41,10 +42,8 @@ ConsoleInput::ConsoleInput(unsigned int inputBufferSize)
     mousePosition = { 0, 0 };
 
     inputHandle = GetStdHandle(STD_INPUT_HANDLE);
-    consoleWindow = GetConsoleWindow(); // May be useful in the future
 
     assert(inputHandle != INVALID_HANDLE_VALUE);
-    assert(consoleWindow != INVALID_HANDLE_VALUE);
 
     GetConsoleMode(inputHandle, &oldMode); // Save the mode so that it may be restored
     SetConsoleMode(inputHandle, ENABLE_WINDOW_INPUT | ENABLE_MOUSE_INPUT | ENABLE_EXTENDED_FLAGS);
@@ -162,16 +161,13 @@ COORD ConsoleInput::GetMousePosition()
     return mousePosition;
 }
 
-bool ConsoleInput::GetMouseDesktopPosition(POINT& pos)
+void ConsoleInput::GetMouseDesktopPosition(POINT& pos)
 {
-    bool hasFocus = (consoleWindow == GetActiveWindow());
     POINT t = { 0, 0 };
 
-    if (hasFocus)
-        GetCursorPos(&t);
+    GetCursorPos(&t);
 
     pos = t;
-    return hasFocus;
 }
 /* ---------------------------------------------------------------- */
 

@@ -76,6 +76,7 @@
     <ClCompile Include="Source\Display Device\Windows Console\Console.cpp" />
     <ClCompile Include="Source\Input\Windows Input\ConsoleInput.cpp" />
     <ClCompile Include="Source\Input\Windows Input\ConsoleInputExt.cpp" />
+    <ClCompile Include="Source\Input\Windows Input\CursorLock.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\Utility\Math\Matrix4f.cpp" />
     <ClCompile Include="Source\Utility\Math\Quaternion.cpp" />
@@ -97,6 +98,9 @@
     <ClInclude Include="Source\Utility\Math\Vector3f.hpp" />
     <ClInclude Include="Source\Utility\Math\Vector4f.hpp" />
     <ClInclude Include="Source\Utility\Time\WindowsTime.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Docs\TODO.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -37,6 +37,9 @@
     <Filter Include="Source\System\Win32">
       <UniqueIdentifier>{a06ea735-667a-45c7-9ef8-61181900f27a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Docs">
+      <UniqueIdentifier>{a0e5aad0-ee6f-4d27-9845-0700c39f8796}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Main.cpp">
@@ -64,6 +67,9 @@
       <Filter>Source\Input\Windows Input</Filter>
     </ClCompile>
     <ClCompile Include="Source\Input\Windows Input\ConsoleInputExt.cpp">
+      <Filter>Source\Input\Windows Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Input\Windows Input\CursorLock.cpp">
       <Filter>Source\Input\Windows Input</Filter>
     </ClCompile>
   </ItemGroup>
@@ -107,5 +113,10 @@
     <ClInclude Include="Source\Input\Windows Input\ConsoleInputExt.hpp">
       <Filter>Source\Input\Windows Input</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Docs\TODO.txt">
+      <Filter>Docs</Filter>
+    </Text>
   </ItemGroup>
 </Project>

@@ -16,10 +16,7 @@
 Console::Console()
 {
     outputHandle = GetStdHandle(STD_OUTPUT_HANDLE);
-    consoleWindow = GetConsoleWindow();
-
     assert(outputHandle != INVALID_HANDLE_VALUE);
-    assert(consoleWindow != INVALID_HANDLE_VALUE);
 }
 
 Console::~Console()
@@ -75,6 +72,9 @@ bool Console::CreateDevice(std::shared_ptr<ConsoleBuffer> cb, unsigned short cur
     InitSize();
 
     SetCursorSize(cursorSize);
+
+    consoleWindow = GetConsoleWindow();
+    assert(consoleWindow != INVALID_HANDLE_VALUE);
 
     return true;
 }
