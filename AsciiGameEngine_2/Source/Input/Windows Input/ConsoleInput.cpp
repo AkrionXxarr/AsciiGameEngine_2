@@ -100,6 +100,10 @@ void ConsoleInput::Tick()
             }
         }
     }
+    else
+    {
+        ClearInputEvents();
+    }
 
     FlushConsoleInputBuffer(inputHandle);
 }
@@ -392,4 +396,20 @@ void ConsoleInput::MouseEvent(MOUSE_EVENT_RECORD mouseEvent)
     }
 
     mouseActions[mouseAction] = true;
+}
+
+void ConsoleInput::ClearInputEvents()
+{
+    for (int i = 0; i < KEYBOARD::END_OF_KEYBOARD; i++)
+    {
+        pressedKeys[i] = false;
+    }
+    for (int i = 0; i < MOUSE_ACTION::END_OF_MOUSE_ACTION; i++)
+    {
+        mouseActions[i] = false;
+    }
+    for (int i = 0; i < MOUSE_BUTTON::END_OF_MOUSE_BUTTON; i++)
+    {
+        pressedMouseButtons[i] = false;
+    }
 }

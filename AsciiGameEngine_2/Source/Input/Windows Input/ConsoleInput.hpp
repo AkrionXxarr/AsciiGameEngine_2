@@ -46,6 +46,7 @@ private:
     /* Utility */
     void KeyEvent(KEY_EVENT_RECORD keyEvent);
     void MouseEvent(MOUSE_EVENT_RECORD mouseEvent);
+    void ClearInputEvents();
 
 protected:
     /* Variables */

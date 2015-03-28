@@ -113,6 +113,9 @@
     <ClInclude Include="Source\Input\Windows Input\ConsoleInputExt.hpp">
       <Filter>Source\Input\Windows Input</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Utility\Time\ITime.hpp">
+      <Filter>Source\Utility\Time</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Docs\TODO.txt">

@@ -97,6 +97,7 @@
     <ClInclude Include="Source\Utility\Math\Vector2f.hpp" />
     <ClInclude Include="Source\Utility\Math\Vector3f.hpp" />
     <ClInclude Include="Source\Utility\Math\Vector4f.hpp" />
+    <ClInclude Include="Source\Utility\Time\ITime.hpp" />
     <ClInclude Include="Source\Utility\Time\WindowsTime.hpp" />
   </ItemGroup>
   <ItemGroup>

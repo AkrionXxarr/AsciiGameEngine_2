@@ -62,7 +62,7 @@ int main()
         console.ClearBuffer();
         input.Tick();
 
-        float deltaTime = float(time.deltaTime) / 1000.0f;
+        float deltaTime = time.DeltaTime();
         
         ci.Char.UnicodeChar = '.';
         ci2.Char.UnicodeChar = '.';

@@ -7,7 +7,9 @@
 
 #include <Windows.h>
 
-class WindowsTime
+#include "Utility\Time\ITime.hpp"
+
+class WindowsTime : public ITime
 {
 public:
     WindowsTime()
@@ -16,15 +18,20 @@ public:
         deltaTime = 0;
     }
 
-    ~WindowsTime() { }
+    virtual ~WindowsTime() { }
 
-    void Tick()
+    virtual void Tick()
     {
         lastTime = curTime;
         curTime = GetTickCount();
         deltaTime = curTime - lastTime;
     }
 
-public:
+    virtual float DeltaTime()
+    {
+        return deltaTime / 1000.0f;
+    }
+
+private:
     DWORD lastTime, curTime, deltaTime;
 };
