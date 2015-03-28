@@ -84,9 +84,6 @@
     <ClCompile Include="Source\Utility\Logging\Log.cpp">
       <Filter>Source\Utility\Logging</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Utility\Error Handling\Windows\ErrorHandler.cpp">
-      <Filter>Source\Utility\Error Handling\Windows</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Display Device\Windows Console\ConsoleDefines.hpp">
@@ -133,9 +130,6 @@
     </ClInclude>
     <ClInclude Include="Source\Utility\Logging\Log.hpp">
       <Filter>Source\Utility\Logging</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Utility\Error Handling\Windows\ErrorHandler.hpp">
-      <Filter>Source\Utility\Error Handling\Windows</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
