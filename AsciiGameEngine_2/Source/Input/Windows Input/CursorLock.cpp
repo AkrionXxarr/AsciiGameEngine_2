@@ -28,6 +28,12 @@ unsigned int __stdcall CursorLock::Run(void* params)
     POINT p;
     CursorLock* cl = (CursorLock*)params;
 
+    // Set the cursor before starting in order to prevent grabbing deltas 
+    // from wherever the mouse originated when the lock occured.
+    EnterCriticalSection(&cl->pointCritical);
+    SetCursorPos(cl->center.x, cl->center.y);
+    LeaveCriticalSection(&cl->pointCritical);
+
     for (;;)
     {
         GetCursorPos(&p);
@@ -45,7 +51,6 @@ unsigned int __stdcall CursorLock::Run(void* params)
     }
     LeaveCriticalSection(&cl->runCritical);
 
-    _endthreadex(0);
     return 0;
 }
 
@@ -67,6 +72,7 @@ void CursorLock::Stop()
     if (running)
     {
         running = false;
+        CloseHandle(handle);
         handle = INVALID_HANDLE_VALUE;
     }
     LeaveCriticalSection(&runCritical);

@@ -101,7 +101,7 @@ void Console::ClearBuffer(CHAR_INFO& ci)
 
 bool Console::HasFocus()
 {
-    return consoleWindow == GetActiveWindow();
+    return consoleWindow == GetForegroundWindow();
 }
 
 

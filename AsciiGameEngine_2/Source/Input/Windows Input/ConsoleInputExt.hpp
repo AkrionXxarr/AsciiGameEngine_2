@@ -70,4 +70,6 @@ protected:
 
 private:
     CursorLock cursorLock;
+    bool lockCursor;
+    bool cursorIsLocked;
 };

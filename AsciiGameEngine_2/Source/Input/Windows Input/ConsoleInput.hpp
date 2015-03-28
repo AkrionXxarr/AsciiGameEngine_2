@@ -63,6 +63,8 @@ protected:
     /* Other */
     HANDLE inputHandle;
     HWND consoleWindow;
+    bool hasFocus;
+    bool regainedFocus;
 
 private:
     /* Variables */

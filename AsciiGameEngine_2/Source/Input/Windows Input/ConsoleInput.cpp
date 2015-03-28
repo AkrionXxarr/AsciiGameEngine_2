@@ -68,36 +68,40 @@ ConsoleInput::~ConsoleInput()
 
 void ConsoleInput::Tick()
 {   
-    POINT point;
-    DWORD inputCount;
-
     releasedKeys.clear();
     releasedMouseButtons.clear();
 
-    for (int i = 0; i < END_OF_MOUSE_ACTION; i++)
-        mouseActions[i] = false;
+    bool curFocus = (GetForegroundWindow() == consoleWindow);
+    regainedFocus = (curFocus && !hasFocus);
+    hasFocus = curFocus;
 
-    PeekConsoleInput(inputHandle, inputRecords, inputBufferSize, &inputCount);
-
-    for (unsigned int i = 0; i < inputCount; i++)
+    if (hasFocus)
     {
-        INPUT_RECORD input = inputRecords[i];
+        DWORD inputCount;
 
-        switch (input.EventType)
+        for (int i = 0; i < END_OF_MOUSE_ACTION; i++)
+            mouseActions[i] = false;
+
+        PeekConsoleInput(inputHandle, inputRecords, inputBufferSize, &inputCount);
+
+        for (unsigned int i = 0; i < inputCount; i++)
         {
-        case KEY_EVENT:
-            KeyEvent(input.Event.KeyEvent);
-            break;
+            INPUT_RECORD input = inputRecords[i];
 
-        case MOUSE_EVENT:
-            MouseEvent(input.Event.MouseEvent);
-            break;
+            switch (input.EventType)
+            {
+            case KEY_EVENT:
+                KeyEvent(input.Event.KeyEvent);
+                break;
+
+            case MOUSE_EVENT:
+                MouseEvent(input.Event.MouseEvent);
+                break;
+            }
         }
     }
 
     FlushConsoleInputBuffer(inputHandle);
-
-    GetCursorPos(&point);
 }
 
 
@@ -159,15 +163,6 @@ bool ConsoleInput::GetMouseAction(MOUSE_ACTION action)
 COORD ConsoleInput::GetMousePosition()
 {
     return mousePosition;
-}
-
-void ConsoleInput::GetMouseDesktopPosition(POINT& pos)
-{
-    POINT t = { 0, 0 };
-
-    GetCursorPos(&t);
-
-    pos = t;
 }
 /* ---------------------------------------------------------------- */
 

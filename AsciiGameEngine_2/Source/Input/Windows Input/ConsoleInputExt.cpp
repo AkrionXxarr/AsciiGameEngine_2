@@ -24,10 +24,32 @@ ConsoleInputExt::~ConsoleInputExt()
 void ConsoleInputExt::Tick()
 {
     ConsoleInput::Tick();
+
+    if (!hasFocus)
+    {
+        // Cursor should be locked, and is locked, so unlock it
+        if (lockCursor && cursorIsLocked)
+        {
+            // Given the unique case of this unlock, the unlock is handled manually.
+            cursorLock.Stop();
+            cursorIsLocked = false;
+            lockCursor = true;
+        }
+    }
+    else if (regainedFocus)
+    {
+        // Cursor should be locked, and isn't locked, so lock it
+        if (lockCursor && !cursorIsLocked)
+        {
+            LockCursor(true);
+        }
+    }
 }
 
 void ConsoleInputExt::LockCursor(bool lock)
 {
+    lockCursor = lock;
+
     if (lock)
     {
         RECT r;
@@ -38,10 +60,12 @@ void ConsoleInputExt::LockCursor(bool lock)
         p.y = r.top + (r.bottom - r.top) / 2;
 
         cursorLock.Start(p);
+        cursorIsLocked = true;
     }
     else
     {
         cursorLock.Stop();
+        cursorIsLocked = false;
     }
 }
 

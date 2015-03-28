@@ -57,7 +57,7 @@ int main()
 
     for (;;)
     {
-        Sleep(1000);
+        Sleep(10);
         time.Tick();
         console.ClearBuffer();
         input.Tick();
