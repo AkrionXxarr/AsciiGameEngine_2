@@ -5,10 +5,12 @@
 
 #pragma once
 
+#
 #include <Windows.h>
 #include <assert.h>
 #include <memory>
 
+#include "Display Device\Interface\IDisplayDevice.hpp"
 #include "Utility\Logging\Log.hpp"
 
 #define DISPLAY_DEVICE_LOG "DisplayDeviceLog.txt"
@@ -91,7 +93,7 @@ private:
 // Expected usage will have the render context share a pointer with the console buffer
 // and for Display() to be called to push the buffer to the console window.
 //
-class Console
+class Console : public IDisplayDevice
 {
 public:
     /* Construct & Destruct */
@@ -99,7 +101,7 @@ public:
     ~Console();
 
     /* Main functions */
-    void Display(); // Push the console buffer to the console window
+    virtual void Display(); // Push the console buffer to the console window
 
     bool CreateDevice(
         std::shared_ptr<ConsoleBuffer> cb,
@@ -113,7 +115,7 @@ public:
     void ClearBuffer(unsigned short attributes, char c);
     void ClearBuffer(CHAR_INFO& ci);
 
-    bool HasFocus();
+    virtual bool HasFocus();
 
     /* Getters & Setters */
     COORD GetCursorPosition() { return cursorPos; }

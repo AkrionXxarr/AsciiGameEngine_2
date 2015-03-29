@@ -66,9 +66,7 @@ bool Console::CreateDevice(std::shared_ptr<ConsoleBuffer> cb, unsigned short cur
 {
     // CreateDevice was already called, clear the data and start anew
     if (consoleBuffer)
-    {
         consoleBuffer.reset();
-    }
 
     consoleBuffer = cb;
     this->fontType = fontType;
@@ -139,6 +137,7 @@ bool Console::SetCursorSize(unsigned short size)
     case 1:
         cci.bVisible = false;
         cci.dwSize = 1;
+        break;
 
     default:
         cci.bVisible = true;
