@@ -87,6 +87,9 @@ bool CursorLock::Stop()
     if (running)
     {
         running = false;
+        LeaveCriticalSection(&runCritical);
+
+        WaitForSingleObject(handle, INFINITE);
 
         if (!CloseHandle(handle))
         {
@@ -96,7 +99,6 @@ bool CursorLock::Stop()
 
         handle = INVALID_HANDLE_VALUE;
     }
-    LeaveCriticalSection(&runCritical);
 
     return true;
 }
