@@ -7,24 +7,27 @@
 
 #include "Akropolix\Object\Interface\IObjectManager.hpp"
 
-class ConsoleInputExt;
-class ConsoleObject;
-
-class ConsoleObjectManager : public IObjectManager
+namespace Akropolix
 {
-public:
-    ConsoleObjectManager();
-    ~ConsoleObjectManager();
+    class ConsoleInputExt;
+    class ConsoleObject;
 
-    virtual void Update(float deltaTime);
-    virtual void Draw(IRenderContext& renderContext);
+    class ConsoleObjectManager : public IObjectManager
+    {
+    public:
+        ConsoleObjectManager();
+        ~ConsoleObjectManager();
 
-    void Input(ConsoleInputExt& input);
+        virtual void Update(float deltaTime);
+        virtual void Draw(IRenderContext& renderContext);
 
-    virtual void AddObject(IObject* object);
-    virtual IObject* RemoveObject(unsigned int ID);
+        void Input(ConsoleInputExt& input);
 
-private:
-    // Very basic object structure
-    std::vector<ConsoleObject*> objects;
+        virtual void AddObject(IObject* object);
+        virtual IObject* RemoveObject(unsigned int ID);
+
+    private:
+        // Very basic object structure
+        std::vector<ConsoleObject*> objects;
+    };
 };

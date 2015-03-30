@@ -9,77 +9,80 @@
 #include "Akropolix\Utility\Time\ITime.hpp"
 #include "Akropolix\Object\Interface\IObjectManager.hpp"
 
-CoreEngine::CoreEngine()
+namespace Akropolix
 {
-    mainEngine = nullptr;
-    displayDevice = nullptr;
-    time = nullptr;
-    renderContext = nullptr;
-    objectManager = nullptr;
-}
-
-CoreEngine::~CoreEngine()
-{
-
-}
-
-void CoreEngine::Start(
-    ITime* time,
-    IDisplayDevice* displayDevice,
-    IRenderContext* renderContext,
-    IObjectManager* objectManager,
-    IMainEngine* mainEngine)
-{
-    if (!running)
+    CoreEngine::CoreEngine()
     {
-        this->mainEngine = mainEngine;
-        this->displayDevice = displayDevice;
-        this->time = time;
-        this->renderContext = renderContext;
-        this->objectManager = objectManager;
-
-        Run();
+        mainEngine = nullptr;
+        displayDevice = nullptr;
+        time = nullptr;
+        renderContext = nullptr;
+        objectManager = nullptr;
     }
-}
 
-void CoreEngine::Run()
-{
-    running = true;
-
-    time->Tick();
-
-    while (running)
+    CoreEngine::~CoreEngine()
     {
-        hasFocus = displayDevice->HasFocus();
+
+    }
+
+    void CoreEngine::Start(
+        ITime* time,
+        IDisplayDevice* displayDevice,
+        IRenderContext* renderContext,
+        IObjectManager* objectManager,
+        IMainEngine* mainEngine)
+    {
+        if (!running)
+        {
+            this->mainEngine = mainEngine;
+            this->displayDevice = displayDevice;
+            this->time = time;
+            this->renderContext = renderContext;
+            this->objectManager = objectManager;
+
+            Run();
+        }
+    }
+
+    void CoreEngine::Run()
+    {
+        running = true;
 
         time->Tick();
-        float deltaTime = time->DeltaTime();
 
-        mainEngine->Tick(deltaTime);
+        while (running)
+        {
+            hasFocus = displayDevice->HasFocus();
 
-        objectManager->Update(deltaTime);
-        objectManager->Draw(*renderContext);
+            time->Tick();
+            float deltaTime = time->DeltaTime();
 
-        displayDevice->Display();
+            mainEngine->Tick(deltaTime);
+
+            objectManager->Update(deltaTime);
+            objectManager->Draw(*renderContext);
+
+            displayDevice->Display();
+        }
     }
-}
 
-void CoreEngine::Stop()
-{
-    if (running)
+    void CoreEngine::Stop()
     {
-        running = false;
+        if (running)
+        {
+            running = false;
 
-        mainEngine->Stop();
+            mainEngine->Stop();
 
-        Clean();
+            Clean();
+        }
     }
-}
 
-void CoreEngine::Clean()
-{
-    displayDevice = nullptr;
-    time = nullptr;
-    renderContext = nullptr;
-    objectManager = nullptr;
-}
+    void CoreEngine::Clean()
+    {
+        displayDevice = nullptr;
+        time = nullptr;
+        renderContext = nullptr;
+        objectManager = nullptr;
+    }
+};

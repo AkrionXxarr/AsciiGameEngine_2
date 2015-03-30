@@ -7,16 +7,19 @@
 
 #include "Akropolix\Object\Interface\IObject.hpp"
 
-class ConsoleInputExt;
-
-class ConsoleObject : public IObject
+namespace Akropolix
 {
-public:
-    ConsoleObject() { }
-    ~ConsoleObject() { }
+    class ConsoleInputExt;
 
-    virtual void Update(float deltaTime) = 0;
-    virtual void Draw(IRenderContext& renderContext) = 0;
+    class ConsoleObject : public IObject
+    {
+    public:
+        ConsoleObject() { }
+        ~ConsoleObject() { }
 
-    virtual void Input(ConsoleInputExt& input) = 0;
+        virtual void Update(float deltaTime) = 0;
+        virtual void Draw(IRenderContext& renderContext) = 0;
+
+        virtual void Input(ConsoleInputExt& input) = 0;
+    };
 };

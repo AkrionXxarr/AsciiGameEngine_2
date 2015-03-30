@@ -8,6 +8,8 @@
 #define WIDTH 80
 #define HEIGHT 80
 
+using namespace Akropolix;
+
 int main()
 {
     MainConsoleEngine mainEngine(WIDTH, HEIGHT);

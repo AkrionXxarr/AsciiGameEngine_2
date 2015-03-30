@@ -5,14 +5,17 @@
 
 #pragma once
 
-class IRenderContext
+namespace Akropolix
 {
-public:
-    IRenderContext() { }
-    virtual ~IRenderContext() { }
+    class IRenderContext
+    {
+    public:
+        IRenderContext() { }
+        virtual ~IRenderContext() { }
 
-private:
-    // Render context has no reason to be copied
-    IRenderContext(const IRenderContext& other);
-    void operator= (const IRenderContext& other);
+    private:
+        // Render context has no reason to be copied
+        IRenderContext(const IRenderContext& other);
+        void operator= (const IRenderContext& other);
+    };
 };

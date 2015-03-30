@@ -9,67 +9,70 @@
 
 #include "Akropolix\Input\Windows Input\ConsoleInput.hpp"
 
-class CursorLock
+namespace Akropolix
 {
-    friend class ConsoleInputExt;
+    class CursorLock
+    {
+        friend class ConsoleInputExt;
 
-private:
-    CursorLock();
-    ~CursorLock();
+    private:
+        CursorLock();
+        ~CursorLock();
 
-    static unsigned int __stdcall Run(void* params);
+        static unsigned int __stdcall Run(void* params);
 
-    bool Start(POINT center);
-    bool Stop();
+        bool Start(POINT center);
+        bool Stop();
 
-    POINT GetDelta();
+        POINT GetDelta();
 
-private:
-    POINT delta;
-    POINT center;
-    CRITICAL_SECTION pointCritical;
-    CRITICAL_SECTION runCritical;
-    HANDLE handle;
-    bool running;
-};
+    private:
+        POINT delta;
+        POINT center;
+        CRITICAL_SECTION pointCritical;
+        CRITICAL_SECTION runCritical;
+        HANDLE handle;
+        bool running;
+    };
 
-//////////////////////////////////////////////////////////////////////////////
-// An extension on the base functionality of ConsoleInput
-//
-class ConsoleInputExt : public ConsoleInput
-{
-public:
-    /* Construct & Destruct */
-    ConsoleInputExt(unsigned int inputBufferSize, HWND consoleWindow);
-    virtual ~ConsoleInputExt();
+    //////////////////////////////////////////////////////////////////////////////
+    // An extension on the base functionality of ConsoleInput
+    //
+    class ConsoleInputExt : public ConsoleInput
+    {
+    public:
+        /* Construct & Destruct */
+        ConsoleInputExt(unsigned int inputBufferSize, HWND consoleWindow);
+        virtual ~ConsoleInputExt();
 
-    /* ConsoleInputExt operations */
-    virtual void Tick();
-    
-    bool LockCursor(bool lock);
+        /* ConsoleInputExt operations */
+        virtual void Tick();
 
-    /* Getters */
-    char GetCharacter();
+        bool LockCursor(bool lock);
 
-    KEYBOARD GetMostRecentKey();
-    MOUSE_BUTTON GetMostRecentMouseButton();
+        /* Getters */
+        char GetCharacter();
 
-    bool GetAnyKeyUp();
-    bool GetAnyKeyDown();   
-    
-    bool GetAnyMouseUp();
-    bool GetAnyMouseDown();
+        KEYBOARD GetMostRecentKey();
+        MOUSE_BUTTON GetMostRecentMouseButton();
 
-    POINT GetDelta();
-    
-protected:
-    KEYBOARD mostRecentKey;
-    MOUSE_BUTTON mostRecentMouseButton;
+        bool GetAnyKeyUp();
+        bool GetAnyKeyDown();
 
-    bool capsLock, scrollLock, numLock;
+        bool GetAnyMouseUp();
+        bool GetAnyMouseDown();
 
-private:
-    CursorLock cursorLock;
-    bool lockCursor;
-    bool cursorIsLocked;
+        POINT GetDelta();
+
+    protected:
+        KEYBOARD mostRecentKey;
+        MOUSE_BUTTON mostRecentMouseButton;
+
+        bool capsLock, scrollLock, numLock;
+
+    private:
+        CursorLock cursorLock;
+        bool lockCursor;
+        bool cursorIsLocked;
+    };
 };

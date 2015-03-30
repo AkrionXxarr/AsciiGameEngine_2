@@ -3,13 +3,16 @@
 * All rights reserved.
 */
 
-class ITime
+namespace Akropolix
 {
-public:
-    ITime() { }
-    virtual ~ITime() { }
+    class ITime
+    {
+    public:
+        ITime() { }
+        virtual ~ITime() { }
 
-    virtual void Tick() = 0;
+        virtual void Tick() = 0;
 
-    virtual float DeltaTime() = 0;
+        virtual float DeltaTime() = 0;
+    };
 };

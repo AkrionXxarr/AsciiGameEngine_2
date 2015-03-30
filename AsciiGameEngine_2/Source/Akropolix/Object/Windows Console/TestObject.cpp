@@ -2,51 +2,54 @@
 #include "Akropolix\Render\Windows Console\ConsoleRenderContext.hpp"
 #include "Akropolix\Input\Windows Input\ConsoleInputExt.hpp"
 
-void TestObject::Update(float deltaTime)
+namespace Akropolix
 {
-    if (right)
-        pos.x += 20 * deltaTime;
-    if (left)
-        pos.x -= 20 * deltaTime;
-    if (up)
-        pos.y -= 20 * deltaTime;
-    if (down)
-        pos.y += 20 * deltaTime;
-}
-
-void TestObject::Draw(IRenderContext& renderContext)
-{
-    ConsoleRenderContext& crc = (ConsoleRenderContext&)renderContext;
-
-    CHAR_INFO ci;
-
-    ci.Attributes = FOREGROUND_RED;
-    ci.Char.UnicodeChar = '#';
-
-    for (int i = 0; i < 3; i++)
+    void TestObject::Update(float deltaTime)
     {
-        for (int j = 0; j < 3; j++)
+        if (right)
+            pos.x += 20 * deltaTime;
+        if (left)
+            pos.x -= 20 * deltaTime;
+        if (up)
+            pos.y -= 20 * deltaTime;
+        if (down)
+            pos.y += 20 * deltaTime;
+    }
+
+    void TestObject::Draw(IRenderContext& renderContext)
+    {
+        ConsoleRenderContext& crc = (ConsoleRenderContext&)renderContext;
+
+        CHAR_INFO ci;
+
+        ci.Attributes = FOREGROUND_RED;
+        ci.Char.UnicodeChar = '#';
+
+        for (int i = 0; i < 3; i++)
         {
-            int x = int(pos.x + (i - 1));
-            int y = int(pos.y + (j - 1));
+            for (int j = 0; j < 3; j++)
+            {
+                int x = int(pos.x + (i - 1));
+                int y = int(pos.y + (j - 1));
 
-            POINT p = { x, y };
+                POINT p = { x, y };
 
-            crc.DrawPoint(p, ci);
+                crc.DrawPoint(p, ci);
+            }
         }
     }
-}
 
-void TestObject::Input(ConsoleInputExt& input)
-{
-    right = input.GetKeyDown(KEYBOARD::ARROW_RIGHT);
-    left = input.GetKeyDown(KEYBOARD::ARROW_LEFT);
-    up = input.GetKeyDown(KEYBOARD::ARROW_UP);
-    down = input.GetKeyDown(KEYBOARD::ARROW_DOWN);
-
-    if (right)
+    void TestObject::Input(ConsoleInputExt& input)
     {
-        int x = 0;
-        x = 5;
+        right = input.GetKeyDown(KEYBOARD::ARROW_RIGHT);
+        left = input.GetKeyDown(KEYBOARD::ARROW_LEFT);
+        up = input.GetKeyDown(KEYBOARD::ARROW_UP);
+        down = input.GetKeyDown(KEYBOARD::ARROW_DOWN);
+
+        if (right)
+        {
+            int x = 0;
+            x = 5;
+        }
     }
-}
+};

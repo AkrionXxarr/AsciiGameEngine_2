@@ -5,51 +5,54 @@
 
 #pragma once
 
-class IMainEngine;
-class IDisplayDevice;
-class IObjectManager;
-class IRenderContext;
-class ITime;
-
-
-///////////////////////////////////////////////////////////
-// Handles the very basic fundamentals, such as managing the time
-// and ordering of critical tasks. (e.g. Update should always preceed Draw/Render)
-//
-
-class ICoreEngine
+namespace Akropolix
 {
-public:
-    ICoreEngine() : running(false) { }
-    virtual ~ICoreEngine() { }
+    class IMainEngine;
+    class IDisplayDevice;
+    class IObjectManager;
+    class IRenderContext;
+    class ITime;
 
-    virtual void Start(
-        ITime* time, 
-        IDisplayDevice* displayDevice,
-        IRenderContext* renderContext,
-        IObjectManager* objectManager,
-        IMainEngine* mainEngine) = 0;
-    virtual void Run() = 0;
-    virtual void Stop() = 0;
 
-    bool HasFocus() { return hasFocus; }
-    bool IsRunning() { return running; }
+    ///////////////////////////////////////////////////////////
+    // Handles the very basic fundamentals, such as managing the time
+    // and ordering of critical tasks. (e.g. Update should always preceed Draw/Render)
+    //
 
-protected:
-    virtual void Clean() = 0;
+    class ICoreEngine
+    {
+    public:
+        ICoreEngine() : running(false) { }
+        virtual ~ICoreEngine() { }
 
-private:
-    // Engine has no reason to be copied
-    ICoreEngine(const ICoreEngine& other);
-    void operator= (const ICoreEngine& other);
+        virtual void Start(
+            ITime* time,
+            IDisplayDevice* displayDevice,
+            IRenderContext* renderContext,
+            IObjectManager* objectManager,
+            IMainEngine* mainEngine) = 0;
+        virtual void Run() = 0;
+        virtual void Stop() = 0;
 
-protected:
-    bool running;
-    bool hasFocus;
+        bool HasFocus() { return hasFocus; }
+        bool IsRunning() { return running; }
 
-    IMainEngine* mainEngine;
-    IDisplayDevice* displayDevice;
-    IObjectManager* objectManager;
-    IRenderContext* renderContext;
-    ITime* time;
+    protected:
+        virtual void Clean() = 0;
+
+    private:
+        // Engine has no reason to be copied
+        ICoreEngine(const ICoreEngine& other);
+        void operator= (const ICoreEngine& other);
+
+    protected:
+        bool running;
+        bool hasFocus;
+
+        IMainEngine* mainEngine;
+        IDisplayDevice* displayDevice;
+        IObjectManager* objectManager;
+        IRenderContext* renderContext;
+        ITime* time;
+    };
 };

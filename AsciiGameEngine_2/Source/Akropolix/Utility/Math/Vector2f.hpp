@@ -8,61 +8,64 @@
 #define _USE_MATH_DEFINES
 #include <math.h>
 
-namespace Math
+namespace Akropolix
 {
-    ///////////////////////////////////////////////////
-    // 2 Dimensional float-based vector
-    //
-
-    class Vector2f
+    namespace Math
     {
-    public:
-        /* Construct & Destruct */
-        Vector2f();
-        Vector2f(float x, float y);
-        Vector2f(const Vector2f& v);
+        ///////////////////////////////////////////////////
+        // 2 Dimensional float-based vector
+        //
 
-        ~Vector2f() { }
+        class Vector2f
+        {
+        public:
+            /* Construct & Destruct */
+            Vector2f();
+            Vector2f(float x, float y);
+            Vector2f(const Vector2f& v);
 
-        /* Vector operations */
-        float Length();
-        Vector2f Normalized();
+            ~Vector2f() { }
 
-        float Dot(Vector2f& v);
-        float Cross(Vector2f& v);
+            /* Vector operations */
+            float Length();
+            Vector2f Normalized();
 
-        Vector2f Rotate(float angle);
-        Vector2f Lerp(Vector2f& dest, float factor);
+            float Dot(Vector2f& v);
+            float Cross(Vector2f& v);
 
-        /* Getters */
-        float GetMax() { return fmax(x, y); }
-        float GetMin() { return fmin(x, y); }
-        Vector2f GetAbs() { return Vector2f(fabs(x), fabs(y)); }
+            Vector2f Rotate(float angle);
+            Vector2f Lerp(Vector2f& dest, float factor);
 
-        /* Swizzlers */
-        Vector2f YX(); // (b,a)
+            /* Getters */
+            float GetMax() { return fmax(x, y); }
+            float GetMin() { return fmin(x, y); }
+            Vector2f GetAbs() { return Vector2f(fabs(x), fabs(y)); }
 
-    public:
-        /* Operators */
-        void operator= (const Vector2f& v) { x = v.x; y = v.y; }
+            /* Swizzlers */
+            Vector2f YX(); // (b,a)
 
-        bool operator== (const Vector2f& v) const { return (x == v.x) && (y == v.y); }
+        public:
+            /* Operators */
+            void operator= (const Vector2f& v) { x = v.x; y = v.y; }
 
-        Vector2f operator- () const { return Vector2f(-x, -y); }
+            bool operator== (const Vector2f& v) const { return (x == v.x) && (y == v.y); }
 
-        Vector2f operator- (const Vector2f& v) const { return Vector2f(x - v.x, y - v.y); }
-        Vector2f operator+ (const Vector2f& v) const { return Vector2f(x + v.x, y + v.y); }
+            Vector2f operator- () const { return Vector2f(-x, -y); }
 
-        Vector2f operator* (const Vector2f& v) const { return Vector2f(x * v.x, y * v.y); }
-        Vector2f operator/ (const Vector2f& v) const { return Vector2f(x / v.x, y / v.y); }
+            Vector2f operator- (const Vector2f& v) const { return Vector2f(x - v.x, y - v.y); }
+            Vector2f operator+ (const Vector2f& v) const { return Vector2f(x + v.x, y + v.y); }
 
-        Vector2f operator* (float f) const { return Vector2f(x * f, y * f); }
-        Vector2f operator/ (float f) const { return Vector2f(x / f, y / f); }
+            Vector2f operator* (const Vector2f& v) const { return Vector2f(x * v.x, y * v.y); }
+            Vector2f operator/ (const Vector2f& v) const { return Vector2f(x / v.x, y / v.y); }
 
-    public:
-        /* Variables */
-        float x, y;
+            Vector2f operator* (float f) const { return Vector2f(x * f, y * f); }
+            Vector2f operator/ (float f) const { return Vector2f(x / f, y / f); }
 
-        static const Vector2f zero;
+        public:
+            /* Variables */
+            float x, y;
+
+            static const Vector2f zero;
+        };
     };
-}; // Namespace Math
+};

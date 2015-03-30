@@ -5,17 +5,20 @@
 
 #pragma once
 
-class IRenderContext;
-
-class IObject
+namespace Akropolix
 {
-public:
-    IObject() { }
-    virtual ~IObject() { }
+    class IRenderContext;
 
-    virtual void Update(float deltaTime) = 0;
-    virtual void Draw(IRenderContext& renderContext) = 0;
+    class IObject
+    {
+    public:
+        IObject() { }
+        virtual ~IObject() { }
 
-public:
-    unsigned int ID;
+        virtual void Update(float deltaTime) = 0;
+        virtual void Draw(IRenderContext& renderContext) = 0;
+
+    public:
+        unsigned int ID;
+    };
 };

@@ -3,18 +3,20 @@
 * All rights reserved.
 */
 
-class IDisplayDevice
+namespace Akropolix
 {
-public:
-    IDisplayDevice() { }
-    virtual ~IDisplayDevice() { }
+    class IDisplayDevice
+    {
+    public:
+        IDisplayDevice() { }
+        virtual ~IDisplayDevice() { }
 
-    virtual void Display() = 0;
+        virtual void Display() = 0;
 
-    virtual bool HasFocus() = 0;
+        virtual bool HasFocus() = 0;
 
-private:
-    IDisplayDevice(const IDisplayDevice& other);
-    void operator= (const IDisplayDevice& other);
+    private:
+        IDisplayDevice(const IDisplayDevice& other);
+        void operator= (const IDisplayDevice& other);
+    };
 };
-

@@ -5,32 +5,35 @@
 
 #pragma once
 
-class ICoreEngine;
-
-///////////////////////////////////////////////////////////
-// Engine the user inherits from to define more specific behavior
-//
-
-class IMainEngine
+namespace Akropolix
 {
-public:
-    IMainEngine() { }
-    virtual ~IMainEngine() { }
+    class ICoreEngine;
 
-    virtual bool Initialize() = 0;
+    ///////////////////////////////////////////////////////////
+    // Engine the user inherits from to define more specific behavior
+    //
 
-    virtual void Start() = 0;
-    virtual void Stop() = 0;
-    virtual void Tick(float deltaTime) = 0;
+    class IMainEngine
+    {
+    public:
+        IMainEngine() { }
+        virtual ~IMainEngine() { }
 
-protected:
-    virtual void Clean() = 0;
+        virtual bool Initialize() = 0;
 
-private:
-    // Engine has no reason to be copied
-    IMainEngine(const IMainEngine& other);
-    void operator= (const IMainEngine& other);
+        virtual void Start() = 0;
+        virtual void Stop() = 0;
+        virtual void Tick(float deltaTime) = 0;
 
-protected:
-    ICoreEngine* coreEngine;
+    protected:
+        virtual void Clean() = 0;
+
+    private:
+        // Engine has no reason to be copied
+        IMainEngine(const IMainEngine& other);
+        void operator= (const IMainEngine& other);
+
+    protected:
+        ICoreEngine* coreEngine;
+    };
 };

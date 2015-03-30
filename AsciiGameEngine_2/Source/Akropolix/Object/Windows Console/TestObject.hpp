@@ -3,22 +3,25 @@
 #include "Akropolix\Object\Windows Console\ConsoleObject.hpp"
 #include "Akropolix\Utility\Math\Vector2f.hpp"
 
-class ConsoleInputExt;
-
-class TestObject : public ConsoleObject
+namespace Akropolix
 {
-public:
-    TestObject(float x, float y) { pos = Math::Vector2f(x, y); }
-    ~TestObject() { }
+    class ConsoleInputExt;
 
-    virtual void Update(float deltaTime);
-    virtual void Draw(IRenderContext& renderContext);
+    class TestObject : public ConsoleObject
+    {
+    public:
+        TestObject(float x, float y) { pos = Math::Vector2f(x, y); }
+        ~TestObject() { }
 
-    virtual void Input(ConsoleInputExt& input);
+        virtual void Update(float deltaTime);
+        virtual void Draw(IRenderContext& renderContext);
 
-private:
-    Math::Vector2f pos;
+        virtual void Input(ConsoleInputExt& input);
 
-    bool up, left, right, down;
+    private:
+        Math::Vector2f pos;
 
+        bool up, left, right, down;
+
+    };
 };
