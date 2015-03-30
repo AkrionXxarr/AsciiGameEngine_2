@@ -244,12 +244,12 @@ namespace aki
                 return 0;
             }
 
-            KEYBOARD ConsoleInputExt::GetMostRecentKey()
+            KEYBOARD::TYPE ConsoleInputExt::GetMostRecentKey()
             {
                 return mostRecentKey;
             }
 
-            MOUSE_BUTTON ConsoleInputExt::GetMostRecentMouseButton()
+            MOUSE_BUTTON::TYPE ConsoleInputExt::GetMostRecentMouseButton()
             {
                 return mostRecentMouseButton;
             }

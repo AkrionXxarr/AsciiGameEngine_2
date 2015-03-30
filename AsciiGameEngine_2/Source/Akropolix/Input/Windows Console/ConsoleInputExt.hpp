@@ -57,8 +57,8 @@ namespace aki
                 /* Getters */
                 char GetCharacter();
 
-                KEYBOARD GetMostRecentKey();
-                MOUSE_BUTTON GetMostRecentMouseButton();
+                KEYBOARD::TYPE GetMostRecentKey();
+                MOUSE_BUTTON::TYPE GetMostRecentMouseButton();
 
                 bool GetAnyKeyUp();
                 bool GetAnyKeyDown();
@@ -69,8 +69,8 @@ namespace aki
                 POINT GetDelta();
 
             protected:
-                KEYBOARD mostRecentKey;
-                MOUSE_BUTTON mostRecentMouseButton;
+                KEYBOARD::TYPE mostRecentKey;
+                MOUSE_BUTTON::TYPE mostRecentMouseButton;
 
                 bool capsLock, scrollLock, numLock;
 

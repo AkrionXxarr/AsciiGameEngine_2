@@ -90,6 +90,7 @@
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\TestApp_1\BasicRectangle.cpp" />
     <ClCompile Include="Source\TestApp_1\Engine.cpp" />
+    <ClCompile Include="Source\TestApp_1\Starfield.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Docs\EngineSystem.txt" />
@@ -124,6 +125,7 @@
     <ClInclude Include="Source\Akropolix\Utility\Time\WindowsTime.hpp" />
     <ClInclude Include="Source\TestApp_1\BasicRectangle.hpp" />
     <ClInclude Include="Source\TestApp_1\Engine.hpp" />
+    <ClInclude Include="Source\TestApp_1\Starfield.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

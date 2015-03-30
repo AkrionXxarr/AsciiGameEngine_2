@@ -40,13 +40,13 @@ namespace aki
 
                 /* Getters */
                 // Keyboard
-                bool GetKeyUp(KEYBOARD key);
-                bool GetKeyDown(KEYBOARD key);
+                bool GetKeyUp(KEYBOARD::TYPE key);
+                bool GetKeyDown(KEYBOARD::TYPE key);
 
                 // Mouse
-                bool GetMouseDown(MOUSE_BUTTON button);
-                bool GetMouseUp(MOUSE_BUTTON button);
-                bool GetMouseAction(MOUSE_ACTION action);
+                bool GetMouseDown(MOUSE_BUTTON::TYPE button);
+                bool GetMouseUp(MOUSE_BUTTON::TYPE button);
+                bool GetMouseAction(MOUSE_ACTION::TYPE action);
 
                 COORD GetMousePosition();
                 void GetMouseDesktopPosition(POINT& pos);
@@ -61,12 +61,12 @@ namespace aki
                 /* Variables */
                 // Keyboard
                 bool* pressedKeys;
-                std::deque<KEYBOARD> releasedKeys;
+                std::deque<KEYBOARD::TYPE> releasedKeys;
 
                 // Mouse
                 bool* mouseActions;
                 bool* pressedMouseButtons;
-                std::deque<MOUSE_BUTTON> releasedMouseButtons;
+                std::deque<MOUSE_BUTTON::TYPE> releasedMouseButtons;
 
                 COORD mousePosition;
 

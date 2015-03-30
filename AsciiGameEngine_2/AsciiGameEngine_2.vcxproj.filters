@@ -138,6 +138,9 @@
     <ClCompile Include="Source\TestApp_1\BasicRectangle.cpp">
       <Filter>Source\TestApp_1</Filter>
     </ClCompile>
+    <ClCompile Include="Source\TestApp_1\Starfield.cpp">
+      <Filter>Source\TestApp_1</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Docs\TODO.txt">
@@ -230,6 +233,9 @@
       <Filter>Source\TestApp_1</Filter>
     </ClInclude>
     <ClInclude Include="Source\TestApp_1\BasicRectangle.hpp">
+      <Filter>Source\TestApp_1</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\TestApp_1\Starfield.hpp">
       <Filter>Source\TestApp_1</Filter>
     </ClInclude>
   </ItemGroup>

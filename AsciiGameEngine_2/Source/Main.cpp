@@ -12,7 +12,7 @@ using namespace aki;
 
 int main()
 {
-    Engine engine(80, 80);
+    Engine engine(160, 90);
     
     if (!engine.Initialize())
         return 0;

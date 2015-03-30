@@ -96,7 +96,7 @@ namespace aki
                 {
                     DWORD inputCount;
 
-                    for (int i = 0; i < END_OF_MOUSE_ACTION; i++)
+                    for (int i = 0; i < MOUSE_ACTION::END_OF_MOUSE_ACTION; i++)
                         mouseActions[i] = false;
 
                     if (!PeekConsoleInput(inputHandle, inputRecords, inputBufferSize, &inputCount))
@@ -133,7 +133,7 @@ namespace aki
             //
 
             /* Keyboard */
-            bool ConsoleInput::GetKeyUp(KEYBOARD key)
+            bool ConsoleInput::GetKeyUp(KEYBOARD::TYPE key)
             {
                 bool keyMatched = false;
 
@@ -149,7 +149,7 @@ namespace aki
                 return keyMatched;
             }
 
-            bool ConsoleInput::GetKeyDown(KEYBOARD key)
+            bool ConsoleInput::GetKeyDown(KEYBOARD::TYPE key)
             {
                 return pressedKeys[key];
             }
@@ -157,12 +157,12 @@ namespace aki
 
 
             /* Mouse */
-            bool ConsoleInput::GetMouseDown(MOUSE_BUTTON button)
+            bool ConsoleInput::GetMouseDown(MOUSE_BUTTON::TYPE button)
             {
                 return pressedMouseButtons[button];
             }
 
-            bool ConsoleInput::GetMouseUp(MOUSE_BUTTON button)
+            bool ConsoleInput::GetMouseUp(MOUSE_BUTTON::TYPE button)
             {
                 bool buttonMatched = false;
 
@@ -178,7 +178,7 @@ namespace aki
                 return buttonMatched;
             }
 
-            bool ConsoleInput::GetMouseAction(MOUSE_ACTION action)
+            bool ConsoleInput::GetMouseAction(MOUSE_ACTION::TYPE action)
             {
                 return mouseActions[action];
             }
@@ -196,7 +196,7 @@ namespace aki
 
             void ConsoleInput::KeyEvent(KEY_EVENT_RECORD keyEvent)
             {
-                KEYBOARD key = KEYBOARD::NO_KEY;
+                KEYBOARD::TYPE key = KEYBOARD::NO_KEY;
 
                 switch (keyEvent.wVirtualKeyCode)
                 {
@@ -329,8 +329,8 @@ namespace aki
 
             void ConsoleInput::MouseEvent(MOUSE_EVENT_RECORD mouseEvent)
             {
-                MOUSE_ACTION mouseAction = MOUSE_ACTION::NO_ACTION;
-                MOUSE_BUTTON mouseButton = MOUSE_BUTTON::NO_BUTTON;
+                MOUSE_ACTION::TYPE mouseAction = MOUSE_ACTION::NO_ACTION;
+                MOUSE_BUTTON::TYPE mouseButton = MOUSE_BUTTON::NO_BUTTON;
                 DWORD mouseButtonFlags = mouseEvent.dwButtonState;
 
                 switch (mouseEvent.dwEventFlags)
