@@ -22,6 +22,6 @@ namespace aki
                 IRenderContext(const IRenderContext& other);
                 void operator= (const IRenderContext& other);
             };
-        };
-    };
-};
+        }
+    }
+}

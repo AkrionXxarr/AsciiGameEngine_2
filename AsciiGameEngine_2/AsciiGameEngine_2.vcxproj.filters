@@ -82,6 +82,9 @@
     <Filter Include="Source\Akropolix\Input\Windows Console">
       <UniqueIdentifier>{417c4f79-773c-4e92-876e-0a52d3caca5d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\TestApp_1">
+      <UniqueIdentifier>{27165baa-738f-4e92-9984-e7a5c0ce90b0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Main.cpp">
@@ -97,9 +100,6 @@
       <Filter>Source\Akropolix\Engine</Filter>
     </ClCompile>
     <ClCompile Include="Source\Akropolix\Object\Windows Console\ConsoleObjectManager.cpp">
-      <Filter>Source\Akropolix\Object\Windows Console</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Akropolix\Object\Windows Console\TestObject.cpp">
       <Filter>Source\Akropolix\Object\Windows Console</Filter>
     </ClCompile>
     <ClCompile Include="Source\Akropolix\Render\Windows Console\ConsoleRenderContext.cpp">
@@ -131,6 +131,12 @@
     </ClCompile>
     <ClCompile Include="Source\Akropolix\Input\Windows Console\CursorLock.cpp">
       <Filter>Source\Akropolix\Input\Windows Console</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\TestApp_1\Engine.cpp">
+      <Filter>Source\TestApp_1</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\TestApp_1\BasicRectangle.cpp">
+      <Filter>Source\TestApp_1</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -173,9 +179,6 @@
       <Filter>Source\Akropolix\Object\Windows Console</Filter>
     </ClInclude>
     <ClInclude Include="Source\Akropolix\Object\Windows Console\ConsoleObjectManager.hpp">
-      <Filter>Source\Akropolix\Object\Windows Console</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Akropolix\Object\Windows Console\TestObject.hpp">
       <Filter>Source\Akropolix\Object\Windows Console</Filter>
     </ClInclude>
     <ClInclude Include="Source\Akropolix\Render\Interface\IRenderContext.hpp">
@@ -222,6 +225,12 @@
     </ClInclude>
     <ClInclude Include="Source\Akropolix\Input\Windows Console\ConsoleInputExt.hpp">
       <Filter>Source\Akropolix\Input\Windows Console</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\TestApp_1\Engine.hpp">
+      <Filter>Source\TestApp_1</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\TestApp_1\BasicRectangle.hpp">
+      <Filter>Source\TestApp_1</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

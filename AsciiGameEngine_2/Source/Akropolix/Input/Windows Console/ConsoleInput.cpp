@@ -6,7 +6,7 @@
 #include <assert.h>
 
 #include "Akropolix\input\Windows Console\ConsoleInput.hpp"
-#include "Akropolix\Utility\math\Vector2f.hpp"
+#include "Akropolix\Utility\Math\Vector2f.hpp"
 
 using namespace aki::math;
 using namespace aki::log;

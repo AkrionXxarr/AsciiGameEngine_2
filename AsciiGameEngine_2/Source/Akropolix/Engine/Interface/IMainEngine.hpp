@@ -40,6 +40,6 @@ namespace aki
             protected:
                 ICoreEngine* coreEngine;
             };
-        };
-    };
-};
+        }
+    }
+}

@@ -50,11 +50,11 @@ namespace aki
                 }
             }
 
-            void ConsoleObjectManager::input(ConsoleInputExt& input)
+            void ConsoleObjectManager::Input(ConsoleInputExt& input)
             {
                 for (unsigned int i = 0; i < objects.size(); i++)
                 {
-                    objects[i]->input(input);
+                    objects[i]->Input(input);
                 }
             }
 

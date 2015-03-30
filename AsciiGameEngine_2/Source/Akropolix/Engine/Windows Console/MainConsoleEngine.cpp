@@ -6,8 +6,6 @@
 #include "Akropolix\Engine\Windows Console\MainConsoleEngine.hpp"
 #include "Akropolix\Engine\CoreEngine.hpp"
 
-#include "Akropolix\Object\Windows Console\TestObject.hpp"
-
 using namespace aki::time;
 using namespace aki::display::wincon;
 using namespace aki::render::wincon;
@@ -54,11 +52,6 @@ namespace aki
 
                 renderContext->Initialize(consoleBuffer);
 
-                objectManager->AddObject(new TestObject(0, 0));
-                objectManager->AddObject(new TestObject(4, 0));
-                objectManager->AddObject(new TestObject(0, 4));
-                objectManager->AddObject(new TestObject(4, 4));
-
                 return true;
             }
 
@@ -77,12 +70,7 @@ namespace aki
             {
                 console->ClearBuffer();
                 input->Tick();
-                objectManager->input(*input);
-
-                if (input->GetKeyUp(KEYBOARD::SPACE))
-                {
-                    objectManager->RemoveObject(2);
-                }
+                objectManager->Input(*input);
             }
 
             void MainConsoleEngine::Clean()

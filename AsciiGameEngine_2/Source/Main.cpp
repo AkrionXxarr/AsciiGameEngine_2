@@ -3,7 +3,7 @@
 * All rights reserved.
 */
 
-#include "Akropolix\Engine\Windows Console\MainConsoleEngine.hpp"
+#include "TestApp_1\Engine.hpp"
 
 #define WIDTH 80
 #define HEIGHT 80
@@ -12,12 +12,12 @@ using namespace aki;
 
 int main()
 {
-    engine::wincon::MainConsoleEngine mainEngine(WIDTH, HEIGHT);
-
-    if (!mainEngine.Initialize())
+    Engine engine(80, 80);
+    
+    if (!engine.Initialize())
         return 0;
 
-    mainEngine.Start();
+    engine.Start();
 
     return 0;
 }

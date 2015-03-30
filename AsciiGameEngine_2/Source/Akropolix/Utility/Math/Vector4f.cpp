@@ -3,9 +3,9 @@
 * All rights reserved.
 */
 
-#include "Akropolix\Utility\math\Vector2f.hpp"
-#include "Akropolix\Utility\math\Vector3f.hpp"
-#include "Akropolix\Utility\math\Vector4f.hpp"
+#include "Akropolix\Utility\Math\Vector2f.hpp"
+#include "Akropolix\Utility\Math\Vector3f.hpp"
+#include "Akropolix\Utility\Math\Vector4f.hpp"
 
 namespace aki
 {

@@ -30,7 +30,7 @@ namespace aki
                 virtual void Update(float deltaTime) = 0;
                 virtual void Draw(render::I::IRenderContext& renderContext) = 0;
 
-                virtual void input(input::wincon::ConsoleInputExt& input) = 0;
+                virtual void Input(input::wincon::ConsoleInputExt& input) = 0;
             };
         }
     }

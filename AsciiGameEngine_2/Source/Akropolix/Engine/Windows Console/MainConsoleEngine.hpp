@@ -26,7 +26,7 @@ namespace aki
             {
             public:
                 MainConsoleEngine(unsigned int width, unsigned int height);
-                ~MainConsoleEngine();
+                virtual ~MainConsoleEngine();
 
                 virtual bool Initialize();
 
@@ -37,7 +37,7 @@ namespace aki
             protected:
                 virtual void Clean();
 
-            private:
+            protected:
                 aki::time::WindowsTime* time;
                 display::wincon::Console* console;
                 std::shared_ptr<display::wincon::ConsoleBuffer> consoleBuffer;

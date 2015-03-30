@@ -32,7 +32,7 @@ namespace aki
                 virtual void Update(float deltaTime);
                 virtual void Draw(render::I::IRenderContext& renderContext);
 
-                void input(input::wincon::ConsoleInputExt& input);
+                void Input(input::wincon::ConsoleInputExt& input);
 
                 virtual void AddObject(object::I::IObject* object);
                 virtual object::I::IObject* RemoveObject(unsigned int ID);

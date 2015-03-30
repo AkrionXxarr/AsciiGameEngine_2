@@ -31,6 +31,6 @@ namespace aki
             public:
                 unsigned int ID;
             };
-        };
-    };
-};
+        }
+    }
+}

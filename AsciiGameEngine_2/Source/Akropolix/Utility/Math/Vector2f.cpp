@@ -3,7 +3,7 @@
 * All rights reserved.
 */
 
-#include "Akropolix\Utility\math\Vector2f.hpp"
+#include "Akropolix\Utility\Math\Vector2f.hpp"
 
 namespace aki
 {

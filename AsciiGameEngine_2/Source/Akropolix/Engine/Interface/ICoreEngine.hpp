@@ -86,6 +86,6 @@ namespace aki
                 render::I::IRenderContext* renderContext;
                 time::I::ITime* time;
             };
-        };
-    };
-};
+        }
+    }
+}
