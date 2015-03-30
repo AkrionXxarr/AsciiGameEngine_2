@@ -7,52 +7,58 @@
 
 namespace Akropolix
 {
-    class IMainEngine;
     class IDisplayDevice;
     class IObjectManager;
     class IRenderContext;
     class ITime;
 
-
-    ///////////////////////////////////////////////////////////
-    // Handles the very basic fundamentals, such as managing the time
-    // and ordering of critical tasks. (e.g. Update should always preceed Draw/Render)
-    //
-
-    class ICoreEngine
+    namespace Engine
     {
-    public:
-        ICoreEngine() : running(false) { }
-        virtual ~ICoreEngine() { }
+        namespace Interface
+        {
+            class IMainEngine;
 
-        virtual void Start(
-            ITime* time,
-            IDisplayDevice* displayDevice,
-            IRenderContext* renderContext,
-            IObjectManager* objectManager,
-            IMainEngine* mainEngine) = 0;
-        virtual void Run() = 0;
-        virtual void Stop() = 0;
+            ///////////////////////////////////////////////////////////
+            // Handles the very basic fundamentals, such as managing the time
+            // and ordering of critical tasks. (e.g. Update should always preceed Draw/Render)
+            //
 
-        bool HasFocus() { return hasFocus; }
-        bool IsRunning() { return running; }
+            class ICoreEngine
+            {
+            public:
+                ICoreEngine() : running(false) { }
+                virtual ~ICoreEngine() { }
 
-    protected:
-        virtual void Clean() = 0;
+                virtual void Start(
+                    ITime* time,
+                    IDisplayDevice* displayDevice,
+                    IRenderContext* renderContext,
+                    IObjectManager* objectManager,
+                    IMainEngine* mainEngine) = 0;
+                virtual void Run() = 0;
+                virtual void Stop() = 0;
 
-    private:
-        // Engine has no reason to be copied
-        ICoreEngine(const ICoreEngine& other);
-        void operator= (const ICoreEngine& other);
+                bool HasFocus() { return hasFocus; }
+                bool IsRunning() { return running; }
 
-    protected:
-        bool running;
-        bool hasFocus;
+            protected:
+                virtual void Clean() = 0;
 
-        IMainEngine* mainEngine;
-        IDisplayDevice* displayDevice;
-        IObjectManager* objectManager;
-        IRenderContext* renderContext;
-        ITime* time;
+            private:
+                // Engine has no reason to be copied
+                ICoreEngine(const ICoreEngine& other);
+                void operator= (const ICoreEngine& other);
+
+            protected:
+                bool running;
+                bool hasFocus;
+
+                IMainEngine* mainEngine;
+                IDisplayDevice* displayDevice;
+                IObjectManager* objectManager;
+                IRenderContext* renderContext;
+                ITime* time;
+            };
+        };
     };
 };

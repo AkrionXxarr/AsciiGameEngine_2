@@ -17,134 +17,140 @@
 
 namespace Akropolix
 {
-    // Raster fonts only
-    enum CONSOLE_FONT_TYPE
+    namespace DisplayDevice
     {
-        FONT_4x6,
-        FONT_6x8,
-        FONT_8x8,
-        FONT_16x8,
-        FONT_5x12,
-        FONT_7x12,
-        FONT_8x12,
-        FONT_16x12,
-        FONT_12x16,
-        FONT_10x18,
-        NOT_SET
-    };
-
-    ///////////////////////////////////////////////////////////////////////////////////////////////////
-    // The buffer that the Console class will render from. It has the capacity to instruct
-    // the console class to push the whole buffer or only a portion of the buffer.
-    //
-    // This class will be accessed through a shared pointer.
-    //
-    // Console has friend access as the raw buffer is needed for the WriteConsoleOutput function.
-    //
-    class ConsoleBuffer
-    {
-        friend class Console;
-
-    public:
-        /* Construct / Destruct */
-        ConsoleBuffer(unsigned int width, unsigned int height) : width(width), height(height)
+        namespace Console
         {
-            buffer = new CHAR_INFO[width * height];
-            size = width * height;
-        }
+            // Raster fonts only
+            enum CONSOLE_FONT_TYPE
+            {
+                FONT_4x6,
+                FONT_6x8,
+                FONT_8x8,
+                FONT_16x8,
+                FONT_5x12,
+                FONT_7x12,
+                FONT_8x12,
+                FONT_16x12,
+                FONT_12x16,
+                FONT_10x18,
+                NOT_SET
+            };
 
-        ~ConsoleBuffer()
-        {
-            if (buffer != nullptr)
-                delete[] buffer;
-        }
+            ///////////////////////////////////////////////////////////////////////////////////////////////////
+            // The buffer that the Console class will render from. It has the capacity to instruct
+            // the console class to push the whole buffer or only a portion of the buffer.
+            //
+            // This class will be accessed through a shared pointer.
+            //
+            // Console has friend access as the raw buffer is needed for the WriteConsoleOutput function.
+            //
+            class ConsoleBuffer
+            {
+                friend class Console;
 
-        /* Buffer write */
-        void Put(unsigned int i, CHAR_INFO& ci)
-        {
-            buffer[i] = ci;
-        }
-        void Put(unsigned int x, unsigned int y, CHAR_INFO& ci)
-        {
-            buffer[(y * width) + x] = ci;
-        }
+            public:
+                /* Construct / Destruct */
+                ConsoleBuffer(unsigned int width, unsigned int height) : width(width), height(height)
+                {
+                    buffer = new CHAR_INFO[width * height];
+                    size = width * height;
+                }
 
-        /* Getters */
-        unsigned int GetSize() { return size; }
-        COORD GetSizeAsCoord() { return{ width, height }; }
+                ~ConsoleBuffer()
+                {
+                    if (buffer != nullptr)
+                        delete[] buffer;
+                }
 
-    private:
-        ConsoleBuffer(const ConsoleBuffer& other);
-        void operator= (const ConsoleBuffer& other);
+                /* Buffer write */
+                void Put(unsigned int i, CHAR_INFO& ci)
+                {
+                    buffer[i] = ci;
+                }
+                void Put(unsigned int x, unsigned int y, CHAR_INFO& ci)
+                {
+                    buffer[(y * width) + x] = ci;
+                }
 
-    public:
-        /* Variables */
-        bool useDrawRect = false;
-        SMALL_RECT drawRect;
+                /* Getters */
+                unsigned int GetSize() { return size; }
+                COORD GetSizeAsCoord() { return{ width, height }; }
 
-    private:
-        /* Variables */
-        CHAR_INFO* buffer = nullptr;
-        unsigned int width, height;
-        unsigned int size;
-    };
+            private:
+                ConsoleBuffer(const ConsoleBuffer& other);
+                void operator= (const ConsoleBuffer& other);
 
-    ///////////////////////////////////////////////////////////////////////////////////////////
-    // Handles Windows Console relevant data and operations.
-    //
-    // Expected usage will have the render context share a pointer with the console buffer
-    // and for Display() to be called to push the buffer to the console window.
-    //
-    class Console : public IDisplayDevice
-    {
-    public:
-        /* Construct & Destruct */
-        Console();
-        ~Console();
+            public:
+                /* Variables */
+                bool useDrawRect = false;
+                SMALL_RECT drawRect;
 
-        /* Main functions */
-        virtual void Display(); // Push the console buffer to the console window
+            private:
+                /* Variables */
+                CHAR_INFO* buffer = nullptr;
+                unsigned int width, height;
+                unsigned int size;
+            };
 
-        bool CreateDevice(
-            std::shared_ptr<ConsoleBuffer> cb,
-            unsigned short cursorSize = 25,
-            CONSOLE_FONT_TYPE fontType = FONT_8x12);
+            ///////////////////////////////////////////////////////////////////////////////////////////
+            // Handles Windows Console relevant data and operations.
+            //
+            // Expected usage will have the render context share a pointer with the console buffer
+            // and for Display() to be called to push the buffer to the console window.
+            //
+            class Console : public IDisplayDevice
+            {
+            public:
+                /* Construct & Destruct */
+                Console();
+                ~Console();
 
-        std::shared_ptr<ConsoleBuffer> GetBuffer() { return consoleBuffer; }
+                /* Main functions */
+                virtual void Display(); // Push the console buffer to the console window
 
-        /* Utility functions */
-        void ClearBuffer() { ClearBuffer(0, ' '); }
-        void ClearBuffer(unsigned short attributes, char c);
-        void ClearBuffer(CHAR_INFO& ci);
+                bool CreateDevice(
+                    std::shared_ptr<ConsoleBuffer> cb,
+                    unsigned short cursorSize = 25,
+                    CONSOLE_FONT_TYPE fontType = FONT_8x12);
 
-        virtual bool HasFocus();
+                std::shared_ptr<ConsoleBuffer> GetBuffer() { return consoleBuffer; }
 
-        /* Getters & Setters */
-        COORD GetCursorPosition() { return cursorPos; }
-        HWND GetHandle() { return consoleWindow; }
+                /* Utility functions */
+                void ClearBuffer() { ClearBuffer(0, ' '); }
+                void ClearBuffer(unsigned short attributes, char c);
+                void ClearBuffer(CHAR_INFO& ci);
 
-        bool SetCursorSize(unsigned short size = 0);
-        bool SetCursorPosition(short x, short y) { return SetCursorPosition({ x, y }); }
-        bool SetCursorPosition(COORD pos);
+                virtual bool HasFocus();
 
-    private:
-        /* Helper functions */
-        bool InitFont();
-        bool InitSize();
+                /* Getters & Setters */
+                COORD GetCursorPosition() { return cursorPos; }
+                HWND GetHandle() { return consoleWindow; }
 
-        // Display device should not be copied
-        Console(const Console& other);
-        void operator= (const Console& other);
+                bool SetCursorSize(unsigned short size = 0);
+                bool SetCursorPosition(short x, short y) { return SetCursorPosition({ x, y }); }
+                bool SetCursorPosition(COORD pos);
 
-    private:
-        /* Variables */
-        std::shared_ptr<ConsoleBuffer> consoleBuffer;
-        HWND consoleWindow;
-        HANDLE outputHandle = nullptr;
-        HANDLE inputHandle = nullptr;
-        COORD cursorPos;
-        SMALL_RECT screenRect;
-        CONSOLE_CURSOR_INFO cci;
-        CONSOLE_FONT_TYPE fontType = NOT_SET;
+            private:
+                /* Helper functions */
+                bool InitFont();
+                bool InitSize();
+
+                // Display device should not be copied
+                Console(const Console& other);
+                void operator= (const Console& other);
+
+            private:
+                /* Variables */
+                std::shared_ptr<ConsoleBuffer> consoleBuffer;
+                HWND consoleWindow;
+                HANDLE outputHandle = nullptr;
+                HANDLE inputHandle = nullptr;
+                COORD cursorPos;
+                SMALL_RECT screenRect;
+                CONSOLE_CURSOR_INFO cci;
+                CONSOLE_FONT_TYPE fontType = NOT_SET;
+            };
+        };
     };
 };

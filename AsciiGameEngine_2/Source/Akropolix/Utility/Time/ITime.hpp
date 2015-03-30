@@ -5,14 +5,20 @@
 
 namespace Akropolix
 {
-    class ITime
+    namespace Time
     {
-    public:
-        ITime() { }
-        virtual ~ITime() { }
+        namespace Interface
+        {
+            class ITime
+            {
+            public:
+                ITime() { }
+                virtual ~ITime() { }
 
-        virtual void Tick() = 0;
+                virtual void Tick() = 0;
 
-        virtual float DeltaTime() = 0;
+                virtual float DeltaTime() = 0;
+            };
+        };
     };
 };

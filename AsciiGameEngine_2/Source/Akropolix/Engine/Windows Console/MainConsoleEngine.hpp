@@ -13,32 +13,38 @@
 #include "Akropolix\Display Device\Windows Console\Console.hpp"
 #include "Akropolix\Render\Windows Console\ConsoleRenderContext.hpp"
 #include "Akropolix\Object\Windows Console\ConsoleObjectManager.hpp"
-#include "Akropolix\Input\Windows Input\ConsoleInputExt.hpp"
+#include "Akropolix\Input\Windows Console\ConsoleInputExt.hpp"
 
 
 namespace Akropolix
 {
-    class MainConsoleEngine : public IMainEngine
+    namespace Engine
     {
-    public:
-        MainConsoleEngine(unsigned int width, unsigned int height);
-        ~MainConsoleEngine();
+        namespace WinConsole
+        {
+            class MainConsoleEngine : public IMainEngine
+            {
+            public:
+                MainConsoleEngine(unsigned int width, unsigned int height);
+                ~MainConsoleEngine();
 
-        virtual bool Initialize();
+                virtual bool Initialize();
 
-        virtual void Start();
-        virtual void Stop();
-        virtual void Tick(float deltaTime);
+                virtual void Start();
+                virtual void Stop();
+                virtual void Tick(float deltaTime);
 
-    protected:
-        virtual void Clean();
+            protected:
+                virtual void Clean();
 
-    private:
-        WindowsTime* time;
-        Console* console;
-        std::shared_ptr<ConsoleBuffer> consoleBuffer;
-        ConsoleRenderContext* renderContext;
-        ConsoleObjectManager* objectManager;
-        ConsoleInputExt* input;
+            private:
+                Akropolix::Time::WindowsTime* time;
+                Console* console;
+                std::shared_ptr<ConsoleBuffer> consoleBuffer;
+                Akropolix::Render::ConsoleRenderContext* renderContext;
+                Akropolix::Object::WinConsole::ConsoleObjectManager* objectManager;
+                ConsoleInputExt* input;
+            };
+        }
     };
 };

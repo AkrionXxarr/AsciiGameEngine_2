@@ -7,15 +7,21 @@
 
 namespace Akropolix
 {
-    class IRenderContext
+    namespace Render
     {
-    public:
-        IRenderContext() { }
-        virtual ~IRenderContext() { }
+        namespace Interface
+        {
+            class IRenderContext
+            {
+            public:
+                IRenderContext() { }
+                virtual ~IRenderContext() { }
 
-    private:
-        // Render context has no reason to be copied
-        IRenderContext(const IRenderContext& other);
-        void operator= (const IRenderContext& other);
+            private:
+                // Render context has no reason to be copied
+                IRenderContext(const IRenderContext& other);
+                void operator= (const IRenderContext& other);
+            };
+        };
     };
 };

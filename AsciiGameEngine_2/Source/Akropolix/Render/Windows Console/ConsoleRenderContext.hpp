@@ -14,19 +14,22 @@ namespace Akropolix
 {
     class ConsoleBuffer;
 
-    class ConsoleRenderContext : public IRenderContext
+    namespace Render
     {
-    public:
-        ConsoleRenderContext();
-        ~ConsoleRenderContext();
+        class ConsoleRenderContext : public IRenderContext
+        {
+        public:
+            ConsoleRenderContext();
+            ~ConsoleRenderContext();
 
-        void Initialize(std::shared_ptr<ConsoleBuffer> buffer);
+            void Initialize(std::shared_ptr<ConsoleBuffer> buffer);
 
-        void Clear();
+            void Clear();
 
-        void DrawPoint(POINT& pos, CHAR_INFO& ci);
+            void DrawPoint(POINT& pos, CHAR_INFO& ci);
 
-    private:
-        std::shared_ptr<ConsoleBuffer> buffer;
+        private:
+            std::shared_ptr<ConsoleBuffer> buffer;
+        };
     };
 };

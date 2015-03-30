@@ -11,15 +11,18 @@ namespace Akropolix
 {
     class ConsoleInputExt;
 
-    class ConsoleObject : public IObject
+    namespace Object
     {
-    public:
-        ConsoleObject() { }
-        ~ConsoleObject() { }
+        class ConsoleObject : public Akropolix::Object::Interface::IObject
+        {
+        public:
+            ConsoleObject() { }
+            ~ConsoleObject() { }
 
-        virtual void Update(float deltaTime) = 0;
-        virtual void Draw(IRenderContext& renderContext) = 0;
+            virtual void Update(float deltaTime) = 0;
+            virtual void Draw(IRenderContext& renderContext) = 0;
 
-        virtual void Input(ConsoleInputExt& input) = 0;
+            virtual void Input(ConsoleInputExt& input) = 0;
+        };
     };
 };

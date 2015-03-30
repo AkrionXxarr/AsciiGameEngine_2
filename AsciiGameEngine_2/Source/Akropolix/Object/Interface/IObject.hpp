@@ -9,16 +9,22 @@ namespace Akropolix
 {
     class IRenderContext;
 
-    class IObject
+    namespace Object
     {
-    public:
-        IObject() { }
-        virtual ~IObject() { }
+        namespace Interface
+        {
+            class IObject
+            {
+            public:
+                IObject() { }
+                virtual ~IObject() { }
 
-        virtual void Update(float deltaTime) = 0;
-        virtual void Draw(IRenderContext& renderContext) = 0;
+                virtual void Update(float deltaTime) = 0;
+                virtual void Draw(IRenderContext& renderContext) = 0;
 
-    public:
-        unsigned int ID;
+            public:
+                unsigned int ID;
+            };
+        };
     };
 };

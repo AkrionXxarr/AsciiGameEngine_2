@@ -76,9 +76,9 @@
     <ClCompile Include="Source\Akropolix\Display Device\Windows Console\Console.cpp" />
     <ClCompile Include="Source\Akropolix\Engine\CoreEngine.cpp" />
     <ClCompile Include="Source\Akropolix\Engine\Windows Console\MainConsoleEngine.cpp" />
-    <ClCompile Include="Source\Akropolix\Input\Windows Input\ConsoleInput.cpp" />
-    <ClCompile Include="Source\Akropolix\Input\Windows Input\ConsoleInputExt.cpp" />
-    <ClCompile Include="Source\Akropolix\Input\Windows Input\CursorLock.cpp" />
+    <ClCompile Include="Source\Akropolix\Input\Windows Console\ConsoleInput.cpp" />
+    <ClCompile Include="Source\Akropolix\Input\Windows Console\ConsoleInputExt.cpp" />
+    <ClCompile Include="Source\Akropolix\Input\Windows Console\CursorLock.cpp" />
     <ClCompile Include="Source\Akropolix\Object\Windows Console\ConsoleObjectManager.cpp" />
     <ClCompile Include="Source\Akropolix\Object\Windows Console\TestObject.cpp" />
     <ClCompile Include="Source\Akropolix\Render\Windows Console\ConsoleRenderContext.cpp" />
@@ -102,9 +102,9 @@
     <ClInclude Include="Source\Akropolix\Engine\Interface\ICoreEngine.hpp" />
     <ClInclude Include="Source\Akropolix\Engine\Interface\IMainEngine.hpp" />
     <ClInclude Include="Source\Akropolix\Engine\Windows Console\MainConsoleEngine.hpp" />
-    <ClInclude Include="Source\Akropolix\Input\Windows Input\ConsoleInput.hpp" />
-    <ClInclude Include="Source\Akropolix\Input\Windows Input\ConsoleInputDefines.hpp" />
-    <ClInclude Include="Source\Akropolix\Input\Windows Input\ConsoleInputExt.hpp" />
+    <ClInclude Include="Source\Akropolix\Input\Windows Console\ConsoleInput.hpp" />
+    <ClInclude Include="Source\Akropolix\Input\Windows Console\ConsoleInputDefines.hpp" />
+    <ClInclude Include="Source\Akropolix\Input\Windows Console\ConsoleInputExt.hpp" />
     <ClInclude Include="Source\Akropolix\Object\Interface\IObject.hpp" />
     <ClInclude Include="Source\Akropolix\Object\Interface\IObjectManager.hpp" />
     <ClInclude Include="Source\Akropolix\Object\Windows Console\ConsoleObject.hpp" />

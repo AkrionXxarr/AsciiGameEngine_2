@@ -31,9 +31,6 @@
     <Filter Include="Source\Akropolix\Input">
       <UniqueIdentifier>{ad1622cf-4719-43fb-8645-0909567f6676}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Akropolix\Input\Windows Input">
-      <UniqueIdentifier>{417c4f79-773c-4e92-876e-0a52d3caca5d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source\Akropolix\Render">
       <UniqueIdentifier>{cadfc243-a8cb-4490-887c-5cae3c60971f}</UniqueIdentifier>
     </Filter>
@@ -82,6 +79,9 @@
     <Filter Include="Source\Akropolix\Utility\Error Handling\Windows">
       <UniqueIdentifier>{4aaf95f3-bf1d-410c-955f-bfb0abfa678a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Akropolix\Input\Windows Console">
+      <UniqueIdentifier>{417c4f79-773c-4e92-876e-0a52d3caca5d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Main.cpp">
@@ -95,15 +95,6 @@
     </ClCompile>
     <ClCompile Include="Source\Akropolix\Engine\CoreEngine.cpp">
       <Filter>Source\Akropolix\Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Akropolix\Input\Windows Input\ConsoleInput.cpp">
-      <Filter>Source\Akropolix\Input\Windows Input</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Akropolix\Input\Windows Input\ConsoleInputExt.cpp">
-      <Filter>Source\Akropolix\Input\Windows Input</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Akropolix\Input\Windows Input\CursorLock.cpp">
-      <Filter>Source\Akropolix\Input\Windows Input</Filter>
     </ClCompile>
     <ClCompile Include="Source\Akropolix\Object\Windows Console\ConsoleObjectManager.cpp">
       <Filter>Source\Akropolix\Object\Windows Console</Filter>
@@ -131,6 +122,15 @@
     </ClCompile>
     <ClCompile Include="Source\Akropolix\Utility\Logging\Log.cpp">
       <Filter>Source\Akropolix\Utility\Logging</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Akropolix\Input\Windows Console\ConsoleInput.cpp">
+      <Filter>Source\Akropolix\Input\Windows Console</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Akropolix\Input\Windows Console\ConsoleInputExt.cpp">
+      <Filter>Source\Akropolix\Input\Windows Console</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Akropolix\Input\Windows Console\CursorLock.cpp">
+      <Filter>Source\Akropolix\Input\Windows Console</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -162,15 +162,6 @@
     </ClInclude>
     <ClInclude Include="Source\Akropolix\Engine\CoreEngine.hpp">
       <Filter>Source\Akropolix\Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Akropolix\Input\Windows Input\ConsoleInput.hpp">
-      <Filter>Source\Akropolix\Input\Windows Input</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Akropolix\Input\Windows Input\ConsoleInputDefines.hpp">
-      <Filter>Source\Akropolix\Input\Windows Input</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Akropolix\Input\Windows Input\ConsoleInputExt.hpp">
-      <Filter>Source\Akropolix\Input\Windows Input</Filter>
     </ClInclude>
     <ClInclude Include="Source\Akropolix\Object\Interface\IObject.hpp">
       <Filter>Source\Akropolix\Object\Interface</Filter>
@@ -222,6 +213,15 @@
     </ClInclude>
     <ClInclude Include="Source\Akropolix\Utility\Time\WindowsTime.hpp">
       <Filter>Source\Akropolix\Utility\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Akropolix\Input\Windows Console\ConsoleInput.hpp">
+      <Filter>Source\Akropolix\Input\Windows Console</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Akropolix\Input\Windows Console\ConsoleInputDefines.hpp">
+      <Filter>Source\Akropolix\Input\Windows Console</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Akropolix\Input\Windows Console\ConsoleInputExt.hpp">
+      <Filter>Source\Akropolix\Input\Windows Console</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

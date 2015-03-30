@@ -12,7 +12,7 @@ using namespace Akropolix;
 
 int main()
 {
-    MainConsoleEngine mainEngine(WIDTH, HEIGHT);
+    Engine::WinConsole::MainConsoleEngine mainEngine(WIDTH, HEIGHT);
 
     if (!mainEngine.Initialize())
         return 0;
