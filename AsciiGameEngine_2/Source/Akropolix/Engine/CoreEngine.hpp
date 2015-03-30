@@ -9,18 +9,18 @@ namespace Akropolix
 {
     namespace Engine
     {
-        class CoreEngine : public ICoreEngine
+        class CoreEngine : public Interface::ICoreEngine
         {
         public:
             CoreEngine();
             virtual ~CoreEngine();
 
             virtual void Start(
-                ITime* time,
-                IDisplayDevice* displayDevice,
-                IRenderContext* renderContext,
-                IObjectManager* objectManager,
-                IMainEngine* mainEngine);
+                Time::Interface::ITime* time,
+                DisplayDevice::Interface::IDisplayDevice* displayDevice,
+                Render::Interface::IRenderContext* renderContext,
+                Object::Interface::IObjectManager* objectManager,
+                Interface::IMainEngine* mainEngine);
             virtual void Run();
             virtual void Stop();
 

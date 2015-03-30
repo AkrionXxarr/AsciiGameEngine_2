@@ -22,7 +22,7 @@ namespace Akropolix
     {
         namespace WinConsole
         {
-            class MainConsoleEngine : public IMainEngine
+            class MainConsoleEngine : public Engine::Interface::IMainEngine
             {
             public:
                 MainConsoleEngine(unsigned int width, unsigned int height);
@@ -39,11 +39,11 @@ namespace Akropolix
 
             private:
                 Akropolix::Time::WindowsTime* time;
-                Console* console;
-                std::shared_ptr<ConsoleBuffer> consoleBuffer;
-                Akropolix::Render::ConsoleRenderContext* renderContext;
+                DisplayDevice::WinConsole::Console* console;
+                std::shared_ptr<DisplayDevice::WinConsole::ConsoleBuffer> consoleBuffer;
+                Akropolix::Render::WinConsole::ConsoleRenderContext* renderContext;
                 Akropolix::Object::WinConsole::ConsoleObjectManager* objectManager;
-                ConsoleInputExt* input;
+                Akropolix::Input::WinConsole::ConsoleInputExt* input;
             };
         }
     };

@@ -7,7 +7,7 @@
 
 #include <process.h>
 
-#include "Akropolix\Input\Windows Input\ConsoleInput.hpp"
+#include "Akropolix\Input\Windows Console\ConsoleInput.hpp"
 
 namespace Akropolix
 {

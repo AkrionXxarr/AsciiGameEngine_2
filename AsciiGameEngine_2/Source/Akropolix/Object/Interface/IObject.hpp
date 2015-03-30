@@ -7,7 +7,13 @@
 
 namespace Akropolix
 {
-    class IRenderContext;
+    namespace Render
+    {
+        namespace Interface
+        {
+            class IRenderContext;
+        }
+    }
 
     namespace Object
     {
@@ -20,7 +26,7 @@ namespace Akropolix
                 virtual ~IObject() { }
 
                 virtual void Update(float deltaTime) = 0;
-                virtual void Draw(IRenderContext& renderContext) = 0;
+                virtual void Draw(Render::Interface::IRenderContext& renderContext) = 0;
 
             public:
                 unsigned int ID;

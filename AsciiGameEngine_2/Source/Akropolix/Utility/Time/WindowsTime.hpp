@@ -13,7 +13,7 @@ namespace Akropolix
 {
     namespace Time
     {
-        class WindowsTime : public ITime
+        class WindowsTime : public Interface::ITime
         {
         public:
             WindowsTime()

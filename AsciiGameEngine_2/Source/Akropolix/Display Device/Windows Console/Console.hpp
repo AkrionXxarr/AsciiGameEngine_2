@@ -19,7 +19,7 @@ namespace Akropolix
 {
     namespace DisplayDevice
     {
-        namespace Console
+        namespace WinConsole
         {
             // Raster fonts only
             enum CONSOLE_FONT_TYPE
@@ -99,7 +99,7 @@ namespace Akropolix
             // Expected usage will have the render context share a pointer with the console buffer
             // and for Display() to be called to push the buffer to the console window.
             //
-            class Console : public IDisplayDevice
+            class Console : public DisplayDevice::Interface::IDisplayDevice
             {
             public:
                 /* Construct & Destruct */

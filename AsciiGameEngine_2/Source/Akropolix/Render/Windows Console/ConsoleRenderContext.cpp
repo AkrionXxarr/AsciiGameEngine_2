@@ -8,29 +8,35 @@
 
 namespace Akropolix
 {
-    ConsoleRenderContext::ConsoleRenderContext()
+    namespace Render
     {
+        namespace WinConsole
+        {
+            ConsoleRenderContext::ConsoleRenderContext()
+            {
 
-    }
+            }
 
-    ConsoleRenderContext::~ConsoleRenderContext()
-    {
+            ConsoleRenderContext::~ConsoleRenderContext()
+            {
 
-    }
+            }
 
-    void ConsoleRenderContext::Initialize(std::shared_ptr<ConsoleBuffer> buffer)
-    {
-        if (this->buffer)
-            this->buffer.reset();
+            void ConsoleRenderContext::Initialize(std::shared_ptr<DisplayDevice::WinConsole::ConsoleBuffer> buffer)
+            {
+                if (this->buffer)
+                    this->buffer.reset();
 
-        this->buffer = buffer;
-    }
+                this->buffer = buffer;
+            }
 
-    void ConsoleRenderContext::DrawPoint(POINT& pos, CHAR_INFO& ci)
-    {
-        if (pos.x < 0 || pos.y < 0 || pos.x >(buffer->GetSizeAsCoord().X - 1) || pos.y >(buffer->GetSizeAsCoord().Y - 1))
-            return;
+            void ConsoleRenderContext::DrawPoint(POINT& pos, CHAR_INFO& ci)
+            {
+                if (pos.x < 0 || pos.y < 0 || pos.x >(buffer->GetSizeAsCoord().X - 1) || pos.y >(buffer->GetSizeAsCoord().Y - 1))
+                    return;
 
-        buffer->Put(pos.x, pos.y, ci);
-    }
+                buffer->Put(pos.x, pos.y, ci);
+            }
+        };
+    };
 };

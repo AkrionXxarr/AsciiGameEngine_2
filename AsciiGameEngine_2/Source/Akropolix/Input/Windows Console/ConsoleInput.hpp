@@ -8,7 +8,7 @@
 #include <Windows.h>
 #include <deque>
 
-#include "Akropolix\Input\Windows Input\ConsoleInputDefines.hpp"
+#include "Akropolix\Input\Windows Console\ConsoleInputDefines.hpp"
 #include "Akropolix\Utility\Logging\Log.hpp"
 
 #define INPUT_LOG "InputLog.txt"

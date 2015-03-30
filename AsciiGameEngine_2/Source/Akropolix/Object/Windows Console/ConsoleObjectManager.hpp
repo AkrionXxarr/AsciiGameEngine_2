@@ -9,7 +9,13 @@
 
 namespace Akropolix
 {
-    class ConsoleInputExt;
+    namespace Input
+    {
+        namespace WinConsole
+        {
+            class ConsoleInputExt;
+        }
+    }
 
     namespace Object
     {
@@ -17,19 +23,19 @@ namespace Akropolix
         {
             class ConsoleObject;
 
-            class ConsoleObjectManager : public IObjectManager
+            class ConsoleObjectManager : public Object::Interface::IObjectManager
             {
             public:
                 ConsoleObjectManager();
                 ~ConsoleObjectManager();
 
                 virtual void Update(float deltaTime);
-                virtual void Draw(IRenderContext& renderContext);
+                virtual void Draw(Render::Interface::IRenderContext& renderContext);
 
-                void Input(ConsoleInputExt& input);
+                void Input(Input::WinConsole::ConsoleInputExt& input);
 
-                virtual void AddObject(IObject* object);
-                virtual IObject* RemoveObject(unsigned int ID);
+                virtual void AddObject(Object::Interface::IObject* object);
+                virtual Object::Interface::IObject* RemoveObject(unsigned int ID);
 
             private:
                 // Very basic object structure

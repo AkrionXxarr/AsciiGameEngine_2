@@ -7,10 +7,37 @@
 
 namespace Akropolix
 {
-    class IDisplayDevice;
-    class IObjectManager;
-    class IRenderContext;
-    class ITime;
+    namespace DisplayDevice
+    {
+        namespace Interface
+        {
+            class IDisplayDevice;
+        }
+    }
+
+    namespace Object
+    {
+        namespace Interface
+        {
+            class IObjectManager;
+        }
+    }
+
+    namespace Render
+    {
+        namespace Interface
+        {
+            class IRenderContext;
+        }
+    }
+
+    namespace Time
+    {
+        namespace Interface
+        {
+            class ITime;
+        }
+    }
 
     namespace Engine
     {
@@ -30,10 +57,10 @@ namespace Akropolix
                 virtual ~ICoreEngine() { }
 
                 virtual void Start(
-                    ITime* time,
-                    IDisplayDevice* displayDevice,
-                    IRenderContext* renderContext,
-                    IObjectManager* objectManager,
+                    Time::Interface::ITime* time,
+                    DisplayDevice::Interface::IDisplayDevice* displayDevice,
+                    Render::Interface::IRenderContext* renderContext,
+                    Object::Interface::IObjectManager* objectManager,
                     IMainEngine* mainEngine) = 0;
                 virtual void Run() = 0;
                 virtual void Stop() = 0;
@@ -54,10 +81,10 @@ namespace Akropolix
                 bool hasFocus;
 
                 IMainEngine* mainEngine;
-                IDisplayDevice* displayDevice;
-                IObjectManager* objectManager;
-                IRenderContext* renderContext;
-                ITime* time;
+                DisplayDevice::Interface::IDisplayDevice* displayDevice;
+                Object::Interface::IObjectManager* objectManager;
+                Render::Interface::IRenderContext* renderContext;
+                Time::Interface::ITime* time;
             };
         };
     };

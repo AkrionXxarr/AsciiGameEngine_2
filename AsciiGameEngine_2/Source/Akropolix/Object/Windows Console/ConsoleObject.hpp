@@ -9,20 +9,29 @@
 
 namespace Akropolix
 {
-    class ConsoleInputExt;
+    namespace Input
+    {
+        namespace WinConsole
+        {
+            class ConsoleInputExt;
+        }
+    }
 
     namespace Object
     {
-        class ConsoleObject : public Akropolix::Object::Interface::IObject
+        namespace WinConsole
         {
-        public:
-            ConsoleObject() { }
-            ~ConsoleObject() { }
+            class ConsoleObject : public Akropolix::Object::Interface::IObject
+            {
+            public:
+                ConsoleObject() { }
+                ~ConsoleObject() { }
 
-            virtual void Update(float deltaTime) = 0;
-            virtual void Draw(IRenderContext& renderContext) = 0;
+                virtual void Update(float deltaTime) = 0;
+                virtual void Draw(Render::Interface::IRenderContext& renderContext) = 0;
 
-            virtual void Input(ConsoleInputExt& input) = 0;
-        };
-    };
-};
+                virtual void Input(Input::WinConsole::ConsoleInputExt& input) = 0;
+            };
+        }
+    }
+}

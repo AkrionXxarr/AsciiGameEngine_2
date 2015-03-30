@@ -5,18 +5,24 @@
 
 namespace Akropolix
 {
-    class ConsoleInputExt;
+    namespace Input
+    {
+        namespace WinConsole
+        {
+            class ConsoleInputExt;
+        };
+    };
 
-    class TestObject : public ConsoleObject
+    class TestObject : public Object::WinConsole::ConsoleObject
     {
     public:
         TestObject(float x, float y) { pos = Math::Vector2f(x, y); }
         ~TestObject() { }
 
         virtual void Update(float deltaTime);
-        virtual void Draw(IRenderContext& renderContext);
+        virtual void Draw(Render::Interface::IRenderContext& renderContext);
 
-        virtual void Input(ConsoleInputExt& input);
+        virtual void Input(Input::WinConsole::ConsoleInputExt& input);
 
     private:
         Math::Vector2f pos;

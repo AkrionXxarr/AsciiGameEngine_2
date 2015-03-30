@@ -1,6 +1,10 @@
 #include "Akropolix\Object\Windows Console\TestObject.hpp"
 #include "Akropolix\Render\Windows Console\ConsoleRenderContext.hpp"
-#include "Akropolix\Input\Windows Input\ConsoleInputExt.hpp"
+#include "Akropolix\Input\Windows Console\ConsoleInputExt.hpp"
+
+using namespace Akropolix::Render::WinConsole;
+using namespace Akropolix::Render::Interface;
+using namespace Akropolix::Input::WinConsole;
 
 namespace Akropolix
 {
