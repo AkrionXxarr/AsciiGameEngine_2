@@ -3,21 +3,24 @@
 * All rights reserved.
 */
 
-#include <windows.h>
-#include <stdio.h>
-#include <iostream>
-
-#include "Input\Windows Input\ConsoleInputExt.hpp"
-#include "Utility\Math\Vector2f.hpp"
-#include "Display Device\Windows Console\Console.hpp"
-#include "Display Device\Windows Console\ConsoleDefines.hpp"
-
-#include "Utility\Time\WindowsTime.hpp"
+#include "Engine\Windows Console\MainConsoleEngine.hpp"
 
 #define WIDTH 80
-#define HEIGHT 30
-#define SENSITIVITY 7.9
+#define HEIGHT 80
 
+int main()
+{
+    MainConsoleEngine mainEngine(WIDTH, HEIGHT);
+
+    if (!mainEngine.Initialize())
+        return 0;
+
+    mainEngine.Start();
+
+    return 0;
+}
+
+/*
 int main()
 {
     std::shared_ptr<ConsoleBuffer> buffer = std::make_shared<ConsoleBuffer>(WIDTH, HEIGHT);
@@ -189,3 +192,4 @@ int main()
         console.Display();
     }
 }
+*/

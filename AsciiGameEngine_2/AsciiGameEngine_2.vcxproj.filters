@@ -49,6 +49,36 @@
     <Filter Include="Source\Utility\Error Handling\Windows">
       <UniqueIdentifier>{4aaf95f3-bf1d-410c-955f-bfb0abfa678a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Object">
+      <UniqueIdentifier>{46798a84-6c8b-484f-a9a3-1a53411b381e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Engine">
+      <UniqueIdentifier>{563724c4-f629-4bd9-923f-69113be6748a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Engine\Interface">
+      <UniqueIdentifier>{875e0fa7-cda9-4b22-99dc-56162c9b8804}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Object\Interface">
+      <UniqueIdentifier>{f74c5e33-3f81-4b6b-9099-ef58a012d0d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Render">
+      <UniqueIdentifier>{cadfc243-a8cb-4490-887c-5cae3c60971f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Render\Interface">
+      <UniqueIdentifier>{0fc04580-6907-4969-87fd-3610db446844}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Display Device\Interface">
+      <UniqueIdentifier>{6a4d986c-0111-45dc-a699-841d3cb9a536}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Engine\Windows Console">
+      <UniqueIdentifier>{d0de4454-bb01-4d31-b3b3-d73968c6c463}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Render\Windows Console">
+      <UniqueIdentifier>{9d711a5f-411c-45e4-8735-ccf68143fb69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Object\Windows Console">
+      <UniqueIdentifier>{317bb069-2962-4b01-b6f5-efd5ac8827c8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Main.cpp">
@@ -83,6 +113,21 @@
     </ClCompile>
     <ClCompile Include="Source\Utility\Logging\Log.cpp">
       <Filter>Source\Utility\Logging</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Engine\CoreEngine.cpp">
+      <Filter>Source\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Render\Windows Console\ConsoleRenderContext.cpp">
+      <Filter>Source\Render\Windows Console</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Engine\Windows Console\MainConsoleEngine.cpp">
+      <Filter>Source\Engine\Windows Console</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Object\Windows Console\ConsoleObjectManager.cpp">
+      <Filter>Source\Object\Windows Console</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Object\Windows Console\TestObject.cpp">
+      <Filter>Source\Object\Windows Console</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -131,9 +176,48 @@
     <ClInclude Include="Source\Utility\Logging\Log.hpp">
       <Filter>Source\Utility\Logging</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Object\Interface\IObjectManager.hpp">
+      <Filter>Source\Object\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Engine\Interface\ICoreEngine.hpp">
+      <Filter>Source\Engine\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Render\Interface\IRenderContext.hpp">
+      <Filter>Source\Render\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Engine\CoreEngine.hpp">
+      <Filter>Source\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Display Device\Interface\IDisplayDevice.hpp">
+      <Filter>Source\Display Device\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Engine\Interface\IMainEngine.hpp">
+      <Filter>Source\Engine\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Engine\Windows Console\MainConsoleEngine.hpp">
+      <Filter>Source\Engine\Windows Console</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Render\Windows Console\ConsoleRenderContext.hpp">
+      <Filter>Source\Render\Windows Console</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Object\Windows Console\ConsoleObjectManager.hpp">
+      <Filter>Source\Object\Windows Console</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Object\Windows Console\ConsoleObject.hpp">
+      <Filter>Source\Object\Windows Console</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Object\Interface\IObject.hpp">
+      <Filter>Source\Object\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Object\Windows Console\TestObject.hpp">
+      <Filter>Source\Object\Windows Console</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Docs\TODO.txt">
+      <Filter>Docs</Filter>
+    </Text>
+    <Text Include="Docs\EngineSystem.txt">
       <Filter>Docs</Filter>
     </Text>
   </ItemGroup>

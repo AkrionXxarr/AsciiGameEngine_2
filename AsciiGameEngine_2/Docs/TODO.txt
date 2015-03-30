@@ -1,2 +1,0 @@
-Console HWND
-* HWND must be obtained after device initialization
