@@ -1,149 +1,149 @@
 ICoreEngine
-	Base operations
+   Base operations
 
 IMainEngine
-	User defined operations
+   User defined operations
 
 IRenderContext
-	Render/Draw operations
+   Render/Draw operations
 
 IObjectManager
-	Object management
+   Object management
 
 IObject
-	Object
+   Object
 
 
 CoreEngine extends ICoreEngine
-	+Constructor
-	|	+Nullifies all pointers
-	*
+   +Constructor
+   |   +Nullifies all pointers
+   *
 
-	+Destructor
-	*
+   +Destructor
+   *
 
-	+Start <-------------------------------------\
-	| +Sets pointers to relevant data            |
-	| +Calls Run() --\                           |
-	*                |                           |
-	                 |                           |                                       
-	+Run <------------/                          |
-	|	+Sets running to true                    |
-	|	+time Tick()                             |
-	|	+Main Loop                               |
-	|	|	+Gets focus                          |
-	|	|	+time Tick()                         |
-	|	|	+Gets delta time                     |
-	|	|	+Main engine Tick() -----------------=--\
-	|	|	+Object manager Update() ------------=--=--\
-	|	|	+Object manager Draw() --------------=--=--=--\
-	|	|	+Display device Display()            |  |  |  |
-	|	*                                        |  |  |  |
-	*                                            |  |  |  |
-	                                             |  |  |  |
-	+Stop                                        |  |  |  |
-	|	+Sets running to false                   |  |  |  |
-	|	+Calls mainEngine Stop() -------\        |  |  |  |
-	|	+Calls Clean() -\               |        |  |  |  |
-	*                   |               |        |  |  |  |
-	                    |               |        |  |  |  |
-	+Clean <------------/               |        |  |  |  |
-	|	+Nullifies all pointers         |        |  |  |  |
-	*                                   |        |  |  |  |
-	                                    |        |  |  |  |
-MainConsoleEngine extends IMainEngine   |        |  |  |  |
-	+Constructor                        |        |  |  |  |
-	|	+Creates time object            |        |  |  |  |
-	|	+Creates console                |        |  |  |  |
-	|	+Creates display buffer         |        |  |  |  |
-	|	+Creates render context         |        |  |  |  |
-	|	+Creates object manager         |        |  |  |  |
-	*                                   |        |  |  |  |
-	                                    |        |  |  |  |
-	+Destructor                         |        |  |  |  |
-	|	+Destroys CoreEngine            |        |  |  |  |
-	|	+Destroys time object           |        |  |  |  |
-	|	+Destroys console               |        |  |  |  |
-	|	+Destroys render context        |        |  |  |  |
-	|	+Destroys object manager        |        |  |  |  |
-	|	+Destroys input                 |        |  |  |  |
-	*                                   |        |  |  |  |
-	                                    |        |  |  |  |
-	+Initialize   <---------------------=--------=--=--=--=------- MAIN
-	|	+Creates CoreEngine             |        |  |  |  |
-	|	+Creates display device         |        |  |  |  |
-	|	+Creates input                  |        |  |  |  |
-	|	+Initializes RenderContext -----=-----\  |  |  |  |
-	*                                   |     |  |  |  |  |
-	                                    |     |  |  |  |  |
-	+Start   <--------------------------=-----=--=--=--=--=------- MAIN
-	|	+Calls CoreEngine's Start() ----=-----=--/  |  |  |
-	*                                   |     |     |  |  |
-	                                    |     |     |  |  |
-	+Stop   <---------------------------/     |     |  |  |
-	|	+Calls Clean()---------------------\  |     |  |  |
-	*                                      |  |     |  |  |
-	                                       |  |     |  |  |
-	+Tick   <------------------------------=--=-----/  |  |
-	|	+Clears display buffer             |  |        |  |
-	|	+Ticks input                       |  |        |  |
-	|	+calls object manager's Input() ---=--=--------=--=--\
-	*                                      |  |        |  |  |
-	                                       |  |        |  |  |
-	+Clean   <-----------------------------/  |        |  |  |
-	*                                         |        |  |  |
-	                                          |        |  |  |
-ConsoleRenderContext extends IRenderContext   |        |  |  |
-	+Initialize() <---------------------------/        |  |  |
-	|	+Resets buffer pointer if buffer exists        |  |  |
-	|	+Gets shared pointer to display buffer         |  |  |
-	*                                                  |  |  |
-	                                                   |  |  |
-ConsoleObjectManager extends IObjectManager            |  |  |
-	+Constructor                                       |  |  |
-	*                                                  |  |  |
-	                                                   |  |  |
-	+Destructor                                        |  |  |
-	|	+ Deletes all objects in object vector         |  |  |
-	*                                                  |  |  |
-	                                                   |  |  |
-	+Update <------------------------------------------/  |  |
-	|	+ Calls all objects Update() ---------------------=--=--\
-	*                                                     |  |  |
-	                                                      |  |  |
-	+Draw <-----------------------------------------------/  |  |
-	|	+ Calls all objects Draw() --------------------------=--=--\
-	*                                                        |  |  |
-	                                                         |  |  |
-	+Input <-------------------------------------------------/  |  |
-	|	+ Calls all objects Input() ----------------------------=--=--\
-	*                                                           |  |  |
-	                                                            |  |  |
-	+AddObject                                                  |  |  |
-	|	+Adds object to vector                                  |  |  |
-	*                                                           |  |  |
-	                                                            |  |  |
-	+RemoveObject                                               |  |  |
-	|	+Removes object from vector, returns object             |  |  |
-	*                                                           |  |  |
-	                                                            |  |  |
-ConsoleObject extends IObject                                   |  |  |
-	+Constructor                                                |  |  |
-	*                                                           |  |  |
-	                                                            |  |  |
-	+Destructor                                                 |  |  |
-	*                                                           |  |  |
-	                                                            |  |  |
-	+Update <---------------------------------------------------/  |  |
-	|	+Whatever relevant update                                  |  |
-	*                                                              |  |
-	                                                               |  |
-	+Draw <--------------------------------------------------------/  |
-	|	+Whatever relevant draw                                       |
-	|	|	+Interacts with the render context                        |
-	|	*                                                             |
-	*                                                                 |
-	                                                                  |
-	+Input <----------------------------------------------------------/
-	|	+Whatever relevant input
-	*
+   +Start <-------------------------------------\
+   | +Sets pointers to relevant data            |
+   | +Calls Run() --\                           |
+   *                |                           |
+                    |                           |                                       
+   +Run <------------/                          |
+   |   +Sets running to true                    |
+   |   +time Tick()                             |
+   |   +Main Loop                               |
+   |   |   +Gets focus                          |
+   |   |   +time Tick()                         |
+   |   |   +Gets delta time                     |
+   |   |   +Main engine Tick() -----------------=--\
+   |   |   +Object manager Update() ------------=--=--\
+   |   |   +Object manager Draw() --------------=--=--=--\
+   |   |   +Display device Display()            |  |  |  |
+   |   *                                        |  |  |  |
+   *                                            |  |  |  |
+                                                |  |  |  |
+   +Stop                                        |  |  |  |
+   |   +Sets running to false                   |  |  |  |
+   |   +Calls mainEngine Stop() -------\        |  |  |  |
+   |   +Calls Clean() -\               |        |  |  |  |
+   *                   |               |        |  |  |  |
+                       |               |        |  |  |  |
+   +Clean <------------/               |        |  |  |  |
+   |   +Nullifies all pointers         |        |  |  |  |
+   *                                   |        |  |  |  |
+                                       |        |  |  |  |
+MainConsoleEngine extends IMainEngine  |        |  |  |  |
+   +Constructor                        |        |  |  |  |
+   |   +Creates time object            |        |  |  |  |
+   |   +Creates console                |        |  |  |  |
+   |   +Creates display buffer         |        |  |  |  |
+   |   +Creates render context         |        |  |  |  |
+   |   +Creates object manager         |        |  |  |  |
+   *                                   |        |  |  |  |
+                                       |        |  |  |  |
+   +Destructor                         |        |  |  |  |
+   |   +Destroys CoreEngine            |        |  |  |  |
+   |   +Destroys time object           |        |  |  |  |
+   |   +Destroys console               |        |  |  |  |
+   |   +Destroys render context        |        |  |  |  |
+   |   +Destroys object manager        |        |  |  |  |
+   |   +Destroys input                 |        |  |  |  |
+   *                                   |        |  |  |  |
+                                       |        |  |  |  |
+   +Initialize   <---------------------=--------=--=--=--=------- MAIN
+   |   +Creates CoreEngine             |        |  |  |  |
+   |   +Creates display device         |        |  |  |  |
+   |   +Creates input                  |        |  |  |  |
+   |   +Initializes RenderContext -----=-----\  |  |  |  |
+   *                                   |     |  |  |  |  |
+                                       |     |  |  |  |  |
+   +Start   <--------------------------=-----=--=--=--=--=------- MAIN
+   |   +Calls CoreEngine's Start() ----=-----=--/  |  |  |
+   *                                   |     |     |  |  |
+                                       |     |     |  |  |
+   +Stop   <---------------------------/     |     |  |  |
+   |   +Calls Clean()---------------------\  |     |  |  |
+   *                                      |  |     |  |  |
+                                          |  |     |  |  |
+   +Tick   <------------------------------=--=-----/  |  |
+   |   +Clears display buffer             |  |        |  |
+   |   +Ticks input                       |  |        |  |
+   |   +calls object manager's Input() ---=--=--------=--=--\
+   *                                      |  |        |  |  |
+                                          |  |        |  |  |
+   +Clean   <-----------------------------/  |        |  |  |
+   *                                         |        |  |  |
+                                             |        |  |  |
+ConsoleRenderContext extends IRenderContext  |        |  |  |
+   +Initialize() <---------------------------/        |  |  |
+   |   +Resets buffer pointer if buffer exists        |  |  |
+   |   +Gets shared pointer to display buffer         |  |  |
+   *                                                  |  |  |
+                                                      |  |  |
+ConsoleObjectManager extends IObjectManager           |  |  |
+   +Constructor                                       |  |  |
+   *                                                  |  |  |
+                                                      |  |  |
+   +Destructor                                        |  |  |
+   |   + Deletes all objects in object vector         |  |  |
+   *                                                  |  |  |
+                                                      |  |  |
+   +Update <------------------------------------------/  |  |
+   |   + Calls all objects Update() ---------------------=--=--\
+   *                                                     |  |  |
+                                                         |  |  |
+   +Draw <-----------------------------------------------/  |  |
+   |   + Calls all objects Draw() --------------------------=--=--\
+   *                                                        |  |  |
+                                                            |  |  |
+   +Input <-------------------------------------------------/  |  |
+   |   + Calls all objects Input() ----------------------------=--=--\
+   *                                                           |  |  |
+                                                               |  |  |
+   +AddObject                                                  |  |  |
+   |   +Adds object to vector                                  |  |  |
+   *                                                           |  |  |
+                                                               |  |  |
+   +RemoveObject                                               |  |  |
+   |   +Removes object from vector, returns object             |  |  |
+   *                                                           |  |  |
+                                                               |  |  |
+ConsoleObject extends IObject                                  |  |  |
+   +Constructor                                                |  |  |
+   *                                                           |  |  |
+                                                               |  |  |
+   +Destructor                                                 |  |  |
+   *                                                           |  |  |
+                                                               |  |  |
+   +Update <---------------------------------------------------/  |  |
+   |   +Whatever relevant update                                  |  |
+   *                                                              |  |
+                                                                  |  |
+   +Draw <--------------------------------------------------------/  |
+   |   +Whatever relevant draw                                       |
+   |   |   +Interacts with the render context                        |
+   |   *                                                             |
+   *                                                                 |
+                                                                     |
+   +Input <----------------------------------------------------------/
+   |   +Whatever relevant input
+   *
