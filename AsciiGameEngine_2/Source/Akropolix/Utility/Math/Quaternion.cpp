@@ -3,14 +3,14 @@
 * All rights reserved.
 */
 
-#include "Akropolix\Utility\Math\Vector3f.hpp"
-#include "Akropolix\Utility\Math\Vector4f.hpp"
-#include "Akropolix\Utility\Math\Matrix4f.hpp"
-#include "Akropolix\Utility\Math\Quaternion.hpp"
+#include "Akropolix\Utility\math\Vector3f.hpp"
+#include "Akropolix\Utility\math\Vector4f.hpp"
+#include "Akropolix\Utility\math\Matrix4f.hpp"
+#include "Akropolix\Utility\math\Quaternion.hpp"
 
-namespace Akropolix
+namespace aki
 {
-    namespace Math
+    namespace math
     {
         ///////////////////////////////
         // Constructors
@@ -141,5 +141,5 @@ namespace Akropolix
 
             return Quaternion(i, j, k, h);
         }
-    }; // Namespace Math
+    }; // Namespace math
 };

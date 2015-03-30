@@ -5,22 +5,22 @@
 
 #include "Akropolix\Engine\Interface\ICoreEngine.hpp"
 
-namespace Akropolix
+namespace aki
 {
-    namespace Engine
+    namespace engine
     {
-        class CoreEngine : public Interface::ICoreEngine
+        class CoreEngine : public I::ICoreEngine
         {
         public:
             CoreEngine();
             virtual ~CoreEngine();
 
             virtual void Start(
-                Time::Interface::ITime* time,
-                DisplayDevice::Interface::IDisplayDevice* displayDevice,
-                Render::Interface::IRenderContext* renderContext,
-                Object::Interface::IObjectManager* objectManager,
-                Interface::IMainEngine* mainEngine);
+                time::I::ITime* time,
+                display::I::IDisplayDevice* displayDevice,
+                render::I::IRenderContext* renderContext,
+                object::I::IObjectManager* objectManager,
+                I::IMainEngine* mainEngine);
             virtual void Run();
             virtual void Stop();
 

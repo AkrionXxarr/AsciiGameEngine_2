@@ -10,34 +10,34 @@
 
 #include "Akropolix\Render\Interface\IRenderContext.hpp"
 
-namespace Akropolix
+namespace aki
 {
-    namespace DisplayDevice
+    namespace display
     {
-        namespace WinConsole
+        namespace wincon
         {
             class ConsoleBuffer;
         };
     };
 
-    namespace Render
+    namespace render
     {
-        namespace WinConsole
+        namespace wincon
         {
-            class ConsoleRenderContext : public Render::Interface::IRenderContext
+            class ConsoleRenderContext : public render::I::IRenderContext
             {
             public:
                 ConsoleRenderContext();
                 ~ConsoleRenderContext();
 
-                void Initialize(std::shared_ptr<DisplayDevice::WinConsole::ConsoleBuffer> buffer);
+                void Initialize(std::shared_ptr<display::wincon::ConsoleBuffer> buffer);
 
                 void Clear();
 
                 void DrawPoint(POINT& pos, CHAR_INFO& ci);
 
             private:
-                std::shared_ptr<DisplayDevice::WinConsole::ConsoleBuffer> buffer;
+                std::shared_ptr<display::wincon::ConsoleBuffer> buffer;
             };
         };
     };

@@ -9,9 +9,9 @@
 #include <math.h>
 #include <vector>
 
-namespace Akropolix
+namespace aki
 {
-    namespace Math
+    namespace math
     {
         class Vector3f;
         class Vector4f;
@@ -59,5 +59,5 @@ namespace Akropolix
             const static Matrix4f identity;
             const static Matrix4f zero;
         };
-    }; // Namespace Math
-}; // Namespace Akropolix
+    }; // Namespace math
+}; // Namespace aki

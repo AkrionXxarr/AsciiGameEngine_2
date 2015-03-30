@@ -8,11 +8,11 @@
 #define WIDTH 80
 #define HEIGHT 80
 
-using namespace Akropolix;
+using namespace aki;
 
 int main()
 {
-    Engine::WinConsole::MainConsoleEngine mainEngine(WIDTH, HEIGHT);
+    engine::wincon::MainConsoleEngine mainEngine(WIDTH, HEIGHT);
 
     if (!mainEngine.Initialize())
         return 0;
@@ -41,8 +41,8 @@ int main()
     CHAR_INFO lineChar;
 
     POINT p = { 0, 0 };
-    Math::Vector2f a;
-    Math::Vector2f b;
+    math::Vector2f a;
+    math::Vector2f b;
 
     ci.Attributes = f_fullGreen;
     ci.Char.UnicodeChar = '.';
@@ -53,8 +53,8 @@ int main()
     lineChar.Attributes = f_white;
     lineChar.Char.UnicodeChar = '@';
 
-    Math::Vector2f charPos = Math::Vector2f(20, 20);
-    Math::Vector2f charPos2;
+    math::Vector2f charPos = math::Vector2f(20, 20);
+    math::Vector2f charPos2;
 
     bool lockCursor = false;
 
@@ -124,15 +124,15 @@ int main()
         }
 
         //if (input.GetMouseAction(MOUSE_ACTION::MOVED))
-        //charPos = Math::Vector2f(input.GetMousePosition().X, input.GetMousePosition().Y);
+        //charPos = math::Vector2f(input.GetMousePosition().X, input.GetMousePosition().Y);
 
         if (lockCursor)
         {
             if (input.GetMouseAction(MOUSE_ACTION::MOVED))
             {
                 p = input.GetDelta();
-                a = Math::Vector2f(buffer->GetSizeAsCoord().X / 2.0f, buffer->GetSizeAsCoord().Y / 2.0f);
-                b = Math::Vector2f(a.x + p.x, a.y + p.y);
+                a = math::Vector2f(buffer->GetSizeAsCoord().X / 2.0f, buffer->GetSizeAsCoord().Y / 2.0f);
+                b = math::Vector2f(a.x + p.x, a.y + p.y);
 
                 charPos.x += p.x / 10.0f;
                 charPos.y += p.y / 10.0f;
@@ -146,7 +146,7 @@ int main()
 
                 for (int i = 0; i <= length; i++)
                 {
-                    Math::Vector2f t = a.Lerp(b, float(i) / float(length));
+                    math::Vector2f t = a.Lerp(b, float(i) / float(length));
                     int x = int(t.x);
                     int y = int(t.y);
 

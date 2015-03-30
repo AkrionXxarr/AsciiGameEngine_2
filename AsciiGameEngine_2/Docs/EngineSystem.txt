@@ -5,13 +5,13 @@ IMainEngine
    User defined operations
 
 IRenderContext
-   Render/Draw operations
+   render/Draw operations
 
 IObjectManager
-   Object management
+   object management
 
 IObject
-   Object
+   object
 
 
 CoreEngine extends ICoreEngine
@@ -27,16 +27,16 @@ CoreEngine extends ICoreEngine
    | +Calls Run() --\                           |
    *                |                           |
                     |                           |                                       
-   +Run <------------/                          |
+   +Run <-----------/                           |
    |   +Sets running to true                    |
-   |   +time Tick()                             |
+   |   +Time Tick()                             |
    |   +Main Loop                               |
    |   |   +Gets focus                          |
-   |   |   +time Tick()                         |
+   |   |   +Time Tick()                         |
    |   |   +Gets delta time                     |
    |   |   +Main engine Tick() -----------------=--\
-   |   |   +Object manager Update() ------------=--=--\
-   |   |   +Object manager Draw() --------------=--=--=--\
+   |   |   +object manager Update() ------------=--=--\
+   |   |   +object manager Draw() --------------=--=--=--\
    |   |   +Display device Display()            |  |  |  |
    |   *                                        |  |  |  |
    *                                            |  |  |  |
@@ -87,7 +87,7 @@ MainConsoleEngine extends IMainEngine  |        |  |  |  |
    +Tick   <------------------------------=--=-----/  |  |
    |   +Clears display buffer             |  |        |  |
    |   +Ticks input                       |  |        |  |
-   |   +calls object manager's Input() ---=--=--------=--=--\
+   |   +calls object manager's input() ---=--=--------=--=--\
    *                                      |  |        |  |  |
                                           |  |        |  |  |
    +Clean   <-----------------------------/  |        |  |  |
@@ -115,8 +115,8 @@ ConsoleObjectManager extends IObjectManager           |  |  |
    |   + Calls all objects Draw() --------------------------=--=--\
    *                                                        |  |  |
                                                             |  |  |
-   +Input <-------------------------------------------------/  |  |
-   |   + Calls all objects Input() ----------------------------=--=--\
+   +input <-------------------------------------------------/  |  |
+   |   + Calls all objects input() ----------------------------=--=--\
    *                                                           |  |  |
                                                                |  |  |
    +AddObject                                                  |  |  |
@@ -144,6 +144,6 @@ ConsoleObject extends IObject                                  |  |  |
    |   *                                                             |
    *                                                                 |
                                                                      |
-   +Input <----------------------------------------------------------/
+   +input <----------------------------------------------------------/
    |   +Whatever relevant input
    *

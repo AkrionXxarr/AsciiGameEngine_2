@@ -3,14 +3,14 @@
 * All rights reserved.
 */
 
-#include "Akropolix\Render\Windows Console\ConsoleRenderContext.hpp"
+#include "Akropolix\render\Windows Console\ConsoleRenderContext.hpp"
 #include "Akropolix\Display Device\Windows Console\Console.hpp"
 
-namespace Akropolix
+namespace aki
 {
-    namespace Render
+    namespace render
     {
-        namespace WinConsole
+        namespace wincon
         {
             ConsoleRenderContext::ConsoleRenderContext()
             {
@@ -22,7 +22,7 @@ namespace Akropolix
 
             }
 
-            void ConsoleRenderContext::Initialize(std::shared_ptr<DisplayDevice::WinConsole::ConsoleBuffer> buffer)
+            void ConsoleRenderContext::Initialize(std::shared_ptr<display::wincon::ConsoleBuffer> buffer)
             {
                 if (this->buffer)
                     this->buffer.reset();

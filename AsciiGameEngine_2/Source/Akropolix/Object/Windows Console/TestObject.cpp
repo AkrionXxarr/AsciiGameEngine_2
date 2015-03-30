@@ -1,12 +1,12 @@
 #include "Akropolix\Object\Windows Console\TestObject.hpp"
-#include "Akropolix\Render\Windows Console\ConsoleRenderContext.hpp"
-#include "Akropolix\Input\Windows Console\ConsoleInputExt.hpp"
+#include "Akropolix\render\Windows Console\ConsoleRenderContext.hpp"
+#include "Akropolix\input\Windows Console\ConsoleInputExt.hpp"
 
-using namespace Akropolix::Render::WinConsole;
-using namespace Akropolix::Render::Interface;
-using namespace Akropolix::Input::WinConsole;
+using namespace aki::render::wincon;
+using namespace aki::render::I;
+using namespace aki::input::wincon;
 
-namespace Akropolix
+namespace aki
 {
     void TestObject::Update(float deltaTime)
     {
@@ -43,7 +43,7 @@ namespace Akropolix
         }
     }
 
-    void TestObject::Input(ConsoleInputExt& input)
+    void TestObject::input(ConsoleInputExt& input)
     {
         right = input.GetKeyDown(KEYBOARD::ARROW_RIGHT);
         left = input.GetKeyDown(KEYBOARD::ARROW_LEFT);

@@ -5,19 +5,19 @@
 
 #pragma once
 
-namespace Akropolix
+namespace aki
 {
-    namespace Render
+    namespace render
     {
-        namespace Interface
+        namespace I
         {
             class IRenderContext;
         }
     }
 
-    namespace Object
+    namespace object
     {
-        namespace Interface
+        namespace I
         {
             class IObject
             {
@@ -26,7 +26,7 @@ namespace Akropolix
                 virtual ~IObject() { }
 
                 virtual void Update(float deltaTime) = 0;
-                virtual void Draw(Render::Interface::IRenderContext& renderContext) = 0;
+                virtual void Draw(render::I::IRenderContext& renderContext) = 0;
 
             public:
                 unsigned int ID;

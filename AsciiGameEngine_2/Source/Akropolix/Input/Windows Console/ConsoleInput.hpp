@@ -8,16 +8,16 @@
 #include <Windows.h>
 #include <deque>
 
-#include "Akropolix\Input\Windows Console\ConsoleInputDefines.hpp"
-#include "Akropolix\Utility\Logging\Log.hpp"
+#include "Akropolix\input\Windows Console\ConsoleInputDefines.hpp"
+#include "Akropolix\Utility\Logging\log.hpp"
 
 #define INPUT_LOG "InputLog.txt"
 
-namespace Akropolix
+namespace aki
 {
-    namespace Input
+    namespace input
     {
-        namespace WinConsole
+        namespace wincon
         {
             //////////////////////////////////////////////////////////////////////////////
             // This class is intended to allow for mouse and keyboard input that
@@ -78,7 +78,7 @@ namespace Akropolix
 
             private:
                 /* Variables */
-                DWORD oldMode; // Input settings before being changed
+                DWORD oldMode; // input settings before being changed
 
                 unsigned int inputBufferSize; // Maximum records to process
                 INPUT_RECORD* inputRecords;

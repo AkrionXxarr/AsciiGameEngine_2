@@ -3,11 +3,11 @@
 * All rights reserved.
 */
 
-namespace Akropolix
+namespace aki
 {
-    namespace Time
+    namespace time
     {
-        namespace Interface
+        namespace I
         {
             class ITime
             {

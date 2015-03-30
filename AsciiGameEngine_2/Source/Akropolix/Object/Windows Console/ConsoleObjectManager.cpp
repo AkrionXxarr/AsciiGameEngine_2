@@ -6,15 +6,15 @@
 #include "Akropolix\Object\Windows Console\ConsoleObjectManager.hpp"
 #include "Akropolix\Object\Windows Console\ConsoleObject.hpp"
 
-using namespace Akropolix::Render::Interface;
-using namespace Akropolix::Input::WinConsole;
-using namespace Akropolix::Object::Interface;
+using namespace aki::render::I;
+using namespace aki::input::wincon;
+using namespace aki::object::I;
 
-namespace Akropolix
+namespace aki
 {
-    namespace Object
+    namespace object
     {
-        namespace WinConsole
+        namespace wincon
         {
             unsigned int BASIC_ID = 0;
 
@@ -50,11 +50,11 @@ namespace Akropolix
                 }
             }
 
-            void ConsoleObjectManager::Input(ConsoleInputExt& input)
+            void ConsoleObjectManager::input(ConsoleInputExt& input)
             {
                 for (unsigned int i = 0; i < objects.size(); i++)
                 {
-                    objects[i]->Input(input);
+                    objects[i]->input(input);
                 }
             }
 

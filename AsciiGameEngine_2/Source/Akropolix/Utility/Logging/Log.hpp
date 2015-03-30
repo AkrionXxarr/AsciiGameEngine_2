@@ -7,9 +7,9 @@
 
 #include <string>
 
-namespace Akropolix
+namespace aki
 {
-    namespace Log
+    namespace log
     {
         void ClearLogFile(std::string fileName);
 

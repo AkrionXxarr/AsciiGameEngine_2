@@ -11,15 +11,15 @@
 #include <memory>
 
 #include "Akropolix\Display Device\Interface\IDisplayDevice.hpp"
-#include "Akropolix\Utility\Logging\Log.hpp"
+#include "Akropolix\Utility\Logging\log.hpp"
 
 #define DISPLAY_DEVICE_LOG "DisplayDeviceLog.txt"
 
-namespace Akropolix
+namespace aki
 {
-    namespace DisplayDevice
+    namespace display
     {
-        namespace WinConsole
+        namespace wincon
         {
             // Raster fonts only
             enum CONSOLE_FONT_TYPE
@@ -99,7 +99,7 @@ namespace Akropolix
             // Expected usage will have the render context share a pointer with the console buffer
             // and for Display() to be called to push the buffer to the console window.
             //
-            class Console : public DisplayDevice::Interface::IDisplayDevice
+            class Console : public display::I::IDisplayDevice
             {
             public:
                 /* Construct & Destruct */

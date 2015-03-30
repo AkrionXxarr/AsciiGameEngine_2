@@ -3,11 +3,11 @@
 * All rights reserved.
 */
 
-namespace Akropolix
+namespace aki
 {
-    namespace DisplayDevice
+    namespace display
     {
-        namespace Interface
+        namespace I
         {
             class IDisplayDevice
             {

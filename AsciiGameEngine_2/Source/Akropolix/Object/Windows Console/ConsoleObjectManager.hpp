@@ -7,35 +7,35 @@
 
 #include "Akropolix\Object\Interface\IObjectManager.hpp"
 
-namespace Akropolix
+namespace aki
 {
-    namespace Input
+    namespace input
     {
-        namespace WinConsole
+        namespace wincon
         {
             class ConsoleInputExt;
         }
     }
 
-    namespace Object
+    namespace object
     {
-        namespace WinConsole
+        namespace wincon
         {
             class ConsoleObject;
 
-            class ConsoleObjectManager : public Object::Interface::IObjectManager
+            class ConsoleObjectManager : public object::I::IObjectManager
             {
             public:
                 ConsoleObjectManager();
                 ~ConsoleObjectManager();
 
                 virtual void Update(float deltaTime);
-                virtual void Draw(Render::Interface::IRenderContext& renderContext);
+                virtual void Draw(render::I::IRenderContext& renderContext);
 
-                void Input(Input::WinConsole::ConsoleInputExt& input);
+                void input(input::wincon::ConsoleInputExt& input);
 
-                virtual void AddObject(Object::Interface::IObject* object);
-                virtual Object::Interface::IObject* RemoveObject(unsigned int ID);
+                virtual void AddObject(object::I::IObject* object);
+                virtual object::I::IObject* RemoveObject(unsigned int ID);
 
             private:
                 // Very basic object structure

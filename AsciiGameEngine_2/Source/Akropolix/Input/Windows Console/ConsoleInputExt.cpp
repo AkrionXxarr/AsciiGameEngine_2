@@ -3,15 +3,15 @@
 * All rights reserved.
 */
 
-#include "Akropolix\Input\Windows Console\ConsoleInputExt.hpp"
+#include "Akropolix\input\Windows Console\ConsoleInputExt.hpp"
 
-using namespace Akropolix::Log;
+using namespace aki::log;
 
-namespace Akropolix
+namespace aki
 {
-    namespace Input
+    namespace input
     {
-        namespace WinConsole
+        namespace wincon
         {
 
             ///////////////////////////////

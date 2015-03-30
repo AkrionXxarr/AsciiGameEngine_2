@@ -5,11 +5,11 @@
 
 #pragma once
 
-namespace Akropolix
+namespace aki
 {
-    namespace Render
+    namespace render
     {
-        namespace Interface
+        namespace I
         {
             class IRenderContext
             {
@@ -18,7 +18,7 @@ namespace Akropolix
                 virtual ~IRenderContext() { }
 
             private:
-                // Render context has no reason to be copied
+                // render context has no reason to be copied
                 IRenderContext(const IRenderContext& other);
                 void operator= (const IRenderContext& other);
             };

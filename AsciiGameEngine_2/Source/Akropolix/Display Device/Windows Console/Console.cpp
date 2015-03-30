@@ -7,13 +7,13 @@
 
 #include "Console.hpp"
 
-using namespace Akropolix::Log;
+using namespace aki::log;
 
-namespace Akropolix
+namespace aki
 {
-    namespace DisplayDevice
+    namespace display
     {
-        namespace WinConsole
+        namespace wincon
         {
 
             ////////////////////////////////

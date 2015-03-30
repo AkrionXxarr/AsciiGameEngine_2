@@ -9,13 +9,13 @@
 #include <sstream>
 #include <iomanip>
 
-#include "Akropolix\Utility\Logging\Log.hpp"
+#include "Akropolix\Utility\Logging\log.hpp"
 
 using namespace std;
 
-namespace Akropolix
+namespace aki
 {
-    namespace Log
+    namespace log
     {
         void AddToLog(string msg, string fileName)
         {

@@ -5,11 +5,11 @@
 
 #pragma once
 
-namespace Akropolix
+namespace aki
 {
-    namespace Input
+    namespace input
     {
-        namespace WinConsole
+        namespace wincon
         {
             enum MOUSE_ACTION
             {

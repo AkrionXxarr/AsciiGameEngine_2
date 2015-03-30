@@ -1,31 +1,31 @@
 #pragma once
 
 #include "Akropolix\Object\Windows Console\ConsoleObject.hpp"
-#include "Akropolix\Utility\Math\Vector2f.hpp"
+#include "Akropolix\Utility\math\Vector2f.hpp"
 
-namespace Akropolix
+namespace aki
 {
-    namespace Input
+    namespace input
     {
-        namespace WinConsole
+        namespace wincon
         {
             class ConsoleInputExt;
         };
     };
 
-    class TestObject : public Object::WinConsole::ConsoleObject
+    class TestObject : public object::wincon::ConsoleObject
     {
     public:
-        TestObject(float x, float y) { pos = Math::Vector2f(x, y); }
+        TestObject(float x, float y) { pos = math::Vector2f(x, y); }
         ~TestObject() { }
 
         virtual void Update(float deltaTime);
-        virtual void Draw(Render::Interface::IRenderContext& renderContext);
+        virtual void Draw(render::I::IRenderContext& renderContext);
 
-        virtual void Input(Input::WinConsole::ConsoleInputExt& input);
+        virtual void input(input::wincon::ConsoleInputExt& input);
 
     private:
-        Math::Vector2f pos;
+        math::Vector2f pos;
 
         bool up, left, right, down;
 

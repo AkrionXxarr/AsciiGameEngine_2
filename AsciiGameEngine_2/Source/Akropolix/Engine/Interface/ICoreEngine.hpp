@@ -5,49 +5,49 @@
 
 #pragma once
 
-namespace Akropolix
+namespace aki
 {
-    namespace DisplayDevice
+    namespace display
     {
-        namespace Interface
+        namespace I
         {
             class IDisplayDevice;
         }
     }
 
-    namespace Object
+    namespace object
     {
-        namespace Interface
+        namespace I
         {
             class IObjectManager;
         }
     }
 
-    namespace Render
+    namespace render
     {
-        namespace Interface
+        namespace I
         {
             class IRenderContext;
         }
     }
 
-    namespace Time
+    namespace time
     {
-        namespace Interface
+        namespace I
         {
             class ITime;
         }
     }
 
-    namespace Engine
+    namespace engine
     {
-        namespace Interface
+        namespace I
         {
             class IMainEngine;
 
             ///////////////////////////////////////////////////////////
             // Handles the very basic fundamentals, such as managing the time
-            // and ordering of critical tasks. (e.g. Update should always preceed Draw/Render)
+            // and ordering of critical tasks. (e.g. Update should always preceed Draw/render)
             //
 
             class ICoreEngine
@@ -57,10 +57,10 @@ namespace Akropolix
                 virtual ~ICoreEngine() { }
 
                 virtual void Start(
-                    Time::Interface::ITime* time,
-                    DisplayDevice::Interface::IDisplayDevice* displayDevice,
-                    Render::Interface::IRenderContext* renderContext,
-                    Object::Interface::IObjectManager* objectManager,
+                    time::I::ITime* time,
+                    display::I::IDisplayDevice* displayDevice,
+                    render::I::IRenderContext* renderContext,
+                    object::I::IObjectManager* objectManager,
                     IMainEngine* mainEngine) = 0;
                 virtual void Run() = 0;
                 virtual void Stop() = 0;
@@ -72,7 +72,7 @@ namespace Akropolix
                 virtual void Clean() = 0;
 
             private:
-                // Engine has no reason to be copied
+                // engine has no reason to be copied
                 ICoreEngine(const ICoreEngine& other);
                 void operator= (const ICoreEngine& other);
 
@@ -81,10 +81,10 @@ namespace Akropolix
                 bool hasFocus;
 
                 IMainEngine* mainEngine;
-                DisplayDevice::Interface::IDisplayDevice* displayDevice;
-                Object::Interface::IObjectManager* objectManager;
-                Render::Interface::IRenderContext* renderContext;
-                Time::Interface::ITime* time;
+                display::I::IDisplayDevice* displayDevice;
+                object::I::IObjectManager* objectManager;
+                render::I::IRenderContext* renderContext;
+                time::I::ITime* time;
             };
         };
     };

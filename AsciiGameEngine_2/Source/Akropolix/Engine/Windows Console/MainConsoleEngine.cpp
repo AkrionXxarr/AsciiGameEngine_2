@@ -8,17 +8,17 @@
 
 #include "Akropolix\Object\Windows Console\TestObject.hpp"
 
-using namespace Akropolix::Time;
-using namespace Akropolix::DisplayDevice::WinConsole;
-using namespace Akropolix::Render::WinConsole;
-using namespace Akropolix::Object::WinConsole;
-using namespace Akropolix::Input::WinConsole;
+using namespace aki::time;
+using namespace aki::display::wincon;
+using namespace aki::render::wincon;
+using namespace aki::object::wincon;
+using namespace aki::input::wincon;
 
-namespace Akropolix
+namespace aki
 {
-    namespace Engine
+    namespace engine
     {
-        namespace WinConsole
+        namespace wincon
         {
             MainConsoleEngine::MainConsoleEngine(unsigned int width, unsigned int height)
             {
@@ -77,7 +77,7 @@ namespace Akropolix
             {
                 console->ClearBuffer();
                 input->Tick();
-                objectManager->Input(*input);
+                objectManager->input(*input);
 
                 if (input->GetKeyUp(KEYBOARD::SPACE))
                 {

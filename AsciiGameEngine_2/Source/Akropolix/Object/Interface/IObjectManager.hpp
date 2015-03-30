@@ -9,19 +9,19 @@
 
 #include "Akropolix\Object\Interface\IObject.hpp"
 
-namespace Akropolix
+namespace aki
 {
-    namespace Render
+    namespace render
     {
-        namespace Interface
+        namespace I
         {
             class IRenderContext;
         }
     }
 
-    namespace Object
+    namespace object
     {
-        namespace Interface
+        namespace I
         {
             class IObjectManager
             {
@@ -30,7 +30,7 @@ namespace Akropolix
                 virtual ~IObjectManager() { }
 
                 virtual void Update(float deltaTime) = 0;
-                virtual void Draw(Render::Interface::IRenderContext& renderContext) = 0;
+                virtual void Draw(render::I::IRenderContext& renderContext) = 0;
 
                 virtual void AddObject(IObject* object) = 0;
                 virtual IObject* RemoveObject(unsigned int ID) = 0;

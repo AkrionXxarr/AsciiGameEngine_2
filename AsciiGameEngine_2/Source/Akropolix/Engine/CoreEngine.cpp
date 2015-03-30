@@ -9,15 +9,15 @@
 #include "Akropolix\Utility\Time\ITime.hpp"
 #include "Akropolix\Object\Interface\IObjectManager.hpp"
 
-using namespace Akropolix::Time::Interface;
-using namespace Akropolix::DisplayDevice::Interface;
-using namespace Akropolix::Engine::Interface;
-using namespace Akropolix::Render::Interface;
-using namespace Akropolix::Object::Interface;
+using namespace aki::time::I;
+using namespace aki::display::I;
+using namespace aki::engine::I;
+using namespace aki::render::I;
+using namespace aki::object::I;
 
-namespace Akropolix
+namespace aki
 {
-    namespace Engine
+    namespace engine
     {
         CoreEngine::CoreEngine()
         {

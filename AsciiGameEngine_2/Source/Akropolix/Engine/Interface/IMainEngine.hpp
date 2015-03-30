@@ -5,16 +5,16 @@
 
 #pragma once
 
-namespace Akropolix
+namespace aki
 {
-    namespace Engine
+    namespace engine
     {
-        namespace Interface
+        namespace I
         {
             class ICoreEngine;
 
             ///////////////////////////////////////////////////////////
-            // Engine the user inherits from to define more specific behavior
+            // engine the user inherits from to define more specific behavior
             //
 
             class IMainEngine
@@ -33,7 +33,7 @@ namespace Akropolix
                 virtual void Clean() = 0;
 
             private:
-                // Engine has no reason to be copied
+                // engine has no reason to be copied
                 IMainEngine(const IMainEngine& other);
                 void operator= (const IMainEngine& other);
 

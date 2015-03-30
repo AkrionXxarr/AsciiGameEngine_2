@@ -7,13 +7,13 @@
 
 #include <process.h>
 
-#include "Akropolix\Input\Windows Console\ConsoleInput.hpp"
+#include "Akropolix\input\Windows Console\ConsoleInput.hpp"
 
-namespace Akropolix
+namespace aki
 {
-    namespace Input
+    namespace input
     {
-        namespace WinConsole
+        namespace wincon
         {
             class CursorLock
             {

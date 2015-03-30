@@ -8,9 +8,9 @@
 #define _USE_MATH_DEFINES
 #include <math.h>
 
-namespace Akropolix
+namespace aki
 {
-    namespace Math
+    namespace math
     {
         class Vector2f;
         class Vector3f;

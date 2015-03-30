@@ -9,11 +9,11 @@
 
 #include "Akropolix\Utility\Time\ITime.hpp"
 
-namespace Akropolix
+namespace aki
 {
-    namespace Time
+    namespace time
     {
-        class WindowsTime : public Interface::ITime
+        class WindowsTime : public I::ITime
         {
         public:
             WindowsTime()

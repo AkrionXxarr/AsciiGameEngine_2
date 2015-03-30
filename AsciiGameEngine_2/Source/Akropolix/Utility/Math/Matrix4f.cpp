@@ -3,13 +3,13 @@
 * All rights reserved.
 */
 
-#include "Akropolix\Utility\Math\Vector3f.hpp"
-#include "Akropolix\Utility\Math\Vector4f.hpp"
-#include "Akropolix\Utility\Math\Matrix4f.hpp"
+#include "Akropolix\Utility\math\Vector3f.hpp"
+#include "Akropolix\Utility\math\Vector4f.hpp"
+#include "Akropolix\Utility\math\Matrix4f.hpp"
 
-namespace Akropolix
+namespace aki
 {
-    namespace Math
+    namespace math
     {
         ////////////////////////////////
         // Constructors
@@ -138,5 +138,5 @@ namespace Akropolix
             0, 0, 0, 0,
             0, 0, 0, 0
             );
-    }; // Namespace Math
+    }; // Namespace math
 };

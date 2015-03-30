@@ -16,13 +16,13 @@
 #include "Akropolix\Input\Windows Console\ConsoleInputExt.hpp"
 
 
-namespace Akropolix
+namespace aki
 {
-    namespace Engine
+    namespace engine
     {
-        namespace WinConsole
+        namespace wincon
         {
-            class MainConsoleEngine : public Engine::Interface::IMainEngine
+            class MainConsoleEngine : public engine::I::IMainEngine
             {
             public:
                 MainConsoleEngine(unsigned int width, unsigned int height);
@@ -38,12 +38,12 @@ namespace Akropolix
                 virtual void Clean();
 
             private:
-                Akropolix::Time::WindowsTime* time;
-                DisplayDevice::WinConsole::Console* console;
-                std::shared_ptr<DisplayDevice::WinConsole::ConsoleBuffer> consoleBuffer;
-                Akropolix::Render::WinConsole::ConsoleRenderContext* renderContext;
-                Akropolix::Object::WinConsole::ConsoleObjectManager* objectManager;
-                Akropolix::Input::WinConsole::ConsoleInputExt* input;
+                aki::time::WindowsTime* time;
+                display::wincon::Console* console;
+                std::shared_ptr<display::wincon::ConsoleBuffer> consoleBuffer;
+                aki::render::wincon::ConsoleRenderContext* renderContext;
+                aki::object::wincon::ConsoleObjectManager* objectManager;
+                aki::input::wincon::ConsoleInputExt* input;
             };
         }
     };

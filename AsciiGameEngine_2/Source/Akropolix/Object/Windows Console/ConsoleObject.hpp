@@ -7,30 +7,30 @@
 
 #include "Akropolix\Object\Interface\IObject.hpp"
 
-namespace Akropolix
+namespace aki
 {
-    namespace Input
+    namespace input
     {
-        namespace WinConsole
+        namespace wincon
         {
             class ConsoleInputExt;
         }
     }
 
-    namespace Object
+    namespace object
     {
-        namespace WinConsole
+        namespace wincon
         {
-            class ConsoleObject : public Akropolix::Object::Interface::IObject
+            class ConsoleObject : public aki::object::I::IObject
             {
             public:
                 ConsoleObject() { }
                 ~ConsoleObject() { }
 
                 virtual void Update(float deltaTime) = 0;
-                virtual void Draw(Render::Interface::IRenderContext& renderContext) = 0;
+                virtual void Draw(render::I::IRenderContext& renderContext) = 0;
 
-                virtual void Input(Input::WinConsole::ConsoleInputExt& input) = 0;
+                virtual void input(input::wincon::ConsoleInputExt& input) = 0;
             };
         }
     }

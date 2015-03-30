@@ -5,17 +5,17 @@
 
 #include <assert.h>
 
-#include "Akropolix\Input\Windows Console\ConsoleInput.hpp"
-#include "Akropolix\Utility\Math\Vector2f.hpp"
+#include "Akropolix\input\Windows Console\ConsoleInput.hpp"
+#include "Akropolix\Utility\math\Vector2f.hpp"
 
-using namespace Akropolix::Math;
-using namespace Akropolix::Log;
+using namespace aki::math;
+using namespace aki::log;
 
-namespace Akropolix
+namespace aki
 {
-    namespace Input
+    namespace input
     {
-        namespace WinConsole
+        namespace wincon
         {
 
             /////////////////////////////
