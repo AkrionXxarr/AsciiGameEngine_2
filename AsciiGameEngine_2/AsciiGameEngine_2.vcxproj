@@ -73,55 +73,55 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Source\Display Device\Windows Console\Console.cpp" />
-    <ClCompile Include="Source\Engine\CoreEngine.cpp" />
-    <ClCompile Include="Source\Engine\Windows Console\MainConsoleEngine.cpp" />
-    <ClCompile Include="Source\Input\Windows Input\ConsoleInput.cpp" />
-    <ClCompile Include="Source\Input\Windows Input\ConsoleInputExt.cpp" />
-    <ClCompile Include="Source\Input\Windows Input\CursorLock.cpp" />
+    <ClCompile Include="Source\Akropolix\Display Device\Windows Console\Console.cpp" />
+    <ClCompile Include="Source\Akropolix\Engine\CoreEngine.cpp" />
+    <ClCompile Include="Source\Akropolix\Engine\Windows Console\MainConsoleEngine.cpp" />
+    <ClCompile Include="Source\Akropolix\Input\Windows Input\ConsoleInput.cpp" />
+    <ClCompile Include="Source\Akropolix\Input\Windows Input\ConsoleInputExt.cpp" />
+    <ClCompile Include="Source\Akropolix\Input\Windows Input\CursorLock.cpp" />
+    <ClCompile Include="Source\Akropolix\Object\Windows Console\ConsoleObjectManager.cpp" />
+    <ClCompile Include="Source\Akropolix\Object\Windows Console\TestObject.cpp" />
+    <ClCompile Include="Source\Akropolix\Render\Windows Console\ConsoleRenderContext.cpp" />
+    <ClCompile Include="Source\Akropolix\Utility\Logging\Log.cpp" />
+    <ClCompile Include="Source\Akropolix\Utility\Math\Matrix4f.cpp" />
+    <ClCompile Include="Source\Akropolix\Utility\Math\Quaternion.cpp" />
+    <ClCompile Include="Source\Akropolix\Utility\Math\Vector2f.cpp" />
+    <ClCompile Include="Source\Akropolix\Utility\Math\Vector3f.cpp" />
+    <ClCompile Include="Source\Akropolix\Utility\Math\Vector4f.cpp" />
     <ClCompile Include="Source\Main.cpp" />
-    <ClCompile Include="Source\Object\Windows Console\ConsoleObjectManager.cpp" />
-    <ClCompile Include="Source\Object\Windows Console\TestObject.cpp" />
-    <ClCompile Include="Source\Render\Windows Console\ConsoleRenderContext.cpp" />
-    <ClCompile Include="Source\Utility\Logging\Log.cpp" />
-    <ClCompile Include="Source\Utility\Math\Matrix4f.cpp" />
-    <ClCompile Include="Source\Utility\Math\Quaternion.cpp" />
-    <ClCompile Include="Source\Utility\Math\Vector2f.cpp" />
-    <ClCompile Include="Source\Utility\Math\Vector3f.cpp" />
-    <ClCompile Include="Source\Utility\Math\Vector4f.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Source\Display Device\Interface\IDisplayDevice.hpp" />
-    <ClInclude Include="Source\Display Device\Windows Console\Console.hpp" />
-    <ClInclude Include="Source\Display Device\Windows Console\ConsoleDefines.hpp" />
-    <ClInclude Include="Source\Engine\CoreEngine.hpp" />
-    <ClInclude Include="Source\Engine\Interface\ICoreEngine.hpp" />
-    <ClInclude Include="Source\Engine\Interface\IMainEngine.hpp" />
-    <ClInclude Include="Source\Engine\Windows Console\MainConsoleEngine.hpp" />
-    <ClInclude Include="Source\Input\Windows Input\ConsoleInput.hpp" />
-    <ClInclude Include="Source\Input\Windows Input\ConsoleInputDefines.hpp" />
-    <ClInclude Include="Source\Input\Windows Input\ConsoleInputExt.hpp" />
-    <ClInclude Include="Source\Object\Interface\IObject.hpp" />
-    <ClInclude Include="Source\Object\Interface\IObjectManager.hpp" />
-    <ClInclude Include="Source\Object\Windows Console\ConsoleObject.hpp" />
-    <ClInclude Include="Source\Object\Windows Console\ConsoleObjectManager.hpp" />
-    <ClInclude Include="Source\Object\Windows Console\TestObject.hpp" />
-    <ClInclude Include="Source\Render\Interface\IRenderContext.hpp" />
-    <ClInclude Include="Source\Render\Windows Console\ConsoleRenderContext.hpp" />
-    <ClInclude Include="Source\Scene Graph\Interface\ISceneGraph.hpp" />
-    <ClInclude Include="Source\System\Win32\Window.hpp" />
-    <ClInclude Include="Source\Utility\Logging\Log.hpp" />
-    <ClInclude Include="Source\Utility\Math\Matrix4f.hpp" />
-    <ClInclude Include="Source\Utility\Math\Quaternion.hpp" />
-    <ClInclude Include="Source\Utility\Math\Vector2f.hpp" />
-    <ClInclude Include="Source\Utility\Math\Vector3f.hpp" />
-    <ClInclude Include="Source\Utility\Math\Vector4f.hpp" />
-    <ClInclude Include="Source\Utility\Time\ITime.hpp" />
-    <ClInclude Include="Source\Utility\Time\WindowsTime.hpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Docs\EngineSystem.txt" />
     <Text Include="Docs\TODO.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\Akropolix\Display Device\Interface\IDisplayDevice.hpp" />
+    <ClInclude Include="Source\Akropolix\Display Device\Windows Console\Console.hpp" />
+    <ClInclude Include="Source\Akropolix\Display Device\Windows Console\ConsoleDefines.hpp" />
+    <ClInclude Include="Source\Akropolix\Engine\CoreEngine.hpp" />
+    <ClInclude Include="Source\Akropolix\Engine\Interface\ICoreEngine.hpp" />
+    <ClInclude Include="Source\Akropolix\Engine\Interface\IMainEngine.hpp" />
+    <ClInclude Include="Source\Akropolix\Engine\Windows Console\MainConsoleEngine.hpp" />
+    <ClInclude Include="Source\Akropolix\Input\Windows Input\ConsoleInput.hpp" />
+    <ClInclude Include="Source\Akropolix\Input\Windows Input\ConsoleInputDefines.hpp" />
+    <ClInclude Include="Source\Akropolix\Input\Windows Input\ConsoleInputExt.hpp" />
+    <ClInclude Include="Source\Akropolix\Object\Interface\IObject.hpp" />
+    <ClInclude Include="Source\Akropolix\Object\Interface\IObjectManager.hpp" />
+    <ClInclude Include="Source\Akropolix\Object\Windows Console\ConsoleObject.hpp" />
+    <ClInclude Include="Source\Akropolix\Object\Windows Console\ConsoleObjectManager.hpp" />
+    <ClInclude Include="Source\Akropolix\Object\Windows Console\TestObject.hpp" />
+    <ClInclude Include="Source\Akropolix\Render\Interface\IRenderContext.hpp" />
+    <ClInclude Include="Source\Akropolix\Render\Windows Console\ConsoleRenderContext.hpp" />
+    <ClInclude Include="Source\Akropolix\Scene Graph\Interface\ISceneGraph.hpp" />
+    <ClInclude Include="Source\Akropolix\System\Win32\Window.hpp" />
+    <ClInclude Include="Source\Akropolix\Utility\Logging\Log.hpp" />
+    <ClInclude Include="Source\Akropolix\Utility\Math\Matrix4f.hpp" />
+    <ClInclude Include="Source\Akropolix\Utility\Math\Quaternion.hpp" />
+    <ClInclude Include="Source\Akropolix\Utility\Math\Vector2f.hpp" />
+    <ClInclude Include="Source\Akropolix\Utility\Math\Vector3f.hpp" />
+    <ClInclude Include="Source\Akropolix\Utility\Math\Vector4f.hpp" />
+    <ClInclude Include="Source\Akropolix\Utility\Time\ITime.hpp" />
+    <ClInclude Include="Source\Akropolix\Utility\Time\WindowsTime.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

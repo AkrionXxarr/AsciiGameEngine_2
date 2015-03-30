@@ -4,214 +4,134 @@
     <Filter Include="Source">
       <UniqueIdentifier>{f58c4c1e-fea8-4881-abfb-1069e66de25b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Display Device">
-      <UniqueIdentifier>{5ace8fea-62ae-4b1d-aae1-07a25129b3c8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Display Device\Windows Console">
-      <UniqueIdentifier>{cf107c27-556b-4a2d-9698-2911cb7d35db}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Utility">
-      <UniqueIdentifier>{c1e9f23d-0f84-4e68-b295-ca71dc001fee}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Utility\Time">
-      <UniqueIdentifier>{b59b7bc1-37f6-4a47-a124-d02e179bfae6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Utility\Math">
-      <UniqueIdentifier>{24f4ee0e-ab7e-42d0-bd92-90f27bc7c7f2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Scene Graph">
-      <UniqueIdentifier>{4733d652-c685-4509-98a3-fffe6f7507c5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Scene Graph\Interface">
-      <UniqueIdentifier>{86dd6cf4-4874-4f19-a38c-baec47fffcfa}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Input">
-      <UniqueIdentifier>{ad1622cf-4719-43fb-8645-0909567f6676}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Input\Windows Input">
-      <UniqueIdentifier>{417c4f79-773c-4e92-876e-0a52d3caca5d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\System">
-      <UniqueIdentifier>{5aa44549-24c4-4a24-9297-3460b8780284}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\System\Win32">
-      <UniqueIdentifier>{a06ea735-667a-45c7-9ef8-61181900f27a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Docs">
       <UniqueIdentifier>{a0e5aad0-ee6f-4d27-9845-0700c39f8796}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Utility\Logging">
-      <UniqueIdentifier>{5c398526-70b9-44db-97f4-2e273db7059b}</UniqueIdentifier>
+    <Filter Include="Source\Akropolix">
+      <UniqueIdentifier>{fb0b8466-30b1-4b54-a199-415badb14c6a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Utility\Error Handling">
-      <UniqueIdentifier>{bb881d47-0974-430e-a75c-86d825198ccc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Utility\Error Handling\Windows">
-      <UniqueIdentifier>{4aaf95f3-bf1d-410c-955f-bfb0abfa678a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Object">
-      <UniqueIdentifier>{46798a84-6c8b-484f-a9a3-1a53411b381e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Engine">
+    <Filter Include="Source\Akropolix\Engine">
       <UniqueIdentifier>{563724c4-f629-4bd9-923f-69113be6748a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Engine\Interface">
+    <Filter Include="Source\Akropolix\Engine\Interface">
       <UniqueIdentifier>{875e0fa7-cda9-4b22-99dc-56162c9b8804}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Object\Interface">
-      <UniqueIdentifier>{f74c5e33-3f81-4b6b-9099-ef58a012d0d7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Render">
-      <UniqueIdentifier>{cadfc243-a8cb-4490-887c-5cae3c60971f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Render\Interface">
-      <UniqueIdentifier>{0fc04580-6907-4969-87fd-3610db446844}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Display Device\Interface">
-      <UniqueIdentifier>{6a4d986c-0111-45dc-a699-841d3cb9a536}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Engine\Windows Console">
+    <Filter Include="Source\Akropolix\Engine\Windows Console">
       <UniqueIdentifier>{d0de4454-bb01-4d31-b3b3-d73968c6c463}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Render\Windows Console">
+    <Filter Include="Source\Akropolix\Display Device">
+      <UniqueIdentifier>{5ace8fea-62ae-4b1d-aae1-07a25129b3c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Akropolix\Display Device\Windows Console">
+      <UniqueIdentifier>{cf107c27-556b-4a2d-9698-2911cb7d35db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Akropolix\Display Device\Interface">
+      <UniqueIdentifier>{6a4d986c-0111-45dc-a699-841d3cb9a536}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Akropolix\Input">
+      <UniqueIdentifier>{ad1622cf-4719-43fb-8645-0909567f6676}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Akropolix\Input\Windows Input">
+      <UniqueIdentifier>{417c4f79-773c-4e92-876e-0a52d3caca5d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Akropolix\Render">
+      <UniqueIdentifier>{cadfc243-a8cb-4490-887c-5cae3c60971f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Akropolix\Render\Interface">
+      <UniqueIdentifier>{0fc04580-6907-4969-87fd-3610db446844}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Akropolix\Render\Windows Console">
       <UniqueIdentifier>{9d711a5f-411c-45e4-8735-ccf68143fb69}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Object\Windows Console">
+    <Filter Include="Source\Akropolix\Object">
+      <UniqueIdentifier>{46798a84-6c8b-484f-a9a3-1a53411b381e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Akropolix\Object\Interface">
+      <UniqueIdentifier>{f74c5e33-3f81-4b6b-9099-ef58a012d0d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Akropolix\Object\Windows Console">
       <UniqueIdentifier>{317bb069-2962-4b01-b6f5-efd5ac8827c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Akropolix\Scene Graph">
+      <UniqueIdentifier>{4733d652-c685-4509-98a3-fffe6f7507c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Akropolix\Scene Graph\Interface">
+      <UniqueIdentifier>{86dd6cf4-4874-4f19-a38c-baec47fffcfa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Akropolix\System">
+      <UniqueIdentifier>{5aa44549-24c4-4a24-9297-3460b8780284}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Akropolix\System\Win32">
+      <UniqueIdentifier>{a06ea735-667a-45c7-9ef8-61181900f27a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Akropolix\Utility">
+      <UniqueIdentifier>{c1e9f23d-0f84-4e68-b295-ca71dc001fee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Akropolix\Utility\Time">
+      <UniqueIdentifier>{b59b7bc1-37f6-4a47-a124-d02e179bfae6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Akropolix\Utility\Math">
+      <UniqueIdentifier>{24f4ee0e-ab7e-42d0-bd92-90f27bc7c7f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Akropolix\Utility\Logging">
+      <UniqueIdentifier>{5c398526-70b9-44db-97f4-2e273db7059b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Akropolix\Utility\Error Handling">
+      <UniqueIdentifier>{bb881d47-0974-430e-a75c-86d825198ccc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Akropolix\Utility\Error Handling\Windows">
+      <UniqueIdentifier>{4aaf95f3-bf1d-410c-955f-bfb0abfa678a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Main.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Display Device\Windows Console\Console.cpp">
-      <Filter>Source\Display Device\Windows Console</Filter>
+    <ClCompile Include="Source\Akropolix\Display Device\Windows Console\Console.cpp">
+      <Filter>Source\Akropolix\Display Device\Windows Console</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Utility\Math\Vector2f.cpp">
-      <Filter>Source\Utility\Math</Filter>
+    <ClCompile Include="Source\Akropolix\Engine\Windows Console\MainConsoleEngine.cpp">
+      <Filter>Source\Akropolix\Engine\Windows Console</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Utility\Math\Vector3f.cpp">
-      <Filter>Source\Utility\Math</Filter>
+    <ClCompile Include="Source\Akropolix\Engine\CoreEngine.cpp">
+      <Filter>Source\Akropolix\Engine</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Utility\Math\Vector4f.cpp">
-      <Filter>Source\Utility\Math</Filter>
+    <ClCompile Include="Source\Akropolix\Input\Windows Input\ConsoleInput.cpp">
+      <Filter>Source\Akropolix\Input\Windows Input</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Utility\Math\Matrix4f.cpp">
-      <Filter>Source\Utility\Math</Filter>
+    <ClCompile Include="Source\Akropolix\Input\Windows Input\ConsoleInputExt.cpp">
+      <Filter>Source\Akropolix\Input\Windows Input</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Utility\Math\Quaternion.cpp">
-      <Filter>Source\Utility\Math</Filter>
+    <ClCompile Include="Source\Akropolix\Input\Windows Input\CursorLock.cpp">
+      <Filter>Source\Akropolix\Input\Windows Input</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Input\Windows Input\ConsoleInput.cpp">
-      <Filter>Source\Input\Windows Input</Filter>
+    <ClCompile Include="Source\Akropolix\Object\Windows Console\ConsoleObjectManager.cpp">
+      <Filter>Source\Akropolix\Object\Windows Console</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Input\Windows Input\ConsoleInputExt.cpp">
-      <Filter>Source\Input\Windows Input</Filter>
+    <ClCompile Include="Source\Akropolix\Object\Windows Console\TestObject.cpp">
+      <Filter>Source\Akropolix\Object\Windows Console</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Input\Windows Input\CursorLock.cpp">
-      <Filter>Source\Input\Windows Input</Filter>
+    <ClCompile Include="Source\Akropolix\Render\Windows Console\ConsoleRenderContext.cpp">
+      <Filter>Source\Akropolix\Render\Windows Console</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Utility\Logging\Log.cpp">
-      <Filter>Source\Utility\Logging</Filter>
+    <ClCompile Include="Source\Akropolix\Utility\Math\Matrix4f.cpp">
+      <Filter>Source\Akropolix\Utility\Math</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Engine\CoreEngine.cpp">
-      <Filter>Source\Engine</Filter>
+    <ClCompile Include="Source\Akropolix\Utility\Math\Quaternion.cpp">
+      <Filter>Source\Akropolix\Utility\Math</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Render\Windows Console\ConsoleRenderContext.cpp">
-      <Filter>Source\Render\Windows Console</Filter>
+    <ClCompile Include="Source\Akropolix\Utility\Math\Vector2f.cpp">
+      <Filter>Source\Akropolix\Utility\Math</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Engine\Windows Console\MainConsoleEngine.cpp">
-      <Filter>Source\Engine\Windows Console</Filter>
+    <ClCompile Include="Source\Akropolix\Utility\Math\Vector3f.cpp">
+      <Filter>Source\Akropolix\Utility\Math</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Object\Windows Console\ConsoleObjectManager.cpp">
-      <Filter>Source\Object\Windows Console</Filter>
+    <ClCompile Include="Source\Akropolix\Utility\Math\Vector4f.cpp">
+      <Filter>Source\Akropolix\Utility\Math</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Object\Windows Console\TestObject.cpp">
-      <Filter>Source\Object\Windows Console</Filter>
+    <ClCompile Include="Source\Akropolix\Utility\Logging\Log.cpp">
+      <Filter>Source\Akropolix\Utility\Logging</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Source\Display Device\Windows Console\ConsoleDefines.hpp">
-      <Filter>Source\Display Device\Windows Console</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Display Device\Windows Console\Console.hpp">
-      <Filter>Source\Display Device\Windows Console</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Utility\Time\WindowsTime.hpp">
-      <Filter>Source\Utility\Time</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Utility\Math\Vector2f.hpp">
-      <Filter>Source\Utility\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Utility\Math\Vector3f.hpp">
-      <Filter>Source\Utility\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Utility\Math\Vector4f.hpp">
-      <Filter>Source\Utility\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Utility\Math\Matrix4f.hpp">
-      <Filter>Source\Utility\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Utility\Math\Quaternion.hpp">
-      <Filter>Source\Utility\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Scene Graph\Interface\ISceneGraph.hpp">
-      <Filter>Source\Scene Graph\Interface</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Input\Windows Input\ConsoleInput.hpp">
-      <Filter>Source\Input\Windows Input</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\System\Win32\Window.hpp">
-      <Filter>Source\System\Win32</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Input\Windows Input\ConsoleInputDefines.hpp">
-      <Filter>Source\Input\Windows Input</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Input\Windows Input\ConsoleInputExt.hpp">
-      <Filter>Source\Input\Windows Input</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Utility\Time\ITime.hpp">
-      <Filter>Source\Utility\Time</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Utility\Logging\Log.hpp">
-      <Filter>Source\Utility\Logging</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Object\Interface\IObjectManager.hpp">
-      <Filter>Source\Object\Interface</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Engine\Interface\ICoreEngine.hpp">
-      <Filter>Source\Engine\Interface</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Render\Interface\IRenderContext.hpp">
-      <Filter>Source\Render\Interface</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Engine\CoreEngine.hpp">
-      <Filter>Source\Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Display Device\Interface\IDisplayDevice.hpp">
-      <Filter>Source\Display Device\Interface</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Engine\Interface\IMainEngine.hpp">
-      <Filter>Source\Engine\Interface</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Engine\Windows Console\MainConsoleEngine.hpp">
-      <Filter>Source\Engine\Windows Console</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Render\Windows Console\ConsoleRenderContext.hpp">
-      <Filter>Source\Render\Windows Console</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Object\Windows Console\ConsoleObjectManager.hpp">
-      <Filter>Source\Object\Windows Console</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Object\Windows Console\ConsoleObject.hpp">
-      <Filter>Source\Object\Windows Console</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Object\Interface\IObject.hpp">
-      <Filter>Source\Object\Interface</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Object\Windows Console\TestObject.hpp">
-      <Filter>Source\Object\Windows Console</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Docs\TODO.txt">
@@ -220,5 +140,88 @@
     <Text Include="Docs\EngineSystem.txt">
       <Filter>Docs</Filter>
     </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\Akropolix\Display Device\Interface\IDisplayDevice.hpp">
+      <Filter>Source\Akropolix\Display Device\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Akropolix\Display Device\Windows Console\Console.hpp">
+      <Filter>Source\Akropolix\Display Device\Windows Console</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Akropolix\Display Device\Windows Console\ConsoleDefines.hpp">
+      <Filter>Source\Akropolix\Display Device\Windows Console</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Akropolix\Engine\Interface\ICoreEngine.hpp">
+      <Filter>Source\Akropolix\Engine\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Akropolix\Engine\Interface\IMainEngine.hpp">
+      <Filter>Source\Akropolix\Engine\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Akropolix\Engine\Windows Console\MainConsoleEngine.hpp">
+      <Filter>Source\Akropolix\Engine\Windows Console</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Akropolix\Engine\CoreEngine.hpp">
+      <Filter>Source\Akropolix\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Akropolix\Input\Windows Input\ConsoleInput.hpp">
+      <Filter>Source\Akropolix\Input\Windows Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Akropolix\Input\Windows Input\ConsoleInputDefines.hpp">
+      <Filter>Source\Akropolix\Input\Windows Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Akropolix\Input\Windows Input\ConsoleInputExt.hpp">
+      <Filter>Source\Akropolix\Input\Windows Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Akropolix\Object\Interface\IObject.hpp">
+      <Filter>Source\Akropolix\Object\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Akropolix\Object\Interface\IObjectManager.hpp">
+      <Filter>Source\Akropolix\Object\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Akropolix\Object\Windows Console\ConsoleObject.hpp">
+      <Filter>Source\Akropolix\Object\Windows Console</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Akropolix\Object\Windows Console\ConsoleObjectManager.hpp">
+      <Filter>Source\Akropolix\Object\Windows Console</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Akropolix\Object\Windows Console\TestObject.hpp">
+      <Filter>Source\Akropolix\Object\Windows Console</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Akropolix\Render\Interface\IRenderContext.hpp">
+      <Filter>Source\Akropolix\Render\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Akropolix\Render\Windows Console\ConsoleRenderContext.hpp">
+      <Filter>Source\Akropolix\Render\Windows Console</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Akropolix\Scene Graph\Interface\ISceneGraph.hpp">
+      <Filter>Source\Akropolix\Scene Graph\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Akropolix\System\Win32\Window.hpp">
+      <Filter>Source\Akropolix\System\Win32</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Akropolix\Utility\Math\Matrix4f.hpp">
+      <Filter>Source\Akropolix\Utility\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Akropolix\Utility\Math\Quaternion.hpp">
+      <Filter>Source\Akropolix\Utility\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Akropolix\Utility\Math\Vector2f.hpp">
+      <Filter>Source\Akropolix\Utility\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Akropolix\Utility\Math\Vector3f.hpp">
+      <Filter>Source\Akropolix\Utility\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Akropolix\Utility\Math\Vector4f.hpp">
+      <Filter>Source\Akropolix\Utility\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Akropolix\Utility\Logging\Log.hpp">
+      <Filter>Source\Akropolix\Utility\Logging</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Akropolix\Utility\Time\ITime.hpp">
+      <Filter>Source\Akropolix\Utility\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Akropolix\Utility\Time\WindowsTime.hpp">
+      <Filter>Source\Akropolix\Utility\Time</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
