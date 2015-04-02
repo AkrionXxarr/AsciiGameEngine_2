@@ -6,7 +6,11 @@ Ultimately, the idea with this project will be that alternating from a console-b
 This project will involve much more pre-planning than most of my projects, hopefully for greater results.<br>
 <br>
 Videos as of commit 4f96510a371efdb4d3c2ea7549e66519cb434e9d:<br>
-8) <br>
+12) https://www.youtube.com/watch?v=RnnzuGZrusA<br>
+11) https://www.youtube.com/watch?v=T-gCzqLDhEU<br>
+10) https://www.youtube.com/watch?v=odzV4JJDwpE<br>
+9) https://www.youtube.com/watch?v=7dPKfULymsM<br>
+8) https://www.youtube.com/watch?v=w2IkRqZozvk<br>
 
 Video as of commit 43030d90811107af989d604ba9782d6b31a80803:<br>
 7) https://www.youtube.com/watch?v=lXC1wKeOjlA<br>
