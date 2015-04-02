@@ -13,7 +13,7 @@
 using namespace aki::render::wincon;
 
 std::default_random_engine generator;
-std::uniform_real_distribution<float> distribution(0.0, 1.0);
+std::uniform_real_distribution<float> distribution(0.0f, 1.0f);
 
 Starfield::Starfield(unsigned int width, unsigned int height, unsigned int starCount, float spread, float speed, CHAR_INFO& ci)
 {
@@ -59,6 +59,13 @@ void Starfield::Draw(aki::render::I::IRenderContext& renderContext)
         p.x = int((stars[i].x / stars[i].z) * halfWidth + halfWidth);
         p.y = int((stars[i].y / stars[i].z) * halfHeight + halfHeight);
 
+        if (stars[i].z > ((spread / 3.0f) * 2))
+            ci.Char.UnicodeChar = '.';
+        else if (stars[i].z > (spread / 3.0f))
+            ci.Char.UnicodeChar = ':';
+        else
+            ci.Char.UnicodeChar = '#';
+
         if (p.x < 0 || p.x >= width || p.y < 0 || p.y >= height)
         {
             InitializeStar(i);
@@ -76,6 +83,6 @@ void Starfield::InitializeStar(int i)
     {
         stars[i].x = 2 * (distribution(generator) - 0.5f) * spread;
         stars[i].y = 2 * (distribution(generator) - 0.5f) * spread;
-        stars[i].z = (distribution(generator) - 0.00001f) * spread;
+        stars[i].z = (distribution(generator) + 0.00001f) * spread;
     }
 }

@@ -89,7 +89,9 @@
     <ClCompile Include="Source\Akropolix\Utility\Math\Vector4f.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\TestApp_1\BasicRectangle.cpp" />
+    <ClCompile Include="Source\TestApp_1\Camera.cpp" />
     <ClCompile Include="Source\TestApp_1\Engine.cpp" />
+    <ClCompile Include="Source\TestApp_1\LineTest.cpp" />
     <ClCompile Include="Source\TestApp_1\Starfield.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -124,7 +126,9 @@
     <ClInclude Include="Source\Akropolix\Utility\Time\ITime.hpp" />
     <ClInclude Include="Source\Akropolix\Utility\Time\WindowsTime.hpp" />
     <ClInclude Include="Source\TestApp_1\BasicRectangle.hpp" />
+    <ClInclude Include="Source\TestApp_1\Camera.hpp" />
     <ClInclude Include="Source\TestApp_1\Engine.hpp" />
+    <ClInclude Include="Source\TestApp_1\LineTest.hpp" />
     <ClInclude Include="Source\TestApp_1\Starfield.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -68,13 +68,22 @@ namespace aki
 
             void MainConsoleEngine::Tick(float deltaTime)
             {
-                console->ClearBuffer();
                 input->Tick();
                 objectManager->Input(*input);
             }
 
             void MainConsoleEngine::Clean()
             {
+            }
+
+            bool MainConsoleEngine::HasFocus()
+            {
+                return coreEngine->HasFocus();
+            }
+
+            bool MainConsoleEngine::IsRunning()
+            {
+                return coreEngine->IsRunning();
             }
         }
     }

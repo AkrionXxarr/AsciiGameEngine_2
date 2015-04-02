@@ -34,6 +34,9 @@ namespace aki
                 virtual void Stop();
                 virtual void Tick(float deltaTime);
 
+                bool HasFocus();
+                bool IsRunning();
+
             protected:
                 virtual void Clean();
 
