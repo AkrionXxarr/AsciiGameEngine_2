@@ -244,58 +244,6 @@ namespace aki
                 return 0;
             }
 
-            KEYBOARD::TYPE ConsoleInputExt::GetMostRecentKey()
-            {
-                return mostRecentKey;
-            }
-
-            MOUSE_BUTTON::TYPE ConsoleInputExt::GetMostRecentMouseButton()
-            {
-                return mostRecentMouseButton;
-            }
-
-            bool ConsoleInputExt::GetAnyKeyUp()
-            {
-                return (releasedKeys.size() > 0);
-            }
-
-            bool ConsoleInputExt::GetAnyKeyDown()
-            {
-                bool keyIsDown = false;
-
-                for (int i = 0; i < KEYBOARD::END_OF_KEYBOARD; i++)
-                {
-                    if (pressedKeys[i])
-                    {
-                        keyIsDown = true;
-                        break;
-                    }
-                }
-
-                return keyIsDown;
-            }
-
-            bool ConsoleInputExt::GetAnyMouseUp()
-            {
-                return (releasedMouseButtons.size() > 0);
-            }
-
-            bool ConsoleInputExt::GetAnyMouseDown()
-            {
-                bool mouseIsDown = false;
-
-                for (int i = 0; i < MOUSE_BUTTON::END_OF_MOUSE_BUTTON; i++)
-                {
-                    if (pressedMouseButtons[i])
-                    {
-                        mouseIsDown = true;
-                        break;
-                    }
-                }
-
-                return mouseIsDown;
-            }
-
             POINT ConsoleInputExt::GetDelta()
             {
                 return cursorLock.GetDelta();

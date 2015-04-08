@@ -43,10 +43,22 @@ namespace aki
                 bool GetKeyUp(KEYBOARD::TYPE key);
                 bool GetKeyDown(KEYBOARD::TYPE key);
 
+                bool GetAnyKeyUp();
+                bool GetAnyKeyDown();
+
+                KEYBOARD::TYPE GetMostRecentKeyDown();
+                KEYBOARD::TYPE GetMostRecentKeyUp();
+
                 // Mouse
                 bool GetMouseDown(MOUSE_BUTTON::TYPE button);
                 bool GetMouseUp(MOUSE_BUTTON::TYPE button);
                 bool GetMouseAction(MOUSE_ACTION::TYPE action);
+
+                bool GetAnyMouseUp();
+                bool GetAnyMouseDown();
+
+                MOUSE_BUTTON::TYPE GetMostRecentMouseDown();
+                MOUSE_BUTTON::TYPE GetMostRecentMouseUp();
 
                 COORD GetMousePosition();
                 void GetMouseDesktopPosition(POINT& pos);
@@ -62,11 +74,15 @@ namespace aki
                 // Keyboard
                 bool* pressedKeys;
                 std::deque<KEYBOARD::TYPE> releasedKeys;
+                KEYBOARD::TYPE mostRecentKeyDown;
+                KEYBOARD::TYPE mostRecentKeyUp;
 
                 // Mouse
                 bool* mouseActions;
                 bool* pressedMouseButtons;
                 std::deque<MOUSE_BUTTON::TYPE> releasedMouseButtons;
+                MOUSE_BUTTON::TYPE mostRecentMouseDown;
+                MOUSE_BUTTON::TYPE mostRecentMouseUp;
 
                 COORD mousePosition;
 

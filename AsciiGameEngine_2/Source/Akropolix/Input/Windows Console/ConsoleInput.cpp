@@ -30,6 +30,12 @@ namespace aki
                 this->consoleWindow = consoleWindow;
                 inputRecords = new INPUT_RECORD[inputBufferSize];
 
+                mostRecentKeyDown = KEYBOARD::NO_KEY;
+                mostRecentKeyUp = KEYBOARD::NO_KEY;
+
+                mostRecentMouseDown = MOUSE_BUTTON::NO_BUTTON;
+                mostRecentMouseUp = MOUSE_BUTTON::NO_BUTTON;
+
                 // Set and clear input buffers
                 pressedKeys = new bool[KEYBOARD::END_OF_KEYBOARD];
                 mouseActions = new bool[MOUSE_ACTION::END_OF_MOUSE_ACTION];
@@ -102,6 +108,9 @@ namespace aki
                     if (!PeekConsoleInput(inputHandle, inputRecords, inputBufferSize, &inputCount))
                         LogWindowsError(INPUT_LOG);
 
+                    if (!FlushConsoleInputBuffer(inputHandle))
+                        LogWindowsError(INPUT_LOG);
+
                     for (unsigned int i = 0; i < inputCount; i++)
                     {
                         INPUT_RECORD input = inputRecords[i];
@@ -122,9 +131,6 @@ namespace aki
                 {
                     ClearInputEvents();
                 }
-
-                if (!FlushConsoleInputBuffer(inputHandle))
-                    LogWindowsError(INPUT_LOG);
             }
 
 
@@ -153,6 +159,37 @@ namespace aki
             {
                 return pressedKeys[key];
             }
+
+            bool ConsoleInput::GetAnyKeyUp()
+            {
+                return (releasedKeys.size() > 0);
+            }
+
+            bool ConsoleInput::GetAnyKeyDown()
+            {
+                bool keyIsDown = false;
+
+                for (int i = 0; i < KEYBOARD::END_OF_KEYBOARD; i++)
+                {
+                    if (pressedKeys[i])
+                    {
+                        keyIsDown = true;
+                        break;
+                    }
+                }
+
+                return keyIsDown;
+            }
+
+            KEYBOARD::TYPE ConsoleInput::GetMostRecentKeyDown()
+            {
+                return mostRecentKeyDown;
+            }
+
+            KEYBOARD::TYPE ConsoleInput::GetMostRecentKeyUp()
+            {
+                return mostRecentKeyUp;
+            }
             /* ---------------------------------------------------------------- */
 
 
@@ -176,6 +213,37 @@ namespace aki
                 }
 
                 return buttonMatched;
+            }
+
+            bool ConsoleInput::GetAnyMouseUp()
+            {
+                return (releasedMouseButtons.size() > 0);
+            }
+
+            bool ConsoleInput::GetAnyMouseDown()
+            {
+                bool mouseIsDown = false;
+
+                for (int i = 0; i < MOUSE_BUTTON::END_OF_MOUSE_BUTTON; i++)
+                {
+                    if (pressedMouseButtons[i])
+                    {
+                        mouseIsDown = true;
+                        break;
+                    }
+                }
+
+                return mouseIsDown;
+            }
+
+            MOUSE_BUTTON::TYPE ConsoleInput::GetMostRecentMouseDown()
+            {
+                return mostRecentMouseDown;
+            }
+
+            MOUSE_BUTTON::TYPE ConsoleInput::GetMostRecentMouseUp()
+            {
+                return mostRecentMouseUp;
             }
 
             bool ConsoleInput::GetMouseAction(MOUSE_ACTION::TYPE action)
@@ -321,10 +389,16 @@ namespace aki
                 default: key = KEYBOARD::UNHANDLED_KEY; break;
                 }
 
-                pressedKeys[key] = (keyEvent.bKeyDown != 0);
-
-                if (!keyEvent.bKeyDown)
+                if (keyEvent.bKeyDown != 0)
+                {
+                    pressedKeys[key] = true;
+                    mostRecentKeyDown = key;
+                }
+                else
+                {
                     releasedKeys.push_front(key);
+                    mostRecentKeyUp = key;
+                }
             }
 
             void ConsoleInput::MouseEvent(MOUSE_EVENT_RECORD mouseEvent)
