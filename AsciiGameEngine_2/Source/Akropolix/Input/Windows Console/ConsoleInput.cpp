@@ -342,6 +342,7 @@ namespace aki
 
                     /* Other Keys */
                 case VK_BACK: key = KEYBOARD::BACKSPACE; break;
+                case VK_RETURN: key = KEYBOARD::ENTER; break;
                 case VK_TAB: key = KEYBOARD::TAB; break;
                 case VK_INSERT: key = KEYBOARD::INSERT; break;
                 case VK_DELETE: key = KEYBOARD::DEL; break;

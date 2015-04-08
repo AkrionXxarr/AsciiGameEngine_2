@@ -118,6 +118,7 @@ namespace aki
 
                     /* Other keys */
                     BACKSPACE,
+                    ENTER,
                     TAB,
                     INSERT,
                     DEL,
