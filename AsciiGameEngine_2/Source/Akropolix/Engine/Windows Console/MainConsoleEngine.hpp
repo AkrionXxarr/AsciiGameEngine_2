@@ -25,7 +25,7 @@ namespace aki
             class MainConsoleEngine : public engine::I::IMainEngine
             {
             public:
-                MainConsoleEngine(unsigned int width, unsigned int height);
+                MainConsoleEngine(unsigned int width, unsigned int height, aki::display::wincon::CONSOLE_FONT::Type fontType);
                 virtual ~MainConsoleEngine();
 
                 virtual bool Initialize();
@@ -41,6 +41,8 @@ namespace aki
                 virtual void Clean();
 
             protected:
+                aki::display::wincon::CONSOLE_FONT::Type fontType;
+
                 aki::time::WindowsTime* time;
                 display::wincon::Console* console;
                 std::shared_ptr<display::wincon::ConsoleBuffer> consoleBuffer;

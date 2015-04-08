@@ -22,20 +22,23 @@ namespace aki
         namespace wincon
         {
             // Raster fonts only
-            enum CONSOLE_FONT_TYPE
+            namespace CONSOLE_FONT
             {
-                FONT_4x6,
-                FONT_6x8,
-                FONT_8x8,
-                FONT_16x8,
-                FONT_5x12,
-                FONT_7x12,
-                FONT_8x12,
-                FONT_16x12,
-                FONT_12x16,
-                FONT_10x18,
-                NOT_SET
-            };
+                enum Type
+                {
+                    _4x6,
+                    _6x8,
+                    _8x8,
+                    _16x8,
+                    _5x12,
+                    _7x12,
+                    _8x12,
+                    _16x12,
+                    _12x16,
+                    _10x18,
+                    NOT_SET
+                };
+            }
 
             ///////////////////////////////////////////////////////////////////////////////////////////////////
             // The buffer that the Console class will render from. It has the capacity to instruct
@@ -112,7 +115,7 @@ namespace aki
                 bool CreateDevice(
                     std::shared_ptr<ConsoleBuffer> cb,
                     unsigned short cursorSize = 25,
-                    CONSOLE_FONT_TYPE fontType = FONT_8x12);
+                    CONSOLE_FONT::Type fontType = CONSOLE_FONT::_8x12);
 
                 std::shared_ptr<ConsoleBuffer> GetBuffer() { return consoleBuffer; }
 
@@ -149,7 +152,7 @@ namespace aki
                 COORD cursorPos;
                 SMALL_RECT screenRect;
                 CONSOLE_CURSOR_INFO cci;
-                CONSOLE_FONT_TYPE fontType = NOT_SET;
+                CONSOLE_FONT::Type fontType = CONSOLE_FONT::NOT_SET;
             };
         };
     };

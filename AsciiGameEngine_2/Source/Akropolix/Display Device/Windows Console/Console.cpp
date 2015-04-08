@@ -71,7 +71,7 @@ namespace aki
                 }
             }
 
-            bool Console::CreateDevice(std::shared_ptr<ConsoleBuffer> cb, unsigned short cursorSize, CONSOLE_FONT_TYPE fontType)
+            bool Console::CreateDevice(std::shared_ptr<ConsoleBuffer> cb, unsigned short cursorSize, CONSOLE_FONT::Type fontType)
             {
                 // CreateDevice was already called, clear the data and start anew
                 if (consoleBuffer)
@@ -199,16 +199,16 @@ namespace aki
                 cfi.FontWeight = 400;
                 cfi.nFont = fontType;
 
-                dwFontSize(FONT_4x6, 4, 6);
-                dwFontSize(FONT_6x8, 6, 8);
-                dwFontSize(FONT_8x8, 8, 8);
-                dwFontSize(FONT_16x8, 16, 8);
-                dwFontSize(FONT_5x12, 5, 12);
-                dwFontSize(FONT_7x12, 7, 12);
-                dwFontSize(FONT_8x12, 8, 12);
-                dwFontSize(FONT_16x12, 16, 12);
-                dwFontSize(FONT_12x16, 12, 16);
-                dwFontSize(FONT_10x18, 10, 18);
+                dwFontSize(CONSOLE_FONT::_4x6, 4, 6);
+                dwFontSize(CONSOLE_FONT::_6x8, 6, 8);
+                dwFontSize(CONSOLE_FONT::_8x8, 8, 8);
+                dwFontSize(CONSOLE_FONT::_16x8, 16, 8);
+                dwFontSize(CONSOLE_FONT::_5x12, 5, 12);
+                dwFontSize(CONSOLE_FONT::_7x12, 7, 12);
+                dwFontSize(CONSOLE_FONT::_8x12, 8, 12);
+                dwFontSize(CONSOLE_FONT::_16x12, 16, 12);
+                dwFontSize(CONSOLE_FONT::_12x16, 12, 16);
+                dwFontSize(CONSOLE_FONT::_10x18, 10, 18);
 
                 if (!SetCurrentConsoleFontEx(outputHandle, NULL, &cfi))
                 {

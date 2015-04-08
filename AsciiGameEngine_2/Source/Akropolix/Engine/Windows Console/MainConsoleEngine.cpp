@@ -18,8 +18,10 @@ namespace aki
     {
         namespace wincon
         {
-            MainConsoleEngine::MainConsoleEngine(unsigned int width, unsigned int height)
+            MainConsoleEngine::MainConsoleEngine(unsigned int width, unsigned int height, CONSOLE_FONT::Type fontType)
             {
+                this->fontType = fontType;
+
                 time = new WindowsTime();
                 console = new Console();
                 consoleBuffer = std::make_shared<ConsoleBuffer>(width, height);
@@ -47,8 +49,8 @@ namespace aki
             bool MainConsoleEngine::Initialize()
             {
                 coreEngine = new CoreEngine();
-                console->CreateDevice(consoleBuffer, 0, FONT_8x8);
-                input = new ConsoleInputExt(10, console->GetHandle());
+                console->CreateDevice(consoleBuffer, 0, fontType);
+                input = new ConsoleInputExt(32, console->GetHandle());
 
                 renderContext->Initialize(consoleBuffer);
 
