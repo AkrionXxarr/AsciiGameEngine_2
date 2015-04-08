@@ -54,11 +54,20 @@ namespace aki
             return (x * v.y) - (y * v.x);
         }
 
-        Vector2f Vector2f::Rotate(float angle)
+        Vector2f Vector2f::RotateDeg(float degrees)
         {
-            float rad = angle * float(M_PI / 180.0f);
+            float rad = degrees * float(M_PI / 180.0f);
+            
             float cosine = cos(rad);
             float sine = sin(rad);
+
+            return Vector2f((x * cosine - y * sine), (x * sine + y * cosine));
+        }
+
+        Vector2f Vector2f::RotateRad(float radians)
+        {
+            float cosine = cos(radians);
+            float sine = sin(radians);
 
             return Vector2f((x * cosine - y * sine), (x * sine + y * cosine));
         }

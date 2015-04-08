@@ -33,7 +33,8 @@ namespace aki
             float Dot(Vector2f& v);
             float Cross(Vector2f& v);
 
-            Vector2f Rotate(float angle);
+            Vector2f RotateDeg(float degrees);
+            Vector2f RotateRad(float radians);
             Vector2f Lerp(Vector2f& dest, float factor);
 
             /* Getters */
