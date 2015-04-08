@@ -396,6 +396,7 @@ namespace aki
                 }
                 else
                 {
+                    pressedKeys[key] = false;
                     releasedKeys.push_front(key);
                     mostRecentKeyUp = key;
                 }
