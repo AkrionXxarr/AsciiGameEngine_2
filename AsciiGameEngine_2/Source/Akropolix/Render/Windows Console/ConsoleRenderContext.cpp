@@ -7,6 +7,9 @@
 
 #include "Akropolix\render\Windows Console\ConsoleRenderContext.hpp"
 #include "Akropolix\Display Device\Windows Console\Console.hpp"
+#include "Akropolix\Utility\Math\Vector2f.hpp"
+
+using namespace aki::math;
 
 namespace aki
 {
@@ -30,6 +33,16 @@ namespace aki
                     this->buffer.reset();
 
                 this->buffer = buffer;
+            }
+
+            unsigned int ConsoleRenderContext::GetWidth()
+            {
+                return buffer->GetSizeAsCoord().X;
+            }
+
+            unsigned int ConsoleRenderContext::GetHeight()
+            {
+                return buffer->GetSizeAsCoord().Y;
             }
 
             void ConsoleRenderContext::DrawPoint(POINT pos, CHAR_INFO& ci)

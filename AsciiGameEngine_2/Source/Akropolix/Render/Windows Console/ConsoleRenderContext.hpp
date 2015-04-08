@@ -32,6 +32,9 @@ namespace aki
 
                 void Initialize(std::shared_ptr<display::wincon::ConsoleBuffer> buffer);
 
+                virtual unsigned int GetWidth();
+                virtual unsigned int GetHeight();
+
                 void Clear();
 
                 void DrawPoint(POINT pos, CHAR_INFO& ci);

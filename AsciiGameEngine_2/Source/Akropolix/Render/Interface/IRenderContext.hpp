@@ -17,6 +17,9 @@ namespace aki
                 IRenderContext() { }
                 virtual ~IRenderContext() { }
 
+                virtual unsigned int GetWidth() = 0;
+                virtual unsigned int GetHeight() = 0;
+
             private:
                 // render context has no reason to be copied
                 IRenderContext(const IRenderContext& other);
