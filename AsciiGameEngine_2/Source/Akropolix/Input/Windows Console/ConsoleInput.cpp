@@ -4,7 +4,6 @@
 */
 
 #include <assert.h>
-#include <sstream>
 
 #include "Akropolix\input\Windows Console\ConsoleInput.hpp"
 #include "Akropolix\Utility\Math\Vector2f.hpp"
@@ -409,16 +408,6 @@ namespace aki
                     releasedKeys.push_front(key);
                     mostRecentKeyUp = key;
                 }
-
-                std::stringstream str;
-                str << ": ";
-                for (int i = 0; i < KEYBOARD::END_OF_KEYBOARD; i++)
-                {
-                    str << pressedKeys[i] << " ";
-                }
-                str << ":";
-
-                LogMessage(str.str(), INPUT_LOG);
             }
 
             void ConsoleInput::MouseEvent(MOUSE_EVENT_RECORD mouseEvent)
