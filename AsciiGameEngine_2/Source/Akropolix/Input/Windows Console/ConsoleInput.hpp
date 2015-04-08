@@ -35,11 +35,13 @@ namespace aki
                 ConsoleInput(unsigned int inputBufferSize, HWND consoleWindow);
                 virtual ~ConsoleInput();
 
-                /* ConsoleInpu operations */
+                /* ConsoleInput operations */
                 virtual void Tick();
 
-                /* Getters */
+                /* Getters & Setters */
                 // Keyboard
+                void ClearKey(KEYBOARD::TYPE key);
+
                 bool GetKeyUp(KEYBOARD::TYPE key);
                 bool GetKeyDown(KEYBOARD::TYPE key);
 
@@ -67,6 +69,7 @@ namespace aki
                 /* Utility */
                 void KeyEvent(KEY_EVENT_RECORD keyEvent);
                 void MouseEvent(MOUSE_EVENT_RECORD mouseEvent);
+
                 void ClearInputEvents();
 
             protected:

@@ -101,7 +101,7 @@ namespace aki
 
             char ConsoleInputExt::GetCharacter()
             {
-#define t(keyCode, hex) if(GetKeyDown(keyCode)) { return hex; }
+#define t(keyCode, hex) if(GetKeyDown(keyCode)) { ClearKey(keyCode); return hex; }
 
                 bool shift = GetKeyDown(KEYBOARD::SHIFT);
 

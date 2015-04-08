@@ -4,6 +4,7 @@
 */
 
 #include <assert.h>
+#include <sstream>
 
 #include "Akropolix\input\Windows Console\ConsoleInput.hpp"
 #include "Akropolix\Utility\Math\Vector2f.hpp"
@@ -105,11 +106,14 @@ namespace aki
                     for (int i = 0; i < MOUSE_ACTION::END_OF_MOUSE_ACTION; i++)
                         mouseActions[i] = false;
 
-                    if (!PeekConsoleInput(inputHandle, inputRecords, inputBufferSize, &inputCount))
+                    if (!GetNumberOfConsoleInputEvents(inputHandle, &inputCount))
                         LogWindowsError(INPUT_LOG);
 
-                    if (!FlushConsoleInputBuffer(inputHandle))
-                        LogWindowsError(INPUT_LOG);
+                    if (inputCount > 0)
+                    {
+                        if (!ReadConsoleInput(inputHandle, inputRecords, inputBufferSize, &inputCount))
+                            LogWindowsError(INPUT_LOG);
+                    }
 
                     for (unsigned int i = 0; i < inputCount; i++)
                     {
@@ -139,6 +143,11 @@ namespace aki
             //
 
             /* Keyboard */
+            void ConsoleInput::ClearKey(KEYBOARD::TYPE key)
+            {
+                pressedKeys[key] = false;
+            }
+
             bool ConsoleInput::GetKeyUp(KEYBOARD::TYPE key)
             {
                 bool keyMatched = false;
@@ -400,6 +409,16 @@ namespace aki
                     releasedKeys.push_front(key);
                     mostRecentKeyUp = key;
                 }
+
+                std::stringstream str;
+                str << ": ";
+                for (int i = 0; i < KEYBOARD::END_OF_KEYBOARD; i++)
+                {
+                    str << pressedKeys[i] << " ";
+                }
+                str << ":";
+
+                LogMessage(str.str(), INPUT_LOG);
             }
 
             void ConsoleInput::MouseEvent(MOUSE_EVENT_RECORD mouseEvent)
