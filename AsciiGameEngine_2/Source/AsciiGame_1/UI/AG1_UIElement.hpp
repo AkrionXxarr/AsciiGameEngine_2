@@ -22,6 +22,9 @@ public:
 
     virtual void Input(aki::input::wincon::ConsoleInputExt& input) { }
 
+    virtual void OnGainFocus() { }
+    virtual void OnLoseFocus() { }
+
     POINT GetPosition() { return { rect.left, rect.top }; }
     POINT GetSize() { return{ rect.right, rect.bottom }; }
     RECT GetRect() { return rect; }

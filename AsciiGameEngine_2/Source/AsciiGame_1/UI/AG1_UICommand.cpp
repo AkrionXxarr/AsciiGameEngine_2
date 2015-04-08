@@ -91,11 +91,17 @@ void UICommand::Update(float deltaTime)
     ci.Attributes = secondary;
 
     int x = 0;
-    for (; x < command.size(); x++)
+    for (x; x < command.size(); x++)
     {
         ci.Char.UnicodeChar = command[x];
 
         Write(x + (prePadding + postPadding), 1, ci);
+    }
+
+    for (int t = x; t < maxCmdLength; t++)
+    {
+        ci.Char.UnicodeChar = ' ';
+        Write(t + (prePadding + postPadding), 1, ci);
     }
 
     if (x < maxCmdLength)
@@ -135,7 +141,6 @@ void UICommand::Input(ConsoleInputExt& input)
             if (cmdPos > 0)
             {
                 lastKey = key;
-                ClearCommandLine();
                 command.pop_back();
                 cmdPos--;
             }
@@ -155,6 +160,16 @@ void UICommand::Input(ConsoleInputExt& input)
     }
 }
 
+void UICommand::OnGainFocus()
+{
+
+}
+
+void UICommand::OnLoseFocus()
+{
+    ClearCommandLine();
+}
+
 void UICommand::ClearCommandLine()
 {
     CHAR_INFO ci;
@@ -166,4 +181,7 @@ void UICommand::ClearCommandLine()
     {
         Write(x, 1, ci);
     }
+
+    command = "";
+    cmdPos = 0;
 }

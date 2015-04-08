@@ -38,8 +38,10 @@ public:
     virtual void Input(aki::input::wincon::ConsoleInputExt& input);
 
     COORD GetUISize();
+    UIElement* const GetUIElement(UI_ELEMENT::Type element);
+    UI_ELEMENT::Type GetFocusedElement();
 
-    void SetFocusedElement(UI_ELEMENT::Type element) { focusedElement = element; }
+    void SetFocusedElement(UI_ELEMENT::Type element);
 
 private:
     UIInfo* uiInfo;

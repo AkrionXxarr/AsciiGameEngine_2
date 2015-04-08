@@ -7,6 +7,8 @@
 
 #include "Akropolix\Engine\Windows Console\MainConsoleEngine.hpp"
 
+class UI;
+
 class Engine : public aki::engine::wincon::MainConsoleEngine
 {
 public:
@@ -21,4 +23,7 @@ public:
 
 protected:
     virtual void Clean();
+
+private:
+    UI* ui;
 };

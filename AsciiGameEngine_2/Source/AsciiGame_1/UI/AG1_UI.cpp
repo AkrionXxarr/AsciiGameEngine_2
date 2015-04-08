@@ -86,3 +86,48 @@ void UI::Input(ConsoleInputExt& input)
         break;
     }
 }
+
+UIElement* const UI::GetUIElement(UI_ELEMENT::Type element)
+{
+    UIElement* t = nullptr;
+
+    switch (element)
+    {
+    case UI_ELEMENT::UI_INFO:
+        t = uiInfo;
+        break;
+
+    case UI_ELEMENT::UI_MENU:
+        t = uiMenu;
+        break;
+
+    case UI_ELEMENT::UI_MESSAGE:
+        t = uiMessage;
+        break;
+
+    case UI_ELEMENT::UI_SCREEN:
+        t = uiScreen;
+        break;
+
+    case UI_ELEMENT::UI_COMMAND:
+        t = uiCommand;
+        break;
+    }
+
+    return t;
+}
+
+UI_ELEMENT::Type UI::GetFocusedElement()
+{
+    return focusedElement;
+}
+
+void UI::SetFocusedElement(UI_ELEMENT::Type element)
+{
+    if (element != focusedElement)
+    {
+        GetUIElement(focusedElement)->OnLoseFocus();
+        focusedElement = element;
+        GetUIElement(focusedElement)->OnGainFocus();
+    }
+}

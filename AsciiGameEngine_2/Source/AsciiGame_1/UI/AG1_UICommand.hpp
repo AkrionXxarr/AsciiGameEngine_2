@@ -23,6 +23,11 @@ public:
 
     virtual void Input(aki::input::wincon::ConsoleInputExt& input);
 
+    virtual void OnGainFocus();
+    virtual void OnLoseFocus();
+
+    std::string GetCommand() { return command; }
+
 private:
     void ClearCommandLine();
 
