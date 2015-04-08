@@ -3,16 +3,14 @@
 * All rights reserved.
 */
 
-#include "TestApp_1\Engine.hpp"
+#include "AsciiGame_1\AG1_Engine.hpp"
 
 #define WIDTH 80
 #define HEIGHT 80
 
-using namespace aki;
-
 int main()
 {
-    Engine engine(160, 90);
+    Engine engine;
     
     if (!engine.Initialize())
         return 0;

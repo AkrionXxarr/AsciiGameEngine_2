@@ -1,0 +1,5 @@
+Note type will be denoted within [] along with an optional + or - to indicate a 
+positive or negative impression respectively.
+
+
+[Usability -] User needs to make sure to call every parent virtual function in their inherited engine class.

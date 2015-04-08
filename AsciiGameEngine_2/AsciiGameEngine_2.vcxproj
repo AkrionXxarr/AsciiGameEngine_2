@@ -87,16 +87,19 @@
     <ClCompile Include="Source\Akropolix\Utility\Math\Vector2f.cpp" />
     <ClCompile Include="Source\Akropolix\Utility\Math\Vector3f.cpp" />
     <ClCompile Include="Source\Akropolix\Utility\Math\Vector4f.cpp" />
+    <ClCompile Include="Source\AsciiGame_1\AG1_Engine.cpp" />
+    <ClCompile Include="Source\AsciiGame_1\AG1_UI.cpp" />
+    <ClCompile Include="Source\AsciiGame_1\AG1_UICommand.cpp" />
+    <ClCompile Include="Source\AsciiGame_1\AG1_UIInfo.cpp" />
+    <ClCompile Include="Source\AsciiGame_1\AG1_UIMenu.cpp" />
+    <ClCompile Include="Source\AsciiGame_1\AG1_UIMessage.cpp" />
+    <ClCompile Include="Source\AsciiGame_1\AG1_UIScreen.cpp" />
     <ClCompile Include="Source\Main.cpp" />
-    <ClCompile Include="Source\TestApp_1\BasicRectangle.cpp" />
-    <ClCompile Include="Source\TestApp_1\Camera.cpp" />
-    <ClCompile Include="Source\TestApp_1\Engine.cpp" />
-    <ClCompile Include="Source\TestApp_1\LineTest.cpp" />
-    <ClCompile Include="Source\TestApp_1\Starfield.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Docs\EngineSystem.txt" />
     <Text Include="Docs\TODO.txt" />
+    <Text Include="Docs\UsageNotes.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Akropolix\Display Device\Interface\IDisplayDevice.hpp" />
@@ -125,11 +128,14 @@
     <ClInclude Include="Source\Akropolix\Utility\Math\Vector4f.hpp" />
     <ClInclude Include="Source\Akropolix\Utility\Time\ITime.hpp" />
     <ClInclude Include="Source\Akropolix\Utility\Time\WindowsTime.hpp" />
-    <ClInclude Include="Source\TestApp_1\BasicRectangle.hpp" />
-    <ClInclude Include="Source\TestApp_1\Camera.hpp" />
-    <ClInclude Include="Source\TestApp_1\Engine.hpp" />
-    <ClInclude Include="Source\TestApp_1\LineTest.hpp" />
-    <ClInclude Include="Source\TestApp_1\Starfield.hpp" />
+    <ClInclude Include="Source\AsciiGame_1\AG1_Engine.hpp" />
+    <ClInclude Include="Source\AsciiGame_1\AG1_UI.hpp" />
+    <ClInclude Include="Source\AsciiGame_1\AG1_UICommand.hpp" />
+    <ClInclude Include="Source\AsciiGame_1\AG1_UIElement.hpp" />
+    <ClInclude Include="Source\AsciiGame_1\AG1_UIInfo.hpp" />
+    <ClInclude Include="Source\AsciiGame_1\AG1_UIMenu.hpp" />
+    <ClInclude Include="Source\AsciiGame_1\AG1_UIMessage.hpp" />
+    <ClInclude Include="Source\AsciiGame_1\AG1_UIScreen.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

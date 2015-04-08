@@ -82,8 +82,11 @@
     <Filter Include="Source\Akropolix\Input\Windows Console">
       <UniqueIdentifier>{417c4f79-773c-4e92-876e-0a52d3caca5d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\TestApp_1">
-      <UniqueIdentifier>{27165baa-738f-4e92-9984-e7a5c0ce90b0}</UniqueIdentifier>
+    <Filter Include="Source\AsciiGame_1">
+      <UniqueIdentifier>{e63e0dad-163b-42de-8a0c-ed51e7005114}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\AsciiGame_1\UI">
+      <UniqueIdentifier>{1372b99c-163a-4fd5-a75e-ad116c9b8003}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -132,20 +135,26 @@
     <ClCompile Include="Source\Akropolix\Input\Windows Console\CursorLock.cpp">
       <Filter>Source\Akropolix\Input\Windows Console</Filter>
     </ClCompile>
-    <ClCompile Include="Source\TestApp_1\Engine.cpp">
-      <Filter>Source\TestApp_1</Filter>
+    <ClCompile Include="Source\AsciiGame_1\AG1_Engine.cpp">
+      <Filter>Source\AsciiGame_1</Filter>
     </ClCompile>
-    <ClCompile Include="Source\TestApp_1\BasicRectangle.cpp">
-      <Filter>Source\TestApp_1</Filter>
+    <ClCompile Include="Source\AsciiGame_1\AG1_UI.cpp">
+      <Filter>Source\AsciiGame_1\UI</Filter>
     </ClCompile>
-    <ClCompile Include="Source\TestApp_1\Starfield.cpp">
-      <Filter>Source\TestApp_1</Filter>
+    <ClCompile Include="Source\AsciiGame_1\AG1_UIInfo.cpp">
+      <Filter>Source\AsciiGame_1\UI</Filter>
     </ClCompile>
-    <ClCompile Include="Source\TestApp_1\LineTest.cpp">
-      <Filter>Source\TestApp_1</Filter>
+    <ClCompile Include="Source\AsciiGame_1\AG1_UIMenu.cpp">
+      <Filter>Source\AsciiGame_1\UI</Filter>
     </ClCompile>
-    <ClCompile Include="Source\TestApp_1\Camera.cpp">
-      <Filter>Source\TestApp_1</Filter>
+    <ClCompile Include="Source\AsciiGame_1\AG1_UIMessage.cpp">
+      <Filter>Source\AsciiGame_1\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\AsciiGame_1\AG1_UIScreen.cpp">
+      <Filter>Source\AsciiGame_1\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\AsciiGame_1\AG1_UICommand.cpp">
+      <Filter>Source\AsciiGame_1\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -153,6 +162,9 @@
       <Filter>Docs</Filter>
     </Text>
     <Text Include="Docs\EngineSystem.txt">
+      <Filter>Docs</Filter>
+    </Text>
+    <Text Include="Docs\UsageNotes.txt">
       <Filter>Docs</Filter>
     </Text>
   </ItemGroup>
@@ -235,20 +247,29 @@
     <ClInclude Include="Source\Akropolix\Input\Windows Console\ConsoleInputExt.hpp">
       <Filter>Source\Akropolix\Input\Windows Console</Filter>
     </ClInclude>
-    <ClInclude Include="Source\TestApp_1\Engine.hpp">
-      <Filter>Source\TestApp_1</Filter>
+    <ClInclude Include="Source\AsciiGame_1\AG1_Engine.hpp">
+      <Filter>Source\AsciiGame_1</Filter>
     </ClInclude>
-    <ClInclude Include="Source\TestApp_1\BasicRectangle.hpp">
-      <Filter>Source\TestApp_1</Filter>
+    <ClInclude Include="Source\AsciiGame_1\AG1_UI.hpp">
+      <Filter>Source\AsciiGame_1\UI</Filter>
     </ClInclude>
-    <ClInclude Include="Source\TestApp_1\Starfield.hpp">
-      <Filter>Source\TestApp_1</Filter>
+    <ClInclude Include="Source\AsciiGame_1\AG1_UIInfo.hpp">
+      <Filter>Source\AsciiGame_1\UI</Filter>
     </ClInclude>
-    <ClInclude Include="Source\TestApp_1\LineTest.hpp">
-      <Filter>Source\TestApp_1</Filter>
+    <ClInclude Include="Source\AsciiGame_1\AG1_UIMenu.hpp">
+      <Filter>Source\AsciiGame_1\UI</Filter>
     </ClInclude>
-    <ClInclude Include="Source\TestApp_1\Camera.hpp">
-      <Filter>Source\TestApp_1</Filter>
+    <ClInclude Include="Source\AsciiGame_1\AG1_UIMessage.hpp">
+      <Filter>Source\AsciiGame_1\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\AsciiGame_1\AG1_UIScreen.hpp">
+      <Filter>Source\AsciiGame_1\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\AsciiGame_1\AG1_UIElement.hpp">
+      <Filter>Source\AsciiGame_1\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\AsciiGame_1\AG1_UICommand.hpp">
+      <Filter>Source\AsciiGame_1\UI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
