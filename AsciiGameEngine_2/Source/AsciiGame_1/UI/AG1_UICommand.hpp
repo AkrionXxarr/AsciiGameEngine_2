@@ -39,5 +39,7 @@ private:
     unsigned int prePadding, postPadding;
     unsigned int maxCmdLength;
 
-    aki::input::wincon::KEYBOARD::TYPE lastKey;
+    bool cursorIsShowing;
+    float cursorFlashInterval;
+    float cursorFlashTime;
 };

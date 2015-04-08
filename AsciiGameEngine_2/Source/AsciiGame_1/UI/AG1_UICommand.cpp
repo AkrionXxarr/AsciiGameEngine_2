@@ -25,7 +25,9 @@ UICommand::UICommand(WORD primaryColor, WORD secondaryColor, WORD tertiaryColor)
     postPadding = 2; // Space after the >
     maxCmdLength = ((rect.right - 2) - prePadding) - postPadding;
 
-    lastKey = KEYBOARD::NO_KEY;
+    cursorIsShowing = true;
+    cursorFlashInterval = 0.5f;
+    cursorFlashTime = 0;
 
     uiBuffer = new CHAR_INFO[rect.right * rect.bottom];
 }
@@ -104,11 +106,22 @@ void UICommand::Update(float deltaTime)
         Write(t + (prePadding + postPadding), 1, ci);
     }
 
-    if (x < maxCmdLength)
+    if (cursorIsShowing)
     {
-        ci.Attributes = tertiary;
-        ci.Char.UnicodeChar = 0xDB;
-        Write(x + (prePadding + postPadding), 1, ci);
+        if (x < maxCmdLength)
+        {
+            ci.Attributes = tertiary;
+            ci.Char.UnicodeChar = 0xDB;
+            Write(x + (prePadding + postPadding), 1, ci);
+        }
+    }
+
+    cursorFlashTime += deltaTime;
+
+    if (cursorFlashTime >= cursorFlashInterval)
+    {
+        cursorFlashTime = 0;
+        cursorIsShowing = !cursorIsShowing;
     }
 }
 
@@ -140,7 +153,8 @@ void UICommand::Input(ConsoleInputExt& input)
         case 0x08: // Backspace
             if (cmdPos > 0)
             {
-                lastKey = key;
+                cursorFlashTime = 0; // Reset to halt the flash while typing
+                cursorIsShowing = true; // Make sure cursor can be seen while typing
                 command.pop_back();
                 cmdPos--;
             }
@@ -152,7 +166,8 @@ void UICommand::Input(ConsoleInputExt& input)
         default:
             if (cmdPos < maxCmdLength)
             {
-                lastKey = key;
+                cursorFlashTime = 0; // Reset to halt the flash while typing
+                cursorIsShowing = true; // Make sure cursor can be seen while typing
                 command.push_back(c);
                 cmdPos++;
             }
@@ -162,7 +177,7 @@ void UICommand::Input(ConsoleInputExt& input)
 
 void UICommand::OnGainFocus()
 {
-
+    cursorIsShowing = true;
 }
 
 void UICommand::OnLoseFocus()
