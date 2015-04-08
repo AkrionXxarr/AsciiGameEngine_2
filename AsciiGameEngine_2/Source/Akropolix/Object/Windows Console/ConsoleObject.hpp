@@ -16,7 +16,10 @@ namespace aki
             class ConsoleInputExt;
         }
     }
+}
 
+namespace aki
+{
     namespace object
     {
         namespace wincon
