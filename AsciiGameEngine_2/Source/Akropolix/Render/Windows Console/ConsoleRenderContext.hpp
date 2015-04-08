@@ -37,8 +37,9 @@ namespace aki
 
                 void Clear();
 
-                void DrawPoint(POINT pos, CHAR_INFO& ci);
-                void DrawLine(POINT a, POINT b, CHAR_INFO& ci);
+                // Draw to console buffer or supplied buffer
+                void DrawPoint(POINT pos, CHAR_INFO& ci, CHAR_INFO* other = nullptr, COORD bufferSize = { 0, 0 });
+                void DrawLine(POINT a, POINT b, CHAR_INFO& ci, CHAR_INFO* other = nullptr, COORD bufferSize = { 0, 0 });
 
             private:
                 std::shared_ptr<display::wincon::ConsoleBuffer> buffer;

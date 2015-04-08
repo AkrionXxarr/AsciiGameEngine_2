@@ -45,19 +45,34 @@ namespace aki
                 return buffer->GetSizeAsCoord().Y;
             }
 
-            void ConsoleRenderContext::DrawPoint(POINT pos, CHAR_INFO& ci)
+            void ConsoleRenderContext::DrawPoint(POINT pos, CHAR_INFO& ci, CHAR_INFO* other, COORD bufferSize)
             {
-                if (pos.x < 0 || pos.y < 0 || pos.x >(buffer->GetSizeAsCoord().X - 1) || pos.y >(buffer->GetSizeAsCoord().Y - 1))
-                    return;
+                if (other)
+                {
+                    if (pos.x < 0 || pos.y < 0 || pos.x > (bufferSize.X - 1) || pos.y >(bufferSize.Y - 1))
+                        return;
+                }
+                else
+                {
+                    if (pos.x < 0 || pos.y < 0 || pos.x >(buffer->GetSizeAsCoord().X - 1) || pos.y >(buffer->GetSizeAsCoord().Y - 1))
+                        return;
+                }
 
-                buffer->Put(pos.x, pos.y, ci);
+                if (other)
+                {
+                    other[(pos.y * bufferSize.X) + pos.x] = ci;
+                }
+                else
+                {
+                    buffer->Put(pos.x, pos.y, ci);
+                }
             }
 
-            void ConsoleRenderContext::DrawLine(POINT a, POINT b, CHAR_INFO& ci)
+            void ConsoleRenderContext::DrawLine(POINT a, POINT b, CHAR_INFO& ci, CHAR_INFO* other, COORD bufferSize)
             {
                 // Make sure the ends of the line get drawn
-                DrawPoint(a, ci);
-                DrawPoint(b, ci);
+                DrawPoint(a, ci, other, bufferSize);
+                DrawPoint(b, ci, other, bufferSize);
 
                 bool vertProjIsLonger = (std::abs(b.y - a.y) > std::abs(b.x - a.x));
 
@@ -129,9 +144,9 @@ namespace aki
                 for (int x = a.x; x < b.x; x++)
                 {
                     if (vertProjIsLonger)
-                        DrawPoint({ y, x }, ci);
+                        DrawPoint({ y, x }, ci, other, bufferSize);
                     else
-                        DrawPoint({ x, y }, ci);
+                        DrawPoint({ x, y }, ci, other, bufferSize);
 
                     err -= dy;
 
