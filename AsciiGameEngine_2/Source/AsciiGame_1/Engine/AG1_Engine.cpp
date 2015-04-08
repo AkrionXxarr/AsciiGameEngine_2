@@ -5,7 +5,7 @@
 
 #include "AG1_Engine.hpp"
 
-#include "AG1_UI.hpp"
+#include "AsciiGame_1\UI\AG1_UI.hpp"
 
 #include "Akropolix\Display Device\Windows Console\ConsoleDefines.hpp"
 
@@ -27,7 +27,7 @@ bool Engine::Initialize()
 {
     MainConsoleEngine::Initialize();
 
-    UI* ui = new UI(f_darkGray, f_fullGreen, f_fullCyan);
+    UI* ui = new UI(f_darkGray, f_halfYellow, f_fullGreen);
 
     ui->SetFocusedElement(UI_ELEMENT::UI_COMMAND);
 

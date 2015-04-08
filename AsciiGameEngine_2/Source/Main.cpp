@@ -3,7 +3,7 @@
 * All rights reserved.
 */
 
-#include "AsciiGame_1\AG1_Engine.hpp"
+#include "AsciiGame_1\Engine\AG1_Engine.hpp"
 
 #define WIDTH 80
 #define HEIGHT 80

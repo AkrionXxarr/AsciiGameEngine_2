@@ -7,11 +7,11 @@
 
 #include "Akropolix\Object\Windows Console\ConsoleObject.hpp"
 
-#include "AG1_UIInfo.hpp"
-#include "AG1_UIMenu.hpp"
-#include "AG1_UIMessage.hpp"
-#include "AG1_UIScreen.hpp"
-#include "AG1_UICommand.hpp"
+#include "AsciiGame_1\UI\AG1_UIInfo.hpp"
+#include "AsciiGame_1\UI\AG1_UIMenu.hpp"
+#include "AsciiGame_1\UI\AG1_UIMessage.hpp"
+#include "AsciiGame_1\UI\AG1_UIScreen.hpp"
+#include "AsciiGame_1\UI\AG1_UICommand.hpp"
 
 // Dictates which element gets input focus
 namespace UI_ELEMENT

@@ -3,30 +3,30 @@
 * All rights reserved.
 */
 
-#include "AG1_UIMenu.hpp"
+#include "AsciiGame_1\UI\AG1_UIMessage.hpp"
 #include "Akropolix\Render\Windows Console\ConsoleRenderContext.hpp"
 
 using namespace aki::render::wincon;
 using namespace aki::render::I;
 using namespace aki::input::wincon;
 
-UIMenu::UIMenu(WORD primaryColor, WORD secondaryColor, WORD tertiaryColor)
+UIMessage::UIMessage(WORD primaryColor, WORD secondaryColor, WORD tertiaryColor)
 {
     primary = primaryColor;
     secondary = secondaryColor;
     tertiary = tertiaryColor;
 
-    rect.left = 51; rect.top = 0;
-    rect.right = 29; rect.bottom = 52;
+    rect.left = 0; rect.top = 53;
+    rect.right = 52; rect.bottom = 27;
 
     uiBuffer = new CHAR_INFO[rect.right * rect.bottom];
 }
 
-UIMenu::~UIMenu()
+UIMessage::~UIMessage()
 {
 }
 
-void UIMenu::InitElement()
+void UIMessage::InitElement()
 {
     CHAR_INFO ci;
     POINT size = GetSize();
@@ -70,12 +70,12 @@ void UIMenu::InitElement()
     }
 }
 
-void UIMenu::Update(float deltaTime)
+void UIMessage::Update(float deltaTime)
 {
 
 }
 
-void UIMenu::Draw(IRenderContext& renderContext)
+void UIMessage::Draw(IRenderContext& renderContext)
 {
     ConsoleRenderContext& crc = (ConsoleRenderContext&)renderContext;
 
@@ -86,9 +86,4 @@ void UIMenu::Draw(IRenderContext& renderContext)
             crc.DrawPoint({ x + rect.left, y + rect.top }, uiBuffer[(y * rect.right) + x]);
         }
     }
-}
-
-void UIMenu::Input(ConsoleInputExt& input)
-{
-
 }

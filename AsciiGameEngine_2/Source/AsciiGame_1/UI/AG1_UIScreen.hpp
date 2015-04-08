@@ -5,13 +5,13 @@
 
 #pragma once
 
-#include "AG1_UIElement.hpp"
+#include "AsciiGame_1\UI\AG1_UIElement.hpp"
 
-class UIMenu : public UIElement
+class UIScreen : public UIElement
 {
 public:
-    UIMenu(WORD primaryColor, WORD secondaryColor, WORD tertiaryColor);
-    ~UIMenu();
+    UIScreen(WORD primaryColor, WORD secondaryColor, WORD tertiaryColor);
+    ~UIScreen();
 
     virtual void InitElement();
 

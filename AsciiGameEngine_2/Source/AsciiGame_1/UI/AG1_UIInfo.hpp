@@ -5,18 +5,20 @@
 
 #pragma once
 
-#include "AG1_UIElement.hpp"
+#include "AsciiGame_1\UI\AG1_UIElement.hpp"
 
-class UIMessage : public UIElement
+class UIInfo : public UIElement
 {
 public:
-    UIMessage(WORD primaryColor, WORD secondaryColor, WORD tertiaryColor);
-    ~UIMessage();
+    UIInfo(WORD primaryColor, WORD secondaryColor, WORD tertiaryColor);
+    ~UIInfo();
 
     virtual void InitElement();
 
     virtual void Update(float deltaTime);
     virtual void Draw(aki::render::I::IRenderContext& renderContext);
+
+    virtual void Input(aki::input::wincon::ConsoleInputExt& input);
 
 private:
     WORD primary, secondary, tertiary;

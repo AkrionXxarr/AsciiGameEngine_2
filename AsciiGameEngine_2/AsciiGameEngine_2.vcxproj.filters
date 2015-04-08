@@ -88,6 +88,9 @@
     <Filter Include="Source\AsciiGame_1\UI">
       <UniqueIdentifier>{1372b99c-163a-4fd5-a75e-ad116c9b8003}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\AsciiGame_1\Engine">
+      <UniqueIdentifier>{275743cb-6a5b-4e05-bc07-3692a2b0e1bf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Main.cpp">
@@ -135,25 +138,25 @@
     <ClCompile Include="Source\Akropolix\Input\Windows Console\CursorLock.cpp">
       <Filter>Source\Akropolix\Input\Windows Console</Filter>
     </ClCompile>
-    <ClCompile Include="Source\AsciiGame_1\AG1_Engine.cpp">
-      <Filter>Source\AsciiGame_1</Filter>
+    <ClCompile Include="Source\AsciiGame_1\Engine\AG1_Engine.cpp">
+      <Filter>Source\AsciiGame_1\Engine</Filter>
     </ClCompile>
-    <ClCompile Include="Source\AsciiGame_1\AG1_UI.cpp">
+    <ClCompile Include="Source\AsciiGame_1\UI\AG1_UI.cpp">
       <Filter>Source\AsciiGame_1\UI</Filter>
     </ClCompile>
-    <ClCompile Include="Source\AsciiGame_1\AG1_UIInfo.cpp">
+    <ClCompile Include="Source\AsciiGame_1\UI\AG1_UICommand.cpp">
       <Filter>Source\AsciiGame_1\UI</Filter>
     </ClCompile>
-    <ClCompile Include="Source\AsciiGame_1\AG1_UIMenu.cpp">
+    <ClCompile Include="Source\AsciiGame_1\UI\AG1_UIInfo.cpp">
       <Filter>Source\AsciiGame_1\UI</Filter>
     </ClCompile>
-    <ClCompile Include="Source\AsciiGame_1\AG1_UIMessage.cpp">
+    <ClCompile Include="Source\AsciiGame_1\UI\AG1_UIMenu.cpp">
       <Filter>Source\AsciiGame_1\UI</Filter>
     </ClCompile>
-    <ClCompile Include="Source\AsciiGame_1\AG1_UIScreen.cpp">
+    <ClCompile Include="Source\AsciiGame_1\UI\AG1_UIMessage.cpp">
       <Filter>Source\AsciiGame_1\UI</Filter>
     </ClCompile>
-    <ClCompile Include="Source\AsciiGame_1\AG1_UICommand.cpp">
+    <ClCompile Include="Source\AsciiGame_1\UI\AG1_UIScreen.cpp">
       <Filter>Source\AsciiGame_1\UI</Filter>
     </ClCompile>
   </ItemGroup>
@@ -247,28 +250,28 @@
     <ClInclude Include="Source\Akropolix\Input\Windows Console\ConsoleInputExt.hpp">
       <Filter>Source\Akropolix\Input\Windows Console</Filter>
     </ClInclude>
-    <ClInclude Include="Source\AsciiGame_1\AG1_Engine.hpp">
-      <Filter>Source\AsciiGame_1</Filter>
+    <ClInclude Include="Source\AsciiGame_1\Engine\AG1_Engine.hpp">
+      <Filter>Source\AsciiGame_1\Engine</Filter>
     </ClInclude>
-    <ClInclude Include="Source\AsciiGame_1\AG1_UI.hpp">
+    <ClInclude Include="Source\AsciiGame_1\UI\AG1_UI.hpp">
       <Filter>Source\AsciiGame_1\UI</Filter>
     </ClInclude>
-    <ClInclude Include="Source\AsciiGame_1\AG1_UIInfo.hpp">
+    <ClInclude Include="Source\AsciiGame_1\UI\AG1_UICommand.hpp">
       <Filter>Source\AsciiGame_1\UI</Filter>
     </ClInclude>
-    <ClInclude Include="Source\AsciiGame_1\AG1_UIMenu.hpp">
+    <ClInclude Include="Source\AsciiGame_1\UI\AG1_UIElement.hpp">
       <Filter>Source\AsciiGame_1\UI</Filter>
     </ClInclude>
-    <ClInclude Include="Source\AsciiGame_1\AG1_UIMessage.hpp">
+    <ClInclude Include="Source\AsciiGame_1\UI\AG1_UIInfo.hpp">
       <Filter>Source\AsciiGame_1\UI</Filter>
     </ClInclude>
-    <ClInclude Include="Source\AsciiGame_1\AG1_UIScreen.hpp">
+    <ClInclude Include="Source\AsciiGame_1\UI\AG1_UIMenu.hpp">
       <Filter>Source\AsciiGame_1\UI</Filter>
     </ClInclude>
-    <ClInclude Include="Source\AsciiGame_1\AG1_UIElement.hpp">
+    <ClInclude Include="Source\AsciiGame_1\UI\AG1_UIMessage.hpp">
       <Filter>Source\AsciiGame_1\UI</Filter>
     </ClInclude>
-    <ClInclude Include="Source\AsciiGame_1\AG1_UICommand.hpp">
+    <ClInclude Include="Source\AsciiGame_1\UI\AG1_UIScreen.hpp">
       <Filter>Source\AsciiGame_1\UI</Filter>
     </ClInclude>
   </ItemGroup>

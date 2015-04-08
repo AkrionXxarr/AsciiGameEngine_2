@@ -7,7 +7,7 @@
 
 #include <string>
 
-#include "AG1_UIElement.hpp"
+#include "AsciiGame_1\UI\AG1_UIElement.hpp"
 #include "Akropolix\Input\Windows Console\ConsoleInputExt.hpp"
 
 class UICommand : public UIElement

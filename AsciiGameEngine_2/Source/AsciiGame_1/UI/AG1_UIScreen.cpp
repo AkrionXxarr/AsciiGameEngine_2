@@ -1,32 +1,32 @@
-/*
+/*UIScreen
 * Copyright(c) 2015, Stephen Bloomquist
 * All rights reserved.
 */
 
-#include "AG1_UIMessage.hpp"
+#include "AsciiGame_1\UI\AG1_UIScreen.hpp"
 #include "Akropolix\Render\Windows Console\ConsoleRenderContext.hpp"
 
 using namespace aki::render::wincon;
 using namespace aki::render::I;
 using namespace aki::input::wincon;
 
-UIMessage::UIMessage(WORD primaryColor, WORD secondaryColor, WORD tertiaryColor)
+UIScreen::UIScreen(WORD primaryColor, WORD secondaryColor , WORD tertiaryColor)
 {
     primary = primaryColor;
     secondary = secondaryColor;
     tertiary = tertiaryColor;
 
-    rect.left = 0; rect.top = 53;
-    rect.right = 52; rect.bottom = 27;
+    rect.left = 0; rect.top = 0;
+    rect.right = 52; rect.bottom = 52;
 
     uiBuffer = new CHAR_INFO[rect.right * rect.bottom];
 }
 
-UIMessage::~UIMessage()
+UIScreen::~UIScreen()
 {
 }
 
-void UIMessage::InitElement()
+void UIScreen::InitElement()
 {
     CHAR_INFO ci;
     POINT size = GetSize();
@@ -39,7 +39,7 @@ void UIMessage::InitElement()
     Write(size.x - 1, 0, ci); // Top right
     Write(0, size.y - 1, ci); // Bottom left
     Write(size.x - 1, size.y - 1, ci); // Bottom right
-
+ 
     ci.Attributes = primary;
 
     // Top and Bottom edges
@@ -70,12 +70,12 @@ void UIMessage::InitElement()
     }
 }
 
-void UIMessage::Update(float deltaTime)
+void UIScreen::Update(float deltaTime)
 {
 
 }
 
-void UIMessage::Draw(IRenderContext& renderContext)
+void UIScreen::Draw(IRenderContext& renderContext)
 {
     ConsoleRenderContext& crc = (ConsoleRenderContext&)renderContext;
 
@@ -86,4 +86,9 @@ void UIMessage::Draw(IRenderContext& renderContext)
             crc.DrawPoint({ x + rect.left, y + rect.top }, uiBuffer[(y * rect.right) + x]);
         }
     }
+}
+
+void UIScreen::Input(ConsoleInputExt& input)
+{
+
 }
