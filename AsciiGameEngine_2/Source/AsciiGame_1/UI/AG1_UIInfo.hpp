@@ -5,6 +5,8 @@
 
 #pragma once
 
+#include <string>
+
 #include "AsciiGame_1\UI\AG1_UIElement.hpp"
 
 class UIInfo : public UIElement
@@ -22,4 +24,8 @@ public:
 
 private:
     WORD primary, secondary, tertiary;
+
+    float timeElapsed;
+    unsigned int frameCount;
+    std::string fps;
 };

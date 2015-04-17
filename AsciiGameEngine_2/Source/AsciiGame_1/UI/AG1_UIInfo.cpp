@@ -3,6 +3,8 @@
 * All rights reserved.
 */
 
+#include <sstream>
+
 #include "AsciiGame_1\UI\AG1_UIInfo.hpp"
 #include "Akropolix\Render\Windows Console\ConsoleRenderContext.hpp"
 
@@ -15,6 +17,10 @@ UIInfo::UIInfo(WORD primaryColor, WORD secondaryColor, WORD tertiaryColor)
     primary = primaryColor;
     secondary = secondaryColor;
     tertiary = tertiaryColor;
+
+    timeElapsed = 0;
+    frameCount = 0;
+    fps = "";
 
     rect.left = 51; rect.top = 51;
     rect.right = 29; rect.bottom = 29;
@@ -72,7 +78,32 @@ void UIInfo::InitElement()
 
 void UIInfo::Update(float deltaTime)
 {
+    timeElapsed += deltaTime;
 
+    if (timeElapsed >= 1.0f)
+    {
+        std::stringstream sstream;
+
+        sstream << "fps: " << frameCount;
+        fps = sstream.str();
+
+        for (int x = 0; x < fps.size(); x++)
+        {
+            CHAR_INFO ci;
+
+            ci.Attributes = secondary;
+            ci.Char.UnicodeChar = fps[x];
+
+            Write(x + 2, 2, ci);
+        }
+
+        timeElapsed = 0;
+        frameCount = 0;
+    }
+    else
+    {
+        frameCount++;
+    }
 }
 
 void UIInfo::Draw(IRenderContext& renderContext)

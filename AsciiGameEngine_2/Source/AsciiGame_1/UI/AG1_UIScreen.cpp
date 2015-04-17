@@ -10,7 +10,7 @@ using namespace aki::render::wincon;
 using namespace aki::render::I;
 using namespace aki::input::wincon;
 
-UIScreen::UIScreen(WORD primaryColor, WORD secondaryColor , WORD tertiaryColor)
+UIScreen::UIScreen(WORD primaryColor, WORD secondaryColor, WORD tertiaryColor) : Viewport({ 50, 50 })
 {
     primary = primaryColor;
     secondary = secondaryColor;
@@ -26,6 +26,7 @@ UIScreen::~UIScreen()
 {
 }
 
+// UIElement
 void UIScreen::InitElement()
 {
     CHAR_INFO ci;
@@ -72,12 +73,20 @@ void UIScreen::InitElement()
 
 void UIScreen::Update(float deltaTime)
 {
-
 }
 
 void UIScreen::Draw(IRenderContext& renderContext)
 {
     ConsoleRenderContext& crc = (ConsoleRenderContext&)renderContext;
+    
+    // So many for loops! >C
+    for (int y = 0; y < viewBufferSize.Y; y++)
+    {
+        for (int x = 0; x < viewBufferSize.X; x++)
+        {
+            Write(x + 1, y + 1, viewBuffer[(y * viewBufferSize.X) + x].ci);
+        }
+    }
 
     for (int y = 0; y < rect.bottom; y++)
     {
@@ -92,3 +101,13 @@ void UIScreen::Input(ConsoleInputExt& input)
 {
 
 }
+
+// Viewport
+void UIScreen::DrawPixel(int x, int y, CHAR_INFO& ci)
+{
+    if (x > 1 || y > 1 || x < (rect.right - 1) || y < (rect.bottom - 1))
+        return;
+
+    uiBuffer[(y * rect.right) + x] = ci;
+}
+

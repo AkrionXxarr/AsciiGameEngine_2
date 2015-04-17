@@ -72,7 +72,6 @@ void UIMenu::InitElement()
 
 void UIMenu::Update(float deltaTime)
 {
-
 }
 
 void UIMenu::Draw(IRenderContext& renderContext)

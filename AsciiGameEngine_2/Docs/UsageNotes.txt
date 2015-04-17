@@ -3,3 +3,15 @@ positive or negative impression respectively.
 
 
 [Usability -] User needs to make sure to call every parent virtual function in their inherited engine class.
+[Usability -] Wasn't a way to make use of the render context to draw to an alternate buffer.
+              This was fixed, though I'm unsure of the implementation.
+[Usability +] Input system working rather well thus far.
+[Usability -] Memory management of objects leaves some to be desired.
+[Usability] Current situation where all Draw functions reference directly to the console buffer makes
+            drawing specifically to a subsection of the buffer more difficult. Either that or my current
+			logic with how I'm making use of the render context is flawed.
+
+[Functionality +] As it stands the inherited engine system to hide away essential functions has worked well.
+[Functionality -] Memory management with object manager not great.
+
+[Note] All row/col buffer for loops could be optimized by pre-calculating the (row * width)

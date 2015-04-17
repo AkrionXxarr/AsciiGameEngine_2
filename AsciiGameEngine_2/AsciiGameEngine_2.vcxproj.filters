@@ -91,6 +91,15 @@
     <Filter Include="Source\AsciiGame_1\Engine">
       <UniqueIdentifier>{275743cb-6a5b-4e05-bc07-3692a2b0e1bf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\AsciiGame_1\Display">
+      <UniqueIdentifier>{bcc77b93-0c67-4654-8f6f-657763af4a26}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\AsciiGame_1\World">
+      <UniqueIdentifier>{989dee8e-4dc3-4c0d-ac6a-57d6ef5f3074}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\AsciiGame_1\Object">
+      <UniqueIdentifier>{3217c62b-5c39-4c6a-9bd4-7b44d734d570}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Main.cpp">
@@ -158,6 +167,24 @@
     </ClCompile>
     <ClCompile Include="Source\AsciiGame_1\UI\AG1_UIScreen.cpp">
       <Filter>Source\AsciiGame_1\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\AsciiGame_1\Display\AG1_Camera.cpp">
+      <Filter>Source\AsciiGame_1\Display</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\AsciiGame_1\World\AG1_World.cpp">
+      <Filter>Source\AsciiGame_1\World</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\AsciiGame_1\World\AG1_Room.cpp">
+      <Filter>Source\AsciiGame_1\World</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\AsciiGame_1\Object\AG1_GameObject.cpp">
+      <Filter>Source\AsciiGame_1\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\AsciiGame_1\World\TestRoom.cpp">
+      <Filter>Source\AsciiGame_1\World</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\AsciiGame_1\Object\AG1_Objects.cpp">
+      <Filter>Source\AsciiGame_1\Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -273,6 +300,27 @@
     </ClInclude>
     <ClInclude Include="Source\AsciiGame_1\UI\AG1_UIScreen.hpp">
       <Filter>Source\AsciiGame_1\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\AsciiGame_1\World\AG1_World.hpp">
+      <Filter>Source\AsciiGame_1\World</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\AsciiGame_1\Display\AG1_Viewport.hpp">
+      <Filter>Source\AsciiGame_1\Display</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\AsciiGame_1\Display\AG1_Camera.hpp">
+      <Filter>Source\AsciiGame_1\Display</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\AsciiGame_1\World\AG1_Room.hpp">
+      <Filter>Source\AsciiGame_1\World</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\AsciiGame_1\Object\AG1_GameObject.hpp">
+      <Filter>Source\AsciiGame_1\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\AsciiGame_1\World\TestRoom.hpp">
+      <Filter>Source\AsciiGame_1\World</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\AsciiGame_1\Object\AG1_Objects.hpp">
+      <Filter>Source\AsciiGame_1\Object</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

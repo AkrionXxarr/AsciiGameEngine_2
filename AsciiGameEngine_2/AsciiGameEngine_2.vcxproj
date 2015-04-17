@@ -87,13 +87,19 @@
     <ClCompile Include="Source\Akropolix\Utility\Math\Vector2f.cpp" />
     <ClCompile Include="Source\Akropolix\Utility\Math\Vector3f.cpp" />
     <ClCompile Include="Source\Akropolix\Utility\Math\Vector4f.cpp" />
+    <ClCompile Include="Source\AsciiGame_1\Display\AG1_Camera.cpp" />
     <ClCompile Include="Source\AsciiGame_1\Engine\AG1_Engine.cpp" />
+    <ClCompile Include="Source\AsciiGame_1\Object\AG1_GameObject.cpp" />
+    <ClCompile Include="Source\AsciiGame_1\Object\AG1_Objects.cpp" />
     <ClCompile Include="Source\AsciiGame_1\UI\AG1_UI.cpp" />
     <ClCompile Include="Source\AsciiGame_1\UI\AG1_UICommand.cpp" />
     <ClCompile Include="Source\AsciiGame_1\UI\AG1_UIInfo.cpp" />
     <ClCompile Include="Source\AsciiGame_1\UI\AG1_UIMenu.cpp" />
     <ClCompile Include="Source\AsciiGame_1\UI\AG1_UIMessage.cpp" />
     <ClCompile Include="Source\AsciiGame_1\UI\AG1_UIScreen.cpp" />
+    <ClCompile Include="Source\AsciiGame_1\World\AG1_Room.cpp" />
+    <ClCompile Include="Source\AsciiGame_1\World\AG1_World.cpp" />
+    <ClCompile Include="Source\AsciiGame_1\World\TestRoom.cpp" />
     <ClCompile Include="Source\Main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -128,7 +134,11 @@
     <ClInclude Include="Source\Akropolix\Utility\Math\Vector4f.hpp" />
     <ClInclude Include="Source\Akropolix\Utility\Time\ITime.hpp" />
     <ClInclude Include="Source\Akropolix\Utility\Time\WindowsTime.hpp" />
+    <ClInclude Include="Source\AsciiGame_1\Display\AG1_Camera.hpp" />
+    <ClInclude Include="Source\AsciiGame_1\Display\AG1_Viewport.hpp" />
     <ClInclude Include="Source\AsciiGame_1\Engine\AG1_Engine.hpp" />
+    <ClInclude Include="Source\AsciiGame_1\Object\AG1_GameObject.hpp" />
+    <ClInclude Include="Source\AsciiGame_1\Object\AG1_Objects.hpp" />
     <ClInclude Include="Source\AsciiGame_1\UI\AG1_UI.hpp" />
     <ClInclude Include="Source\AsciiGame_1\UI\AG1_UICommand.hpp" />
     <ClInclude Include="Source\AsciiGame_1\UI\AG1_UIElement.hpp" />
@@ -136,6 +146,9 @@
     <ClInclude Include="Source\AsciiGame_1\UI\AG1_UIMenu.hpp" />
     <ClInclude Include="Source\AsciiGame_1\UI\AG1_UIMessage.hpp" />
     <ClInclude Include="Source\AsciiGame_1\UI\AG1_UIScreen.hpp" />
+    <ClInclude Include="Source\AsciiGame_1\World\AG1_Room.hpp" />
+    <ClInclude Include="Source\AsciiGame_1\World\AG1_World.hpp" />
+    <ClInclude Include="Source\AsciiGame_1\World\TestRoom.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

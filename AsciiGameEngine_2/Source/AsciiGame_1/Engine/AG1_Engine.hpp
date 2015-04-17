@@ -8,6 +8,9 @@
 #include "Akropolix\Engine\Windows Console\MainConsoleEngine.hpp"
 
 class UI;
+class Camera;
+class World;
+class Player;
 
 class Engine : public aki::engine::wincon::MainConsoleEngine
 {
@@ -26,4 +29,7 @@ protected:
 
 private:
     UI* ui;
+    Camera* camera;
+    World* world;
+    Player* player;
 };
