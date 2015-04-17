@@ -6,6 +6,7 @@
 #pragma once
 
 #include <vector>
+#include <random>
 
 #include "Akropolix\Utility\Math\Vector2f.hpp"
 
@@ -18,6 +19,12 @@
 //
 class Player : public GameObject
 {
+    enum COLLIDE
+    {
+        NONE,
+        WALL,
+        WATER
+    };
 public:
     Player(
         float speed, 
@@ -34,7 +41,7 @@ public:
    
     virtual void Input(aki::input::wincon::ConsoleInputExt& input);
 
-    bool CollidesWithWall();
+    COLLIDE Collision(POINT p);
 
     POINT GetPosAsPoint();
 
@@ -44,7 +51,10 @@ private:
 
     CHAR_INFO ci;
     aki::math::Vector2f pos;
+    POINT curPoint, lastPoint;
     int depth;
+
+    bool isInWater;
 
     bool up, left, down, right;
     float speed;
@@ -86,4 +96,29 @@ private:
     POINT pos;
     CHAR_INFO ci;
     int depth;
+};
+
+/////////////////////////////
+// Water
+//
+class Water : public GameObject
+{
+public:
+    Water(CHAR_INFO ci1, CHAR_INFO ci2, POINT pos, int depth, Camera* camera, bool visible);
+    ~Water() { }
+
+    virtual void Update(float deltaTime);
+    virtual void Draw(aki::render::I::IRenderContext& renderContext);
+
+    const POINT& GetPos() { return pos; }
+
+private:
+    POINT pos;
+    CHAR_INFO ci1;
+    CHAR_INFO ci2;
+    int depth;
+    bool is1;
+
+    std::uniform_real_distribution<float> distribution;
+    float changeTime, elapsedTime;
 };

@@ -13,6 +13,7 @@
 using namespace aki::render::I;
 using namespace aki::input::wincon;
 
+std::default_random_engine generator;
 
 /////////////////////////////
 // Player
@@ -33,6 +34,11 @@ Player::Player(
     this->speed = speed;
     up = false; left = false; down = false; right = false;
     this->pos = aki::math::Vector2f(pos.x, pos.y);
+
+    isInWater = false;
+
+    curPoint = GetPosAsPoint();
+    lastPoint = curPoint;
 }
 
 void Player::Update(float deltaTime)
@@ -44,36 +50,104 @@ void Player::Update(float deltaTime)
             if ((deltaTime * speed) >= 1.0f)
                 return; // Prevent movements of more than 1 tile
 
-            pos.y -= speed * deltaTime;
-            if (CollidesWithWall())
-                pos.y += speed * deltaTime;
+            switch (Collision({ curPoint.x, curPoint.y - 1 }))
+            {
+            case WALL:
+                break;
+
+            case WATER:
+                isInWater = true;
+
+                pos.y -= (speed / 3) * deltaTime;
+                lastPoint = curPoint;
+                curPoint = GetPosAsPoint();
+                break;
+
+            default:
+                isInWater = false;
+
+                pos.y -= speed * deltaTime;
+                lastPoint = curPoint;
+                curPoint = GetPosAsPoint();
+            }
         }
         if (left)
         {
             if ((deltaTime * speed) >= 1.0f)
                 return; // Prevent movements of more than 1 tile
 
-            pos.x -= speed * deltaTime;
-            if (CollidesWithWall())
-                pos.x += speed * deltaTime;
+            switch (Collision({ curPoint.x - 1, curPoint.y }))
+            {
+            case WALL:
+                break;
+
+            case WATER:
+                isInWater = true;
+
+                pos.x -= (speed / 3) * deltaTime;
+                lastPoint = curPoint;
+                curPoint = GetPosAsPoint();
+                break;
+
+            default:
+                isInWater = false;
+
+                pos.x -= speed * deltaTime;
+                lastPoint = curPoint;
+                curPoint = GetPosAsPoint();
+            }
         }
         if (down)
         {
             if ((deltaTime * speed) >= 1.0f)
                 return; // Prevent movements of more than 1 tile
 
-            pos.y += speed * deltaTime;
-            if (CollidesWithWall())
-                pos.y -= speed * deltaTime;
+            switch (Collision({ curPoint.x, curPoint.y + 1}))
+            {
+            case WALL:
+                break;
+
+            case WATER:
+                isInWater = true;
+
+                pos.y += (speed / 3) * deltaTime;
+                lastPoint = curPoint;
+                curPoint = GetPosAsPoint();
+                break;
+
+            default:
+                isInWater = false;
+
+                pos.y += speed * deltaTime;
+                lastPoint = curPoint;
+                curPoint = GetPosAsPoint();
+            }
         }
         if (right)
         {
             if ((deltaTime * speed) >= 1.0f)
                 return; // Prevent movements of more than 1 tile
 
-            pos.x += speed * deltaTime;
-            if (CollidesWithWall())
-                pos.x -= speed * deltaTime;
+            switch (Collision({ curPoint.x + 1, curPoint.y }))
+            {
+            case WALL:
+                break;
+
+            case WATER:
+                isInWater = true;
+
+                pos.x += (speed / 3) * deltaTime;
+                lastPoint = curPoint;
+                curPoint = GetPosAsPoint();
+                break;
+
+            default:
+                isInWater = false;
+
+                pos.x += speed * deltaTime;
+                lastPoint = curPoint;
+                curPoint = GetPosAsPoint();
+            }
         }
     }
 }
@@ -81,7 +155,14 @@ void Player::Update(float deltaTime)
 void Player::Draw(IRenderContext& renderContext)
 {
     if (isVisible)
-        camera->Draw({ LONG(floor(pos.x)), LONG(floor(pos.y)) }, ci, depth);
+    {
+        CHAR_INFO t = ci;
+
+        if (isInWater)
+            t.Attributes = FOREGROUND_GREEN | FOREGROUND_BLUE;
+
+        camera->Draw(curPoint, t, depth);
+    }
 }
 
 void Player::Input(ConsoleInputExt& input)
@@ -95,29 +176,41 @@ void Player::Input(ConsoleInputExt& input)
     }
 }
 
-bool Player::CollidesWithWall()
+Player::COLLIDE Player::Collision(POINT p)
 {
+    COLLIDE collide = NONE;
+
     for (int i = 0; i < room->objects.size(); i++)
     {
-        if (room->objects[i]->GetName() == "wall")
+        GameObject* obj = room->objects[i];
+        if (obj->GetName() == "wall")
         {
-            Wall* wall = (Wall*)room->objects[i];
+            Wall* wall = (Wall*)obj;
             const POINT wallPos = wall->GetPos();
-            const POINT p = GetPosAsPoint();
 
             if (p.x == wallPos.x && p.y == wallPos.y)
             {
-                return true;
+                collide = WALL;
+            }
+        }
+        else if (obj->GetName() == "water")
+        {
+            Water* water = (Water*)obj;
+            const POINT waterPos = water->GetPos();
+
+            if (p.x == waterPos.x && p.y == waterPos.y)
+            {
+                collide = WATER;
             }
         }
     }
 
-    return false;
+    return collide;
 }
 
 POINT Player::GetPosAsPoint()
 {
-    return { LONG(floor(pos.x)), LONG(floor(pos.y)) };
+    return { LONG(floor(pos.x + 0.5f)), LONG(floor(pos.y + 0.5f)) };
 }
 
 /////////////////////////////
@@ -153,4 +246,52 @@ void Wall::Draw(IRenderContext& renderContext)
 {
     if (isVisible)
         camera->Draw(pos, ci, depth);
+}
+
+/////////////////////////////
+// Water
+//
+Water::Water(CHAR_INFO ci1, CHAR_INFO ci2, POINT pos, int depth, Camera* camera, bool visible) : GameObject(camera, "water")
+{
+    this->ci1 = ci1;
+    this->ci2 = ci2;
+    this->pos = pos;
+    this->depth = depth;
+    this->isVisible = visible;
+    
+    is1 = ((std::uniform_int_distribution<int>(0, 1))(generator) == 0);
+
+    distribution = std::uniform_real_distribution<float>(0.5f, 2.5f);
+
+    changeTime = distribution(generator);
+    elapsedTime = 0;
+}
+
+void Water::Update(float deltaTime)
+{
+    if (elapsedTime >= changeTime)
+    {
+        changeTime = distribution(generator);
+        is1 = !is1;
+        elapsedTime = 0;
+    }
+    else
+    {
+        elapsedTime += deltaTime;
+    }
+}
+
+void Water::Draw(IRenderContext& renderContext)
+{
+    if (isVisible)
+    {
+        if (is1)
+        {
+            camera->Draw(pos, ci1, depth);
+        }
+        else
+        {
+            camera->Draw(pos, ci2, depth);
+        }
+    }
 }

@@ -11,6 +11,7 @@
 TestRoom::TestRoom(Camera* const camera) : Room(camera)
 {
     CHAR_INFO ci;
+    CHAR_INFO ciAlt;
 
     ci.Attributes = f_lightGray;
     ci.Char.UnicodeChar = 0xB2;
@@ -53,10 +54,17 @@ TestRoom::TestRoom(Camera* const camera) : Room(camera)
         y--;
     }
 
+
+    ciAlt.Attributes = f_halfBlue;
+    ciAlt.Char.UnicodeChar = '~';
+    bool isFloor = true;
+
     for (int row = 1; row < 35; row++)
     {
         for (int col = 1; col < 40; col++)
         {
+            isFloor = true;
+
             if (row < 8 || col < 8 || row > 27 || col > 32)
             {
                 ci.Attributes = f_halfYellow;
@@ -102,12 +110,16 @@ TestRoom::TestRoom(Camera* const camera) : Room(camera)
                 }
                 else
                 {
+                    isFloor = false;
                     ci.Attributes = f_fullBlue;
                     ci.Char.UnicodeChar = 247;
                 }
             }
 
-            objects.push_back(new Floor(ci, { col, row }, 0, camera, true));
+            if (isFloor)
+                objects.push_back(new Floor(ci, { col, row }, 0, camera, true));
+            else
+                objects.push_back(new Water(ci, ciAlt, { col, row }, 0, camera, true));
         }
     }
 
