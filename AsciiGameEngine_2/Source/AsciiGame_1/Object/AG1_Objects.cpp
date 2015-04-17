@@ -58,7 +58,7 @@ void Player::Update(float deltaTime)
             case WATER:
                 isInWater = true;
 
-                pos.y -= (speed / 3) * deltaTime;
+                pos.y -= (speed / 3.0f) * deltaTime;
                 lastPoint = curPoint;
                 curPoint = GetPosAsPoint();
                 break;
@@ -84,7 +84,7 @@ void Player::Update(float deltaTime)
             case WATER:
                 isInWater = true;
 
-                pos.x -= (speed / 3) * deltaTime;
+                pos.x -= (speed / 3.0f) * deltaTime;
                 lastPoint = curPoint;
                 curPoint = GetPosAsPoint();
                 break;
@@ -110,7 +110,7 @@ void Player::Update(float deltaTime)
             case WATER:
                 isInWater = true;
 
-                pos.y += (speed / 3) * deltaTime;
+                pos.y += (speed / 3.0f) * deltaTime;
                 lastPoint = curPoint;
                 curPoint = GetPosAsPoint();
                 break;
@@ -136,7 +136,7 @@ void Player::Update(float deltaTime)
             case WATER:
                 isInWater = true;
 
-                pos.x += (speed / 3) * deltaTime;
+                pos.x += (speed / 3.0f) * deltaTime;
                 lastPoint = curPoint;
                 curPoint = GetPosAsPoint();
                 break;
