@@ -9,6 +9,7 @@
 #include <random>
 
 #include "Akropolix\Utility\Math\Vector2f.hpp"
+#include "Akropolix\Object\Windows Console\ConsoleObjectManager.hpp"
 
 #include "AsciiGame_1\Object\AG1_GameObject.hpp"
 #include "AsciiGame_1\World\AG1_Room.hpp"
@@ -33,7 +34,8 @@ public:
         int depth, 
         Camera* camera, 
         UI* ui,
-        Room* room);
+        Room* room,
+        aki::object::wincon::ConsoleObjectManager* objectManager);
     ~Player() { }
 
     virtual void Update(float deltaTime);
@@ -48,11 +50,15 @@ public:
 private:
     UI* const ui;
     Room* const room;
+    aki::object::wincon::ConsoleObjectManager* const objectManager;
 
     CHAR_INFO ci;
     aki::math::Vector2f pos;
-    POINT curPoint, lastPoint;
+    POINT curPoint;
     int depth;
+
+    bool mouseClick;
+    COORD mousePos;
 
     bool isInWater;
 
@@ -121,4 +127,30 @@ private:
 
     std::uniform_real_distribution<float> distribution;
     float changeTime, elapsedTime;
+};
+
+//////////////////////////
+// Bullet
+//
+class Bullet : public GameObject
+{
+public:
+    Bullet(POINT start, POINT end, float speed, Camera* camera, bool visible, aki::object::wincon::ConsoleObjectManager* objectManager);
+    ~Bullet() { }
+
+    virtual void Update(float deltaTime);
+    virtual void Draw(aki::render::I::IRenderContext& renderContext);
+
+    POINT GetPosAsPoint();
+
+private:
+    aki::object::wincon::ConsoleObjectManager* const objectManager;
+
+    aki::math::Vector2f pos, dir;
+    POINT start, end, curPos;
+    CHAR_INFO ci;
+    int depth;
+
+    float speed;
+    float dist, distTraveled;
 };

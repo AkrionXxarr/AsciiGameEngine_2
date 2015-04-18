@@ -45,6 +45,12 @@ void Camera::Draw(POINT objPos, CHAR_INFO& ci, int depth)
     if (t.x < 0 || t.y < 0 || t.x >= viewport->viewBufferSize.X || t.y >= viewport->viewBufferSize.Y)
         return;
 
+    if (t.x == 25 && t.y == 25)
+    {
+        int x = 0;
+        x = 5;
+    }
+
     unsigned int index = (t.y * viewport->viewBufferSize.X) + t.x;
 
     if (viewport->viewBuffer[index].depth <= depth)

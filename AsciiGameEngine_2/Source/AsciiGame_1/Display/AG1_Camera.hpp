@@ -15,6 +15,8 @@ class Player;
 
 class Camera
 {
+    friend class Player; // For now, I guess, I dunno. :B
+
 public:
     Camera(Viewport* const viewport, World* const world);
     ~Camera();

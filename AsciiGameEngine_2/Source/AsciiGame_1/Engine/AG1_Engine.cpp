@@ -47,8 +47,7 @@ bool Engine::Initialize()
     playerCI.Attributes = f_white;
     playerCI.Char.UnicodeChar = '@';
 
-    player = new Player(50.0f, playerCI, { 5, 5 }, 5, camera, ui, room);
-    camera->SetPlayer(player);
+    player = new Player(10.0f, playerCI, { 5, 5 }, 5, camera, ui, room, objectManager);
 
     ui->SetFocusedElement(UI_ELEMENT::UI_SCREEN);
 

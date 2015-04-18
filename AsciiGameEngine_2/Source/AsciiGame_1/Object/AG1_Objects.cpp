@@ -3,15 +3,20 @@
 * All rights reserved.
 */
 
+
 #include <math.h>
+#include <sstream>
 
 #include "Akropolix\Input\Windows Console\ConsoleInputExt.hpp"
+#include "Akropolix\Utility\Logging\Log.hpp"
 
 #include "AsciiGame_1\Object\AG1_Objects.hpp"
 #include "AsciiGame_1\Display\AG1_Camera.hpp"
 
 using namespace aki::render::I;
 using namespace aki::input::wincon;
+using namespace aki::object::wincon;
+using namespace aki::math;
 
 std::default_random_engine generator;
 
@@ -25,26 +30,63 @@ Player::Player(
     int depth,
     Camera* camera,
     UI* const ui,
-    Room* room
-    ) : GameObject(camera, "player"), ui(ui), room(room)
+    Room* room,
+    ConsoleObjectManager* objectManager
+    ) : GameObject(camera, "player"), ui(ui), room(room), objectManager(objectManager)
 { 
+    aki::log::ClearLogFile("MousePosData.txt");
+
+    camera->SetPlayer(this);
+
     this->isVisible = true;
     this->ci = ci;
     this->depth = depth;
     this->speed = speed;
     up = false; left = false; down = false; right = false;
-    this->pos = aki::math::Vector2f(pos.x, pos.y);
+    this->pos = Vector2f(pos.x, pos.y);
+
+    mouseClick = false;
+    mousePos = { 0, 0 };
 
     isInWater = false;
 
     curPoint = GetPosAsPoint();
-    lastPoint = curPoint;
 }
 
 void Player::Update(float deltaTime)
 {
     if (ui->GetFocusedElement() == UI_ELEMENT::UI_SCREEN)
     {
+        if (mouseClick)
+        {
+            COORD viewPort = camera->viewport->viewBufferSize;
+
+            // With the way things are implemented, I have to take into 
+            // account the viewport offset here unfortunately.
+            mousePos.X--;
+            mousePos.Y--;
+
+            if (mousePos.X >= 0 && mousePos.Y >= 0 && mousePos.X <= viewPort.X && mousePos.Y <= viewPort.Y)
+            {
+                std::stringstream sstream;
+
+                // Only mouse clicks within the viewport are accepted
+                int halfWidth = viewPort.X / 2;
+                int halfHeight = viewPort.Y / 2;
+
+                POINT t = { mousePos.X - halfWidth, mousePos.Y - halfHeight };
+
+                sstream << "(" << t.x << ", " << t.y << ")";
+                aki::log::LogMessage(sstream.str(), "MousePosData.txt");
+
+                objectManager->RemoveObject(ui->ID); // This is gross and I should feel bad about it...
+                objectManager->AddObject(new Bullet(curPoint, { curPoint.x + t.x, curPoint.y + t.y }, 10.0f, camera, true, objectManager));
+                objectManager->AddObject(ui); // ...but right now the UI must be the very last in the update/draw call chain
+            }
+
+            mouseClick = false;
+        }
+
         if (up)
         {
             if ((deltaTime * speed) >= 1.0f)
@@ -59,7 +101,6 @@ void Player::Update(float deltaTime)
                 isInWater = true;
 
                 pos.y -= (speed / 3.0f) * deltaTime;
-                lastPoint = curPoint;
                 curPoint = GetPosAsPoint();
                 break;
 
@@ -67,7 +108,6 @@ void Player::Update(float deltaTime)
                 isInWater = false;
 
                 pos.y -= speed * deltaTime;
-                lastPoint = curPoint;
                 curPoint = GetPosAsPoint();
             }
         }
@@ -85,7 +125,6 @@ void Player::Update(float deltaTime)
                 isInWater = true;
 
                 pos.x -= (speed / 3.0f) * deltaTime;
-                lastPoint = curPoint;
                 curPoint = GetPosAsPoint();
                 break;
 
@@ -93,7 +132,6 @@ void Player::Update(float deltaTime)
                 isInWater = false;
 
                 pos.x -= speed * deltaTime;
-                lastPoint = curPoint;
                 curPoint = GetPosAsPoint();
             }
         }
@@ -111,7 +149,6 @@ void Player::Update(float deltaTime)
                 isInWater = true;
 
                 pos.y += (speed / 3.0f) * deltaTime;
-                lastPoint = curPoint;
                 curPoint = GetPosAsPoint();
                 break;
 
@@ -119,7 +156,6 @@ void Player::Update(float deltaTime)
                 isInWater = false;
 
                 pos.y += speed * deltaTime;
-                lastPoint = curPoint;
                 curPoint = GetPosAsPoint();
             }
         }
@@ -137,7 +173,6 @@ void Player::Update(float deltaTime)
                 isInWater = true;
 
                 pos.x += (speed / 3.0f) * deltaTime;
-                lastPoint = curPoint;
                 curPoint = GetPosAsPoint();
                 break;
 
@@ -145,7 +180,6 @@ void Player::Update(float deltaTime)
                 isInWater = false;
 
                 pos.x += speed * deltaTime;
-                lastPoint = curPoint;
                 curPoint = GetPosAsPoint();
             }
         }
@@ -173,6 +207,12 @@ void Player::Input(ConsoleInputExt& input)
         left = input.GetKeyDown(KEYBOARD::A);
         down = input.GetKeyDown(KEYBOARD::S);
         right = input.GetKeyDown(KEYBOARD::D);
+
+        if (input.GetMouseUp(MOUSE_BUTTON::CLICK_LEFT))
+        {
+            mouseClick = true;
+            mousePos = input.GetMousePosition();
+        }
     }
 }
 
@@ -294,4 +334,77 @@ void Water::Draw(IRenderContext& renderContext)
             camera->Draw(pos, ci2, depth);
         }
     }
+}
+
+
+//////////////////////////
+// Bullet
+//
+Bullet::Bullet(
+    POINT start,
+    POINT end,
+    float speed,
+    Camera* camera,
+    bool visible,
+    ConsoleObjectManager* objectManager) : GameObject(camera, "bullet"), objectManager(objectManager)
+{
+    this->start = start;
+    this->end = end;
+    this->speed = speed;
+
+    depth = 10;
+    
+    pos = Vector2f(float(start.x), float(start.y));
+    dir = (Vector2f(float(end.x), float(end.y)) - pos);
+
+    dist = dir.Length();
+    dir = dir.Normalized();
+
+    distTraveled = 0;
+
+    curPos = GetPosAsPoint();
+
+    ci.Attributes = FOREGROUND_RED | FOREGROUND_INTENSITY;
+    ci.Char.UnicodeChar = 0xFE;
+}
+
+void Bullet::Update(float deltaTime)
+{
+    float moveAmt = speed * deltaTime;
+
+    pos = pos + (dir * moveAmt);
+    distTraveled += moveAmt;
+    curPos = GetPosAsPoint();
+
+    if (distTraveled > dist)
+    {
+        objectManager->RemoveObject(this->ID);
+        delete this;
+    }
+}
+
+void Bullet::Draw(IRenderContext& renderContext)
+{
+    if (isVisible)
+    {
+        if (abs(dir.x) > 0.92388)
+            ci.Char.UnicodeChar = '-';
+        else if (abs(dir.x) < 0.38268)
+            ci.Char.UnicodeChar = '|';
+        else if (dir.x > 0.38268 && dir.y > 0)
+            ci.Char.UnicodeChar = '\\';
+        else if (dir.x > 0.38268 && dir.y < 0)
+            ci.Char.UnicodeChar = '/';
+        else if (dir.x < -0.38268 && dir.y > 0)
+            ci.Char.UnicodeChar = '/';
+        else
+            ci.Char.UnicodeChar = '\\';
+
+        camera->Draw(curPos, ci, depth);
+    }
+}
+
+POINT Bullet::GetPosAsPoint()
+{
+    return{ LONG(floor(pos.x + 0.5f)), LONG(floor(pos.y + 0.5f)) };
 }
