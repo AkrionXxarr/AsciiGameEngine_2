@@ -55,13 +55,10 @@ bool Engine::Initialize()
 
     ui->SetFocusedElement(UI_ELEMENT::UI_SCREEN);
 
-    
-    //objectManager->AddObject(camera);
-
-    world->LoadRoom(startRoom);
-
     objectManager->AddObject(player);
     objectManager->AddObject(ui);
+
+    world->LoadRoom(startRoom);
 
     return true;
 }
