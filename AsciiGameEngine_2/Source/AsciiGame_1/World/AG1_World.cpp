@@ -8,15 +8,31 @@
 #include "AsciiGame_1\World\AG1_World.hpp"
 
 
-World::World(aki::object::wincon::ConsoleObjectManager* objectManager)
+World::World(aki::object::wincon::ConsoleObjectManager* objectManager, UI* ui) : objectManager(objectManager), ui(ui)
 {
-    this->objectManager = objectManager;
+    activeRoom = nullptr;
 }
 
 World::~World()
 {
 }
 
+void World::LoadRoom(Room* room)
+{
+    if (activeRoom)
+    {
+        activeRoom->Unload(*objectManager);
+        activeRoom = nullptr;
+    }
+
+    activeRoom = room;
+
+    objectManager->RemoveObject(ui->ID); // TERRIBLE >:F
+    room->Load(*objectManager);
+    objectManager->AddObject(ui);
+}
+
+/*
 void World::AddRoom(Room* room, bool active)
 {
     rooms.push_back(room);
@@ -27,3 +43,4 @@ void World::AddRoom(Room* room, bool active)
         room->Load(*objectManager);
     }
 }
+*/

@@ -14,6 +14,7 @@
 #include "AsciiGame_1\Object\AG1_GameObject.hpp"
 #include "AsciiGame_1\World\AG1_Room.hpp"
 #include "AsciiGame_1\UI\AG1_UI.hpp"
+#include "AsciiGame_1\World\AG1_World.hpp"
 
 /////////////////////////////
 // Player
@@ -24,6 +25,7 @@ class Player : public GameObject
     {
         NONE,
         WALL,
+        PORTAL,
         WATER
     };
 public:
@@ -49,7 +51,7 @@ public:
 
 private:
     UI* const ui;
-    Room* const room;
+    Room* room;
     aki::object::wincon::ConsoleObjectManager* const objectManager;
 
     CHAR_INFO ci;
@@ -78,6 +80,8 @@ public:
 
     virtual void Draw(aki::render::I::IRenderContext& renderContext);
 
+    const POINT& GetPos() { return pos; }
+
 private:
     POINT pos;
     CHAR_INFO ci;
@@ -100,6 +104,32 @@ public:
 
 private:
     POINT pos;
+    CHAR_INFO ci;
+    int depth;
+};
+
+/////////////////////////////
+// Portal
+//
+class Portal : public GameObject
+{
+public:
+    Portal(CHAR_INFO ci, POINT pos, POINT playerPos, int depth, Camera* camera, bool visible, Room* next, World* world);
+    ~Portal() { }
+
+    virtual void Draw(aki::render::I::IRenderContext& renderContext);
+
+    void Trigger();
+
+    const POINT& GetPos() { return pos; }
+    const POINT& GetPlayerPos() { return playerPos; }
+    Room* const GetRoom() { return room; }
+
+private:
+    Room* const room;
+    World* const world;
+
+    POINT pos, playerPos;
     CHAR_INFO ci;
     int depth;
 };
@@ -135,7 +165,15 @@ private:
 class Bullet : public GameObject
 {
 public:
-    Bullet(POINT start, POINT end, float speed, Camera* camera, bool visible, aki::object::wincon::ConsoleObjectManager* objectManager);
+    Bullet(
+        POINT start, 
+        POINT end, 
+        float speed, 
+        int depth, 
+        Camera* camera, 
+        bool visible, 
+        aki::object::wincon::ConsoleObjectManager* objectManager,
+        Room* room);
     ~Bullet() { }
 
     virtual void Update(float deltaTime);
@@ -145,6 +183,7 @@ public:
 
 private:
     aki::object::wincon::ConsoleObjectManager* const objectManager;
+    Room* const room;
 
     aki::math::Vector2f pos, dir;
     POINT start, end, curPos;
@@ -153,4 +192,34 @@ private:
 
     float speed;
     float dist, distTraveled;
+};
+
+/////////////////////////////
+// Rain
+//
+class Rain : public GameObject
+{
+    struct RainHitData
+    {
+        POINT pos;
+        float drawTime;
+    };
+
+public:
+    Rain(CHAR_INFO ci1, CHAR_INFO ci2, float rainDrawTime, float rainMin, float rainMax, int depth, Camera* camera, bool visible, Room* const room);
+    ~Rain();
+
+    virtual void Update(float deltaTime);
+    virtual void Draw(aki::render::I::IRenderContext& renderContext);
+
+private:
+    CHAR_INFO ci1, ci2;
+    int depth;
+
+    std::uniform_real_distribution<float> rainHitTimeDist;
+
+    std::vector<Floor*> floorTiles;
+    std::vector<RainHitData> rainToDraw;
+    float* rainHitTimes;
+    float rainDrawTime;
 };

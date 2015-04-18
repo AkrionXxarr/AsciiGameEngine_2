@@ -2,6 +2,9 @@ Note type will be denoted within [] along with an optional + or - to indicate a
 positive or negative impression respectively.
 
 
+=== Akropolix ===
+Quite a bit of preplanning for this
+
 [Usability -] User needs to make sure to call every parent virtual function in their inherited engine class.
 [Usability -] Wasn't a way to make use of the render context to draw to an alternate buffer.
               This was fixed, though I'm unsure of the implementation.
@@ -15,3 +18,11 @@ positive or negative impression respectively.
 [Functionality -] Memory management with object manager not great.
 
 [Note] All row/col buffer for loops could be optimized by pre-calculating the (row * width)
+
+
+
+
+=== AsciiGame_1 ===
+Very little preplanning for this
+
+[Usability -] Object usage is way too dependant on arbitrary sequences (e.g. UI -must- be the last object in the update/draw chain)

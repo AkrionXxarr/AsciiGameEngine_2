@@ -80,7 +80,7 @@ void Player::Update(float deltaTime)
                 aki::log::LogMessage(sstream.str(), "MousePosData.txt");
 
                 objectManager->RemoveObject(ui->ID); // This is gross and I should feel bad about it...
-                objectManager->AddObject(new Bullet(curPoint, { curPoint.x + t.x, curPoint.y + t.y }, 10.0f, camera, true, objectManager));
+                objectManager->AddObject(new Bullet(curPoint, { curPoint.x + t.x, curPoint.y + t.y }, 50.0f, depth - 1, camera, true, objectManager, room));
                 objectManager->AddObject(ui); // ...but right now the UI must be the very last in the update/draw call chain
             }
 
@@ -95,6 +95,9 @@ void Player::Update(float deltaTime)
             switch (Collision({ curPoint.x, curPoint.y - 1 }))
             {
             case WALL:
+                break;
+
+            case PORTAL:
                 break;
 
             case WATER:
@@ -121,6 +124,9 @@ void Player::Update(float deltaTime)
             case WALL:
                 break;
 
+            case PORTAL:
+                break;
+
             case WATER:
                 isInWater = true;
 
@@ -145,6 +151,9 @@ void Player::Update(float deltaTime)
             case WALL:
                 break;
 
+            case PORTAL:
+                break;
+
             case WATER:
                 isInWater = true;
 
@@ -167,6 +176,9 @@ void Player::Update(float deltaTime)
             switch (Collision({ curPoint.x + 1, curPoint.y }))
             {
             case WALL:
+                break;
+
+            case PORTAL:
                 break;
 
             case WATER:
@@ -231,6 +243,26 @@ Player::COLLIDE Player::Collision(POINT p)
             if (p.x == wallPos.x && p.y == wallPos.y)
             {
                 collide = WALL;
+                break;
+            }
+        }
+        else if (obj->GetName() == "portal")
+        {
+            Portal* portal = (Portal*)obj;
+            const POINT portalPos = portal->GetPos();
+
+            if (p.x == portalPos.x && p.y == portalPos.y)
+            {
+                collide = PORTAL;
+
+                pos = Vector2f(float(portal->GetPlayerPos().x), float(portal->GetPlayerPos().y));
+                curPoint = GetPosAsPoint();
+
+                room = portal->GetRoom();
+
+                portal->Trigger();
+
+                break;
             }
         }
         else if (obj->GetName() == "water")
@@ -241,6 +273,8 @@ Player::COLLIDE Player::Collision(POINT p)
             if (p.x == waterPos.x && p.y == waterPos.y)
             {
                 collide = WATER;
+
+                break;
             }
         }
     }
@@ -286,6 +320,37 @@ void Wall::Draw(IRenderContext& renderContext)
 {
     if (isVisible)
         camera->Draw(pos, ci, depth);
+}
+
+/////////////////////////////
+// Portal
+//
+Portal::Portal(
+    CHAR_INFO ci, 
+    POINT pos, 
+    POINT playerPos, 
+    int depth, 
+    Camera* camera, 
+    bool visible, 
+    Room* room, 
+    World* world) : GameObject(camera, "portal"), room(room), world(world)
+{
+    this->ci = ci;
+    this->pos = pos;
+    this->playerPos = playerPos;
+    this->depth = depth;
+    this->isVisible = visible;
+}
+
+void Portal::Draw(IRenderContext& renderContext)
+{
+    if (isVisible)
+        camera->Draw(pos, ci, depth);
+}
+
+void Portal::Trigger()
+{
+    world->LoadRoom(room);
 }
 
 /////////////////////////////
@@ -344,15 +409,16 @@ Bullet::Bullet(
     POINT start,
     POINT end,
     float speed,
+    int depth,
     Camera* camera,
     bool visible,
-    ConsoleObjectManager* objectManager) : GameObject(camera, "bullet"), objectManager(objectManager)
+    ConsoleObjectManager* objectManager,
+    Room* room) : GameObject(camera, "bullet"), objectManager(objectManager), room(room)
 {
     this->start = start;
     this->end = end;
     this->speed = speed;
-
-    depth = 10;
+    this->depth = depth;
     
     pos = Vector2f(float(start.x), float(start.y));
     dir = (Vector2f(float(end.x), float(end.y)) - pos);
@@ -365,7 +431,19 @@ Bullet::Bullet(
     curPos = GetPosAsPoint();
 
     ci.Attributes = FOREGROUND_RED | FOREGROUND_INTENSITY;
-    ci.Char.UnicodeChar = 0xFE;
+    
+    if (abs(dir.x) > 0.92388)
+        ci.Char.UnicodeChar = '-';
+    else if (abs(dir.x) < 0.38268)
+        ci.Char.UnicodeChar = '|';
+    else if (dir.x > 0.38268 && dir.y > 0)
+        ci.Char.UnicodeChar = '\\';
+    else if (dir.x > 0.38268 && dir.y < 0)
+        ci.Char.UnicodeChar = '/';
+    else if (dir.x < -0.38268 && dir.y > 0)
+        ci.Char.UnicodeChar = '/';
+    else
+        ci.Char.UnicodeChar = '\\';
 }
 
 void Bullet::Update(float deltaTime)
@@ -387,19 +465,6 @@ void Bullet::Draw(IRenderContext& renderContext)
 {
     if (isVisible)
     {
-        if (abs(dir.x) > 0.92388)
-            ci.Char.UnicodeChar = '-';
-        else if (abs(dir.x) < 0.38268)
-            ci.Char.UnicodeChar = '|';
-        else if (dir.x > 0.38268 && dir.y > 0)
-            ci.Char.UnicodeChar = '\\';
-        else if (dir.x > 0.38268 && dir.y < 0)
-            ci.Char.UnicodeChar = '/';
-        else if (dir.x < -0.38268 && dir.y > 0)
-            ci.Char.UnicodeChar = '/';
-        else
-            ci.Char.UnicodeChar = '\\';
-
         camera->Draw(curPos, ci, depth);
     }
 }
@@ -407,4 +472,106 @@ void Bullet::Draw(IRenderContext& renderContext)
 POINT Bullet::GetPosAsPoint()
 {
     return{ LONG(floor(pos.x + 0.5f)), LONG(floor(pos.y + 0.5f)) };
+}
+
+/////////////////////////////
+// Rain
+//
+Rain::Rain(
+    CHAR_INFO ci1, 
+    CHAR_INFO ci2, 
+    float rainDrawTime, 
+    float rainMin, 
+    float rainMax, 
+    int depth, 
+    Camera* camera, 
+    bool visible, 
+    Room* const room) : GameObject(camera, "rain")
+{
+    this->ci1 = ci1;
+    this->ci2 = ci2;
+    this->rainDrawTime = rainDrawTime;
+    this->depth = depth;
+    this->isVisible = visible;
+
+    for (int i = 0; i < room->objects.size(); i++)
+    {
+        if (room->objects[i]->GetName() == "floor")
+        {
+            floorTiles.push_back((Floor*)room->objects[i]);
+        }
+    }
+
+    // Set the minimum to negative first so that the very first entry of the room
+    // will have rain already "in progress" rather than starting with nothing for
+    // a brief moment.
+    rainHitTimeDist = std::uniform_real_distribution<float>(-0.5f, rainMax);
+    rainHitTimes = new float[floorTiles.size()];
+
+    for (int i = 0; i < floorTiles.size(); i++)
+    {
+        rainHitTimes[i] = rainHitTimeDist(generator);
+    }
+
+    rainHitTimeDist = std::uniform_real_distribution<float>(rainMin, rainMax);
+}
+
+Rain::~Rain()
+{
+    if (rainHitTimes)
+    {
+        delete[] rainHitTimes;
+        rainHitTimes = nullptr;
+    }
+}
+
+void Rain::Update(float deltaTime)
+{
+    // Update all tiles
+    for (int i = 0; i < floorTiles.size(); i++)
+    {
+        rainHitTimes[i] -= deltaTime;
+
+        if (rainHitTimes[i] <= 0)
+        {
+            rainHitTimes[i] = rainHitTimeDist(generator);
+
+            RainHitData data;
+
+            data.pos = floorTiles[i]->GetPos();
+            data.drawTime = rainDrawTime;
+
+            rainToDraw.push_back(data);
+        }
+    }
+
+    // Update rain that's being drawn
+    for (std::vector<RainHitData>::iterator itr = rainToDraw.begin(); itr != rainToDraw.end(); itr++)
+    {
+        itr->drawTime -= deltaTime;
+
+        if (itr->drawTime <= 0)
+        {
+            rainToDraw.erase(itr);
+            itr = rainToDraw.begin();
+        }
+    }
+}
+
+void Rain::Draw(IRenderContext& renderContext)
+{
+    if (isVisible)
+    {
+        for (int i = 0; i < rainToDraw.size(); i++)
+        {
+            if (rainToDraw[i].drawTime >= rainDrawTime - (rainDrawTime / 4.0f))
+            {
+                camera->Draw(rainToDraw[i].pos, ci1, depth);
+            }
+            else
+            {
+                camera->Draw(rainToDraw[i].pos, ci2, depth);
+            }
+        }
+    }
 }

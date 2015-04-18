@@ -38,23 +38,27 @@ bool Engine::Initialize()
     COORD worldSize = { 256, 256 };
 
     ui = new UI(f_darkGray, f_halfYellow, f_fullGreen);
-    world = new World(objectManager);
+    world = new World(objectManager, ui);
     camera = new Camera((UIScreen*)ui->GetUIElement(UI_ELEMENT::UI_SCREEN), world);
 
     CHAR_INFO playerCI;
-    Room* room = new TestRoom(camera);
+    TestRoom1* startRoom = new TestRoom1(camera, world);
+    TestRoom2* nextRoom = new TestRoom2(camera, world);
+
+    startRoom->AddRightRoom(nextRoom);
+    nextRoom->AddLeftRoom(startRoom);
 
     playerCI.Attributes = f_white;
     playerCI.Char.UnicodeChar = '@';
 
-    player = new Player(10.0f, playerCI, { 5, 5 }, 5, camera, ui, room, objectManager);
+    player = new Player(20.0f, playerCI, { 5, 5 }, 5, camera, ui, startRoom, objectManager);
 
     ui->SetFocusedElement(UI_ELEMENT::UI_SCREEN);
 
     
     //objectManager->AddObject(camera);
 
-    world->AddRoom(room, true);
+    world->LoadRoom(startRoom);
 
     objectManager->AddObject(player);
     objectManager->AddObject(ui);
