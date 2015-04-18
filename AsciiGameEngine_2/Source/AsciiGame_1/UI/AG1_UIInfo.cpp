@@ -94,7 +94,7 @@ void UIInfo::Update(float deltaTime)
             ci.Attributes = secondary;
             ci.Char.UnicodeChar = fps[x];
 
-            Write(x + 2, 2, ci);
+            //Write(x + 2, 2, ci);
         }
 
         timeElapsed = 0;
