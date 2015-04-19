@@ -37,7 +37,6 @@ namespace aki
                 bool HasFocus();
                 bool IsRunning();
 
-            protected:
                 virtual void Clean();
 
             protected:

@@ -10,7 +10,7 @@
 #include "AsciiGame_1\World\TestRoom.hpp"
 #include "AsciiGame_1\Object\AG1_Objects.hpp"
 
-TestRoom1::TestRoom1(Camera* const camera, World* world) : Room(camera), world(world)
+TestRoom1::TestRoom1(Camera* const camera, World* world, UI* ui, aki::object::wincon::ConsoleObjectManager* objectManager) : Room(camera), world(world)
 {
     CHAR_INFO ci;
     CHAR_INFO ciAlt;
@@ -25,37 +25,37 @@ TestRoom1::TestRoom1(Camera* const camera, World* world) : Room(camera), world(w
     //
     for (int i = 0; i < 40; i++)
     {
-        objects.push_back(new Wall(ci, { x, y }, 1, camera, true));
+        physObjects.push_back(new Wall(ci, { x, y }, 1, camera, true));
         x++;
     }
 
     for (int i = 0; i < 20; i++)
     {
-        objects.push_back(new Wall(ci, { x, y }, 1, camera, true));
+        physObjects.push_back(new Wall(ci, { x, y }, 1, camera, true));
         y++;
     }
 
     for (int i = 0; i < 20; i++)
     {
-        objects.push_back(new Wall(ci, { x, y }, 1, camera, true));
+        physObjects.push_back(new Wall(ci, { x, y }, 1, camera, true));
         x++;
     }
 
     for (int i = 0; i < 15; i++)
     {
-        objects.push_back(new Wall(ci, { x, y }, 1, camera, true));
+        physObjects.push_back(new Wall(ci, { x, y }, 1, camera, true));
         y++;
     }
 
     for (int i = 0; i < 60; i++)
     {
-        objects.push_back(new Wall(ci, { x, y }, 1, camera, true));
+        physObjects.push_back(new Wall(ci, { x, y }, 1, camera, true));
         x--;
     }
 
     for (int i = 0; i < 35; i++)
     {
-        objects.push_back(new Wall(ci, { x, y }, 1, camera, true));
+        physObjects.push_back(new Wall(ci, { x, y }, 1, camera, true));
         y--;
     }
 
@@ -125,9 +125,9 @@ TestRoom1::TestRoom1(Camera* const camera, World* world) : Room(camera), world(w
             }
 
             if (isFloor)
-                objects.push_back(new Floor(ci, { col, row }, 0, camera, true));
+                other.push_back(new Floor(ci, { col, row }, 0, camera, true));
             else
-                objects.push_back(new Water(ci, ciAlt, { col, row }, 0, camera, true));
+                physObjects.push_back(new Water(ci, ciAlt, { col, row }, 0, camera, true));
         }
     }
 
@@ -139,11 +139,11 @@ TestRoom1::TestRoom1(Camera* const camera, World* world) : Room(camera), world(w
 
     for (int row = 21; row < 35; row++)
     {
-        objects.push_back(new Floor(ci, { 40, row }, 0, camera, true));
+        other.push_back(new Floor(ci, { 40, row }, 10, camera, true));
     }
 
-    /////////////////////
-    // Secondary room
+    //////////////////////////
+    // Floor, secondary room
     //
     ci.Attributes = f_halfRed;
     ci.Char.UnicodeChar = 0xDB;
@@ -152,7 +152,7 @@ TestRoom1::TestRoom1(Camera* const camera, World* world) : Room(camera), world(w
     {
         for (int col = 41; col < 60; col++)
         {
-            objects.push_back(new Floor(ci, { col, row }, 0, camera, true));
+            other.push_back(new Floor(ci, { col, row }, 0, camera, true));
         }
     }
 
@@ -162,20 +162,12 @@ TestRoom1::TestRoom1(Camera* const camera, World* world) : Room(camera), world(w
     ci.Attributes = f_lightGray;
     ci.Char.UnicodeChar = 0xB2;
     
-    objects.push_back(new Wall(ci, { 59, 26 }, 1, camera, true));
-    objects.push_back(new Wall(ci, { 59, 29 }, 1, camera, true));
+    physObjects.push_back(new Wall(ci, { 59, 26 }, 1, camera, true));
+    physObjects.push_back(new Wall(ci, { 59, 29 }, 1, camera, true));
 }
 
 TestRoom1::~TestRoom1()
 {
-    for (int i = 0; i < objects.size(); i++)
-    {
-        if (objects[i])
-        {
-            delete objects[i];
-            objects[i] = nullptr;
-        }
-    }
 }
 
 void TestRoom1::AddRightRoom(Room* room)
@@ -185,19 +177,21 @@ void TestRoom1::AddRightRoom(Room* room)
     ci.Attributes = f_white;
     ci.Char.UnicodeChar = 0x1D;
 
-    objects.push_back(new Portal(ci, { 59, 27 }, { 2, 27 }, 1, camera, true, room, world));
-    objects.push_back(new Portal(ci, { 59, 28 }, { 2, 28 }, 1, camera, true, room, world));
+    physObjects.push_back(new Portal(ci, { 59, 27 }, { 2, 27 }, 1, camera, true, room, world));
+    physObjects.push_back(new Portal(ci, { 59, 28 }, { 2, 28 }, 1, camera, true, room, world));
 }
 
 
 
 
-TestRoom2::TestRoom2(Camera* const camera, World* world) : Room(camera), world(world)
+TestRoom2::TestRoom2(Camera* const camera, World* world, UI* ui, aki::object::wincon::ConsoleObjectManager* objectManager) : Room(camera), world(world)
 {
     std::default_random_engine generator;
-    std::uniform_int_distribution<int> distribution(0, 50);
+    std::uniform_int_distribution<int> distribution(0, 100);
 
     CHAR_INFO ci;
+
+    int numEnemies = 0;
 
     ci.Attributes = f_lightGray;
     ci.Char.UnicodeChar = 0xB2;
@@ -209,25 +203,25 @@ TestRoom2::TestRoom2(Camera* const camera, World* world) : Room(camera), world(w
     //
     for (int i = 0; i < 50; i++)
     {
-        objects.push_back(new Wall(ci, { x, y }, 1, camera, true));
+        physObjects.push_back(new Wall(ci, { x, y }, 1, camera, true));
         x++;
     }
 
     for (int i = 0; i < 50; i++)
     {
-        objects.push_back(new Wall(ci, { x, y }, 1, camera, true));
+        physObjects.push_back(new Wall(ci, { x, y }, 1, camera, true));
         y++;
     }
 
     for (int i = 0; i < 50; i++)
     {
-        objects.push_back(new Wall(ci, { x, y }, 1, camera, true));
+        physObjects.push_back(new Wall(ci, { x, y }, 1, camera, true));
         x--;
     }
 
     for (int i = 0; i < 50; i++)
     {
-        objects.push_back(new Wall(ci, { x, y }, 1, camera, true));
+        physObjects.push_back(new Wall(ci, { x, y }, 1, camera, true));
         y--;
     }
 
@@ -246,17 +240,55 @@ TestRoom2::TestRoom2(Camera* const camera, World* world) : Room(camera), world(w
             switch (t)
             {
             case 1:
+                if (numEnemies < 6)
+                {
+                    switch (numEnemies)
+                    {
+                    case 0:
+                        ci.Attributes = f_fullRed;
+                        ci.Char.UnicodeChar = '@';
+                        break;
+                    case 1:
+                        ci.Attributes = f_halfRed;
+                        ci.Char.UnicodeChar = '#';
+                        break;
+                    case 2:
+                        ci.Attributes = f_halfCyan;
+                        ci.Char.UnicodeChar = '@';
+                        break;
+                    case 3:
+                        ci.Attributes = f_fullCyan;
+                        ci.Char.UnicodeChar = '#';
+                        break;
+                    case 4:
+                        ci.Attributes = f_halfPurple;
+                        ci.Char.UnicodeChar = '#';
+                        break;
+                    case 5:
+                        ci.Attributes = f_fullPurple;
+                        ci.Char.UnicodeChar = '@';
+                        break;
+                    }
+                    
+
+                    physObjects.push_back(new Enemy(ci, { col, row }, 2.0f, 0, 100, 5, camera, ui, this, world, objectManager));
+
+                    numEnemies++;
+                }
             case 2:
             case 3:
+            case 4:
                 ci.Attributes = f_halfYellow;
                 ci.Char.UnicodeChar = 0xB0;
                 break;
 
-            case 4:
             case 5:
             case 6:
             case 7:
             case 8:
+            case 9:
+            case 10:
+            case 11:
                 ci.Attributes = f_fullGreen;
                 ci.Char.UnicodeChar = 0xB0;
                 break;
@@ -266,7 +298,7 @@ TestRoom2::TestRoom2(Camera* const camera, World* world) : Room(camera), world(w
                 ci.Char.UnicodeChar = 0xB0;
             }
 
-            objects.push_back(new Floor(ci, { col, row }, 0, camera, true));
+            other.push_back(new Floor(ci, { col, row }, 0, camera, true));
         }
     }
 
@@ -276,8 +308,8 @@ TestRoom2::TestRoom2(Camera* const camera, World* world) : Room(camera), world(w
     ci.Attributes = f_lightGray;
     ci.Char.UnicodeChar = 0xB2;
 
-    objects.push_back(new Wall(ci, { 1, 26 }, 1, camera, true));
-    objects.push_back(new Wall(ci, { 1, 29 }, 1, camera, true));
+    physObjects.push_back(new Wall(ci, { 1, 26 }, 1, camera, true));
+    physObjects.push_back(new Wall(ci, { 1, 29 }, 1, camera, true));
 
     /////////////////////
     // Rain
@@ -290,12 +322,11 @@ TestRoom2::TestRoom2(Camera* const camera, World* world) : Room(camera), world(w
     ciAlt.Attributes = f_fullBlue;
     ciAlt.Char.UnicodeChar = 0xB2;
 
-    objects.push_back(new Rain(ci, ciAlt, 0.5f, 0.5f, 30.0f, 1, camera, true, this));
+    other.push_back(new Rain(ci, ciAlt, 0.5f, 0.5f, 30.0f, 1, camera, true, this));
 }
 
 TestRoom2::~TestRoom2()
 {
-
 }
 
 void TestRoom2::AddLeftRoom(Room* room)
@@ -305,6 +336,6 @@ void TestRoom2::AddLeftRoom(Room* room)
     ci.Attributes = f_white;
     ci.Char.UnicodeChar = 0x1D;
 
-    objects.push_back(new Portal(ci, { 1, 27 }, { 58, 27 }, 1, camera, true, room, world));
-    objects.push_back(new Portal(ci, { 1, 28 }, { 58, 28 }, 1, camera, true, room, world));
+    physObjects.push_back(new Portal(ci, { 1, 27 }, { 58, 27 }, 1, camera, true, room, world));
+    physObjects.push_back(new Portal(ci, { 1, 28 }, { 58, 28 }, 1, camera, true, room, world));
 }

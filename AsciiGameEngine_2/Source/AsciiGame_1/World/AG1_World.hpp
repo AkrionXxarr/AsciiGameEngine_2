@@ -19,11 +19,14 @@ public:
     ~World();
 
     void LoadRoom(Room* room);
+    void Clean();
     //void AddRoom(Room* room, bool active);
+
+public:
+    Room* activeRoom;
 
 private:
     //std::vector<Room*> rooms;
-    Room* activeRoom;
     aki::object::wincon::ConsoleObjectManager* const objectManager;
     UI* const ui;
 };

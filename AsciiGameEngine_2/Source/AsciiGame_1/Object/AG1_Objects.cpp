@@ -18,6 +18,8 @@ using namespace aki::input::wincon;
 using namespace aki::object::wincon;
 using namespace aki::math;
 
+bool killGame = false;
+
 std::default_random_engine generator;
 
 /////////////////////////////
@@ -28,11 +30,13 @@ Player::Player(
     CHAR_INFO ci,
     POINT pos,
     int depth,
+    int maxHealth,
     Camera* camera,
     UI* const ui,
     Room* room,
+    World* world,
     ConsoleObjectManager* objectManager
-    ) : GameObject(camera, "player"), ui(ui), room(room), objectManager(objectManager)
+    ) : GameObject(camera, "player"), ui(ui), room(room), world(world), objectManager(objectManager)
 { 
     aki::log::ClearLogFile("MousePosData.txt");
 
@@ -45,6 +49,8 @@ Player::Player(
     up = false; left = false; down = false; right = false;
     this->pos = Vector2f(pos.x, pos.y);
 
+    this->health = this->maxHealth = maxHealth;
+
     mouseClick = false;
     mousePos = { 0, 0 };
 
@@ -55,6 +61,13 @@ Player::Player(
 
 void Player::Update(float deltaTime)
 {
+    ((UIInfo*)ui->GetUIElement(UI_ELEMENT::UI_INFO))->DrawHealth(health, maxHealth);
+
+    if (health <= 0)
+    {
+        killGame = true;
+    }
+
     if (ui->GetFocusedElement() == UI_ELEMENT::UI_SCREEN)
     {
         if (mouseClick)
@@ -80,7 +93,7 @@ void Player::Update(float deltaTime)
                 aki::log::LogMessage(sstream.str(), "MousePosData.txt");
 
                 objectManager->RemoveObject(ui->ID); // This is gross and I should feel bad about it...
-                objectManager->AddObject(new Bullet(curPoint, { curPoint.x + t.x, curPoint.y + t.y }, 50.0f, depth - 1, camera, true, objectManager, room));
+                objectManager->AddObject(new Bullet(ci.Attributes, curPoint, { curPoint.x + t.x, curPoint.y + t.y }, 50.0f, 10, depth - 1, camera, true, true, objectManager, room, world));
                 objectManager->AddObject(ui); // ...but right now the UI must be the very last in the update/draw call chain
             }
 
@@ -232,9 +245,9 @@ Player::COLLIDE Player::Collision(POINT p)
 {
     COLLIDE collide = NONE;
 
-    for (int i = 0; i < room->objects.size(); i++)
+    for (int i = 0; i < room->physObjects.size(); i++)
     {
-        GameObject* obj = room->objects[i];
+        GameObject* obj = room->physObjects[i];
         if (obj->GetName() == "wall")
         {
             Wall* wall = (Wall*)obj;
@@ -406,19 +419,25 @@ void Water::Draw(IRenderContext& renderContext)
 // Bullet
 //
 Bullet::Bullet(
+    int attributes,
     POINT start,
     POINT end,
     float speed,
+    int damage,
     int depth,
     Camera* camera,
     bool visible,
+    bool isPlayer,
     ConsoleObjectManager* objectManager,
-    Room* room) : GameObject(camera, "bullet"), objectManager(objectManager), room(room)
+    Room* room,
+    World* world) : GameObject(camera, "bullet"), objectManager(objectManager), room(room), world(world)
 {
     this->start = start;
     this->end = end;
     this->speed = speed;
+    this->damage = damage;
     this->depth = depth;
+    this->isPlayer = isPlayer;
     
     pos = Vector2f(float(start.x), float(start.y));
     dir = (Vector2f(float(end.x), float(end.y)) - pos);
@@ -430,7 +449,7 @@ Bullet::Bullet(
 
     curPos = GetPosAsPoint();
 
-    ci.Attributes = FOREGROUND_RED | FOREGROUND_INTENSITY;
+    ci.Attributes = attributes;
     
     if (abs(dir.x) > 0.92388)
         ci.Char.UnicodeChar = '-';
@@ -448,6 +467,13 @@ Bullet::Bullet(
 
 void Bullet::Update(float deltaTime)
 {
+    if (room != world->activeRoom)
+    {
+        objectManager->RemoveObject(this->ID);
+        delete this;
+        return;
+    }
+
     float moveAmt = speed * deltaTime;
 
     pos = pos + (dir * moveAmt);
@@ -459,6 +485,41 @@ void Bullet::Update(float deltaTime)
         objectManager->RemoveObject(this->ID);
         delete this;
     }
+    else
+    {
+        switch (Collision(curPos))
+        {
+        case WALL:
+            objectManager->RemoveObject(this->ID);
+            delete this;
+            return;
+            break;
+
+        case PORTAL:
+            objectManager->RemoveObject(this->ID);
+            delete this;
+            return;
+            break;
+
+        case PLAYER:
+            if (!isPlayer) // Enemy shot this bullet
+            {
+                objectManager->RemoveObject(this->ID);
+                delete this;
+                return;
+            }
+            break;
+
+        case ENEMY:
+            if (isPlayer) // Player shot this bullet
+            {
+                objectManager->RemoveObject(this->ID);
+                delete this;
+                return;
+            }
+            break;
+        }
+    }
 }
 
 void Bullet::Draw(IRenderContext& renderContext)
@@ -467,6 +528,70 @@ void Bullet::Draw(IRenderContext& renderContext)
     {
         camera->Draw(curPos, ci, depth);
     }
+}
+
+Bullet::COLLIDE Bullet::Collision(POINT p)
+{
+    COLLIDE collide = NONE;
+
+    Player* player = room->player;
+    const POINT playerPos = player->GetPosAsPoint();
+
+    // More gross code!
+    if (p.x == playerPos.x && p.y == playerPos.y)
+    {
+        collide = PLAYER;
+        if (!isPlayer)
+        {
+            player->Hit(damage);
+        }
+        return collide;
+    }
+    // --
+
+    for (int i = 0; i < room->physObjects.size(); i++)
+    {
+        GameObject* obj = room->physObjects[i];
+        if (obj->GetName() == "wall")
+        {
+            Wall* wall = (Wall*)obj;
+            const POINT wallPos = wall->GetPos();
+
+            if (p.x == wallPos.x && p.y == wallPos.y)
+            {
+                collide = WALL;
+                break;
+            }
+        }
+        else if (obj->GetName() == "portal")
+        {
+            Portal* portal = (Portal*)obj;
+            const POINT portalPos = portal->GetPos();
+
+            if (p.x == portalPos.x && p.y == portalPos.y)
+            {
+                collide = PORTAL;
+                break;
+            }
+        }
+        else if (obj->GetName() == "enemy")
+        {
+            Enemy* enemy = (Enemy*)obj;
+            const POINT enemyPos = enemy->GetPosAsPoint();
+
+            if (p.x == enemyPos.x && p.y == enemyPos.y)
+            {
+                collide = ENEMY;
+                if (isPlayer)
+                {
+                    enemy->Hit(damage);
+                }
+                break;
+            }
+        }
+    }
+
+    return collide;
 }
 
 POINT Bullet::GetPosAsPoint()
@@ -494,11 +619,11 @@ Rain::Rain(
     this->depth = depth;
     this->isVisible = visible;
 
-    for (int i = 0; i < room->objects.size(); i++)
+    for (int i = 0; i < room->other.size(); i++)
     {
-        if (room->objects[i]->GetName() == "floor")
+        if (room->other[i]->GetName() == "floor")
         {
-            floorTiles.push_back((Floor*)room->objects[i]);
+            floorTiles.push_back((Floor*)room->other[i]);
         }
     }
 
@@ -574,4 +699,163 @@ void Rain::Draw(IRenderContext& renderContext)
             }
         }
     }
+}
+
+/////////////////////////////
+// Enemy
+//
+Enemy::Enemy(
+    CHAR_INFO ci,
+    POINT pos,
+    float rof,
+    float speed,
+    int maxHealth,
+    int depth,
+    Camera* camera,
+    UI* const ui,
+    Room* room,
+    World* world,
+    ConsoleObjectManager* objectManager
+    ) : GameObject(camera, "enemy"), ui(ui), room(room), world(world), objectManager(objectManager)
+{
+    aki::log::ClearLogFile("MousePosData.txt");
+
+    this->isVisible = true;
+    this->ci = ci;
+    this->depth = depth;
+    this->speed = speed;
+    this->rof = rof;
+    this->pos = Vector2f(pos.x, pos.y);
+
+    this->health = this->maxHealth = maxHealth;
+
+    mouseClick = false;
+    mousePos = { 0, 0 };
+
+    isActive = true;
+
+    curPoint = GetPosAsPoint();
+
+    elapsedTime = std::uniform_real_distribution<float>(0, rof)(generator);
+}
+
+void Enemy::Update(float deltaTime)
+{
+    if (!isActive)
+        return;
+
+    if (health <= 0)
+    {
+        isActive = false;
+        isVisible = false;
+    }
+
+    elapsedTime += deltaTime;
+
+    if (elapsedTime >= rof)
+    {
+        elapsedTime = 0;
+
+        POINT player = camera->GetPlayer()->GetPosAsPoint();
+        POINT curPoint = GetPosAsPoint();
+
+        POINT p1 = { player.x - 2, player.y - 2 };
+        POINT p2 = { player.x    , player.y - 2 };
+        POINT p3 = { player.x + 2, player.y - 2 };
+
+        POINT p4 = { player.x - 2, player.y };
+        POINT p5 = { player.x    , player.y };
+        POINT p6 = { player.x + 2, player.y };
+
+        POINT p7 = { player.x - 2, player.y + 2 };
+        POINT p8 = { player.x    , player.y + 2 };
+        POINT p9 = { player.x + 2, player.y + 2 };
+
+        objectManager->RemoveObject(ui->ID); // This is gross and I should feel bad about it...
+
+        objectManager->AddObject(new Bullet(ci.Attributes, curPoint, p1, 10.0f, 1, depth - 1, camera, true, false, objectManager, room, world));
+        objectManager->AddObject(new Bullet(ci.Attributes, curPoint, p2, 15.0f, 1, depth - 1, camera, true, false, objectManager, room, world));
+        objectManager->AddObject(new Bullet(ci.Attributes, curPoint, p3, 20.0f, 1, depth - 1, camera, true, false, objectManager, room, world));
+
+        objectManager->AddObject(new Bullet(ci.Attributes, curPoint, p4, 25.0f, 1, depth - 1, camera, true, false, objectManager, room, world));
+        objectManager->AddObject(new Bullet(ci.Attributes, curPoint, p5, 30.0f, 1, depth - 1, camera, true, false, objectManager, room, world));
+        objectManager->AddObject(new Bullet(ci.Attributes, curPoint, p6, 35.0f, 1, depth - 1, camera, true, false, objectManager, room, world));
+
+        objectManager->AddObject(new Bullet(ci.Attributes, curPoint, p7, 40.0f, 1, depth - 1, camera, true, false, objectManager, room, world));
+        objectManager->AddObject(new Bullet(ci.Attributes, curPoint, p8, 45.0f, 1, depth - 1, camera, true, false, objectManager, room, world));
+        objectManager->AddObject(new Bullet(ci.Attributes, curPoint, p9, 50.0f, 1, depth - 1, camera, true, false, objectManager, room, world));
+
+        objectManager->AddObject(ui); // ...but right now the UI must be the very last in the update/draw call chain
+    }
+}
+
+void Enemy::Draw(IRenderContext& renderContext)
+{
+    if (isVisible)
+    {
+        camera->Draw(curPoint, ci, depth);
+    }
+}
+
+void Enemy::Input(ConsoleInputExt& input)
+{
+}
+
+Enemy::COLLIDE Enemy::Collision(POINT p)
+{
+    COLLIDE collide = NONE;
+
+    for (int i = 0; i < room->physObjects.size(); i++)
+    {
+        GameObject* obj = room->physObjects[i];
+        if (obj->GetName() == "wall")
+        {
+            Wall* wall = (Wall*)obj;
+            const POINT wallPos = wall->GetPos();
+
+            if (p.x == wallPos.x && p.y == wallPos.y)
+            {
+                collide = WALL;
+                break;
+            }
+        }
+        else if (obj->GetName() == "portal")
+        {
+            Portal* portal = (Portal*)obj;
+            const POINT portalPos = portal->GetPos();
+
+            if (p.x == portalPos.x && p.y == portalPos.y)
+            {
+                collide = PORTAL;
+
+                pos = Vector2f(float(portal->GetPlayerPos().x), float(portal->GetPlayerPos().y));
+                curPoint = GetPosAsPoint();
+
+                room = portal->GetRoom();
+
+                portal->Trigger();
+
+                break;
+            }
+        }
+        else if (obj->GetName() == "water")
+        {
+            Water* water = (Water*)obj;
+            const POINT waterPos = water->GetPos();
+
+            if (p.x == waterPos.x && p.y == waterPos.y)
+            {
+                collide = WATER;
+
+                break;
+            }
+        }
+    }
+
+    return collide;
+}
+
+POINT Enemy::GetPosAsPoint()
+{
+    return{ LONG(floor(pos.x + 0.5f)), LONG(floor(pos.y + 0.5f)) };
 }

@@ -123,3 +123,32 @@ void UIInfo::Input(ConsoleInputExt& input)
 {
 
 }
+
+void UIInfo::DrawHealth(int health, int maxHealth)
+{
+    std::stringstream sstream;
+    std::string str;
+
+    sstream << "Health: " << health << "/" << maxHealth;
+    str = sstream.str();
+
+    for (int x = 0; x < 26; x++)
+    {
+        CHAR_INFO ci;
+
+        ci.Attributes = 0;
+        ci.Char.UnicodeChar = ' ';
+
+        Write(x + 2, 2, ci);
+    }
+
+    for (int x = 0; x < str.size(); x++)
+    {
+        CHAR_INFO ci;
+
+        ci.Attributes = secondary;
+        ci.Char.UnicodeChar = str[x];
+
+        Write(x + 2, 2, ci);
+    }
+}

@@ -7,35 +7,56 @@
 
 Room::Room(Camera* const camera) : camera(camera)
 {
-
+    player = nullptr;
 }
 
 Room::~Room()
 {
-    for (int i = 0; i < objects.size(); i++)
+    for (int i = 0; i < physObjects.size(); i++)
     {
-        if (objects[i])
+        if (physObjects[i])
         {
-            delete objects[i];
-            objects[i] = nullptr;
+            delete physObjects[i];
+            physObjects[i] = nullptr;
         }
+    }
+
+    for (int i = 0; i < other.size(); i++)
+    {
+        if (other[i])
+        {
+            delete other[i];
+            other[i] = nullptr;
+        };
     }
 }
 
 void Room::Load(aki::object::wincon::ConsoleObjectManager& objectManager)
 {
-    for (int i = 0; i < objects.size(); i++)
+    for (int i = 0; i < physObjects.size(); i++)
     {
-        objects[i]->OnLoad();
-        objectManager.AddObject(objects[i]);
+        physObjects[i]->OnLoad();
+        objectManager.AddObject(physObjects[i]);
+    }
+
+    for (int i = 0; i < other.size(); i++)
+    {
+        other[i]->OnLoad();
+        objectManager.AddObject(other[i]);
     }
 }
 
 void Room::Unload(aki::object::wincon::ConsoleObjectManager& objectManager)
 {
-    for (int i = 0; i < objects.size(); i++)
+    for (int i = 0; i < physObjects.size(); i++)
     {
-        objects[i]->OnUnload();
-        objectManager.RemoveObject(objects[i]->ID);
+        physObjects[i]->OnUnload();
+        objectManager.RemoveObject(physObjects[i]->ID);
+    }
+
+    for (int i = 0; i < other.size(); i++)
+    {
+        other[i]->OnUnload();
+        objectManager.RemoveObject(other[i]->ID);
     }
 }

@@ -27,6 +27,7 @@ public:
     void Draw(POINT objPos, CHAR_INFO& ci, int depth);
 
     void SetPlayer(Player* player) { this->player = player; }
+    Player* const GetPlayer() { return player; }
 
 private:
     Viewport* const viewport;

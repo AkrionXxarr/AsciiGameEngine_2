@@ -42,8 +42,8 @@ bool Engine::Initialize()
     camera = new Camera((UIScreen*)ui->GetUIElement(UI_ELEMENT::UI_SCREEN), world);
 
     CHAR_INFO playerCI;
-    TestRoom1* startRoom = new TestRoom1(camera, world);
-    TestRoom2* nextRoom = new TestRoom2(camera, world);
+    TestRoom1* startRoom = new TestRoom1(camera, world, ui, objectManager);
+    TestRoom2* nextRoom = new TestRoom2(camera, world, ui, objectManager);
 
     startRoom->AddRightRoom(nextRoom);
     nextRoom->AddLeftRoom(startRoom);
@@ -51,7 +51,10 @@ bool Engine::Initialize()
     playerCI.Attributes = f_white;
     playerCI.Char.UnicodeChar = '@';
 
-    player = new Player(20.0f, playerCI, { 5, 5 }, 5, camera, ui, startRoom, objectManager);
+    player = new Player(20.0f, playerCI, { 5, 5 }, 5, 100, camera, ui, startRoom, world, objectManager);
+
+    startRoom->player = player;
+    nextRoom->player = player;
 
     ui->SetFocusedElement(UI_ELEMENT::UI_SCREEN);
 
@@ -60,6 +63,7 @@ bool Engine::Initialize()
 
     world->LoadRoom(startRoom);
 
+    killGame = false;
     return true;
 }
 
@@ -96,9 +100,13 @@ void Engine::Tick(float deltaTime)
 
     if (!HasFocus())
         Sleep(100);
+
+    if (killGame)
+        this->Stop();
 }
 
 void Engine::Clean()
 {
     MainConsoleEngine::Clean();
+    world->Clean();
 }

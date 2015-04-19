@@ -29,7 +29,6 @@ namespace aki
                 virtual void Stop() = 0;
                 virtual void Tick(float deltaTime) = 0;
 
-            protected:
                 virtual void Clean() = 0;
 
             private:

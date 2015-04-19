@@ -22,6 +22,8 @@ public:
 
     virtual void Input(aki::input::wincon::ConsoleInputExt& input);
 
+    void DrawHealth(int health, int maxHealth);
+
 private:
     WORD primary, secondary, tertiary;
 

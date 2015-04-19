@@ -32,6 +32,15 @@ void World::LoadRoom(Room* room)
     objectManager->AddObject(ui);
 }
 
+void World::Clean()
+{
+    if (activeRoom)
+    {
+        activeRoom->Unload(*objectManager);
+        activeRoom = nullptr;
+    }
+}
+
 /*
 void World::AddRoom(Room* room, bool active)
 {

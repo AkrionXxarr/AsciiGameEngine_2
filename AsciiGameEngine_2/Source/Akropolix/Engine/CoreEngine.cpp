@@ -67,6 +67,10 @@ namespace aki
 
                 mainEngine->Tick(deltaTime);
 
+                // Hack to fix crash, since running goes faulse after Tick and Clean kills the pointers.
+                if (!running)
+                    break;
+
                 objectManager->Update(deltaTime);
                 objectManager->Draw(*renderContext);
 
@@ -80,7 +84,7 @@ namespace aki
             {
                 running = false;
 
-                mainEngine->Stop();
+                //mainEngine->Stop();
 
                 Clean();
             }
@@ -88,6 +92,8 @@ namespace aki
 
         void CoreEngine::Clean()
         {
+            mainEngine->Clean();
+
             displayDevice = nullptr;
             time = nullptr;
             renderContext = nullptr;

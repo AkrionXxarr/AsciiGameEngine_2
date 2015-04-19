@@ -16,10 +16,11 @@ Quite a bit of preplanning for this
 
 [Functionality +] As it stands the inherited engine system to hide away essential functions has worked well.
 [Functionality -] Memory management with object manager not great.
+[Functionality -] Core engine / Main engine Start/Stop functionality needs work.
 
 [Note] All row/col buffer for loops could be optimized by pre-calculating the (row * width)
-
-
+[Note] Engine system in general could use some rethinking, as well as the render context.
+[Note] Console input system and display device have worked quite well so far.
 
 
 === AsciiGame_1 ===

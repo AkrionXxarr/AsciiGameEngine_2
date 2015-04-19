@@ -16,6 +16,8 @@
 #include "AsciiGame_1\UI\AG1_UI.hpp"
 #include "AsciiGame_1\World\AG1_World.hpp"
 
+extern bool killGame;
+
 /////////////////////////////
 // Player
 //
@@ -34,9 +36,11 @@ public:
         CHAR_INFO ci, 
         POINT pos, 
         int depth, 
+        int maxHealth,
         Camera* camera, 
         UI* ui,
         Room* room,
+        World* world,
         aki::object::wincon::ConsoleObjectManager* objectManager);
     ~Player() { }
 
@@ -45,12 +49,15 @@ public:
    
     virtual void Input(aki::input::wincon::ConsoleInputExt& input);
 
+    void Hit(int damage) { health -= damage; }
+
     COLLIDE Collision(POINT p);
 
     POINT GetPosAsPoint();
 
 private:
     UI* const ui;
+    World* const world;
     Room* room;
     aki::object::wincon::ConsoleObjectManager* const objectManager;
 
@@ -63,6 +70,9 @@ private:
     COORD mousePos;
 
     bool isInWater;
+
+    int maxHealth;
+    int health;
 
     bool up, left, down, right;
     float speed;
@@ -164,33 +174,52 @@ private:
 //
 class Bullet : public GameObject
 {
+    enum COLLIDE
+    {
+        NONE,
+        WALL,
+        PORTAL,
+        PLAYER,
+        ENEMY
+    };
+
 public:
     Bullet(
+        int attributes,
         POINT start, 
         POINT end, 
         float speed, 
+        int damage,
         int depth, 
         Camera* camera, 
         bool visible, 
+        bool isPlayer,
         aki::object::wincon::ConsoleObjectManager* objectManager,
-        Room* room);
+        Room* room,
+        World* world);
     ~Bullet() { }
 
     virtual void Update(float deltaTime);
     virtual void Draw(aki::render::I::IRenderContext& renderContext);
+
+    COLLIDE Collision(POINT p);
 
     POINT GetPosAsPoint();
 
 private:
     aki::object::wincon::ConsoleObjectManager* const objectManager;
     Room* const room;
+    World* const world;
 
     aki::math::Vector2f pos, dir;
     POINT start, end, curPos;
     CHAR_INFO ci;
     int depth;
 
+    bool isPlayer;
+
     float speed;
+    int damage;
     float dist, distTraveled;
 };
 
@@ -223,3 +252,65 @@ private:
     float* rainHitTimes;
     float rainDrawTime;
 };
+
+/////////////////////////////
+// Enemy
+//
+class Enemy : public GameObject
+{
+    enum COLLIDE
+    {
+        NONE,
+        WALL,
+        PORTAL,
+        WATER
+    };
+public:
+    Enemy(
+        CHAR_INFO ci,
+        POINT pos,
+        float rof,
+        float speed,
+        int maxHealth,
+        int depth,
+        Camera* camera,
+        UI* ui,
+        Room* room,
+        World* world,
+        aki::object::wincon::ConsoleObjectManager* objectManager);
+    ~Enemy() { }
+
+    virtual void Update(float deltaTime);
+    virtual void Draw(aki::render::I::IRenderContext& renderContext);
+
+    virtual void Input(aki::input::wincon::ConsoleInputExt& input);
+
+    void Hit(int damage) { health -= damage; }
+
+    COLLIDE Collision(POINT p);
+
+    POINT GetPosAsPoint();
+
+private:
+    UI* const ui;
+    Room* room;
+    World* const world;
+    aki::object::wincon::ConsoleObjectManager* const objectManager;
+
+    CHAR_INFO ci;
+    aki::math::Vector2f pos;
+    POINT curPoint;
+    int depth;
+
+    bool mouseClick;
+    COORD mousePos;
+
+    bool isActive;
+
+    int health;
+    int maxHealth;
+
+    float speed;
+    float rof;
+    float elapsedTime;
+};;

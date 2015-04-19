@@ -65,7 +65,8 @@ namespace aki
 
             void MainConsoleEngine::Stop()
             {
-                Clean();
+                if (coreEngine)
+                    coreEngine->Stop();
             }
 
             void MainConsoleEngine::Tick(float deltaTime)

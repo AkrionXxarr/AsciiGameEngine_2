@@ -12,6 +12,7 @@
 #include "AsciiGame_1\Object\AG1_GameObject.hpp"
 
 class Camera;
+class Player;
 
 class Room
 {
@@ -23,6 +24,7 @@ public:
     void Unload(aki::object::wincon::ConsoleObjectManager& objectManager);
 
 public:
-    std::vector<GameObject*> objects;
+    std::vector<GameObject*> physObjects, other;
     Camera* const camera;
+    Player* player;
 };
